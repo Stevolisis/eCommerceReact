@@ -1,0 +1,139 @@
+
+.section1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 34vw;
+}
+
+.sub1section1{
+    flex-grow: 1;
+    width: calc(100%/3);
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
+}
+
+.subimage{
+    width: 100%;
+    height: 100%;
+    box-shadow: 0 1px 2px 0 rgba(0,0,0,.2);
+    background: $color40;
+    border-radius: 5px;
+
+    img{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 5px;
+    }
+}
+
+.sub1section1 div:nth-of-type(2){
+    margin-top: 10px;
+}
+
+
+.sub2section1{
+    flex-grow: 2;
+    width: 100%;
+    height: 100%;  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 1px 2px 0 rgba(0,0,0,.2);
+    background: $color40;
+    border-radius: 5px;
+
+
+    a{
+        width: 100%;
+        height: 100%;
+        z-index: 100;
+    }
+}
+
+.slidebanner{
+width: 100%;
+height: 100%;
+display: flex;
+border-radius: 5px;
+}
+
+.slidebtncon{
+    width: calc(100%/2);
+    position: absolute;
+    display: flex;
+}
+.slidebtn1{
+    cursor: pointer;
+    width: calc(100%/2);
+    display: flex;
+    justify-content: flex-start;    
+ 
+    i{
+        z-index: 150;
+        background: $color30;
+        border-radius: 50%;
+        color:$color40;
+        padding: 10px;
+    }
+}
+
+.slidebtn2{
+    cursor: pointer;
+    width: calc(100%/2);
+    display: flex;
+    justify-content: flex-end;
+
+    i{
+        z-index: 150;
+        background: $color30;
+        border-radius: 50%;
+        color:$color40;
+        padding: 10px;
+    }
+}
+
+
+
+
+
+
+
+
+
+@media (max-width:760px) {
+    .slidebtn1{
+        padding: 7px;
+        font-size: 12px;
+    }
+
+    .slidebtn2{
+        padding: 7px;
+        font-size: 12px;
+    }
+
+    .section1{
+        height: 41vw;
+        margin-top: 7px;
+    }
+    .sub1section1{
+        display: none;
+    }
+    .section1{
+        margin-top: 10px 0 !important;
+        border-radius: 0px;
+    }
+    .slidebtncon{
+        width: calc(87%);
+    }
+    .sub2section1{
+        border-radius: 0;
+    }
+    .slidebanner{
+        border-radius: 0;
+    }
+}
