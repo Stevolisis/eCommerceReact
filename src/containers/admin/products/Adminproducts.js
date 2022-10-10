@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import ProductList from '../../../components/ProductList';
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { loadProducts } from '../../../Redux/Admin/products/productList';
 
 export default function Adminproducts(){
     const navigate=useNavigate();
@@ -13,6 +15,7 @@ export default function Adminproducts(){
     const filterData=Array.from(products);
     const cancelalert=useRef(true);
     let limit=useRef(10);
+    const dispatch=useDispatch();
 
 
 
@@ -47,7 +50,7 @@ export default function Adminproducts(){
     }
 
 
-    const loadProducts=()=>{
+    const loadProducts2=()=>{
         axios.get(`http://localhost:80/products/getProducts?limit=${limit.current}`,{withCredientials:true})
         .then(res=>{
             let status=res.data.status;
@@ -57,6 +60,7 @@ export default function Adminproducts(){
             setProducts(data);
             setbackup(data);
             settotal(data.length);
+            console.log('Redux Products',dispatch(loadProducts(data)))
             }else{
                 Swal.fire(
                     'Error Occured',
@@ -119,7 +123,7 @@ export default function Adminproducts(){
 
     function loadLimit(){
     limit.current=limit.current+10;
-    loadProducts()
+    loadProducts2()
     }
 
 
@@ -176,7 +180,7 @@ export default function Adminproducts(){
        useEffect(()=>{
         if(cancelalert.current){
             cancelalert.current=false
-            loadProducts();
+            loadProducts2();
             loadCategories();
         }
        },[]);

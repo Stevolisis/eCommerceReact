@@ -1,7 +1,11 @@
 import React from 'react'
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { getAllProducts } from '../Redux/Admin/products/productList';
 
 export default function ProductList({deleteproduct,products}) {
+  const productsli=useSelector(getAllProducts);
+  console.log("productsli",productsli)
     const productLists=products.map((product,i)=>{
         let {_id,img_gallery,name,SKU,category,stock,sale_price,sold,createdAt}=product;
        let categoryCon=[];
