@@ -25,8 +25,7 @@ export default function Index(){
 <Link to='/help'><i className='fa fa-question-circle'></i></Link>
 
 <div className='cart'>
-<Link to='/cart'><i className='fa fa-shopping-cart'></i></Link>
-<div>3</div>
+<Link to='/cart'><i className='fa fa-shopping-cart'></i><sup>23</sup></Link>
 </div>
 
 <Link to='/user/useraccount'><i className='fa fa-user-circle'></i></Link>
@@ -53,8 +52,7 @@ export default function Index(){
 <Link to='/help'><i className='fa fa-question-circle'></i></Link>
 
 <div className='cart'>
-<Link to='/cart'><i className='fa fa-shopping-cart'></i></Link>
-<div>3</div>
+<Link to='/cart'><i className='fa fa-shopping-cart'></i><sup>23</sup></Link>
 </div>
 
 <Link to='/user/useraccount'><i className='fa fa-user-circle'></i></Link>

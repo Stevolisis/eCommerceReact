@@ -1,5 +1,5 @@
 import {React,useState,useEffect,useCallback,useRef} from 'react'
-import { Link,Outlet, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import Firstslider from '../../components/Firstslider'
 import Mainheader from '../../components/Mainheader'
@@ -79,6 +79,10 @@ useEffect(()=>{
 
 <div className='submain'>
 
+
+
+
+
 <div className='section1'>
 
 <div className='sub1section1'>
@@ -103,32 +107,29 @@ prevslide={prevslide}
 </div>
 
 
-<section className='siteInfoCon'>
- 
- <div className='siteInfo'>
-    <img src='http://localhost/media/safepayments.png' alt='mainbanner'/>
-    <p>Safe Payments</p>
-</div>
 
-<div className='siteInfo'>
-    <img src='http://localhost/media/freeshipping2.webp' alt='mainbanner'/>
-    <p>Free Shipping</p>
-</div>
 
-<div className='siteInfo'>
-    <img src='http://localhost/media/customerservice.jpeg' alt='mainbanner'/>
-    <p>24/7 Customer Services</p>
-</div>
 
-<div className='siteInfo'>
-    <img src='http://localhost/media/discount.jpg' alt='mainbanner'/>
-    <p>Amazing Discounts</p>
-</div>
 
-</section>
+
+
+
+
+
+
+
+
+
 
 <div className='section2'>
 <div className='slidecategcon'>
+<div className='productcateghead' style={{borderRadius:'35%',justifyContent:'center'}}>
+<div className='producthead1'>
+<p>Top Categories</p>
+</div>
+</div>
+
+
 
 
 <div className='slidecateg'>
@@ -238,6 +239,31 @@ prevslide={prevslide}
 
 
 
+
+
+<section className='siteInfoCon'>
+ 
+ <div className='siteInfo'>
+    <img src='/media3/safepayments.png' alt='mainbanner'/>
+    <p>Safe Payments</p>
+</div>
+
+<div className='siteInfo'>
+    <img src='/media3/freeshipping2.webp' alt='mainbanner'/>
+    <p>Free Shipping</p>
+</div>
+
+<div className='siteInfo'>
+    <img src='/media3/customerservice.jpeg' alt='mainbanner'/>
+    <p>24/7 Customer Services</p>
+</div>
+
+<div className='siteInfo'>
+    <img src='/media3/discount.jpg' alt='mainbanner'/>
+    <p>Amazing Discounts</p>
+</div>
+
+</section>
 
 
 
@@ -376,7 +402,7 @@ prevslide={prevslide}
 
 <div className='midbanner'>
 <Link to='/product'>
-<img src='/media3/advertm4.jpg' alt='midbanner' /> 
+<img src='/media3/advert4.jpg' alt='midbanner' /> 
 </Link>
 </div>
 <div className='midbanner'>
@@ -386,7 +412,7 @@ prevslide={prevslide}
 </div>
 <div className='midbanner'>
 <Link to='/product'>
-<img src='/media3/advert7.jpg' alt='midbanner' />
+<img src='/media3/nniva_advert.jpg' alt='midbanner' />
 </Link>
 </div>
 <div className='midbanner'>
