@@ -1,13 +1,12 @@
 import React from 'react'
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { getAllProducts, deleteProduct } from '../Redux/Admin/products/productList';
+import { getAllProducts } from '../Redux/Admin/products';
 import Swal from 'sweetalert2';
 
 export default function ProductList({deleteproduct}) {
   const allProducts=useSelector(getAllProducts);
   const products=allProducts&&allProducts.data||[];
-  const dispatch=useDispatch();
 
 
   if(Object.keys(allProducts).length!==0&&allProducts&&allProducts.status!=='success'){
@@ -42,7 +41,7 @@ export default function ProductList({deleteproduct}) {
         <td>{sold}</td>
         <td>{createdAt.split('T')[0]}</td>
         <td><Link to={`/admin/editproduct/${_id}`}><i className='fa fa-edit'/></Link></td>
-        <td><button onClick={()=>dispatch(deleteProduct(_id))}>Delete</button></td>
+        <td><button onClick={()=>deleteproduct(_id)}>Delete</button></td>
         </tr>
         )
     })
