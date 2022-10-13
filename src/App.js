@@ -77,22 +77,11 @@ import './containers/admin/styles/adminaddcateg.scss';
 
 //---------Fontawesome-----------
 import 'font-awesome/css/font-awesome.min.css';
-import { swalAlert } from './Utils/baseUrl';
-import { useSelector } from 'react-redux';
 
 
 
 
 function App() {
-  const confirmStatus = useSelector(state => state.swalNotifyReducer.confirmStatus)
-  const alertStatus = useSelector(state => state.swalNotifyReducer.alertStatus)
-
-console.log('kolo',alertStatus)
-useMemo(()=>{
-if(Object.keys(alertStatus).length!==0){
-  swalAlert(alertStatus.heading,alertStatus.message,alertStatus.status)
-}
-},[alertStatus]);
 
 
   return (
