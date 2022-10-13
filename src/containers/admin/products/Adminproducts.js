@@ -3,20 +3,20 @@ import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import ProductList from '../../../components/ProductList';
 import axios from 'axios';
-import { useDispatch } from 'react-redux';
-import { loadProducts } from '../../../Redux/Admin/products/productList';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchProducts, getAllProducts, filterProducts, filterByCategory} from '../../../Redux/Admin/products/productList';
+import { setAlert } from '../../../Redux/swalNotify';
 
 export default function Adminproducts(){
     const navigate=useNavigate();
     const [products,setProducts]=useState([]);
     const [backup,setbackup]=useState([]);
-    const [total,settotal]=useState('');
     const [categories,setcategories]=useState([]);
     const filterData=Array.from(products);
     const cancelalert=useRef(true);
     let limit=useRef(10);
     const dispatch=useDispatch();
-
+    const allProducts=useSelector(getAllProducts);
 
 
     const loadCategories=()=>{
@@ -24,7 +24,7 @@ export default function Adminproducts(){
         .then(res=>{
             let status=res.data.status;
             let data=res.data.data||'';
-            console.log(data);
+            // console.log(data);
 
             if(status==='success'){
 
@@ -50,33 +50,6 @@ export default function Adminproducts(){
     }
 
 
-    const loadProducts2=()=>{
-        axios.get(`http://localhost:80/products/getProducts?limit=${limit.current}`,{withCredientials:true})
-        .then(res=>{
-            let status=res.data.status;
-            let data=res.data.data||"";
-            
-            if(status==='success'){
-            setProducts(data);
-            setbackup(data);
-            settotal(data.length);
-            console.log('Redux Products',dispatch(loadProducts(data)))
-            }else{
-                Swal.fire(
-                    'Error Occured',
-                    status,
-                    'warning'
-                  )
-            }
-
-        }).catch(e=>{
-            Swal.fire(
-                'Error Occured',
-                e.message,
-                'error'
-              )
-        })
-    }
 
         const deleteproduct=((id)=>{
             Swal.fire({
@@ -99,7 +72,7 @@ export default function Adminproducts(){
                     'Producted Delete Successful',
                     'success'
                   )  
-                 return loadProducts();                  
+                //  return loadProducts();                  
                 }else{
                     Swal.fire(
                         'Error Occured',
@@ -122,8 +95,9 @@ export default function Adminproducts(){
 
 
     function loadLimit(){
+        dispatch(setAlert({heading:'On Track!!',message:'I Hope',status:'success'}))
     limit.current=limit.current+10;
-    loadProducts2()
+    dispatch(fetchProducts(limit.current));
     }
 
 
@@ -145,52 +119,30 @@ export default function Adminproducts(){
   }
 
 
-    function filterByName(e){
-        console.log(e);
-        let filterdata2=[];
-        for (let i = 0; i < backup.length; i++) {
-        if(backup[i].name.toLowerCase().includes(e.toLowerCase())){
-        filterdata2.push(backup[i]);
-        }      
-        }
-        setProducts(filterdata2);
-    }
 
-    function filterByNameArray(e){
-        let arr1=[];
-        let searchData=e.split(',');
-
-        if(e==='all'){
-            setProducts(backup);
-        }else{
-        for (let i = 0; i < backup.length; i++) {
-            if(backup[i].category.some(arr=>searchData.includes(arr.name))){
-                arr1.push(backup[i])
-            }
-        }
-        setProducts(arr1);
-        }
-
-        
-    }
 
     
 
 
        useEffect(()=>{
         if(cancelalert.current){
-            cancelalert.current=false
-            loadProducts2();
+            cancelalert.current=false;
             loadCategories();
         }
        },[]);
+
+       useEffect(()=>{
+        dispatch(fetchProducts(10));
+       },[dispatch]);
+
+
 
 
     return(
         <>
         <div className='admindashcon'>
         <div className='userorderheading'>
-            <p>Products ({total})</p>
+            <p>Products ({allProducts&&allProducts.data&&allProducts.data.length})</p>
             <button onClick={()=>navigate('/admin/addproduct')}>ADD</button>
             </div>
         <div className='admincategcon'>
@@ -199,10 +151,10 @@ export default function Adminproducts(){
 
             <div className='adminfilterscon'>
             <div className='adminfilters'>
-                    <input type='text' placeholder='Search...' onChange={(e)=>{filterByName(e.target.value)}}/>
+                    <input type='text' placeholder='Search...' onChange={(e)=>dispatch(filterProducts(e.target.value))}/>
                 </div>
                 <div className='adminfilters'>
-                    <select onChange={(e)=>filterByNameArray(e.target.value)}>
+                    <select onChange={(e)=>dispatch(filterByCategory(e.target.value))}>
                     <option value='all'>All Category</option>
                     {categories.map((categ,i)=>{
                         return <option key={i} value={categ}>{categ}</option>

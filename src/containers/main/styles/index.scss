@@ -255,7 +255,7 @@ box-sizing: border-box;
 }
 
 .section3{
-    margin-top: 40px;
+    margin-top: 35px;
 }
 
 .specialproduct{
@@ -374,7 +374,7 @@ box-sizing: border-box;
 
 .productcateghead{
     border-radius:5px 5px 0 0;
-    background:$color101;
+    background:$color60;
     padding:15px 25px;
     display:flex;
     justify-content:space-between;
@@ -760,13 +760,6 @@ align-items: center;
 // }
 
 .productcateghead{
-    border-radius:5px 5px 0 0;
-    background:$color101;
-    padding:15px 25px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    color:$color30;
     font-size: 14px;
     }
 

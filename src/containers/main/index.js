@@ -118,16 +118,51 @@ prevslide={prevslide}
 
 
 
+<section className='siteInfoCon'>
+ 
+ <div className='siteInfo'>
+    <img src='/media3/safepayments.png' alt='mainbanner'/>
+    <p>Safe Payments</p>
+</div>
+
+<div className='siteInfo'>
+    <img src='/media3/freeshipping2.webp' alt='mainbanner'/>
+    <p>Free Shipping</p>
+</div>
+
+<div className='siteInfo'>
+    <img src='/media3/customerservice.jpeg' alt='mainbanner'/>
+    <p>24/7 Customer Services</p>
+</div>
+
+<div className='siteInfo'>
+    <img src='/media3/discount.jpg' alt='mainbanner'/>
+    <p>Amazing Discounts</p>
+</div>
+
+</section>
+
+
+
+
+
+
 
 
 
 <div className='section2'>
+<div className='specialcateghead' style={{background:'linear-gradient(40deg,#5972b9,#fa568d)'}}>
+<div className='specialhead1'>
+<p>Top Categories</p>
+</div>
+
+</div>
 <div className='slidecategcon'>
-<div className='productcateghead' style={{borderRadius:'35%',justifyContent:'center'}}>
+{/* <div className='productcateghead' style={{borderRadius:'35%',justifyContent:'center'}}>
 <div className='producthead1'>
 <p>Top Categories</p>
 </div>
-</div>
+</div> */}
 
 
 
@@ -241,29 +276,6 @@ prevslide={prevslide}
 
 
 
-<section className='siteInfoCon'>
- 
- <div className='siteInfo'>
-    <img src='/media3/safepayments.png' alt='mainbanner'/>
-    <p>Safe Payments</p>
-</div>
-
-<div className='siteInfo'>
-    <img src='/media3/freeshipping2.webp' alt='mainbanner'/>
-    <p>Free Shipping</p>
-</div>
-
-<div className='siteInfo'>
-    <img src='/media3/customerservice.jpeg' alt='mainbanner'/>
-    <p>24/7 Customer Services</p>
-</div>
-
-<div className='siteInfo'>
-    <img src='/media3/discount.jpg' alt='mainbanner'/>
-    <p>Amazing Discounts</p>
-</div>
-
-</section>
 
 
 

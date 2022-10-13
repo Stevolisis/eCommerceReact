@@ -9,12 +9,12 @@ export default function Editproduct(){
     const {id}=useParams();
     const editorRef=useRef();
     const [selected,setSelected]=useState([]);
-    const [name,setName]=useState([]);
-    const [stock,setStock]=useState([]);
-    const [regular_price,setRegular_price]=useState([]);
-    const [sale_price,setSale_price]=useState([]);
-    const [shipping,setShipping]=useState([]);
-    const [status,setStatus]=useState([]);
+    const [name,setName]=useState('');
+    const [stock,setStock]=useState('');
+    const [regular_price,setRegular_price]=useState('');
+    const [sale_price,setSale_price]=useState('');
+    const [shipping,setShipping]=useState('');
+    const [status,setStatus]=useState('');
     const [options,setOptions]=useState([]);
     const [initialValue,setInitialValue]=useState('');
     const [imggallerypreview,setImggallerypreview]=useState([]);
@@ -27,13 +27,13 @@ export default function Editproduct(){
             let status=res.data.status;
             let data=res.data.data||'';
             if(status==='success'){
-                setName(data.name);
-                setStock(data.stock);
-                setRegular_price(data.regular_price);
-                setSale_price(data.sale_price);
+                setName(data.name||'');
+                setStock(data.stock||'');
+                setRegular_price(data.regular_price||'');
+                setSale_price(data.sale_price||'');
                 setShipping(data.shipping)
-                setStatus(data.status);
-                setImggallerypreview(data.img_gallery);
+                setStatus(data.status||'');
+                setImggallerypreview(data.img_gallery||[]);
                 setInitialValue(data.product_details)
                 data.category.forEach(option=>{
                 setSelected(oldOption=>[...oldOption,{value:option.name, label:option.name}])

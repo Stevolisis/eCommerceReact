@@ -1,12 +1,25 @@
 import React from 'react'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { getAllProducts } from '../Redux/Admin/products/productList';
+import { getAllProducts, deleteProduct } from '../Redux/Admin/products/productList';
+import Swal from 'sweetalert2';
 
-export default function ProductList({deleteproduct,products}) {
-  const productsli=useSelector(getAllProducts);
-  console.log("productsli",productsli)
-    const productLists=products.map((product,i)=>{
+export default function ProductList({deleteproduct}) {
+  const allProducts=useSelector(getAllProducts);
+  const products=allProducts&&allProducts.data||[];
+  const dispatch=useDispatch();
+
+
+  if(Object.keys(allProducts).length!==0&&allProducts&&allProducts.status!=='success'){
+    Swal.fire(
+    'Error Occured',
+    allProducts.status,
+    'warning'
+  )
+  console.log('Whats AGain')
+} 
+  
+  const productLists=products.map((product,i)=>{
         let {_id,img_gallery,name,SKU,category,stock,sale_price,sold,createdAt}=product;
        let categoryCon=[];
        category.forEach(categ=>{
@@ -29,7 +42,7 @@ export default function ProductList({deleteproduct,products}) {
         <td>{sold}</td>
         <td>{createdAt.split('T')[0]}</td>
         <td><Link to={`/admin/editproduct/${_id}`}><i className='fa fa-edit'/></Link></td>
-        <td><button onClick={()=>deleteproduct(_id)}>Delete</button></td>
+        <td><button onClick={()=>dispatch(deleteProduct(_id))}>Delete</button></td>
         </tr>
         )
     })
