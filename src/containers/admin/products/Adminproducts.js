@@ -11,7 +11,7 @@ export default function Adminproducts(){
     const [categories,setcategories]=useState([]);
     const [alert2,setalert2]=useState(false);
     const cancelalert=useRef(true);
-    let limit=useRef(9);
+    let limit=useRef(10);
     const dispatch=useDispatch();
 
 
