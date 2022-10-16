@@ -97,6 +97,12 @@ useEffect(()=>{
   },15000)
 })
 
+useEffect(()=>{
+  setTimeout(()=>{
+    setloadingStatus(false)
+  },15000)
+})
+
   return (
  
 
