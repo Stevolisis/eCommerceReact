@@ -91,6 +91,7 @@ function App() {
 const loaderStatus=useSelector((state)=>state.loader.loaderStatus)
 const [loadingStatus,setloadingStatus]=useState(loaderStatus);
 
+
 useEffect(()=>{
   setTimeout(()=>{
     setloadingStatus(false)
