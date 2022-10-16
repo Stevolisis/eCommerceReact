@@ -1,7 +1,16 @@
-import { configureStore } from "@reduxjs/toolkit";
-import productReducer from './Admin/products/productList';
-import swalNotifyReducer from './swalNotify';
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import productReducer from './Admin/products';
+import loaderReducer, { setLoader } from './loader';
 
-export const store=configureStore({
-    reducer:{productReducer,swalNotifyReducer}
-});
+
+
+const reducer = combineReducers({
+    products: productReducer,
+    loader:loaderReducer
+})
+
+export const store=configureStore({reducer});
+
+export const loading=()=>{
+    store.dispatch(setLoader());
+}

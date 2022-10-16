@@ -1,4 +1,4 @@
-import {React, useCallback, useEffect, useMemo, useState} from 'react'
+import {React, useCallback, useMemo} from 'react'
 import {BrowserRouter,Routes,Route} from 'react-router-dom';
 //------------Main Pages------------
 import Index from './containers/main/index';
@@ -77,33 +77,27 @@ import './containers/admin/styles/adminaddcateg.scss';
 
 //---------Fontawesome-----------
 import 'font-awesome/css/font-awesome.min.css';
-
-//------------Loaders------------
-import MainLoader from './Loaders/MainLoader';
-
-//------------Loader Styles------------
-import './Loaders/styles/mainLoader.scss';
+import { swalAlert } from './Utils/baseUrl';
 import { useSelector } from 'react-redux';
 
 
-
 function App() {
-const loaderStatus=useSelector((state)=>state.loader.loaderStatus)
-const [loadingStatus,setloadingStatus]=useState(loaderStatus);
+  const confirmStatus = useSelector(state => state.swalNotifyReducer.confirmStatus)
+  const alertStatus = useSelector(state => state.swalNotifyReducer.alertStatus)
 
-useEffect(()=>{
-  setTimeout(()=>{
-    setloadingStatus(false)
-  },16000)
-})
+console.log('kolo',alertStatus)
+useMemo(()=>{
+if(Object.keys(alertStatus).length!==0){
+  swalAlert(alertStatus.heading,alertStatus.message,alertStatus.status)
+}
+},[alertStatus]);
+
 
   return (
  
 
 <>
-{loadingStatus && <MainLoader/>}
-
-<BrowserRouter>
+    <BrowserRouter>
       <Routes>  
       {/* -------------Main Route------------- */}
         <Route path='/' element={<Index />} />

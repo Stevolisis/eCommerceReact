@@ -3,20 +3,16 @@ import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import ProductList from '../../../components/ProductList';
 import axios from 'axios';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchProducts, getAllProducts, filterProducts, filterByCategory} from '../../../Redux/Admin/products/productList';
-import { setAlert } from '../../../Redux/swalNotify';
+import { useDispatch } from 'react-redux';
+import { fetchProducts, searchProducts, filterByCategory, filterProducts, deleteProduct} from '../../../Redux/Admin/products';
 
 export default function Adminproducts(){
     const navigate=useNavigate();
-    const [products,setProducts]=useState([]);
-    const [backup,setbackup]=useState([]);
     const [categories,setcategories]=useState([]);
-    const filterData=Array.from(products);
+    const [alert2,setalert2]=useState(false);
     const cancelalert=useRef(true);
-    let limit=useRef(10);
+    let limit=useRef(9);
     const dispatch=useDispatch();
-    const allProducts=useSelector(getAllProducts);
 
 
     const loadCategories=()=>{
@@ -51,72 +47,21 @@ export default function Adminproducts(){
 
 
 
-        const deleteproduct=((id)=>{
-            Swal.fire({
-                title: 'Are you sure?',
-                text: "Confirm Action On Product",
-                icon: 'question',
-                showCancelButton: true,
-                confirmButtonColor: '#5972b9',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, Delete it!'
-              }).then((result) => {
-                if (result.isConfirmed) {
-
-            axios.delete(`http://localhost:80/products/deleteProduct/${id}`,{withCredientials:true})
-            .then(res=>{
-                let status=res.data.status;
-                if(status==='success'){
-                Swal.fire(
-                    'Deleted!',
-                    'Producted Delete Successful',
-                    'success'
-                  )  
-                //  return loadProducts();                  
-                }else{
-                    Swal.fire(
-                        'Error Occured',
-                        `${status}`,
-                        'warning'
-                      )
-                }
-
-            }).catch(e=>{
-                Swal.fire(
-                    'Error Occured',
-                    `${e.message}`,
-                    'error'
-                  )
-            })
-
-        }
-    });
-        })
-
-
-    function loadLimit(){
-        dispatch(setAlert({heading:'On Track!!',message:'I Hope',status:'success'}))
-    limit.current=limit.current+10;
-    dispatch(fetchProducts(limit.current));
-    }
-
-
-    
-  function filter(e){
-    console.log(categories);
-
-    if(e==='ascend'){
-        setProducts(filterData.sort((a,b)=>a._id < b._id ? 1:-1));
-    }else if(e==='descend'){
-        setProducts(filterData.sort((a,b)=>a._id < b._id ? -1:1));
-    }else if(e==='mostSold'){
-        setProducts(filterData.sort((a,b)=>a.sold < b.sold ? 1:-1));
-    }else if(e==='hPrice'){
-        setProducts(filterData.sort((a,b)=>a.sale_price < b.sale_price ? 1:-1));
-    }else if(e==='lPrice'){
-        setProducts(filterData.sort((a,b)=>a.sale_price < b.sale_price ? -1:1));
-    }
-  }
+    const deleteproduct=((id)=>{
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "Confirm Action On Product",
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#5972b9',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, Delete it!'
+            }).then((result) => {
+            if (result.isConfirmed) {
+                dispatch(deleteProduct(id));
+            }
+        });
+    })
 
 
 
@@ -135,6 +80,12 @@ export default function Adminproducts(){
         dispatch(fetchProducts(10));
        },[dispatch]);
 
+       useEffect(()=>{
+        if(alert2){
+            alert('Alert Within');
+        }
+       },[alert2]);
+
 
 
 
@@ -142,7 +93,7 @@ export default function Adminproducts(){
         <>
         <div className='admindashcon'>
         <div className='userorderheading'>
-            <p>Products ({allProducts&&allProducts.data&&allProducts.data.length})</p>
+            <p onClick={()=>setalert2(!alert2)}>Products</p>
             <button onClick={()=>navigate('/admin/addproduct')}>ADD</button>
             </div>
         <div className='admincategcon'>
@@ -151,7 +102,7 @@ export default function Adminproducts(){
 
             <div className='adminfilterscon'>
             <div className='adminfilters'>
-                    <input type='text' placeholder='Search...' onChange={(e)=>dispatch(filterProducts(e.target.value))}/>
+                    <input type='text' placeholder='Search...' onChange={(e)=>dispatch(searchProducts(e.target.value))}/>
                 </div>
                 <div className='adminfilters'>
                     <select onChange={(e)=>dispatch(filterByCategory(e.target.value))}>
@@ -160,7 +111,7 @@ export default function Adminproducts(){
                         return <option key={i} value={categ}>{categ}</option>
                     })}
                     </select>
-                    <select onChange={(e)=>filter(e.target.value)}>
+                    <select onChange={(e)=>dispatch(filterProducts(e.target.value))}>
                     <option value='ascend'>Recently Added</option>
                     <option value='descend'>Descending Order</option>
                     <option value='mostSold'>Most Sold</option>
@@ -176,12 +127,12 @@ export default function Adminproducts(){
         <div className='adminstat3'>
             <div className='adminstat3info2'>
             <table>
-              <ProductList deleteproduct={deleteproduct} products={products}/>
+              <ProductList deleteproduct={deleteproduct} />
             </table>
             </div>
         </div>
         <div className='adminmorebtn'>
-        <button onClick={loadLimit}>See More</button>
+        <button onClick={()=>dispatch(fetchProducts(limit.current+10))}>See More</button>
         </div>
         </div>
 
