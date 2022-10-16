@@ -100,7 +100,7 @@ useEffect(()=>{
 useEffect(()=>{
   setTimeout(()=>{
     setloadingStatus(false)
-  },15000)
+  },20000)
 })
 
   return (
