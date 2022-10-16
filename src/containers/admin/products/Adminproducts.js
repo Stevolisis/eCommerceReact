@@ -9,6 +9,7 @@ import { fetchProducts, searchProducts, filterByCategory, filterProducts, delete
 export default function Adminproducts(){
     const navigate=useNavigate();
     const [categories,setcategories]=useState([]);
+    const [alert2,setalert2]=useState(false);
     const cancelalert=useRef(true);
     let limit=useRef(10);
     const dispatch=useDispatch();
@@ -79,6 +80,12 @@ export default function Adminproducts(){
         dispatch(fetchProducts(10));
        },[dispatch]);
 
+       useEffect(()=>{
+        if(alert2){
+            alert('Alert Within');
+        }
+       },[alert2]);
+
 
 
 
@@ -86,7 +93,7 @@ export default function Adminproducts(){
         <>
         <div className='admindashcon'>
         <div className='userorderheading'>
-            <p>Products</p>
+            <p onClick={()=>setalert2(!alert2)}>Products</p>
             <button onClick={()=>navigate('/admin/addproduct')}>ADD</button>
             </div>
         <div className='admincategcon'>
