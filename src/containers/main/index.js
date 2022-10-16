@@ -153,7 +153,7 @@ prevslide={prevslide}
 <div className='section2'>
 <div className='specialcateghead' style={{background:'linear-gradient(40deg,#5972b9,#fa568d)'}}>
 <div className='specialhead1'>
-<p>Top Categories and Brands</p>
+<p>Top Brands</p>
 </div>
 
 </div>
