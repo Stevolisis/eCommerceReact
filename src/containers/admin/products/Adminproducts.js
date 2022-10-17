@@ -3,49 +3,18 @@ import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import ProductList from '../../../components/ProductList';
 import axios from 'axios';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { fetchProducts, searchProducts, filterByCategory, filterProducts, deleteProduct} from '../../../Redux/Admin/products';
+import { fetchCategories } from '../../../Redux/Admin/categories';
+import { store } from '../../../Redux/store';
+import { setLoader } from '../../../Redux/loader';
 
 export default function Adminproducts(){
     const navigate=useNavigate();
     const [categories,setcategories]=useState([]);
-    const [alert2,setalert2]=useState(false);
     const cancelalert=useRef(true);
     let limit=useRef(9);
     const dispatch=useDispatch();
-
-
-    const loadCategories=()=>{
-        axios.get('http://localhost:80/categories/getcategories')
-        .then(res=>{
-            let status=res.data.status;
-            let data=res.data.data||'';
-            // console.log(data);
-
-            if(status==='success'){
-
-            data.forEach(categ=>{
-            setcategories(oldCateg=>[...oldCateg,categ.name])
-            });
-
-            }else{
-                Swal.fire(
-                    'Error Occured',
-                    `${status}`,
-                    'warning'
-                  )                
-            }
-
-        }).catch(e=>{
-            Swal.fire(
-                'Error Occured',
-                `${e.message}`,
-                'error'
-              )
-        })
-    }
-
-
 
     const deleteproduct=((id)=>{
         Swal.fire({
@@ -66,25 +35,13 @@ export default function Adminproducts(){
 
 
 
-    
-
-
-       useEffect(()=>{
-        if(cancelalert.current){
-            cancelalert.current=false;
-            loadCategories();
-        }
-       },[]);
-
-       useEffect(()=>{
-        dispatch(fetchProducts(10));
-       },[dispatch]);
-
-       useEffect(()=>{
-        if(alert2){
-            alert('Alert Within');
-        }
-       },[alert2]);
+    useEffect(()=>{
+        // .finally(store.dispatch(setLoader(false)))
+    dispatch(fetchProducts(10))
+    dispatch(fetchCategories(2))
+    .then(res=>setcategories(res.payload.data))
+    .catch(err=>console.log('Categs Error',err));
+    },[dispatch]);
 
 
 
@@ -93,7 +50,7 @@ export default function Adminproducts(){
         <>
         <div className='admindashcon'>
         <div className='userorderheading'>
-            <p onClick={()=>setalert2(!alert2)}>Products</p>
+            <p>Products</p>
             <button onClick={()=>navigate('/admin/addproduct')}>ADD</button>
             </div>
         <div className='admincategcon'>
@@ -107,8 +64,8 @@ export default function Adminproducts(){
                 <div className='adminfilters'>
                     <select onChange={(e)=>dispatch(filterByCategory(e.target.value))}>
                     <option value='all'>All Category</option>
-                    {categories.map((categ,i)=>{
-                        return <option key={i} value={categ}>{categ}</option>
+                    {categories&&categories.map((categ,i)=>{
+                        return <option key={i} value={categ.name}>{categ.name}</option>
                     })}
                     </select>
                     <select onChange={(e)=>dispatch(filterProducts(e.target.value))}>

@@ -2,14 +2,12 @@ import { createSlice,createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { baseUrl } from "../../Utils/baseUrl";
 import Swal from "sweetalert2";
-import { loading, store } from "../store";
-import { setLoader } from "../loader";
-
+import { loading } from "../../Loaders/setMainLoader";
 
 
 export const fetchProducts=createAsyncThunk('adminProducts/fetchProducts',async(limit)=>{
+    loading(true);
     const response=await axios.get(`${baseUrl}/products/getProducts?limit=${limit}`)
-    store.dispatch(setLoader(true));
     return response.data;
 });
 
@@ -43,8 +41,7 @@ const productSlice=createSlice({
             }
         },
         filterProducts:(state,{payload})=>{
-            if(payload==='ascend'){
-                
+            if(payload==='ascend'){                
                 return {...state,products:{...state.products,data:[...state.filterBackup.data].sort((a,b)=>a._id < b._id ? 1:-1)}}
             }else if(payload==='descend'){
                 return {...state,products:{...state.products,data:[...state.filterBackup.data].sort((a,b)=>a._id < b._id ? -1:1)}}
@@ -61,6 +58,7 @@ const productSlice=createSlice({
     },
     extraReducers:{
         [fetchProducts.fulfilled]: (state,{payload})=>{
+            loading(false);
             return {...state,products:payload,filterBackup:payload}
         },
         [fetchProducts.rejected]: (state,{error})=>{
@@ -96,5 +94,5 @@ const productSlice=createSlice({
 
 
 export const {searchProducts,filterByCategory,filterProducts}=productSlice.actions;
-export const getAllProducts=(state)=>state.products.products;
+export const getAllProducts=(state)=>state.productReducer.products;
 export default productSlice.reducer;
