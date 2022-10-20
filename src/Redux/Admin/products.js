@@ -32,7 +32,7 @@ export const editProduct=createAsyncThunk('adminProducts/editProduct',async(form
 export const deleteProduct=createAsyncThunk('adminProducts/deleteProduct',async(id)=>{
     loading(true);
     const response=await axios.delete(`${baseUrl}/products/deleteProduct/${id}`)
-        return response.data;
+        return {data:response.data,id:id}
 });
 
 
@@ -160,8 +160,8 @@ const productSlice=createSlice({
                 'Producted Delete Successful',
                 'success'
             )
-            // state.products=state.products.filter(item => item.id !== payload.id)
-            // state.filterBackup=state.filterBackup.filter(item => item.id !== payload.id)
+            console.log(payload)
+            return {...state,filterBackup:[...state.filterBackup].filter(item => item._id !== payload.id),products:[...state.products].filter(item => item._id !== payload.id)}
         },
         [deleteProduct.rejected]: (state,{error})=>{
             loading(false);

@@ -44,7 +44,7 @@ export default function Addproduct({type}){
     cancelalert.current=false;
     dispatch(fetchCategories(2))
     .then(res=>{
-    let data=res.payload.data;
+    let data=res.payload;
     data.forEach(option=>{
         setOptions(oldOption=>[...oldOption,{value:option.name, label:option.name}])
     })
