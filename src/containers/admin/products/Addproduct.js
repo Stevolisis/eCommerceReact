@@ -1,8 +1,9 @@
-import {React, useRef,useState,useEffect} from 'react';
+import {React,useRef,useState,useEffect} from 'react';
 import {Editor} from '@tinymce/tinymce-react';
 import { MultiSelect } from 'react-multi-select-component';
-import Swal from 'sweetalert2';
-import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { fetchCategories } from '../../../Redux/Admin/categories';
+import { addProduct } from '../../../Redux/Admin/products';
 
 export default function Addproduct({type}){
     const editorRef=useRef();
@@ -10,39 +11,11 @@ export default function Addproduct({type}){
     const [options,setOptions]=useState([]);
     const [imggallerypreview,setImggallerypreview]=useState([]);
     const cancelalert=useRef(true)
+    const dispatch=useDispatch();
 
-     function show(){
-        console.log(editorRef.current.getContent())
-     }
-    const loadCategories=()=>{
-        axios.get('http://localhost:80/categories/getcategories')
-        .then(res=>{
-            let status=res.data.status;
-            let data=res.data.data||'';
-            console.log(data);
 
-            if(status==='success'){
 
-            data.forEach(option=>{
-            setOptions(oldOption=>[...oldOption,{value:option.name, label:option.name}])
-            });
 
-            }else{
-                Swal.fire(
-                    'Error Occured',
-                    `${status}`,
-                    'warning'
-                  )                
-            }
-
-        }).catch(e=>{
-            Swal.fire(
-                'Error Occured',
-                `${e.message}`,
-                'error'
-              )
-        })
-    }
 
       function handleSumbit(e){
         e.preventDefault();
@@ -50,35 +23,11 @@ export default function Addproduct({type}){
         const formData=new FormData(e.target)
         formData.append('category',JSON.stringify(selected));
         formData.append('product_details',product_details);
-
-        axios.post('http://localhost:80/products/addproduct',formData,{withCredentials:true})
-        .then(res=>{
-            let status=res.data.status;
-            if(status==='success'){
-                 Swal.fire(
-                    'Successful!',
-                    'Product inserted Successfully',
-                    'success'
-                );               
-            }else{
-                Swal.fire(
-                    'Error Occured!',
-                    `${status}`,
-                    'warning'
-                );
-                //e.target.reset();
-            }
-        
-        }).catch(err=>{
-            Swal.fire(
-                'Error Occured!',
-                `${err}`,
-                'error'
-              )
-        })  
-   
-
+        dispatch(addProduct(formData))
      }
+
+
+
 
     function imggalleryPreview(e){
         setImggallerypreview([])
@@ -88,15 +37,29 @@ export default function Addproduct({type}){
         });
     }
 
-
+    function show(){
+    console.log(editorRef.current.getContent())
+    }
 
     useEffect(()=>{
-        if(cancelalert.current){
-            cancelalert.current=false;
-            loadCategories();
-        }
-    
-       },[])
+    if(cancelalert.current){
+    cancelalert.current=false;
+    dispatch(fetchCategories(2))
+    .then(res=>{
+    let data=res.payload.data;
+    data.forEach(option=>{
+        setOptions(oldOption=>[...oldOption,{value:option.name, label:option.name}])
+    })
+    }).catch(err=>console.log('Categs Error',err));
+    }
+    },[dispatch]);
+
+
+
+
+
+
+
 
     return(
         <>

@@ -11,7 +11,14 @@ export const fetchProducts=createAsyncThunk('adminProducts/fetchProducts',async(
     return response.data;
 });
 
+export const addProduct=createAsyncThunk('adminProducts/fetchProducts',async(formData)=>{
+    loading(true);
+    const response=await axios.post(`${baseUrl}/products/addproduct`,formData);
+    return response.data;
+});
+
 export const deleteProduct=createAsyncThunk('adminProducts/deleteProduct',async(id)=>{
+    loading(true);
     const response=await axios.delete(`${baseUrl}/products/deleteProduct/${id}`)
         return {response:response.data,id:id};
 });
@@ -62,6 +69,33 @@ const productSlice=createSlice({
             return {...state,products:payload,filterBackup:payload}
         },
         [fetchProducts.rejected]: (state,{error})=>{
+            loading(false);
+            Swal.fire(
+                "Error Occured",
+                error.message,
+                'error'
+            )
+        },
+        [addProduct.fulfilled]: (state,{payload})=>{
+            loading(false);
+            let status=payload.status;
+
+            if(status==='success'){
+                Swal.fire(
+                   'Successful!',
+                   'Product Inserted Successfully',
+                   'success'
+               );               
+           }else{
+               Swal.fire(
+                   'Error Occured!',
+                   `${status}`,
+                   'warning'
+               );
+           }
+        },
+        [addProduct.rejected]: (state,{error})=>{
+            loading(false);
             Swal.fire(
                 "Error Occured",
                 error.message,
@@ -69,6 +103,7 @@ const productSlice=createSlice({
             )
         },
         [deleteProduct.fulfilled]: (state,{payload})=>{
+            loading(false);
             Swal.fire(
                 "Deleted!",
                 'Producted Delete Successful',
@@ -78,6 +113,7 @@ const productSlice=createSlice({
             state.filterBackup=state.filterBackup.filter(item => item.id !== payload.id)
         },
         [deleteProduct.rejected]: (state,{error})=>{
+            loading(false);
             Swal.fire(
                 "Error Occured",
                 error.message,
