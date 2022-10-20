@@ -8,27 +8,40 @@ import { loading } from "../../Loaders/setMainLoader";
 export const fetchProducts=createAsyncThunk('adminProducts/fetchProducts',async(limit)=>{
     loading(true);
     const response=await axios.get(`${baseUrl}/products/getProducts?limit=${limit}`)
-    return response.data;
+    return response.data.data;
 });
 
-export const addProduct=createAsyncThunk('adminProducts/fetchProducts',async(formData)=>{
+export const fetchProduct=createAsyncThunk('adminProducts/fetchProduct',async(id)=>{
+    loading(true);
+    const response=await axios.get(`${baseUrl}/products/getproductforedit/${id}`)
+    return response.data.data;
+});
+
+export const addProduct=createAsyncThunk('adminProducts/addProducts',async(formData)=>{
     loading(true);
     const response=await axios.post(`${baseUrl}/products/addproduct`,formData);
     return response.data;
 });
 
+export const editProduct=createAsyncThunk('adminProducts/editProduct',async(formData)=>{
+    loading(true);
+    const response=await axios.put(`${baseUrl}/products/editproduct`,formData)
+        return response.data;
+});
+
 export const deleteProduct=createAsyncThunk('adminProducts/deleteProduct',async(id)=>{
     loading(true);
     const response=await axios.delete(`${baseUrl}/products/deleteProduct/${id}`)
-        return {response:response.data,id:id};
+        return response.data;
 });
 
 
 
 
 const initialState={
-    products:{},
-    filterBackup:{}
+    products:[],
+    filterBackup:[],
+    product:{}
 }
 
 const productSlice=createSlice({
@@ -36,28 +49,28 @@ const productSlice=createSlice({
     initialState,
     reducers:{
         searchProducts:(state,{payload})=>{
-            return {...state,products:{...state.products,data:[...state.filterBackup.data].filter(item=>item.name.toLowerCase().includes(payload.toLowerCase()))}}
+            return {...state,products:[...state.filterBackup].filter(item=>item.name.toLowerCase().includes(payload.toLowerCase()))}
         },
         filterByCategory:(state,{payload})=>{
             if(payload==='all'){
                state.products=state.filterBackup;
             }else{
                 let searchData=payload.split(',');
-                return {...state,products:{...state.products,data:[...state.filterBackup.data].filter(item=>item.category.some(arr=>searchData.includes(arr.name)))}}
+                return {...state,products:[...state.filterBackup].filter(item=>item.category.some(arr=>searchData.includes(arr.name)))}
 
             }
         },
         filterProducts:(state,{payload})=>{
             if(payload==='ascend'){                
-                return {...state,products:{...state.products,data:[...state.filterBackup.data].sort((a,b)=>a._id < b._id ? 1:-1)}}
+                return {...state,products:[...state.filterBackup].sort((a,b)=>a._id < b._id ? 1:-1)}
             }else if(payload==='descend'){
-                return {...state,products:{...state.products,data:[...state.filterBackup.data].sort((a,b)=>a._id < b._id ? -1:1)}}
+                return {...state,products:[...state.filterBackup].sort((a,b)=>a._id < b._id ? -1:1)}
             }else if(payload==='mostSold'){
-                return {...state,products:{...state.products,data:[...state.filterBackup.data].sort((a,b)=>a.sold < b.sold ? 1:-1)}}
+                return {...state,products:[...state.filterBackup].sort((a,b)=>a.sold < b.sold ? 1:-1)}
             }else if(payload==='hPrice'){
-                return {...state,products:{...state.products,data:[...state.filterBackup.data].sort((a,b)=>a.sale_price < b.sale_price ? 1:-1)}}
+                return {...state,products:[...state.filterBackup].sort((a,b)=>a.sale_price < b.sale_price ? 1:-1)}
             }else if(payload==='lPrice'){
-                return {...state,products:{...state.products,data:[...state.filterBackup.data].sort((a,b)=>a.sale_price < b.sale_price ? -1:1)}}
+                return {...state,products:[...state.filterBackup].sort((a,b)=>a.sale_price < b.sale_price ? -1:1)}
             }else{
                 return;
             }
@@ -69,6 +82,18 @@ const productSlice=createSlice({
             return {...state,products:payload,filterBackup:payload}
         },
         [fetchProducts.rejected]: (state,{error})=>{
+            loading(false);
+            Swal.fire(
+                "Error Occured",
+                error.message,
+                'error'
+            )
+        },
+        [fetchProduct.fulfilled]: (state,{payload})=>{
+            loading(false);
+            return {...state,product:payload}
+        },
+        [fetchProduct.rejected]: (state,{error})=>{
             loading(false);
             Swal.fire(
                 "Error Occured",
@@ -102,6 +127,32 @@ const productSlice=createSlice({
                 'error'
             )
         },
+        [editProduct.fulfilled]: (state,{payload})=>{
+            loading(false);
+            let status=payload.status;
+
+            if(status==='success'){
+                Swal.fire(
+                   'Successfulop!',
+                   'Product Edited Successfully',
+                   'success'
+               );               
+           }else{
+               Swal.fire(
+                   'Error Occured!',
+                   `${status}`,
+                   'warning'
+               );
+           }
+        },
+        [editProduct.rejected]: (state,{error})=>{
+            loading(false);
+            Swal.fire(
+                "Error Occured",
+                error.message,
+                'error'
+            )
+        },
         [deleteProduct.fulfilled]: (state,{payload})=>{
             loading(false);
             Swal.fire(
@@ -109,8 +160,8 @@ const productSlice=createSlice({
                 'Producted Delete Successful',
                 'success'
             )
-            state.products=state.products.filter(item => item.id !== payload.id)
-            state.filterBackup=state.filterBackup.filter(item => item.id !== payload.id)
+            // state.products=state.products.filter(item => item.id !== payload.id)
+            // state.filterBackup=state.filterBackup.filter(item => item.id !== payload.id)
         },
         [deleteProduct.rejected]: (state,{error})=>{
             loading(false);

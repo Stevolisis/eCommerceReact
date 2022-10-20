@@ -4,6 +4,7 @@ import { MultiSelect } from 'react-multi-select-component';
 import { useDispatch } from 'react-redux';
 import { fetchCategories } from '../../../Redux/Admin/categories';
 import { addProduct } from '../../../Redux/Admin/products';
+import Swal from 'sweetalert2';
 
 export default function Addproduct({type}){
     const editorRef=useRef();
@@ -37,9 +38,6 @@ export default function Addproduct({type}){
         });
     }
 
-    function show(){
-    console.log(editorRef.current.getContent())
-    }
 
     useEffect(()=>{
     if(cancelalert.current){
@@ -50,10 +48,15 @@ export default function Addproduct({type}){
     data.forEach(option=>{
         setOptions(oldOption=>[...oldOption,{value:option.name, label:option.name}])
     })
-    }).catch(err=>console.log('Categs Error',err));
+    }).catch(err=>{
+        Swal.fire(
+            'Error Occured',
+            `${err.message}`,
+            'error'
+          )
+    });
     }
     },[dispatch]);
-
 
 
 
@@ -127,7 +130,6 @@ export default function Addproduct({type}){
                 skin:false,
                 content_css:false,
             }}
-            onChange={show}
             />
         </div>
         </div>

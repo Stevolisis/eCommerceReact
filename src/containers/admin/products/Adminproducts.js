@@ -2,12 +2,10 @@ import {React, useRef, useState,useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import ProductList from '../../../components/ProductList';
-import axios from 'axios';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { fetchProducts, searchProducts, filterByCategory, filterProducts, deleteProduct} from '../../../Redux/Admin/products';
 import { fetchCategories } from '../../../Redux/Admin/categories';
-import { store } from '../../../Redux/store';
-import { setLoader } from '../../../Redux/loader';
+
 
 export default function Adminproducts(){
     const navigate=useNavigate();
@@ -36,11 +34,16 @@ export default function Adminproducts(){
 
 
     useEffect(()=>{
-        // .finally(store.dispatch(setLoader(false)))
     dispatch(fetchProducts(10))
     dispatch(fetchCategories(2))
-    .then(res=>setcategories(res.payload.data))
-    .catch(err=>console.log('Categs Error',err));
+    .then(res=>setcategories(res.payload))
+    .catch(err=>{
+        Swal.fire(
+            'Error Occured',
+            `${err.message}`,
+            'error'
+          )
+    });
     },[dispatch]);
 
 

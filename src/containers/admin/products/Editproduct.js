@@ -4,6 +4,9 @@ import {Editor} from '@tinymce/tinymce-react';
 import { MultiSelect } from 'react-multi-select-component';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import { fetchCategories } from '../../../Redux/Admin/categories';
+import { useDispatch } from 'react-redux';
+import { editProduct, fetchProduct } from '../../../Redux/Admin/products';
 
 export default function Editproduct(){
     const {id}=useParams();
@@ -19,76 +22,12 @@ export default function Editproduct(){
     const [initialValue,setInitialValue]=useState('');
     const [imggallerypreview,setImggallerypreview]=useState([]);
     const cancelalert=useRef(true)
+    const dispatch=useDispatch();
 
 
-      const loadProduct=()=>{
-        axios.get(`http://localhost:80/products/getproductforedit/${id}`)
-        .then(res=>{
-            let status=res.data.status;
-            let data=res.data.data||'';
-            if(status==='success'){
-                setName(data.name||'');
-                setStock(data.stock||'');
-                setRegular_price(data.regular_price||'');
-                setSale_price(data.sale_price||'');
-                setShipping(data.shipping)
-                setStatus(data.status||'');
-                setImggallerypreview(data.img_gallery||[]);
-                setInitialValue(data.product_details)
-                data.category.forEach(option=>{
-                setSelected(oldOption=>[...oldOption,{value:option.name, label:option.name}])
-                })                
-
-            }else{
-                Swal.fire(
-                    'Error Occured',
-                    `${status}`,
-                    'warning'
-                  )
-             }
-
-        }).catch(e=>{
-            Swal.fire(
-                'Error Occured',
-                `${e.message}`,
-                'error'
-              )
-        })
-    }
-
-    const loadCategories=()=>{
-        axios.get('http://localhost:80/categories/getcategories')
-        .then(res=>{
-            let status=res.data.status;
-            let data=res.data.data||'';
-            console.log(data);
-
-            if(status==='success'){
-
-            data.forEach(option=>{
-            setOptions(oldOption=>[...oldOption,{value:option.name, label:option.name}])
-            });
-
-            }else{
-                Swal.fire(
-                    'Error Occured',
-                    `${status}`,
-                    'warning'
-                  )                
-            }
-
-        }).catch(e=>{
-            Swal.fire(
-                'Error Occured',
-                `${e.message}`,
-                'error'
-              )
-        })
-    }
 
     function handleSumbit(e){
         e.preventDefault();
-        console.log(editorRef.current.getContent())
         Swal.fire({
             title: 'Are you sure?',
             text: "Confirm Action On Product",
@@ -99,42 +38,16 @@ export default function Editproduct(){
             confirmButtonText: 'Yes, Edit it!'
           }).then((result) => {
             if (result.isConfirmed) {
-
                 const formData=new FormData(e.target);
+                formData.append('id',id);
                 formData.append('category',JSON.stringify(selected));
                 formData.append('product_details',editorRef.current.getContent());
-        
-                    axios.put(`http://localhost:80/products/editproduct/${id}`,formData,{withCredentials:true})
-                    .then(res=>{
-                        let status=res.data.status;
-                        if(status==='success'){
-                             Swal.fire(
-                                'Successful!',
-                                'Product Edited Successfully',
-                                'success'
-                            );               
-                        }else{
-                            Swal.fire(
-                                'Error Occured!',
-                                `${status}`,
-                                'warning'
-                            );
-                            //e.target.reset();
-                        }
-                    
-                    }).catch(err=>{
-                        Swal.fire(
-                            'Error Occured!',
-                            `${err}`,
-                            'error'
-                          )
-                    });   
 
+                dispatch(editProduct(formData));
             }
           })
    
     }
-
 
 
 
@@ -149,16 +62,43 @@ export default function Editproduct(){
         });
 }
 
-useEffect(()=>{
+
+
+   useEffect(()=>{
     if(cancelalert.current){
-        cancelalert.current=false;
-        loadCategories();
-        loadProduct();
+    cancelalert.current=false;
+//------------------
+    dispatch(fetchProduct(id))
+    .then(res=>{
+        let data=res.payload;
+        setName(data.name||'');
+        setStock(data.stock||'');
+        setRegular_price(data.regular_price||'');
+        setSale_price(data.sale_price||'');
+        setShipping(data.shipping)
+        setStatus(data.status||'');
+        setImggallerypreview(data.img_gallery||[]);
+        setInitialValue(data.product_details)
+        data.category.forEach(option=>{
+        setSelected(oldOption=>[...oldOption,{value:option.name, label:option.name}]);
+        });
+    }).catch(err=>{Swal.fire('Error Occured', `${err.message}`,'error')});
+
+//---------------------
+    dispatch(fetchCategories(2))
+    .then(res=>{
+    let data=res.payload;
+    data.forEach(option=>{
+        setOptions(oldOption=>[...oldOption,{value:option.name, label:option.name}])
+    })
+    }).catch(err=>{Swal.fire('Error Occured', `${err.message}`,'error')});
     }
+    },[dispatch]);
 
-   },[])
 
 
+
+    
 
     return(
         <>

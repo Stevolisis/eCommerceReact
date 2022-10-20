@@ -10,7 +10,7 @@ import { setLoader } from "../loader";
 export const fetchCategories=createAsyncThunk('adminCategories/fetchCategories',async(limit)=>{
     // store.dispatch(setLoader(true));
     const response=await axios.get(`${baseUrl}/categories/getcategories?limit=${limit}`)
-    return response.data;
+    return response.data.data;
 });
 
 export const deleteCategory=createAsyncThunk('adminCategories/deleteCategories',async(id)=>{
@@ -22,8 +22,8 @@ export const deleteCategory=createAsyncThunk('adminCategories/deleteCategories',
 
 
 const initialState={
-    categories:{},
-    filterBackups:{}
+    categories:[],
+    filterBackups:[]
 }
 
 const categorySlice=createSlice({
