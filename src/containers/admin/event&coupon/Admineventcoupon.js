@@ -6,10 +6,11 @@ import { ReactSortable } from "react-sortablejs";
 export default function Admineventcoupon(){
     const navigate=useNavigate();
     const [state, setState] = useState([
-      { id: 1, name: "shrek" },
-      { id: 2, name: "fiona" },
-      { id: 3, name: "Lia" },
-      { id: 4, name: "James" },
+      { id: 1, title: "Flash Sales",banner_color: "Crimson",date:"10/6/2022",products: 12, sold:3},
+      { id: 2, title: "Special Category",banner_color: "orangered",date:"10/6/2022",products: 3, sold:1},
+      { id: 3, title: "New Release",banner_color: "dodgerblue",date:"10/6/2022",products: 32, sold:22},
+      { id: 4, title: "Brands",banner_color: "brickred",date:"10/6/2022",products: 19, sold:10},
+      { id: 5, title: "Latest",banner_color: "violet",date:"10/6/2022",products: 55, sold:44}
     ]);
 
     useEffect(()=>{
@@ -92,11 +93,7 @@ export default function Admineventcoupon(){
         <div className='adminstat3'>
             <div className='adminstat3info2'>
 
-          <ReactSortable list={state} setList={setState}>
-          {state.map((item) => (
-          <div key={item.id}>{item.name}</div>
-          ))}
-          </ReactSortable>
+
 
             <table>
             <tbody>
@@ -111,52 +108,26 @@ export default function Admineventcoupon(){
             <th>Delete</th>
             <th>Arrange</th>
             </tr>
+</tbody>
 
-            <tr>
-            <td>Flash Deals</td>
-            <td>Crimson</td>
-            <td>10/06/2022</td>
-            <td>19</td>
-            <td>12</td>
+          <ReactSortable tag="tbody" list={state} setList={setState}>
+          {state.map((item) => (
+          <tr key={item.id} style={{cursor:"grab"}}>
+            <td>{item.title}</td>
+            <td>{item.banner_color}</td>
+            <td>{item.date}</td>
+            <td>{item.products}</td>
+            <td>{item.sold}</td>
             <td><Link to='/admin/editcoupon/wdhfvj44'><i className='fa fa-edit'/></Link></td>
-            <td><button onClick={()=>deletespec()}>Delete</button></td>
-            <td><i className='fa fa-bars'/></td>
-            </tr>
+            <td><button onClick={()=>deletespec2()}>Delete</button></td>
+            <td><i className='fa fa-bar'/></td>
+          </tr>
+          ))}
+          </ReactSortable>
 
-            <tr>
-            <td>Special Category</td>
-            <td>Crimson</td>
-            <td>10/06/2022</td>
-            <td>19</td>
-            <td>12</td>
-            <td><Link to='/admin/editcoupon/wdhfvj44'><i className='fa fa-edit'/></Link></td>
-            <td><button onClick={()=>deletespec()}>Delete</button></td>
-            <td><i className='fa fa-bars'/></td>
-            </tr>
+            
 
-            <tr>
-            <td>Grandpro New Release</td>
-            <td>Crimson</td>
-            <td>10/06/2022</td>
-            <td>19</td>
-            <td>12</td>
-            <td><Link to='/admin/editcoupon/wdhfvj44'><i className='fa fa-edit'/></Link></td>
-            <td><button onClick={()=>deletespec()}>Delete</button></td>
-            <td><i className='fa fa-bars'/></td>
-            </tr>
-
-            <tr>
-            <td>Grandpro Brands</td>
-            <td>Crimson</td>
-            <td>10/06/2022</td>
-            <td>19</td>
-            <td>12</td>
-            <td><Link to='/admin/editcoupon/wdhfvj44'><i className='fa fa-edit'/></Link></td>
-            <td><button onClick={()=>deletespec()}>Delete</button></td>
-            <td><i className='fa fa-bars'/></td>
-            </tr>
-
-            </tbody>
+            {/* </tbody> */}
             </table>
             </div>
         </div>
