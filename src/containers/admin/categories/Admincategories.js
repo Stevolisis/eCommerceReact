@@ -1,74 +1,36 @@
-import {React, useEffect, useState,useRef} from 'react';
+import {React, useEffect, useState} from 'react';
 import {  useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import CategoryList from '../../../components/CategoryList';
-import axios from 'axios';
+import CategoryList from '../../../components/listings/CategoryList';
+import { deleteCategory, fetchCategories, filterCategories, searchCategories } from '../../../Redux/Admin/categories';
+import { useDispatch } from 'react-redux';
 
 export default function Admincategories(){
-    const [categs,setCategs]=useState([])
     const navigate=useNavigate();
-    const cancelalert=useRef(true)
-
-    // const deletecateg=(()=>{
-    //     Swal.fire({
-    //         title: 'Are you sure?',
-    //         text: "You won't be able to revert this!",
-    //         icon: 'question',
-    //         showCancelButton: true,
-    //         confirmButtonColor: '#3085d6',
-    //         cancelButtonColor: '#d33',
-    //         confirmButtonText: 'Yes, delete it!'
-    //       }).then((result) => {
-    //         if (result.isConfirmed) {
-    //           Swal.fire(
-    //             'Deleted!',
-    //             'Category Deleted.',
-    //             'success'
-    //           )
-    //         }
-    //       })
-    //    })
+    const dispatch=useDispatch();
+    let [limit,setlimit]=useState(10);
 
 
-       const loadCategs=()=>{
-        axios.get('http://localhost:80/categories/getcategories',{withCredientials:true})
-        .then(res=>{
-            let data=res.data.data;
-            setCategs(data);
-            console.log(data);
-        }).catch(err=>{
-            Swal.fire(
-                'Error Occured!!',
-                'Updated Error.',
-                'warning'
-              )
-        })
-    }
+    const deletecateg=((id)=>{
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "Confirm Action On Category",
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#5972b9',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, Delete it!'
+            }).then((result) => {
+            if (result.isConfirmed) {
+                dispatch(deleteCategory(id));
+            }
+        });
+    })
 
-        const deletecateg=((id)=>{
-            axios.delete(`http://localhost:80/categories/deleteCategory/${id}`,{withCredientials:true})
-            .then(res=>{
-                let data=res.data.data;
-                Swal.fire(
-                    'Deleted!',
-                    data,
-                    'success'
-                  )
-            }).catch(err=>{
-                Swal.fire(
-                    'Error Occured!!',
-                    'Error at Axios.',
-                    'warning'
-                  )
-            })
-        })
 
-       useEffect(()=>{
-        if(cancelalert.current){
-            cancelalert.current=false;
-            loadCategs();
-        }
-       },[]);
+        useEffect(()=>{
+            dispatch(fetchCategories(limit));
+            },[dispatch,limit]);
 
     return(
         <>
@@ -83,21 +45,15 @@ export default function Admincategories(){
 
             <div className='adminfilterscon'>
             <div className='adminfilters'>
-                    <input type='text' placeholder='Search...'/>
+                    <input type='text' placeholder='Search...' onChange={(e)=>dispatch(searchCategories(e.target.value))}/>
                 </div>
                 <div className='adminfilters'>
-                    <select>
-                    <option defaultValue='All Category'>All Category</option>
-                    <option>Phones</option>
-                    <option>Shirts</option>
-                    <option>Home Appliances</option>
-                    <option>Underwears</option>
-                    </select>
-                    <select>
-                    <option defaultValue='All Category'>Recent Added</option>
-                    <option>High product</option>
-                    <option>Desc</option>
-                    <option>Home Appliances</option>
+                    <select onChange={(e)=>dispatch(filterCategories(e.target.value))}>
+                    <option value='ascend'>Recent Added</option>
+                    <option value='descend'>Descending Order</option>
+                    <option value='mostProduct'>Most Products</option>
+                    <option value='active'>Active</option>
+                    <option value='inactive'>Inactive</option>
                     </select>
                 </div>
             </div>
@@ -108,12 +64,12 @@ export default function Admincategories(){
         <div className='adminstat3'>
             <div className='adminstat3info2'>
             <table>
-            <CategoryList deletecateg={deletecateg} categs={categs}/>
+            <CategoryList deletecateg={deletecateg}/>
             </table>
             </div>
         </div>
         <div className='adminmorebtn'>
-            <button>See More</button>
+            <button onClick={()=>setlimit(limit+10)}>See More</button>
         </div>
         </div>
 

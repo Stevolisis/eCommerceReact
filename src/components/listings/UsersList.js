@@ -1,13 +1,15 @@
-import {React} from 'react';
+import { React} from 'react';
+import { useSelector } from 'react-redux';
 import {Link} from 'react-router-dom'
+import { getAllUsers } from '../../Redux/Admin/users';
 
-export default function UsersList({users,deleteuser}){
+export default function UsersList({deleteuser}){
+    const users=useSelector(getAllUsers);
 
     const userLists=users.map((user,i)=>{
-        let {_id,first_name,last_name,email,phone_number,orders,wishlist,createdAt,verified}=user;
-        return(
-            <>            
-            <tr>
+        let {_id,first_name,last_name,email,phone_number,orders,wishlist,createdAt,verified,status}=user;
+        return(           
+            <tr key={i}>
             <td>{first_name+' '+last_name}</td>
             <td>{email}</td>
             <td>{phone_number}</td>
@@ -17,8 +19,8 @@ export default function UsersList({users,deleteuser}){
             <td>{createdAt.split('T')[0]}</td>
             <td><Link to={`/admin/edituser/${_id}`}><i className='fa fa-edit'/></Link></td>
             <td><button onClick={()=>deleteuser(_id)}>Delete</button></td>
+            <td>{status}</td>
             </tr>
-            </>
         )
      })
     return(
@@ -33,6 +35,7 @@ export default function UsersList({users,deleteuser}){
             <th>Date</th>
             <th>Edit</th>
             <th>Delete</th>
+            <th>Status</th>
             </tr>
 
             {userLists}

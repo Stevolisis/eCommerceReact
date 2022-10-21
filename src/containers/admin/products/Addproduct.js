@@ -18,7 +18,7 @@ export default function Addproduct({type}){
 
 
 
-      function handleSumbit(e){
+      function handleSubmit(e){
         e.preventDefault();
         const product_details=editorRef.current.getContent();
         const formData=new FormData(e.target)
@@ -42,7 +42,7 @@ export default function Addproduct({type}){
     useEffect(()=>{
     if(cancelalert.current){
     cancelalert.current=false;
-    dispatch(fetchCategories(2))
+    dispatch(fetchCategories())
     .then(res=>{
     let data=res.payload;
     data.forEach(option=>{
@@ -70,7 +70,7 @@ export default function Addproduct({type}){
         <div className='userorderheading'>
         <p>Add Product</p>
         </div>
-        <form onSubmit={handleSumbit}>
+        <form onSubmit={handleSubmit}>
         <div className='addcategcon'>
         <div className='admineditnamecon'>
             <div className='admineditname'>

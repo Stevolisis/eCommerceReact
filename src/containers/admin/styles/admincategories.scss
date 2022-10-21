@@ -17,6 +17,7 @@
 .adminfilters{
 width: 40%;
 display: flex;
+justify-content: flex-end;
 
     input{
         border: 1px solid $color108;
@@ -33,6 +34,7 @@ display: flex;
         width: 80%;
        box-sizing: border-box;  
        margin: 0 5px;
+       float:right;
       }
 }
 

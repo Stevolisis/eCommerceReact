@@ -2,7 +2,7 @@ import {React,useState,useRef, useEffect} from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import axios from 'axios'
-import FaqList from '../../../components/FaqList';
+import FaqList from '../../../components/listings/FaqList';
 
 export default function Adminsupport(){
     const navigate=useNavigate();

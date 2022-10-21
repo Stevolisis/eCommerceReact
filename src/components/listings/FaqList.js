@@ -1,5 +1,5 @@
 import React from 'react'
-import Accordion2 from './Accordion2'
+import Accordion2 from '../Accordion2'
 
 export default function FaqList({deletespec,faqs}) {
     const faqsDisplay=faqs.map((faq,i)=>{

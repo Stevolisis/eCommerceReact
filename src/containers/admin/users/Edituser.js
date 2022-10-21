@@ -113,8 +113,8 @@ export default function Edituser(){
             <div className='admineditname'>
             <p>Status</p>
             <select name='status' value={status} onChange={(e)=>setStatus(e.target.value)}>
-            <option value='Activate'>Activate</option>
-            <option value='Deactivate'>Deactivate</option>
+            <option value='active'>Activate</option>
+            <option value='inactive'>Deactivate</option>
             </select>
             </div>
         </div>

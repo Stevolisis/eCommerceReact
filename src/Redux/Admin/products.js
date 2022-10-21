@@ -71,6 +71,10 @@ const productSlice=createSlice({
                 return {...state,products:[...state.filterBackup].sort((a,b)=>a.sale_price < b.sale_price ? 1:-1)}
             }else if(payload==='lPrice'){
                 return {...state,products:[...state.filterBackup].sort((a,b)=>a.sale_price < b.sale_price ? -1:1)}
+            }else if(payload==='active'){
+                return {...state,products:[...state.filterBackup].filter(item=>item.status==='active')}
+            }else if(payload==='inactive'){
+                return {...state,products:[...state.filterBackup].filter(item=>item.status==='inactive')}
             }else{
                 return;
             }
@@ -133,7 +137,7 @@ const productSlice=createSlice({
 
             if(status==='success'){
                 Swal.fire(
-                   'Successfulop!',
+                   'Successful!',
                    'Product Edited Successfully',
                    'success'
                );               
@@ -160,7 +164,6 @@ const productSlice=createSlice({
                 'Producted Delete Successful',
                 'success'
             )
-            console.log(payload)
             return {...state,filterBackup:[...state.filterBackup].filter(item => item._id !== payload.id),products:[...state.products].filter(item => item._id !== payload.id)}
         },
         [deleteProduct.rejected]: (state,{error})=>{

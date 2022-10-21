@@ -1,44 +1,25 @@
 import {React, useState} from 'react';
-import Swal from 'sweetalert2';
-import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { addCategory } from '../../../Redux/Admin/categories';
 
 export default function Addcategory(){
     const [imgpreview,setImgpreview]=useState('');
+    const dispatch=useDispatch();
 
-    const handleSubmit=((e)=>{
+    function handleSubmit(e){
         e.preventDefault();
-    const formData=new FormData(e.target);
-   
-        axios.post('http://localhost:80/categories/addcategory',formData,{withCredentials:true})
-        .then(res=>{
-            let status=res.data.status;
-            if(status==='success'){
-                 Swal.fire(
-                    'Successful!',
-                    'Category inserted Successfully',
-                    'success'
-                );               
-            }else{
-                Swal.fire(
-                    'Error Occured!',
-                    `${status}`,
-                    'warning'
-                );
-                //e.target.reset();
-            }
-        
-        }).catch(e=>{
-            Swal.fire(
-                'Error Occured!',
-                `${e.message}`,
-                'error'
-              )
-        });  
-        });
+        const formData=new FormData(e.target)
+        dispatch(addCategory(formData))
+    }
 
-        function imgPreview(e){
-            setImgpreview(URL.createObjectURL(e.target.files[0]));
-           }
+
+    function imgPreview(e){
+        setImgpreview(URL.createObjectURL(e.target.files[0]));
+    }
+
+
+
+
 
     return(
         <>
@@ -67,8 +48,8 @@ export default function Addcategory(){
             <div className='admineditname'>
             <p>Status</p>
             <select name='status'>
-            <option defaultValue>Activate</option>
-            <option>Deactivate</option>
+            <option value='active'>Activate</option>
+            <option value='inactive'>Deactivate</option>
             </select>
             </div>
         </div>

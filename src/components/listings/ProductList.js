@@ -1,14 +1,14 @@
 import React from 'react'
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { getAllProducts } from '../Redux/Admin/products';
+import { getAllProducts } from '../../Redux/Admin/products';
 
 export default function ProductList({deleteproduct}) {
   const allProducts=useSelector(getAllProducts);
 
   
   const productLists=allProducts.map((product,i)=>{
-  let {_id,img_gallery,name,SKU,category,stock,sale_price,sold,createdAt}=product;
+  let {_id,img_gallery,name,status,category,stock,sale_price,sold,createdAt}=product;
   let categoryCon=[];
 
   category.forEach(categ=>{
@@ -32,6 +32,7 @@ export default function ProductList({deleteproduct}) {
   <td>{createdAt.split('T')[0]}</td>
   <td><Link to={`/admin/editproduct/${_id}`}><i className='fa fa-edit'/></Link></td>
   <td><button onClick={()=>deleteproduct(_id)}>Delete</button></td>
+  <td>{status}</td>
   </tr>
   )
     })
@@ -53,6 +54,7 @@ return (
 <th>Date</th>
 <th>Edit</th>
 <th>Delete</th>
+<th>Status</th>
 </tr>
 
 {productLists}

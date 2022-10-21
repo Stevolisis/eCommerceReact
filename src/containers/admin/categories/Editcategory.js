@@ -1,7 +1,8 @@
 import {React,useEffect,useState} from 'react';
 import Swal from 'sweetalert2';
-import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import { editCategory, fetchCategory } from '../../../Redux/Admin/categories';
+import { useDispatch } from 'react-redux';
 
 export default function Editcategory(){
     const {id}=useParams();
@@ -9,64 +10,51 @@ export default function Editcategory(){
     const [slug,setSlug]=useState('')
     const [status,setStatus]=useState('')
     const [imgpreview,setImgpreview]=useState('http://localhost:80/media/1658441585321Screenshot_20220612-225205.png');
+    const dispatch=useDispatch();
 
-    const loadCategory=()=>{
-        axios.get(`http://localhost:80/categories/getcategoryforedit/${id}`)
-        .then(res=>{
-            let category=res.data.data;
-            if(category==='Error Occured'){
-                Swal.fire(
-                    'Error After Fetch!',
-                    `Error Occured: ${category}`,
-                    'warning'
-                  )
-            }else{
-                setName(category.name);
-                setSlug(category.slug);
-                setImgpreview(category.img_link);
-                setStatus(category.status)
+
+
+    function handleSubmit(e){
+        e.preventDefault();
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "Confirm Action On Category",
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#5972b9',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, Edit it!'
+          }).then((result) => {
+            if (result.isConfirmed) {
+                const formData=new FormData(e.target);
+                formData.append('id',id);
+
+                dispatch(editCategory(formData));
             }
-
-        }).catch(err=>{
-            Swal.fire(
-                'Error At Axios!',
-                `Error Occured: ${err}`,
-                'warning'
-              )
-        })
+          })
+   
+    }
+        
+    function imgPreview(e){
+    setImgpreview(URL.createObjectURL(e.target.files[0]));
     }
 
-    const handleSubmit=((e)=>{
-        e.preventDefault();
-        const formData=new FormData(e.target);
+    useEffect(()=>{
+    dispatch(fetchCategory(id))
+    .then(res=>{
+        let category=res.payload;
+        setName(category.name);
+        setSlug(category.slug);
+        setImgpreview(category.img_link);
+        setStatus(category.status)
+    }).catch(err=>{Swal.fire('Error Occured', `${err.message}`,'error')});
 
-        axios.put(`http://localhost:80/categories/editcategory/${id}`,formData,{withCredentials:true})
-        .then(res=>{
-            let data=res.data.data;
+    },[dispatch,id])
 
-            Swal.fire(
-                'Successful!',
-                `Data Done: ${data}`,
-                'success'
-              )
-        }).catch(err=>{
 
-            Swal.fire(
-                'Successful!',
-                `Error Occured: ${err}`,
-                'success'
-              )
-        });
-        });
 
-        
-        function imgPreview(e){
-            setImgpreview(URL.createObjectURL(e.target.files[0]));
-           }
 
-           useEffect(()=>{
-            loadCategory();
-           },[])
+
 
     return(
         <>
@@ -107,8 +95,8 @@ export default function Editcategory(){
             <div className='admineditname'>
             <p>Status</p>
             <select name='status' value={status} onChange={(e)=>setStatus(e.target.value)}>
-            <option value='Activate'>Activate</option>
-            <option value='Deactivate'>Deactivate</option>
+            <option value='active'>Activate</option>
+            <option value='inactive'>Deactivate</option>
             </select>
             </div>
         </div>

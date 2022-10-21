@@ -1,7 +1,7 @@
-import {React, useRef, useState,useEffect} from 'react';
+import {React, useState,useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import ProductList from '../../../components/ProductList';
+import ProductList from '../../../components/listings/ProductList';
 import { useDispatch } from 'react-redux';
 import { fetchProducts, searchProducts, filterByCategory, filterProducts, deleteProduct} from '../../../Redux/Admin/products';
 import { fetchCategories } from '../../../Redux/Admin/categories';
@@ -10,8 +10,7 @@ import { fetchCategories } from '../../../Redux/Admin/categories';
 export default function Adminproducts(){
     const navigate=useNavigate();
     const [categories,setcategories]=useState([]);
-    const cancelalert=useRef(true);
-    let limit=useRef(9);
+    let [limit,setlimit]=useState(10);
     const dispatch=useDispatch();
 
     const deleteproduct=((id)=>{
@@ -34,8 +33,7 @@ export default function Adminproducts(){
 
 
     useEffect(()=>{
-    dispatch(fetchProducts(10))
-    dispatch(fetchCategories(2))
+    dispatch(fetchCategories())
     .then(res=>setcategories(res.payload))
     .catch(err=>{
         Swal.fire(
@@ -45,6 +43,10 @@ export default function Adminproducts(){
           )
     });
     },[dispatch]);
+
+    useEffect(()=>{
+    dispatch(fetchProducts(limit))
+    },[dispatch,limit]);
 
 
 
@@ -77,6 +79,8 @@ export default function Adminproducts(){
                     <option value='mostSold'>Most Sold</option>
                     <option value='hPrice'>Highest Price</option>
                     <option value='lPrice'>Lowest Price</option>
+                    <option value='active'>Active</option>
+                    <option value='inactive'>Inactive</option>
                     </select>
                 </div>
             </div>
@@ -92,7 +96,7 @@ export default function Adminproducts(){
             </div>
         </div>
         <div className='adminmorebtn'>
-        <button onClick={()=>dispatch(fetchProducts(limit.current+10))}>See More</button>
+        <button onClick={()=>setlimit(limit+10)}>See More</button>
         </div>
         </div>
 

@@ -1,9 +1,12 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { getAllCategories } from '../../Redux/Admin/categories';
 
-export default function CategoryList({deletecateg,categs}) {
+export default function CategoryList({deletecateg}) {
+   const categories=useSelector(getAllCategories);
 
-     const categoryLists=categs.map((category,i)=>{
+     const categoryLists=categories.map((category,i)=>{
         let {_id,img_link,name,slug,product,createdAt,status}=category;
         return(
             <tr key={i}>

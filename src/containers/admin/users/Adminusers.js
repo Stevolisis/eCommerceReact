@@ -1,51 +1,35 @@
-import {React,useEffect, useState,useRef} from 'react';
+import {React,useEffect, useState} from 'react';
 import Swal from 'sweetalert2';
-import UsersList from '../../../components/UsersList';
+import UsersList from '../../../components/listings/UsersList';
 import axios from 'axios';
+import { deleteUser, fetchUsers } from '../../../Redux/Admin/users';
+import { useDispatch } from 'react-redux';
 
 export default function Adminusers(){
-    const [users,setUsers]=useState([])
-    const cancelalert=useRef(true)
-   
-   const loadUsers=()=>{
-    axios.get('http://localhost:80/users/getusers',{withCredientials:true})
-    .then(res=>{
-        let data=res.data.data;
-        setUsers(data);
-        console.log(data);
-    }).catch(err=>{
-        Swal.fire(
-            'Error Occured!!',
-            'Updated Error.',
-            'warning'
-          )
-    })
-}
+    let [limit,setlimit]=useState(1);
+    const dispatch=useDispatch();
+
+
 
     const deleteuser=((id)=>{
-        axios.delete(`http://localhost:80/users/deleteuser/${id}`,{withCredientials:true})
-        .then(res=>{
-            let data=res.data.data;
-            Swal.fire(
-                'Deleted!',
-                data,
-                'success'
-              )
-        }).catch(err=>{
-            Swal.fire(
-                'Error Occured!!',
-                'Error at Axios.',
-                'warning'
-              )
-        })
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "Confirm Action On User",
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#5972b9',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, Delete it!'
+            }).then((result) => {
+            if (result.isConfirmed) {
+                dispatch(deleteUser(id));
+            }
+        });
     })
 
-   useEffect(()=>{
-    if(cancelalert.current){
-        cancelalert.current=false;
-        loadUsers();
-    }
-   },[]);
+    useEffect(()=>{
+    dispatch(fetchUsers(limit));
+    },[dispatch,limit]);
 
 
     return(
@@ -62,17 +46,14 @@ export default function Adminusers(){
                 </div>
                 <div className='adminfilters'>
                     <select>
-                    <option defaultValue='All Category'>All Category</option>
-                    <option>Phones</option>
-                    <option>Shirts</option>
-                    <option>Home Appliances</option>
-                    <option>Underwears</option>
-                    </select>
-                    <select>
-                    <option defaultValue='All Category'>Recent Added</option>
-                    <option>High product</option>
-                    <option>Desc</option>
-                    <option>Home Appliances</option>
+                    <option value='ascend'>Recent Added</option>
+                    <option value='descend'>Descending Order</option>
+                    <option value='mostOrders'>Most Orders</option>
+                    <option value='mostWishist'>Most Wishlist</option>
+                    <option value='verified'>Verified</option>
+                    <option value='unverified'>Unverified</option>
+                    <option value='active'>Active</option>
+                    <option value='inactive'>Inactive</option>
                     </select>
                 </div>
             </div>
@@ -83,12 +64,12 @@ export default function Adminusers(){
         <div className='adminstat3'>
             <div className='adminstat3info2'>
             <table>
-                <UsersList users={users} deleteuser={deleteuser}/>
+                <UsersList deleteuser={deleteuser}/>
             </table>
             </div>
         </div>
         <div className='adminmorebtn'>
-            <button>See More</button>
+        <button onClick={()=>setlimit(limit+10)}>See More</button>
         </div>
         </div>
 

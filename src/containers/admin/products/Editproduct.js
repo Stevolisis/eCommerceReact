@@ -2,7 +2,6 @@ import {React, useRef,useState,useEffect} from 'react';
 import { useParams } from 'react-router-dom';
 import {Editor} from '@tinymce/tinymce-react';
 import { MultiSelect } from 'react-multi-select-component';
-import axios from 'axios';
 import Swal from 'sweetalert2';
 import { fetchCategories } from '../../../Redux/Admin/categories';
 import { useDispatch } from 'react-redux';
@@ -26,8 +25,9 @@ export default function Editproduct(){
 
 
 
-    function handleSumbit(e){
+    function handleSubmit(e){
         e.preventDefault();
+        
         Swal.fire({
             title: 'Are you sure?',
             text: "Confirm Action On Product",
@@ -85,7 +85,7 @@ export default function Editproduct(){
     }).catch(err=>{Swal.fire('Error Occured', `${err.message}`,'error')});
 
 //---------------------
-    dispatch(fetchCategories(2))
+    dispatch(fetchCategories())
     .then(res=>{
     let data=res.payload;
     data.forEach(option=>{
@@ -93,7 +93,7 @@ export default function Editproduct(){
     })
     }).catch(err=>{Swal.fire('Error Occured', `${err.message}`,'error')});
     }
-    },[dispatch]);
+    },[dispatch,id]);
 
 
 
@@ -106,7 +106,7 @@ export default function Editproduct(){
         <div className='userorderheading'>
         <p>Edit Product</p>
         </div>
-        <form onSubmit={handleSumbit}>
+        <form onSubmit={handleSubmit}>
         <div className='addcategcon'>
         <div className='admineditnamecon'>
             <div className='admineditname'>
