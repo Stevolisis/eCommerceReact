@@ -110,9 +110,10 @@ export default function Admineventcoupon(){
             </tr>
 </tbody>
 
-          <ReactSortable tag="tbody" list={state} setList={setState}>
+          <ReactSortable tag="tbody" list={state} setList={setState} handle='.lop'>
           {state.map((item) => (
           <tr key={item.id} style={{cursor:"grab"}}>
+            <td className='lop'><i className='fa fa-bars'/></td>
             <td>{item.title}</td>
             <td>{item.banner_color}</td>
             <td>{item.date}</td>
@@ -120,7 +121,6 @@ export default function Admineventcoupon(){
             <td>{item.sold}</td>
             <td><Link to='/admin/editcoupon/wdhfvj44'><i className='fa fa-edit'/></Link></td>
             <td><button onClick={()=>deletespec2()}>Delete</button></td>
-            <td><i className='fa fa-bar'/></td>
           </tr>
           ))}
           </ReactSortable>
