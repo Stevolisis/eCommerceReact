@@ -45,7 +45,7 @@ const userSlice=createSlice({
     initialState,
     reducers:{
         searchUsers:(state,{payload})=>{
-            return {...state,users:[...state.filterBackup].filter(item=>item.name.toLowerCase().includes(payload.toLowerCase()))}
+            return {...state,users:[...state.filterBackup].filter(item=>item.first_name.toLowerCase().includes(payload.toLowerCase())||item.last_name.toLowerCase().includes(payload.toLowerCase()))}
         },
         filterUsers:(state,{payload})=>{
             if(payload==='ascend'){                
@@ -53,9 +53,9 @@ const userSlice=createSlice({
             }else if(payload==='descend'){
                 return {...state,users:[...state.filterBackup].sort((a,b)=>a._id < b._id ? -1:1)}
             }else if(payload==='mostOrders'){
-                return {...state,users:[...state.filterBackup].sort((a,b)=>a.orders < b.orders ? 1:-1)}
+                return {...state,users:[...state.filterBackup].sort((a,b)=>a.orders.length < b.orders.length ? 1:-1)}
             }else if(payload==='mostWishlist'){
-                return {...state,users:[...state.filterBackup].sort((a,b)=>a.wishlist < b.wishlist ? 1:-1)}
+                return {...state,users:[...state.filterBackup].sort((a,b)=>a.wishlist.length < b.wishlist.length ? 1:-1)}
             }else if(payload==='verified'){
                 return {...state,users:[...state.filterBackup].filter(item=>item.verified===true)}
             }else if(payload==='unverified'){
@@ -127,7 +127,7 @@ const userSlice=createSlice({
                 'User Delete Successful',
                 'success'
             )
-            return {...state,filterBackup:[...state.filterBackup].filter(item => item._id !== payload.id),categories:[...state.categories].filter(item => item._id !== payload.id)}
+            return {...state,filterBackup:[...state.filterBackup].filter(item => item._id !== payload.id),users:[...state.users].filter(item => item._id !== payload.id)}
         },
         [deleteUser.rejected]: (state,{error})=>{
             loading(false)

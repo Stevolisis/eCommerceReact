@@ -2,11 +2,11 @@ import {React,useEffect, useState} from 'react';
 import Swal from 'sweetalert2';
 import UsersList from '../../../components/listings/UsersList';
 import axios from 'axios';
-import { deleteUser, fetchUsers } from '../../../Redux/Admin/users';
+import { deleteUser, fetchUsers, filterUsers, searchUsers } from '../../../Redux/Admin/users';
 import { useDispatch } from 'react-redux';
 
 export default function Adminusers(){
-    let [limit,setlimit]=useState(1);
+    let [limit,setlimit]=useState(10);
     const dispatch=useDispatch();
 
 
@@ -42,10 +42,10 @@ export default function Adminusers(){
 
             <div className='adminfilterscon'>
             <div className='adminfilters'>
-                    <input type='text' placeholder='Search...'/>
+                    <input type='text' placeholder='Search...' onChange={(e)=>dispatch(searchUsers(e.target.value))}/>
                 </div>
                 <div className='adminfilters'>
-                    <select>
+                    <select onChange={(e)=>dispatch(filterUsers(e.target.value))}>
                     <option value='ascend'>Recent Added</option>
                     <option value='descend'>Descending Order</option>
                     <option value='mostOrders'>Most Orders</option>

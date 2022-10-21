@@ -60,7 +60,7 @@ export default function Editcategory(){
         <>
         <div className='admindashcon'>
         <div className='userorderheading'>
-        <p>Edit Category ({id})</p>
+        <p>Edit Category</p>
         </div>
         <form onSubmit={handleSubmit}>
         <div className='addcategcon'>

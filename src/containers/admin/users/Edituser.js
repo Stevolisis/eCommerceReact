@@ -1,7 +1,8 @@
 import {React,useEffect,useState} from 'react';
 import { useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { editUser, fetchUser } from '../../../Redux/Admin/users';
 
 export default function Edituser(){
     const {id}=useParams();
@@ -10,77 +11,52 @@ export default function Edituser(){
     const [email,setEmail]=useState('');
     const [phone_number,setPhone_number]=useState('');
     const [status,setStatus]=useState('');
-
-    const loadUser=()=>{
-        axios.get(`http://localhost:80/users/getuser/${id}`)
-        .then(res=>{
-            let data=res.data.data;
-            if(data==='Error Occured'){
-                Swal.fire(
-                    'Error After Fetch!',
-                    `Error Occured: ${data}`,
-                    'warning'
-                  )
-            }else{
-                setFirst_name(data.first_name);
-                setLast_name(data.last_name);
-                setEmail(data.email);
-                setPhone_number(data.phone_number);
-                setStatus(data.status);
-            }
-
-        }).catch(err=>{
-            Swal.fire(
-                'Error At Axios Pro!',
-                `Error Occured: ${err}`,
-                'warning'
-              )
-        })
-    }
-
+    const dispatch=useDispatch();
 
     function handleSubmit(e){
         e.preventDefault();
-        const formData=new FormData(e.target);
-        axios.put(`http://localhost:80/users/edituser/${id}`,formData,{withCredentials:true})
-        .then(res=>{
-            let data=res.data.data;
-            if(data==='success'){
-                
-            Swal.fire(
-                'Successful!',
-                `Data Done: ${data}`,
-                'success'
-              )
-            }else{
-            Swal.fire(
-                'Error!',
-                `${data}`,
-                'info'
-              )
-            }
-        }).catch(err=>{
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "Confirm Action On User",
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#5972b9',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, Edit it!'
+          }).then((result) => {
+            if (result.isConfirmed) {
+                const formData=new FormData(e.target);
+                formData.append('id',id);
 
-            Swal.fire(
-                'Error At Axios!',
-                `Error Occured: ${err}`,
-                'success'
-              )
-        });
+                dispatch(editUser(formData));
+            }
+          })
+   
     }
 
 
 
 
     useEffect(()=>{
-    loadUser();
-    },[]);
+        dispatch(fetchUser(id))
+        .then(res=>{
+            let data=res.payload;
+            setFirst_name(data.first_name);
+            setLast_name(data.last_name);
+            setEmail(data.email);
+            setPhone_number(data.phone_number);
+            setStatus(data.status);
+        }).catch(err=>{Swal.fire('Error Occured', `${err.message}`,'error')});
+    },[dispatch,id])
+
+
+
 
     return(
         <>
         <div className='admindashcon'>
         <div className='userorderheading'>
-        <p>Edit User ({id})</p>
+        <p>Edit User</p>
         </div>
         <div className='addcategcon'>
             <form onSubmit={handleSubmit}>
