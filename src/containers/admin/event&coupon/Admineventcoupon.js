@@ -1,9 +1,20 @@
-import {React} from 'react';
+import {React, useEffect, useState} from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import { ReactSortable } from "react-sortablejs";
 
 export default function Admineventcoupon(){
     const navigate=useNavigate();
+    const [state, setState] = useState([
+      { id: 1, name: "shrek" },
+      { id: 2, name: "fiona" },
+      { id: 3, name: "Lia" },
+      { id: 4, name: "James" },
+    ]);
+
+    useEffect(()=>{
+      console.log(state)
+    },[state])
     const deletespec=(()=>{
         Swal.fire({
             title: 'Are you sure?',
@@ -80,6 +91,13 @@ export default function Admineventcoupon(){
             <div className='adminstat3con'>
         <div className='adminstat3'>
             <div className='adminstat3info2'>
+
+          <ReactSortable list={state} setList={setState}>
+          {state.map((item) => (
+          <div key={item.id}>{item.name}</div>
+          ))}
+          </ReactSortable>
+
             <table>
             <tbody>
 
