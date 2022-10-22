@@ -1,6 +1,6 @@
 import {React} from 'react';
 import { Link } from 'react-router-dom';
-import Accordion2 from '../../components/Accordion2';
+import Accordion2 from '../../components/accordions/Accordion2';
 import Mainheader from '../../components/Mainheader'
 import Mainfooter from '../../components/Mainfooter'
 

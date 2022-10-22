@@ -2,66 +2,56 @@ import {React,useEffect,useRef, useState} from 'react';
 import { useParams } from 'react-router-dom';
 import {Editor} from '@tinymce/tinymce-react';
 import Swal from 'sweetalert2';
-import axios from 'axios';
+import { editFaq, fetchFaq } from '../../../Redux/Admin/supportFaqs';
+import { useDispatch } from 'react-redux';
 
 export default function Editsupport(){
     const editorRef=useRef();
     const {id}=useParams();
     const [initialValue,setInitialValue]=useState('')
     const [question,setQuestion]=useState('')
-    const cancelalert=useRef(true)
+    const dispatch=useDispatch();
 
-    const handleSubmit=((e)=>{
+    function handleSubmit(e){
         e.preventDefault();
-        const formData=new FormData(e.target);
-        formData.append('answer',editorRef.current.getContent());
-        axios.put(`http://localhost:80/faq/editFaq/${id}`,formData,{withCredientials:true})
-        .then(res=>{
-            let data=res.data.data;
-            Swal.fire(
-                'Successful!!',
-                data,
-                'success'
-            )
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "Confirm Action On F.A.Q",
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#5972b9',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, Edit it!'
+          }).then((result) => {
+            if (result.isConfirmed) {
+                const formData=new FormData(e.target);
+                formData.append('id',id);
+                formData.append('answer',editorRef.current.getContent());
 
-        }).catch(e=>{
-            console.log(e)
-            Swal.fire(
-                'Error!!',
-                e.message,
-                'warning'
-            )
-        })
-    });
+                dispatch(editFaq(formData));
+            }
+          })
+   
+    }
 
-        const loadFaq=(()=>{
-           axios.get(`http://localhost:80/faq/editfaqForEdit/${id}`,{withCredentials:true})
-           .then(res=>{
-            let data=res.data.data;
-            setQuestion(data.question);
-            setInitialValue(data.answer);
-           }).catch(err=>{
-            Swal.fire(
-                'Error Occured!',
-                err.message,
-                'warning'
-            )   
-           })
-        });
 
         useEffect(()=>{
-            if(cancelalert.current){
-                cancelalert.current=false;
-                loadFaq();
-            }
+            dispatch(fetchFaq(id))
+            .then(res=>{
+                let data=res.payload;
+                setQuestion(data.question);
+                setInitialValue(data.answer);
+            }).catch(err=>{Swal.fire('Error Occured', `${err.message}`,'error')});
         
-        },[])
+        },[dispatch,id])
+
+
 
     return(
         <>
         <div className='admindashcon'>
         <div className='userorderheading'>
-        <p>EDIT F.A.Q({id})</p>
+        <p>EDIT F.A.Q</p>
         </div>
         <div className='addcategcon'>
             <form onSubmit={handleSubmit}>

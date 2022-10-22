@@ -3,7 +3,7 @@ import Accordtoggle from './Accordtoggle';
 import Accordtoggle2 from './Accordtoggle2';
 import parse from 'html-react-parser';
 
-export default function Accordion2({heading,detail,id,type,editdelid,deletespec}){
+export default function Accordion2({heading,detail,id,type,editdelid,deletefaq}){
 
     return(
 <>
@@ -12,7 +12,7 @@ export default function Accordion2({heading,detail,id,type,editdelid,deletespec}
 <div><p>{heading}</p></div>
 <div className='slideicon'>
 {type==='non-slide' ? <Accordtoggle id={id} editdelid={editdelid}/>
- :<Accordtoggle2 id={id} editdelid={editdelid} deletespec={deletespec}/>}
+ :<Accordtoggle2 id={id} editdelid={editdelid} deletefaq={deletefaq}/>}
 </div>
 </div>
 

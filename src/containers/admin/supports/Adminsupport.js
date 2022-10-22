@@ -5,6 +5,7 @@ import axios from 'axios'
 import FaqList from '../../../components/listings/FaqList';
 import { useDispatch } from 'react-redux';
 import { fetchSupport, editSupport} from '../../../Redux/Admin/supports';
+import {fetchFaqs, deleteFaq} from '../../../Redux/Admin/supportFaqs';
 
 export default function Adminsupport(){
     const navigate=useNavigate();
@@ -43,78 +44,57 @@ export default function Adminsupport(){
     
     }
 
-        useEffect(()=>{
-            dispatch(fetchSupport())
-            .then(res=>{
-                let data=res.payload;
-                setImggallerypreview(data.supportImage);
-                console.log(imggallerypreview)
-                setSupportHeader(data.supportHeader);
-                setSupportText(data.supportText);
-                setWhatsappStatus(data.whatsappStatus);
-                setFacebookStatus(data.facebookStatus);
-                setTwitterStatus(data.twitterStatus);
-                setInstagramStatus(data.instagramStatus);
-                setWhatsappLink(data.whatsappLink);
-                setFacebookLink(data.facebookLink);
-                setTwitterLink(data.twitterLink);
-                setInstagramLink(data.instagramLink);
-            }).catch(err=>{
-                Swal.fire(
-                    'Error Occured!!',
-                    'Updated Error.',
-                    'warning'
-                  )
-            })
-        },[dispatch]);
-
-
-
-    const loadFaqs=()=>{
-        axios.get('http://localhost:80/faq/getFaqs',{withCredientials:true})
+    useEffect(()=>{
+        dispatch(fetchSupport())
         .then(res=>{
-            let data=res.data.data;
-            setFaqs(data);
-            console.log(data);
+            let data=res.payload;
+            setImggallerypreview(data.supportImage);
+            console.log(imggallerypreview)
+            setSupportHeader(data.supportHeader);
+            setSupportText(data.supportText);
+            setWhatsappStatus(data.whatsappStatus);
+            setFacebookStatus(data.facebookStatus);
+            setTwitterStatus(data.twitterStatus);
+            setInstagramStatus(data.instagramStatus);
+            setWhatsappLink(data.whatsappLink);
+            setFacebookLink(data.facebookLink);
+            setTwitterLink(data.twitterLink);
+            setInstagramLink(data.instagramLink);
         }).catch(err=>{
             Swal.fire(
                 'Error Occured!!',
                 'Updated Error.',
                 'warning'
-              )
+                )
         })
-    }
+        dispatch(fetchFaqs());
+    },[dispatch]);
 
-        const deletespec=((id)=>{
-            axios.delete(`http://localhost:80/faq/deleteFaq/${id}`,{withCredientials:true})
-            .then(res=>{
-                let data=res.data.data;
-                Swal.fire(
-                    'Deleted!',
-                    data,
-                    'success'
-                  )
-            }).catch(err=>{
-                Swal.fire(
-                    'Error Occured!!',
-                    'Updated Error.',
-                    'warning'
-                  )
-            })
-           })
 
+
+
+
+        const deletefaq=((id)=>{
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "Confirm Action On F.A.Q",
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#5972b9',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, Delete it!'
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    dispatch(deleteFaq(id));
+                }
+            });
+        })
 
            function imggalleryPreview(e){
             setImggallerypreview(URL.createObjectURL(e.target.files[0]));
            }
 
-           useEffect(()=>{
-            if(cancelalert.current){
-                cancelalert.current=false;
-                loadFaqs();
-            }
-        
-           },[])
+
 
     return(
 
@@ -226,7 +206,7 @@ export default function Adminsupport(){
         </div>
 
 <div className='customercare2'>
-<FaqList deletespec={deletespec} faqs={faqs}/>
+<FaqList deletefaq={deletefaq} />
 </div>
 
             </div>

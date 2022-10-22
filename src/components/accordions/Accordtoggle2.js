@@ -2,7 +2,7 @@ import {React} from 'react';
 import $ from 'jquery';
 import { Link } from 'react-router-dom';
 
-export default function Accordtoggle2({id,editdelid,deletespec}){
+export default function Accordtoggle2({id,editdelid,deletefaq}){
 
     return(
 
@@ -18,7 +18,7 @@ export default function Accordtoggle2({id,editdelid,deletespec}){
            {editdelid ?
            <>
            <Link to={`/admin/editfaq/${editdelid.split('/')[0]}`}> <i className='fa fa-edit' style={{padding:'0 0 0 25px',color:'dodgerblue',cursor:'pointer'}}></i></Link>
-           <i className='fa fa-trash' style={{padding:'0 25px',color:'red',cursor:'pointer'}} onClick={()=>deletespec(editdelid.split('/')[0])}></i>
+           <i className='fa fa-trash' style={{padding:'0 25px',color:'red',cursor:'pointer'}} onClick={()=>deletefaq(editdelid.split('/')[0])}></i>
            </>
            :
            ''}

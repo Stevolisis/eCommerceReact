@@ -7,32 +7,32 @@ import { loading } from "../../Loaders/setMainLoader";
 
 
 
-export const fetchFaqs=createAsyncThunk('adminFaqs/fetchFaqs',async(limit)=>{
+export const fetchFaqs=createAsyncThunk('adminFaqs/fetchFaqs',async()=>{
     loading(true)
-    const response=await axios.get(`${baseUrl}/faqs/getfaqs?limit=${limit}`)
+    const response=await axios.get(`${baseUrl}/faq/getFaqs`)
     return response.data.data;
 });
 
 export const fetchFaq=createAsyncThunk('adminFaqs/fetchFaq',async(id)=>{
     loading(true);
-    const response=await axios.get(`${baseUrl}/faqs/getfaqforedit/${id}`)
+    const response=await axios.get(`${baseUrl}/faq/getfaqForEdit/${id}`)
     return response.data.data;
 });
 
 export const addFaq=createAsyncThunk('adminFaqs/addFaq',async(formData)=>{
     loading(true);
-    const response=await axios.post(`${baseUrl}/faqs/addFaq`,formData);
+    const response=await axios.post(`${baseUrl}/faq/addFaq`,formData);
     return response.data;
 });
 
 export const editFaq=createAsyncThunk('adminFaqs/editFaq',async(formData)=>{
     loading(true);
-    const response=await axios.put(`${baseUrl}/faqs/editFaq`,formData)
+    const response=await axios.put(`${baseUrl}/faq/editFaq`,formData)
         return response.data;
 });
 export const deleteFaq=createAsyncThunk('adminFaqs/deleteFaq',async(id)=>{
     loading(true)
-    const response=await axios.delete(`${baseUrl}/faqs/deleteFaq/${id}`)
+    const response=await axios.delete(`${baseUrl}/faq/deleteFaq/${id}`)
         return {response:response.data,id:id};
 });
 
@@ -132,7 +132,7 @@ const faqSlice=createSlice({
                 'F.A.Q Delete Successful',
                 'success'
             )
-            return {...state,filterBackup:[...state.filterBackup].filter(item => item._id !== payload.id),faqs:[...state.faqs].filter(item => item._id !== payload.id)}
+            return {...state,faqs:[...state.faqs].filter(item => item._id !== payload.id)}
         },
         [deleteFaq.rejected]: (state,{error})=>{
             loading(false)
@@ -151,5 +151,5 @@ const faqSlice=createSlice({
 
 
 
-export const getAllfaqs=(state)=>state.faqReducer.faqs;
+export const getAllFaqs=(state)=>state.faqReducer.faqs;
 export default faqSlice.reducer;

@@ -1,6 +1,6 @@
 import {React,useState} from 'react'
 import { Link } from 'react-router-dom'
-import Accordion from '../../components/Accordion'
+import Accordion from '../../components/accordions/Accordion'
 import Reviews from '../../components/Reviews'
 import Swal from 'sweetalert2';
 // import { faHeart,faBell,faStar } from '@fortawesome/free-regular-svg-icons'
@@ -198,16 +198,15 @@ Parfum, Persea Gratissima Oil, Charcoal Powder, Trisodium EDTA, BHT, Linalool, L
 
  </Accordion>
 
- <Accordion 
- heading='Reviews (6)'
- id='accordioncon3'
- type='slide'
- preshow='show'
- >
-<Reviews
-listing='All'
-/>
- </Accordion>
+    <Accordion 
+    heading='Reviews (6)'
+    id='accordioncon3'
+    type='slide'
+    preshow='show'>
+        <Reviews
+        listing='All'
+        />
+    </Accordion>
 
 
  
