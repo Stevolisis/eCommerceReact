@@ -56,8 +56,8 @@ import Adminusers from './containers/admin/users/Adminusers';
 import Edituser from './containers/admin/users/Edituser';
 
 import Adminsupport from './containers/admin/supports/Adminsupport';
-import Addsupport from './containers/admin/supports/Addsupport';
-import Editsupport from './containers/admin/supports/Editsupport';
+import Addfaq from './containers/admin/supports/Addfaq';
+import Editfaq from './containers/admin/supports/Editfaq';
 
 import Admineventcoupon from './containers/admin/event&coupon/Admineventcoupon';
 import Editcoupon from './containers/admin/event&coupon/Editcoupon';
@@ -134,7 +134,7 @@ function App() {
       <Route path='addcategory' element={<Addcategory />} />
       <Route path='addproduct' element={<Addproduct />} />
       <Route path='addstaff' element={<Addstaff />} />
-      <Route path='addfaq' element={<Addsupport />} />
+      <Route path='addfaq' element={<Addfaq />} />
       <Route path='addcoupon' element={<Addcoupon />} />
       <Route path='addevent' element={<Addevent />} />
 
@@ -143,7 +143,7 @@ function App() {
       <Route path='editcategory/:id' element={<Editcategory />} />
       <Route path='editcoupon/:id' element={<Editcoupon />} />
       <Route path='editstaff/:id' element={<Editstaff />} />
-      <Route path='editfaq/:id' element={<Editsupport />} />
+      <Route path='editfaq/:id' element={<Editfaq />} />
 
       <Route path='analytics' element={<Adminanalytics />} />
       </Route>

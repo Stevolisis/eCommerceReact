@@ -3,6 +3,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import axios from 'axios'
 import FaqList from '../../../components/listings/FaqList';
+import { useDispatch } from 'react-redux';
+import { fetchSupport, editSupport} from '../../../Redux/Admin/supports';
 
 export default function Adminsupport(){
     const navigate=useNavigate();
@@ -18,52 +20,54 @@ export default function Adminsupport(){
     const [twitterLink,setTwitterLink]=useState('');
     const [instagramLink,setInstagramLink]=useState('');
     const [faqs,setFaqs]=useState([]);
-    const cancelalert=useRef(true)
+    const cancelalert=useRef(true);
+    const dispatch=useDispatch();
 
-    const handleSubmit=((e)=>{
+
+    function handleSubmit(e){
         e.preventDefault();
-        const formData=new FormData(e.target);
-        axios.put('http://localhost:80/support/editSupport1',formData,{withCredientials:true})
-        .then(res=>{
-            let data=res.data.data;
-            Swal.fire(
-                'Successful!!',
-                data,
-                'success'
-              )
-        }).catch(err=>{
-            Swal.fire(
-                'Error Occured!!',
-                'Updated Error.',
-                'warning'
-              )
-        })
-        });
-
-    const loadSupport=()=>{
-        axios.get('http://localhost:80/support/getsupportforedit',{withCredientials:true})
-        .then(res=>{
-            let data=res.data.data[0];
-            setImggallerypreview(data.supportImage);
-            console.log(imggallerypreview)
-            setSupportHeader(data.supportHeader);
-            setSupportText(data.supportText);
-            setWhatsappStatus(data.whatsappStatus);
-            setFacebookStatus(data.facebookStatus);
-            setTwitterStatus(data.twitterStatus);
-            setInstagramStatus(data.instagramStatus);
-            setWhatsappLink(data.whatsappLink);
-            setFacebookLink(data.facebookLink);
-            setTwitterLink(data.twitterLink);
-            setInstagramLink(data.instagramLink);
-        }).catch(err=>{
-            Swal.fire(
-                'Error Occured!!',
-                'Updated Error.',
-                'warning'
-              )
-        })
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "Confirm Action On Support",
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#5972b9',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, Edit it!'
+            }).then((result) => {
+            if (result.isConfirmed) {
+                const formData=new FormData(e.target);
+                dispatch(editSupport(formData));
+            }
+            })
+    
     }
+
+        useEffect(()=>{
+            dispatch(fetchSupport())
+            .then(res=>{
+                let data=res.payload;
+                setImggallerypreview(data.supportImage);
+                console.log(imggallerypreview)
+                setSupportHeader(data.supportHeader);
+                setSupportText(data.supportText);
+                setWhatsappStatus(data.whatsappStatus);
+                setFacebookStatus(data.facebookStatus);
+                setTwitterStatus(data.twitterStatus);
+                setInstagramStatus(data.instagramStatus);
+                setWhatsappLink(data.whatsappLink);
+                setFacebookLink(data.facebookLink);
+                setTwitterLink(data.twitterLink);
+                setInstagramLink(data.instagramLink);
+            }).catch(err=>{
+                Swal.fire(
+                    'Error Occured!!',
+                    'Updated Error.',
+                    'warning'
+                  )
+            })
+        },[dispatch]);
+
 
 
     const loadFaqs=()=>{
@@ -107,7 +111,6 @@ export default function Adminsupport(){
            useEffect(()=>{
             if(cancelalert.current){
                 cancelalert.current=false;
-                loadSupport();
                 loadFaqs();
             }
         

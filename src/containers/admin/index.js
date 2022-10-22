@@ -11,15 +11,11 @@ import 'tinymce/skins/ui/oxide/skin.min.css';
 import 'tinymce/skins/ui/oxide/content.min.css';
 import 'tinymce/skins/content/default/content.min.css';
 import 'tinymce/models/dom/model'
-import Swal from 'sweetalert2';
 
 
 export default function Index(){
     const [trigger,setTrigger]=useState(false);
-    const [confirm,setconfirm]=useState(false);
-    const [alert,setalert]=useState(false);
     const navigate=useNavigate();
-    // swalConfirm('Hmm','Probem Dey','error')
 
     return(
         <>

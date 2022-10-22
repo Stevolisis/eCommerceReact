@@ -29,9 +29,10 @@ export default function Admincategories(){
 
 
         useEffect(()=>{
-            dispatch(fetchCategories(limit));
-            },[dispatch,limit]);
+        dispatch(fetchCategories(limit));
+        },[dispatch,limit]);
 
+        
     return(
         <>
         <div className='admindashcon'>

@@ -112,11 +112,11 @@ export default function PopupEvent({selected2,setSelected2}){
         <div className='admineditnamecon'>
         <div className='admineditname'>
             <p>Valid from</p>
-            <input type='datetime-local' name='start'/>
+            <input type='url' name='start'/>
         </div>
         <div className='admineditname'>
             <p>to</p>
-            <input type='datetime-local' name='end'/>
+            <input type='url' name='end'/>
         </div>
         </div>
         </>

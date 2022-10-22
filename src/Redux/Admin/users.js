@@ -146,6 +146,6 @@ const userSlice=createSlice({
 
 
 
-export const {searchUsers,filterByCategory,filterUsers}=userSlice.actions;
+export const {searchUsers,filterUsers}=userSlice.actions;
 export const getAllUsers=(state)=>state.userReducer.users;
 export default userSlice.reducer;

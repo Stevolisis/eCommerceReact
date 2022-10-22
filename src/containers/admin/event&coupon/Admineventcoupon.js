@@ -13,28 +13,6 @@ export default function Admineventcoupon(){
       { id: 5, title: "Latest",banner_color: "violet",date:"10/6/2022",products: 55, sold:44}
     ]);
 
-    useEffect(()=>{
-      console.log(state)
-    },[state])
-    const deletespec=(()=>{
-        Swal.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
-            icon: 'question',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
-          }).then((result) => {
-            if (result.isConfirmed) {
-              Swal.fire(
-                'Deleted!',
-                'Event Deleted.',
-                'success'
-              )
-            }
-          })
-       })
 
        const deletespec2=(()=>{
         Swal.fire({
@@ -112,8 +90,8 @@ export default function Admineventcoupon(){
 
           <ReactSortable tag="tbody" list={state} setList={setState} handle='.lop'>
           {state.map((item) => (
-          <tr key={item.id} style={{cursor:"grab"}}>
-            <td className='lop'><i className='fa fa-bars'/></td>
+          <tr key={item.id} >
+            <td className='lop' style={{cursor:"grab"}}><i className='fa fa-bars'/></td>
             <td>{item.title}</td>
             <td>{item.banner_color}</td>
             <td>{item.date}</td>

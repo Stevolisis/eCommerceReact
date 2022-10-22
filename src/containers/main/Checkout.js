@@ -1,10 +1,8 @@
-import {React, useCallback, useMemo, useState} from 'react';
-import {Link} from 'react-router-dom'
+import {React, useState} from 'react';
 import Popupcomponent from '../../components/Popupcomponent';
 import Swal from 'sweetalert2';
 import Mainheader from '../../components/Mainheader'
 import Mainfooter from '../../components/Mainfooter'
-import $ from 'jquery';
 
 export default function Checkout(){
     const [trigger,setTrigger]=useState(false);

@@ -1,7 +1,6 @@
 import {React,useEffect, useState} from 'react';
 import Swal from 'sweetalert2';
 import UsersList from '../../../components/listings/UsersList';
-import axios from 'axios';
 import { deleteUser, fetchUsers, filterUsers, searchUsers } from '../../../Redux/Admin/users';
 import { useDispatch } from 'react-redux';
 
