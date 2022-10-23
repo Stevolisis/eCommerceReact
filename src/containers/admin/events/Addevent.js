@@ -1,8 +1,10 @@
 import axios from 'axios';
 import {React,useState} from 'react';
 import Swal from 'sweetalert2';
-import PopupEvent from '../../../components/PopupEvent';
-import Specialcateg from '../../../components/Specialcateg';
+import AdsListing from '../../../components/event_layouts/ads_listing_layout';
+import PopupEvent from '../../../components/event_layouts/popup_layout';
+import PermenantLayouts from '../../../components/event_layouts/set_permenant_layouts';
+import SpecialContainer from '../../../components/event_layouts/special_container_layout';
 
 export default function Addevent(){
     const [type,setType]=useState('');
@@ -10,13 +12,19 @@ export default function Addevent(){
     const [selected2,setSelected2]=useState('')
     console.log(selected)
     console.log(selected2)
+
+
     function viewEventOptions(){
         if(type===''){
             return '';
-          }else if(type==='special_category'){
-            return <Specialcateg selected={selected} setSelected={setSelected}/>
+          }else if(type==='special_container_slider'||type==='special_container_listing'){
+            return <SpecialContainer selected={selected} setSelected={setSelected}/>
           }else if(type==='pop_up'){
             return <PopupEvent selected2={selected2} setSelected2={setSelected2}/>
+          }else if(type==='ads_listing'){
+            return <AdsListing/>
+          }else if(type==='main_banner'||type==='category_slider'){
+            return <PermenantLayouts/>
           }
     }
 
@@ -66,8 +74,12 @@ export default function Addevent(){
             <p>type</p>
             <select value={type} onChange={(e)=>setType(e.target.value)} name='type'>
             <option value=''>Choose Event Type</option>
-            <option value='special_category'>Special Category</option>
-                <option value='pop_up'>Pop Up</option>
+            <option value='special_container_slider'>Special Slider</option>
+            <option value='special_container_listing'>Special Listing</option>
+            <option value='ads_listing'>Special Ads Container</option>
+            <option value='main_banner'>Main Banner</option>
+            <option value='category_slider'>Category Slider</option>
+            <option value='pop_up'>Pop Up</option>
             </select>
             </div>
         </div>
@@ -76,8 +88,8 @@ export default function Addevent(){
             <div className='admineditname'>
             <p>Status</p>
             <select name='status'>
-            <option value='Activate'>Activate</option>
-            <option value='Deactivate'>Deactivate</option>
+            <option value='active'>Activate</option>
+            <option value='inactive'>Deactivate</option>
             </select>
             </div>
         </div>

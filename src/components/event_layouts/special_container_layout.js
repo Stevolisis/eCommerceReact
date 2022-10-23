@@ -45,12 +45,6 @@ export default function Specialcateg({selected,setSelected}){
         <>
         <div className='admineditnamecon'>
             <div className='admineditname'>
-            <p>Category Name</p>
-            <input type='text' name='name'/>
-            </div>
-        </div>
-        <div className='admineditnamecon'>
-            <div className='admineditname'>
             <p>Banner Color</p>
             <input type='color' style={{height:'50px'}} name='banner_color'/>
             </div>

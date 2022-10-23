@@ -7,8 +7,8 @@ import $ from 'jquery';
 export default function PopupEvent({selected2,setSelected2}){
     const [options,setOptions]=useState([]);
     const cancelalert=useRef(true)
-    const defaultVal=[{value:'l',label:'ss'}];
-       const loadProducts=()=>{
+
+    const loadProducts=()=>{
         axios.get('http://localhost:80/products/getProducts')
         .then(res=>{
             let response=res.data.data;
@@ -80,12 +80,6 @@ export default function PopupEvent({selected2,setSelected2}){
         <>
         <div className='admineditnamecon'>
             <div className='admineditname'>
-            <p className='css-6j8wv5-Input' data-value='leopard'>Category Name</p>
-            <input type='text' name='name'/>
-            </div>
-        </div>
-        <div className='admineditnamecon'>
-            <div className='admineditname'>
             <p>Image</p>
             <input type='file' name='popup_img'/>
             </div>
@@ -112,11 +106,11 @@ export default function PopupEvent({selected2,setSelected2}){
         <div className='admineditnamecon'>
         <div className='admineditname'>
             <p>Valid from</p>
-            <input type='url' name='start'/>
+            <input type='datetime-local' name='start'/>
         </div>
         <div className='admineditname'>
             <p>to</p>
-            <input type='url' name='end'/>
+            <input type='datetime-local' name='end'/>
         </div>
         </div>
         </>

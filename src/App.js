@@ -59,10 +59,12 @@ import Adminsupport from './containers/admin/supports/Adminsupport';
 import Addfaq from './containers/admin/supports/Addfaq';
 import Editfaq from './containers/admin/supports/Editfaq';
 
-import Admineventcoupon from './containers/admin/event&coupon/Admineventcoupon';
-import Editcoupon from './containers/admin/event&coupon/Editcoupon';
-import Addcoupon from './containers/admin/event&coupon/Addcoupon';
-import Addevent from './containers/admin/event&coupon/Addevent';
+import Adminevents from './containers/admin/events/Adminevents';
+import Addevent from './containers/admin/events/Addevent';
+
+import Admincoupons from './containers/admin/coupons/Admincoupons';
+import Editcoupon from './containers/admin/coupons/Editcoupon';
+import Addcoupon from './containers/admin/coupons/Addcoupon';
 
 import Adminbannerimg from './containers/admin/banners/Adminbannerimg';
 import Adminpayment from './containers/admin/payments/Adminpayment';
@@ -127,7 +129,8 @@ function App() {
       <Route path='support' element={<Adminsupport />} />
       <Route path='bannerimg' element={<Adminbannerimg />} />
       <Route path='payment' element={<Adminpayment />} />
-      <Route path='eventandcoupon' element={<Admineventcoupon />} />
+      <Route path='events' element={<Adminevents />} />
+      <Route path='coupons' element={<Admincoupons />} />
       <Route path='orders' element={<Adminorders />} />
       <Route path='order' element={<Userorder origin='admin'/>} />
 

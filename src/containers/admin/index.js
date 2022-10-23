@@ -59,9 +59,9 @@ export default function Index(){
 <div className='navlinks' onClick={()=>navigate('/admin/staffs')}><Link className='navlink' to='/admin/staffs'>Staffs</Link></div>
 <div className='navlinks' onClick={()=>navigate('/admin/sales')}><Link className='navlink' to='/admin/sales'>SMS Management</Link></div>
 <div className='navlinks' onClick={()=>navigate('/admin/sales')}><Link className='navlink' to='/admin/sales'>Email Management</Link></div>
-<div className='navlinks' onClick={()=>navigate('/admin/bannerimg')}><Link className='navlink' to='/admin/bannerimg'>Banner Images</Link></div>
+<div className='navlinks' onClick={()=>navigate('/admin/events')}><Link className='navlink' to='/admin/events'>Events</Link></div>
 <div className='navlinks' onClick={()=>navigate('/admin/support')}><Link className='navlink' to='/admin/support'>Customer Support</Link></div>
-<div className='navlinks' onClick={()=>navigate('/admin/eventandcoupon')}><Link className='navlink' to='/admin/eventandcoupon'>Events & Coupons</Link></div>
+<div className='navlinks' onClick={()=>navigate('/admin/coupons')}><Link className='navlink' to='/admin/coupons'>Coupons</Link></div>
 <div className='navlinks' onClick={()=>navigate('/admin/analytics')}><Link className='navlink' to='/admin/analytics'>Analytics</Link></div>
 <div className='navlinks' onClick={()=>navigate('/admin/payment')}><Link className='navlink' to='/admin/payment'>Payment Management</Link></div>
 <div className='navlinks' onClick={()=>navigate('/')}><Link className='navlink' to='useraccount'>Logout</Link></div>
