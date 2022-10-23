@@ -11,6 +11,7 @@
     padding: 8px 0px;
     display: flex;
     justify-content: center;
+    box-sizing: border-box;
 
 
         p{
@@ -74,6 +75,7 @@
 
 .admineditname{
     width: 100%;
+    box-sizing: border-box;
 }
 
 .dropdown-container{

@@ -63,8 +63,8 @@ export default function Addevent(){
             <form onSubmit={handleSubmit}>
         <div className='admineditnamecon'>
             <div className='admineditname'>
-            <p>Event Title</p>
-            <input type='text' name='title'/>
+            <p>Event Name</p>
+            <input type='text' name='name'/>
             </div>
         </div>
 

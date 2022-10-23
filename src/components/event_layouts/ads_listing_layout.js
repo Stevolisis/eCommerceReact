@@ -1,6 +1,7 @@
-import {React, useEffect, useState} from 'react';
+import {React, useEffect, useState, useRef} from 'react';
 import { MultiSelect } from 'react-multi-select-component';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 export default function AdsListing(){
     const [imggallery,setimggallery]=useState([]);
@@ -87,6 +88,18 @@ export default function AdsListing(){
 
     return(
         <>
+        <div className='previewimg2'>
+            {
+            imggallery.map((imgprev,i)=>{
+                return (
+            <div className='previewimg' key={i}>
+            <img src={imgprev} alt={imgprev}/>
+            </div>
+                )
+            })
+            }
+        </div>
+
         <div className='admineditnamecon' style={{paddingTop:'6px'}}>
             <div className='usereditadditionalinfo'>
             <p>BannerAds Images</p>
@@ -95,7 +108,7 @@ export default function AdsListing(){
             </div>
         </div>
 
-        <div className='admineditnamecon' style={{marginTop:'-10px'}}>
+        <div className='admineditnamecon2'>
             <div className='admineditname'>
             <p>Label</p>
             <MultiSelect

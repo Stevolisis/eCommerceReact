@@ -70,9 +70,7 @@ export default function PopupEvent({selected2,setSelected2}){
     
        },[]);
 
-    function gui(){
-        console.log(selected2)
-    }
+
 
     
 
@@ -91,7 +89,7 @@ export default function PopupEvent({selected2,setSelected2}){
             options={options}
             value={selected2}
             name='Select'
-            onChange={(e)=>(setSelected2(e),gui())}
+            onChange={(e)=>(setSelected2(e))}
             isSearchable={true}
             />
             {/* style at adminaddcateg.scss */}

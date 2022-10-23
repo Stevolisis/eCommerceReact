@@ -9,12 +9,12 @@ export default function PermenantLayouts(){
         <div className='admineditnamecon'>
         <div className='admineditname'>
             <p>Valid from</p>
-            <input value='infinty' name='start'/>
+            <input defaultValue='infinty' name='start'/>
         </div>
         
         <div className='admineditname'>
             <p>to</p>
-            <input value='infinty' name='end'/>
+            <input defaultValue='infinty' name='end'/>
         </div>
         </div>
         </>
