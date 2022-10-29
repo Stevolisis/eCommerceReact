@@ -19,10 +19,10 @@ export default function Addevent(){
             return '';
           }else if(type==='special_container_slider'||type==='special_container_listing'){
             return <SpecialContainer selected={selected} setSelected={setSelected}/>
-          }else if(type==='pop_up'){
-            return <PopupEvent selected2={selected2} setSelected2={setSelected2}/>
           }else if(type==='ads_listing'){
             return <AdsListing/>
+          }else if(type==='pop_up'){
+            return <PopupEvent selected2={selected2} setSelected2={setSelected2}/>
           }else if(type==='main_banner'||type==='category_slider'){
             return <PermenantLayouts/>
           }
@@ -53,6 +53,8 @@ export default function Addevent(){
            }
         })
     }
+
+
     return(
         <>
         <div className='admindashcon'>

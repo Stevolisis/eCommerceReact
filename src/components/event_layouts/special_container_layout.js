@@ -11,7 +11,6 @@ export default function Specialcateg({selected,setSelected}){
         axios.get('http://localhost:80/products/getProducts')
         .then(res=>{
             let response=res.data.data;
-            console.log(response);
             if(!Array.isArray(response)){
                 Swal.fire(
                     'Error After Fetch!',
@@ -20,7 +19,7 @@ export default function Specialcateg({selected,setSelected}){
                   )
             }else{
                response.forEach(option=>{
-                setOptions(oldOption=>[...oldOption,{value:option.name, label:option.name}])
+                setOptions(oldOption=>[...oldOption,{value:option._id, label:option.name}])
                })
 
             }

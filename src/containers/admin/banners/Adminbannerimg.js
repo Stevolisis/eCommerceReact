@@ -169,8 +169,9 @@ export default function Adminbannerimg(){
 
     return(
         <>
-            <div className='usermaincon'>
+        <div className='usermaincon'>
         <div className='userorderheading'><p>Banner Images</p></div>
+        
         <div className='userorderscon'>
 
 

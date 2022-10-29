@@ -6,11 +6,11 @@ import { ReactSortable } from "react-sortablejs";
 export default function Admineventcoupon(){
     const navigate=useNavigate();
     const [state, setState] = useState([
-      { id: 1, title: "Flash Sales",banner_color: "Crimson",date:"10/6/2022",products: 12, sold:3},
+      { id: 1, title: "Main Banner",banner_color: "Crimson",date:"10/6/2022",products: 12, sold:3},
       { id: 2, title: "Special Category",banner_color: "orangered",date:"10/6/2022",products: 3, sold:1},
-      { id: 3, title: "New Release",banner_color: "dodgerblue",date:"10/6/2022",products: 32, sold:22},
-      { id: 4, title: "Brands",banner_color: "brickred",date:"10/6/2022",products: 19, sold:10},
-      { id: 5, title: "Latest",banner_color: "violet",date:"10/6/2022",products: 55, sold:44}
+      { id: 3, title: "Brand Slider",banner_color: "dodgerblue",date:"10/6/2022",products: 32, sold:22},
+      { id: 4, title: "Ketchen Listen",banner_color: "brickred",date:"10/6/2022",products: 19, sold:10},
+      { id: 5, title: "I phone Ads Banner",banner_color: "violet",date:"10/6/2022",products: 55, sold:44}
     ]);
 
 
@@ -87,19 +87,17 @@ export default function Admineventcoupon(){
             <tr>
             <th>Arrange</th>
             <th>Title</th>
-            <th>Banner Color</th>
             <th>Valid Till</th>
             <th>Edit</th>
             <th>Delete</th>
             </tr>
 </tbody>
 
-          <ReactSortable tag="tbody" list={state} setList={setState} handle='.lop'>
+          <ReactSortable tag="tbody" list={state} setList={setState} handle='.handler' onChange={(e)=>console.log(e)}>
           {state.map((item) => (
           <tr key={item.id} >
-            <td className='lop' style={{cursor:"grab",textAlign:'center'}}><i className='fa fa-bars'/></td>
+            <td className='handler' style={{cursor:"grab",textAlign:'center'}}><i className='fa fa-bars'/></td>
             <td>{item.title}</td>
-            <td style={{backgroundColor:`${item.banner_color}`,margin:'10% 8px',display:'flex'}}>{}</td>
             <td>{item.date}</td>
             <td><Link to='/admin/editcoupon/wdhfvj44'><i className='fa fa-edit'/></Link></td>
             <td><button onClick={()=>deletespec2()}>Delete</button></td>
