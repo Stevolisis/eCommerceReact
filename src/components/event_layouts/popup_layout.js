@@ -101,7 +101,7 @@ export default function PopupEvent({selected2,setSelected2}){
             <p onClick={()=>console.log($('.css-6j8wv5-Input').data('value'))}>Select Category or product where the user will be directed to after clicking View on the Pop Up Event.</p>
             </div>
         </div>
-        <div className='admineditnamecon'>
+        {/* <div className='admineditnamecon'>
         <div className='admineditname'>
             <p>Valid from</p>
             <input type='datetime-local' name='start'/>
@@ -110,7 +110,7 @@ export default function PopupEvent({selected2,setSelected2}){
             <p>to</p>
             <input type='datetime-local' name='end'/>
         </div>
-        </div>
+        </div> */}
         </>
     )
 }

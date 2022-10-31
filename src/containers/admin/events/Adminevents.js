@@ -1,4 +1,4 @@
-import {React, useState} from 'react';
+import {React, useEffect, useState} from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { ReactSortable } from "react-sortablejs";
@@ -12,6 +12,8 @@ export default function Admineventcoupon(){
       { id: 4, title: "Ketchen Listen",banner_color: "brickred",date:"10/6/2022",products: 19, sold:10},
       { id: 5, title: "I phone Ads Banner",banner_color: "violet",date:"10/6/2022",products: 55, sold:44}
     ]);
+    // const sortedArray=Array.from(state);
+    const [sortedArray, setsortedArray] = useState(state);
 
 
        const deletespec2=(()=>{
@@ -35,9 +37,23 @@ export default function Admineventcoupon(){
        })
 
 
+       function move(array, from, to) {
+        if( to === from ) return array;
+      
+        var target = array[from];                         
+        var increment = to < from ? -1 : 1;
+      
+        for(var k = from; k !== to; k += increment){
+          array[k] = array[k + increment];
+        }
+        array[to] = target;
+        return array;
+      }
 
 
-
+      useEffect(()=>{
+        // console.log(state)
+      },[state])
 
 
 
@@ -87,20 +103,20 @@ export default function Admineventcoupon(){
             <tr>
             <th>Arrange</th>
             <th>Title</th>
-            <th>Valid Till</th>
             <th>Edit</th>
             <th>Delete</th>
+            <th>Status</th>
             </tr>
 </tbody>
 
-          <ReactSortable tag="tbody" list={state} setList={setState} handle='.handler' onChange={(e)=>console.log(e)}>
+          <ReactSortable tag="tbody" list={state} setList={setState} handle='.handler'>
           {state.map((item) => (
           <tr key={item.id} >
             <td className='handler' style={{cursor:"grab",textAlign:'center'}}><i className='fa fa-bars'/></td>
             <td>{item.title}</td>
-            <td>{item.date}</td>
             <td><Link to='/admin/editcoupon/wdhfvj44'><i className='fa fa-edit'/></Link></td>
             <td><button onClick={()=>deletespec2()}>Delete</button></td>
+            <td>{item.status}</td>
           </tr>
           ))}
           </ReactSortable>

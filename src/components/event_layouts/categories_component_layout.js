@@ -3,12 +3,12 @@ import { MultiSelect } from 'react-multi-select-component';
 import Swal from 'sweetalert2';
 import axios from 'axios';
 
-export default function Specialcateg({selected,setSelected}){
+export default function CategoryLayout({selected,setSelected}){
     const [options,setOptions]=useState([]);
     const cancelalert=useRef(true);
 
-       const loadProducts=()=>{
-        axios.get('http://localhost:80/products/getProducts')
+       const loadCategories=()=>{
+        axios.get('http://localhost:80/categories/getCategories?o')
         .then(res=>{
             let response=res.data.data;
             if(!Array.isArray(response)){
@@ -19,8 +19,10 @@ export default function Specialcateg({selected,setSelected}){
                   )
             }else{
                response.forEach(option=>{
+                console.log(option)
                 setOptions(oldOption=>[...oldOption,{value:option._id, label:option.name}])
                })
+               console.log(options)
 
             }
         }).catch(err=>{
@@ -35,10 +37,13 @@ export default function Specialcateg({selected,setSelected}){
     useEffect(()=>{
         if(cancelalert.current){
             cancelalert.current=false;
-            loadProducts();
+            loadCategories();
         }
     
        },[])
+
+
+
 
     return(
         <>
@@ -50,7 +55,7 @@ export default function Specialcateg({selected,setSelected}){
         </div>
         <div className='admineditnamecon2'>
             <div className='admineditname'>
-            <p>Products</p>
+            <p>Categories</p>
             <MultiSelect
             options={options}
             value={selected}
@@ -58,16 +63,6 @@ export default function Specialcateg({selected,setSelected}){
             labelledBy='Select'
             />
             </div>
-        </div>
-        <div className='admineditnamecon'>
-        <div className='admineditname'>
-            <p>Valid from</p>
-            <input type='datetime-local' name='start'/>
-        </div>
-        <div className='admineditname'>
-            <p>to</p>
-            <input type='datetime-local'  name='end'/>
-        </div>
         </div>
         </>
     )

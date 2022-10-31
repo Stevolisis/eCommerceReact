@@ -1,31 +1,38 @@
 import axios from 'axios';
 import {React,useState} from 'react';
 import Swal from 'sweetalert2';
-import AdsListing from '../../../components/event_layouts/ads_listing_layout';
+import TopBanner from '../../../components/event_layouts/top_banner_layout';
+import MainBanner from '../../../components/event_layouts/main_banner_layout';
+import MetaData from '../../../components/event_layouts/four_metadata_layout';
 import PopupEvent from '../../../components/event_layouts/popup_layout';
-import PermenantLayouts from '../../../components/event_layouts/set_permenant_layouts';
-import SpecialContainer from '../../../components/event_layouts/special_container_layout';
+import CategoryLayout from '../../../components/event_layouts/categories_component_layout';
+import ProductsLayout from '../../../components/event_layouts/products_component_layout';
+import AdsListing from '../../../components/event_layouts/ads_listing_layout';
 
 export default function Addevent(){
     const [type,setType]=useState('');
     const [selected,setSelected]=useState([])
     const [selected2,setSelected2]=useState('')
-    console.log(selected)
-    console.log(selected2)
 
 
     function viewEventOptions(){
         if(type===''){
             return '';
-          }else if(type==='special_container_slider'||type==='special_container_listing'){
-            return <SpecialContainer selected={selected} setSelected={setSelected}/>
-          }else if(type==='ads_listing'){
-            return <AdsListing/>
-          }else if(type==='pop_up'){
+        }else if(type==='top_banner'){
+            return <TopBanner/>
+        }else if(type==='main_banner'){
+            return <MainBanner/>
+        }else if(type==='metadata'){
+            return <MetaData/>
+        }else if(type==='pop_up'){
             return <PopupEvent selected2={selected2} setSelected2={setSelected2}/>
-          }else if(type==='main_banner'||type==='category_slider'){
-            return <PermenantLayouts/>
-          }
+        }else if(type==='category_slider'){
+            return <CategoryLayout selected={selected} setSelected={setSelected}/>
+        }else if(type==='products_slider'||type==='products_listing'){
+        return <ProductsLayout selected={selected} setSelected={setSelected}/>
+        }else if(type==='ads_listing'){
+        return <AdsListing/>
+        }
     }
 
     function handleSubmit(e){
@@ -76,12 +83,14 @@ export default function Addevent(){
             <p>type</p>
             <select value={type} onChange={(e)=>setType(e.target.value)} name='type'>
             <option value=''>Choose Event Type</option>
-            <option value='special_container_slider'>Special Slider</option>
-            <option value='special_container_listing'>Special Listing</option>
-            <option value='ads_listing'>Special Ads Container</option>
+            <option value='top_banner'>Top Banner</option>
             <option value='main_banner'>Main Banner</option>
-            <option value='category_slider'>Category Slider</option>
+            <option value='metadata'>MetaData Banner</option>
             <option value='pop_up'>Pop Up</option>
+            <option value='category_slider'>Category Layout</option>
+            <option value='products_slider'>Products Layout Slider</option>
+            <option value='products_listing'>Products Layout Listing</option>
+            <option value='ads_listing'>Special Ads Layout</option>
             </select>
             </div>
         </div>
