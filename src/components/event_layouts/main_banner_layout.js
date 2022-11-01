@@ -1,8 +1,7 @@
-import {React, useState, useRef} from 'react';
+import {React, useState} from 'react';
 import { MultiSelect } from 'react-multi-select-component';
 
-export default function MainBanner(){
-    const [selected2,setSelected2]=useState([]);
+export default function MainBanner({selected3,setSelected3}){
     const [options1,setOptions1]=useState([]);
     const [imggallerypreview1,setImggallerypreview1]=useState('');
     const [imggallerypreview2,setImggallerypreview2]=useState('');
@@ -38,6 +37,7 @@ export default function MainBanner(){
             {imggallerypreview2&&<img src={imggallerypreview2} alt='banner2'/>}
         </div>
         </div>
+
         <div className='usereditnamecon' style={{padding:'8px 0'}}>
         <div className='usereditname'>
             <p>Banner 1</p>
@@ -64,7 +64,7 @@ export default function MainBanner(){
         <div className='admineditnamecon'>
             <div className='usereditadditionalinfo'>
             <p>Slider Images</p>
-            <input name='sliders' type='file' multiple  onChange={imggalleryPreview3}/>
+            <input name='slides' type='file' multiple  onChange={imggalleryPreview3}/>
             <p>select multiple images for you slider. Recommended number of images (6)</p>
             </div>
         </div>
@@ -74,8 +74,8 @@ export default function MainBanner(){
             <p>Label</p>
             <MultiSelect
             options={options1}
-            value={selected2}
-            onChange={setSelected2}
+            value={selected3}
+            onChange={setSelected3}
             labelledBy='Select'
             />
             <p>Select label(Category/Product) to which the user will be sent to after clicking the banners.</p>

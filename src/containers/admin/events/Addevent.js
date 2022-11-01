@@ -12,8 +12,9 @@ import AdsListing from '../../../components/event_layouts/ads_listing_layout';
 export default function Addevent(){
     const [type,setType]=useState('');
     const [selected,setSelected]=useState([])
-    const [selected2,setSelected2]=useState('')
-
+    const [selected2,setSelected2]=useState([])
+    const [selected3,setSelected3]=useState([])
+    const [selected4,setSelected4]=useState([])
 
     function viewEventOptions(){
         if(type===''){
@@ -21,7 +22,7 @@ export default function Addevent(){
         }else if(type==='top_banner'){
             return <TopBanner/>
         }else if(type==='main_banner'){
-            return <MainBanner/>
+            return <MainBanner selected3={selected3} setSelected3={setSelected3}/>
         }else if(type==='metadata'){
             return <MetaData/>
         }else if(type==='pop_up'){
@@ -31,7 +32,7 @@ export default function Addevent(){
         }else if(type==='products_slider'||type==='products_listing'){
         return <ProductsLayout selected={selected} setSelected={setSelected}/>
         }else if(type==='ads_listing'){
-        return <AdsListing/>
+        return <AdsListing selected4={selected4} setSelected4={setSelected4}/>
         }
     }
 

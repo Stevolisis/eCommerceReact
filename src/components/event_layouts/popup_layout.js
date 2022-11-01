@@ -2,7 +2,6 @@ import {React, useEffect, useRef, useState} from 'react';
 import Select  from 'react-select';
 import Swal from 'sweetalert2';
 import axios from 'axios';
-import $ from 'jquery';
 
 export default function PopupEvent({selected2,setSelected2}){
     const [options,setOptions]=useState([]);
@@ -82,6 +81,14 @@ export default function PopupEvent({selected2,setSelected2}){
             <input type='file' name='popup_img'/>
             </div>
         </div>
+
+        <div className='usereditadditionalinfocon' style={{padding:'10px 0'}}>
+            <div className='usereditadditionalinfo'>
+            <p>Message</p>
+            <input type='text' name='message'/>
+            </div>
+        </div>
+
         <div className='admineditnamecon2'>
             <div className='admineditname'>
             <p>Products</p>
@@ -98,7 +105,7 @@ export default function PopupEvent({selected2,setSelected2}){
                     return <option value={option.value}>{option.label}</option>
                 })}
             </select> */}
-            <p onClick={()=>console.log($('.css-6j8wv5-Input').data('value'))}>Select Category or product where the user will be directed to after clicking View on the Pop Up Event.</p>
+            <p>Select Category or product where the user will be directed to after clicking View on the Pop Up Event.</p>
             </div>
         </div>
         {/* <div className='admineditnamecon'>
