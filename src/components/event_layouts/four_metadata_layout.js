@@ -31,10 +31,10 @@ export default function MetaData(){
         <>
         <div className='previewimg2' style={{justifyContent:'space-between',width:'100%'}}>
         <div className='previewimg' >
-            <img src={imggallerypreview1} alt='Banner 1'/>
+            {imggallerypreview1&&<img src={imggallerypreview1} alt='meta1'/>}
             </div>
         <div className='previewimg'>
-            <img src={imggallerypreview2} alt='Banner 2'/>
+            {imggallerypreview2&&<img src={imggallerypreview2} alt='meta2'/>}
         </div>
         </div>
         <div className='usereditnamecon' style={{padding:'8px 0'}}>
@@ -60,10 +60,10 @@ export default function MetaData(){
 
         <div className='previewimg2' style={{justifyContent:'space-between',width:'100%'}}>
         <div className='previewimg' >
-            <img src={imggallerypreview3} alt='Banner 1'/>
+            {imggallerypreview3&&<img src={imggallerypreview3} alt='meta3'/>}
             </div>
         <div className='previewimg'>
-            <img src={imggallerypreview4} alt='Banner 2'/>
+            {imggallerypreview4&&<img src={imggallerypreview4} alt='meta4'/>}
         </div>
         </div>
         <div className='usereditnamecon' style={{padding:'8px 0'}}>

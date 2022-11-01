@@ -32,10 +32,10 @@ export default function MainBanner(){
         <>
         <div className='previewimg2' style={{justifyContent:'space-between',width:'100%'}}>
         <div className='previewimg' >
-            <img src={imggallerypreview1} alt='Banner 1'/>
-            </div>
-        <div className='previewimg'>
-            <img src={imggallerypreview2} alt='Banner 2'/>
+            {imggallerypreview1&&<img src={imggallerypreview1} alt='banner1'/>}
+        </div>
+        <div className='previewimg' >
+            {imggallerypreview2&&<img src={imggallerypreview2} alt='banner2'/>}
         </div>
         </div>
         <div className='usereditnamecon' style={{padding:'8px 0'}}>
@@ -52,7 +52,7 @@ export default function MainBanner(){
 
         <div className='previewimg2'>
         {
-            imggallerypreview3.map((imgprev,i)=>{
+            imggallerypreview3&&imggallerypreview3.map((imgprev,i)=>{
                 return (
             <div className='previewimg' key={i}>
             <img src={imgprev} alt={imgprev}/>

@@ -1,7 +1,7 @@
 import {React, useState} from 'react';
 
 export default function TopBanner(){
-    const [imggallerypreview,setImggallerypreview]=useState([]);
+    const [imggallerypreview,setImggallerypreview]=useState('');
 
     function imggalleryPreview(e){
         setImggallerypreview('')
@@ -11,8 +11,8 @@ export default function TopBanner(){
     return(
         <>
         <div className='previewimg2'>
-        <div className='previewimg'>
-            <img src={imggallerypreview} alt='Top Banner'/>
+        <div className='previewimg' >
+            {imggallerypreview&&<img src={imggallerypreview} alt='topbanner'/>}
         </div>
         </div>
         <div className='admineditnamecon'>

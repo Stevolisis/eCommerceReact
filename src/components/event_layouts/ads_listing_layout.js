@@ -90,7 +90,7 @@ export default function AdsListing(){
         <>
         <div className='previewimg2'>
             {
-            imggallery.map((imgprev,i)=>{
+            imggallery&&imggallery.map((imgprev,i)=>{
                 return (
             <div className='previewimg' key={i}>
             <img src={imgprev} alt={imgprev}/>
