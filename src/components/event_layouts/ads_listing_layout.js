@@ -3,7 +3,7 @@ import { MultiSelect } from 'react-multi-select-component';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 
-export default function AdsListing({selected4,setSelected4}){
+export default function AdsListing({selected5,setSelected5}){
     const [imggallery,setimggallery]=useState([]);
     const [options,setOptions]=useState([]);
     const cancelalert=useRef(true)
@@ -112,8 +112,8 @@ export default function AdsListing({selected4,setSelected4}){
             <p>Label</p>
             <MultiSelect
             options={options}
-            value={selected4}
-            onChange={setSelected4}
+            value={selected5}
+            onChange={setSelected5}
             labelledBy='Select'
             />
             <p>Select label(Category/Product) to which the user will be sent to after clicking the banners.</p>

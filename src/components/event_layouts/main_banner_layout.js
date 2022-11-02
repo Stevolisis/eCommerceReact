@@ -1,11 +1,71 @@
-import {React, useState} from 'react';
+import axios from 'axios';
+import {React, useState, useEffect, useRef} from 'react';
 import { MultiSelect } from 'react-multi-select-component';
+import Swal from 'sweetalert2';
 
-export default function MainBanner({selected3,setSelected3}){
-    const [options1,setOptions1]=useState([]);
+export default function MainBanner({selected3,setSelected3,selected4,setSelected4}){
+    const [options,setOptions]=useState([]);
     const [imggallerypreview1,setImggallerypreview1]=useState('');
     const [imggallerypreview2,setImggallerypreview2]=useState('');
     const [imggallerypreview3,setImggallerypreview3]=useState([]);
+
+
+    const cancelalert=useRef(true)
+
+    const loadCategories=()=>{
+        axios.get('http://localhost:80/categories/getcategories')
+        .then(res=>{
+            let response=res.data.data;
+            console.log(response);
+            if(response==='Error Occured'){
+                Swal.fire(
+                    'Error After Fetch!',
+                    `Error Occured: ${response}`,
+                    'warning'
+                  )
+            }else{
+               response.forEach(option=>{
+                setOptions(oldOption=>[...oldOption,{value:`products/${option.slug}`, label:`${option.name} (Category)`}])
+               })
+
+            }
+        }).catch(err=>{
+            Swal.fire(
+                'Error At Axios2!',
+                `Error Occured: ${err}`,
+                'warning'
+              )
+        })
+    }
+
+    const loadProducts=()=>{
+        axios.get('http://localhost:80/products/getproducts')
+        .then(res=>{
+            let response=res.data.data;
+            console.log(response);
+            if(response==='Error Occured'){
+                Swal.fire(
+                    'Error After Fetch!',
+                    `Error Occured: ${response}`,
+                    'warning'
+                  )
+            }else{
+               response.forEach(option=>{
+                setOptions(oldOption=>[...oldOption,{value:`product/${option.slug}`, label:`${option.name} (Product)`}])
+               })
+
+            }
+        }).catch(err=>{
+            Swal.fire(
+                'Error At Axios2!',
+                `Error Occured: ${err}`,
+                'warning'
+              )
+        })
+    }
+
+
+
 
     function imggalleryPreview1(e){
         setImggallerypreview1('')
@@ -27,6 +87,20 @@ export default function MainBanner({selected3,setSelected3}){
 
 
 
+    useEffect(()=>{
+        if(cancelalert.current){
+            cancelalert.current=false;
+            loadCategories();
+            loadProducts();
+        }
+    
+    },[]);
+
+
+
+
+
+    
     return(
         <>
         <div className='previewimg2' style={{justifyContent:'space-between',width:'100%'}}>
@@ -48,6 +122,20 @@ export default function MainBanner({selected3,setSelected3}){
             <input name='banner2' type='file'  onChange={imggalleryPreview2}/>
         </div>
 
+        </div>
+
+        <div className='admineditnamecon2'>
+            <div className='admineditname'>
+            <p>Label</p>
+            <MultiSelect
+            options={options}
+            value={selected3}
+            onChange={setSelected3}
+            labelledBy='Select'
+            />
+            <p>Select label(Category/Product) to which the user will be sent to after clicking the banners.</p>
+            <p><b>Note: </b>Select the labels chronologically, e.g the first label you ticked, will be allocated to the first banner and so on.</p>
+            </div>
         </div>
 
         <div className='previewimg2'>
@@ -73,9 +161,9 @@ export default function MainBanner({selected3,setSelected3}){
             <div className='admineditname'>
             <p>Label</p>
             <MultiSelect
-            options={options1}
-            value={selected3}
-            onChange={setSelected3}
+            options={options}
+            value={selected4}
+            onChange={setSelected4}
             labelledBy='Select'
             />
             <p>Select label(Category/Product) to which the user will be sent to after clicking the banners.</p>
