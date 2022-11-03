@@ -8,9 +8,8 @@ export default function MainBanner({selected3,setSelected3,selected4,setSelected
     const [imggallerypreview1,setImggallerypreview1]=useState('');
     const [imggallerypreview2,setImggallerypreview2]=useState('');
     const [imggallerypreview3,setImggallerypreview3]=useState([]);
-
-
     const cancelalert=useRef(true)
+
 
     const loadCategories=()=>{
         axios.get('http://localhost:80/categories/getcategories')
@@ -37,6 +36,7 @@ export default function MainBanner({selected3,setSelected3,selected4,setSelected
               )
         })
     }
+
 
     const loadProducts=()=>{
         axios.get('http://localhost:80/products/getproducts')
@@ -93,9 +93,7 @@ export default function MainBanner({selected3,setSelected3,selected4,setSelected
             loadCategories();
             loadProducts();
         }
-    
     },[]);
-
 
 
 
