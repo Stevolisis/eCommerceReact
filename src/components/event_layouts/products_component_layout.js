@@ -3,7 +3,7 @@ import { MultiSelect } from 'react-multi-select-component';
 import Swal from 'sweetalert2';
 import axios from 'axios';
 
-export default function ProductsLayout({selected,setSelected}){
+export default function ProductsLayout({selected6,setSelected6}){
     const [options,setOptions]=useState([]);
     const cancelalert=useRef(true);
 
@@ -53,8 +53,8 @@ export default function ProductsLayout({selected,setSelected}){
             <p>Products</p>
             <MultiSelect
             options={options}
-            value={selected}
-            onChange={setSelected}
+            value={selected6}
+            onChange={setSelected6}
             labelledBy='Select'
             />
             </div>

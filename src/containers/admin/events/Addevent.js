@@ -16,6 +16,7 @@ export default function Addevent(){
     const [selected3,setSelected3]=useState([])
     const [selected4,setSelected4]=useState([])
     const [selected5,setSelected5]=useState([])
+    const [selected6,setSelected6]=useState([])
 
     function viewEventOptions(){
         if(type===''){
@@ -30,8 +31,8 @@ export default function Addevent(){
             return <PopupEvent selected2={selected2} setSelected2={setSelected2}/>
         }else if(type==='category_slider'){
             return <CategoryLayout selected={selected} setSelected={setSelected}/>
-        }else if(type==='products_slide'||type==='products_listing'){
-        return <ProductsLayout selected={selected} setSelected={setSelected}/>
+        }else if(type==='products_slider'||type==='products_listing'){
+        return <ProductsLayout selected6={selected6} setSelected6={setSelected6}/>
         }else if(type==='ads_listing'){
         return <AdsListing selected5={selected5} setSelected5={setSelected5}/>
         }
@@ -45,6 +46,7 @@ export default function Addevent(){
         formData.append('selected3',JSON.stringify(selected3))
         formData.append('selected4',JSON.stringify(selected4))
         formData.append('selected5',JSON.stringify(selected5))
+        formData.append('selected6',JSON.stringify(selected6))
         console.log(e.target)
         console.log(selected)
         axios.post('http://localhost:80/events/addevent',formData,{withCredentials:true})
@@ -93,7 +95,7 @@ export default function Addevent(){
             <option value='meta_data'>MetaData Banner</option>
             <option value='pop_up'>Pop Up</option>
             <option value='category_slider'>Category Layout</option>
-            <option value='products_slide'>Products Layout Slider</option>
+            <option value='products_slider'>Products Layout Slider</option>
             <option value='products_listing'>Products Layout Listing</option>
             <option value='ads_listing'>Special Ads Layout</option>
             </select>
