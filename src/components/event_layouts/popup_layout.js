@@ -11,7 +11,6 @@ export default function PopupEvent({selected2,setSelected2}){
         axios.get('http://localhost:80/products/getProducts')
         .then(res=>{
             let response=res.data.data;
-            //console.log(response);
             if(!Array.isArray(response)){
                 Swal.fire(
                     'Error After Fetch!',
@@ -78,7 +77,7 @@ export default function PopupEvent({selected2,setSelected2}){
         <div className='admineditnamecon'>
             <div className='admineditname'>
             <p>Image</p>
-            <input type='file' name='popup_img'/>
+            <input type='file' name='img_link'/>
             </div>
         </div>
 

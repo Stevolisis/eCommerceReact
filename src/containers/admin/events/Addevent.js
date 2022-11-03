@@ -28,7 +28,7 @@ export default function Addevent(){
             return <MetaData/>
         }else if(type==='pop_up'){
             return <PopupEvent selected2={selected2} setSelected2={setSelected2}/>
-        }else if(type==='category_slide'){
+        }else if(type==='category_slider'){
             return <CategoryLayout selected={selected} setSelected={setSelected}/>
         }else if(type==='products_slide'||type==='products_listing'){
         return <ProductsLayout selected={selected} setSelected={setSelected}/>
@@ -92,7 +92,7 @@ export default function Addevent(){
             <option value='main_banner'>Main Banner</option>
             <option value='meta_data'>MetaData Banner</option>
             <option value='pop_up'>Pop Up</option>
-            <option value='category_slide'>Category Layout</option>
+            <option value='category_slider'>Category Layout</option>
             <option value='products_slide'>Products Layout Slider</option>
             <option value='products_listing'>Products Layout Listing</option>
             <option value='ads_listing'>Special Ads Layout</option>
