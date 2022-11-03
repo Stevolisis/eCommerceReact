@@ -17,9 +17,8 @@ export default function TopBanner(){
         </div>
         <div className='admineditnamecon'>
             <div className='usereditadditionalinfo'>
-            <p>Slider Images</p>
+            <p>Top Banner Image</p>
             <input name='img_link' type='file'  onChange={imggalleryPreview}/>
-            <p>select multiple images for you slider. Recommended number of images (6)</p>
             </div>
         </div>
         </>

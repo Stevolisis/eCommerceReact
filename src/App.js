@@ -61,6 +61,7 @@ import Editfaq from './containers/admin/supports/Editfaq';
 
 import Adminevents from './containers/admin/events/Adminevents';
 import Addevent from './containers/admin/events/Addevent';
+import Editevent from './containers/admin/events/Editevent';
 
 import Admincoupons from './containers/admin/coupons/Admincoupons';
 import Editcoupon from './containers/admin/coupons/Editcoupon';
@@ -144,6 +145,7 @@ function App() {
       <Route path='edituser/:id' element={<Edituser />} />
       <Route path='editproduct/:id' element={<Editproduct />} />
       <Route path='editcategory/:id' element={<Editcategory />} />
+      <Route path='editevent/:id' element={<Editevent />} />
       <Route path='editcoupon/:id' element={<Editcoupon />} />
       <Route path='editstaff/:id' element={<Editstaff />} />
       <Route path='editfaq/:id' element={<Editfaq />} />
