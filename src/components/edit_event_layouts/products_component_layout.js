@@ -3,8 +3,9 @@ import { MultiSelect } from 'react-multi-select-component';
 import Swal from 'sweetalert2';
 import axios from 'axios';
 
-export default function ProductsLayout({selected6,setSelected6}){
+export default function ProductsLayout({event,selected,setSelected}){
     const [options,setOptions]=useState([]);
+    const [banner_color,setBanner_Color]=useState([]);
     const cancelalert=useRef(true);
 
        const loadProducts=()=>{
@@ -40,12 +41,31 @@ export default function ProductsLayout({selected6,setSelected6}){
     
        },[])
 
+
+       useEffect(()=>{
+        if(event){
+        setBanner_Color(event.product_component.banner_color)
+        setSelected(oldOption=>[...oldOption,{value:event.product_component.products.id, label:event.product_component.products.name}]);
+
+        {
+            let slide=[]
+            event.product_component.products.forEach(option=>{
+            slide.push({value:option._id, label:option.name})
+            });
+            setSelected(slide);
+        }
+        console.log(selected)
+
+    }
+
+    },[event])
+
     return(
         <>
         <div className='admineditnamecon'>
             <div className='admineditname'>
             <p>Banner Color</p>
-            <input type='color' style={{height:'50px'}} name='banner_color'/>
+            <input type='color' style={{height:'50px'}} name='banner_color' value={banner_color} onChange={(e)=>setBanner_Color(e.target.value)}/>
             </div>
         </div>
         <div className='admineditnamecon2'>
@@ -53,8 +73,8 @@ export default function ProductsLayout({selected6,setSelected6}){
             <p>Products</p>
             <MultiSelect
             options={options}
-            value={selected6}
-            onChange={setSelected6}
+            value={selected}
+            onChange={setSelected}
             labelledBy='Select'
             />
             </div>

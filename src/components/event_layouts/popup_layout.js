@@ -5,6 +5,7 @@ import axios from 'axios';
 
 export default function PopupEvent({selected2,setSelected2}){
     const [options,setOptions]=useState([]);
+    const [imggallerypreview,setImggallerypreview]=useState('');
     const cancelalert=useRef(true)
 
     const loadProducts=()=>{
@@ -59,6 +60,12 @@ export default function PopupEvent({selected2,setSelected2}){
         })
     }
 
+
+    function imggalleryPreview(e){
+        setImggallerypreview('')
+        setImggallerypreview(URL.createObjectURL(e.target.files[0]))
+    }
+
     useEffect(()=>{
         if(cancelalert.current){
             cancelalert.current=false;
@@ -74,10 +81,13 @@ export default function PopupEvent({selected2,setSelected2}){
 
     return(
         <>
+        <div className='previewimg' >
+        {imggallerypreview&&<img src={imggallerypreview} alt='Pop Up'/>}
+        </div>
         <div className='admineditnamecon'>
             <div className='admineditname'>
             <p>Image</p>
-            <input type='file' name='img_link'/>
+            <input type='file' name='img_link' onChange={imggalleryPreview}/>
             </div>
         </div>
 

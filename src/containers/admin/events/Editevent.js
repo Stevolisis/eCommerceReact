@@ -19,7 +19,6 @@ export default function Editevent(){
     const [selected,setSelected]=useState([])
     const [selected2,setSelected2]=useState([])
     const [selected5,setSelected5]=useState([])
-    const [selected6,setSelected6]=useState([])
     const [event,setEvent]=useState(null)
 
     function viewEventOptions(){
@@ -30,13 +29,13 @@ export default function Editevent(){
         }else if(type==='main_banner'){
             return <MainBanner event={event} selected={selected} setSelected={setSelected} selected2={selected2} setSelected2={setSelected2}/>
         }else if(type==='meta_data'){
-            return <MetaData/>
+            return <MetaData event={event}/>
         }else if(type==='pop_up'){
-            return <PopupEvent selected2={selected2} setSelected2={setSelected2}/>
+            return <PopupEvent event={event} selected={selected} setSelected={setSelected}/>
         }else if(type==='category_slider'){
-            return <CategoryLayout selected={selected} setSelected={setSelected}/>
+            return <CategoryLayout event={event} selected={selected} setSelected={setSelected}/>
         }else if(type==='products_slider'||type==='products_listing'){
-        return <ProductsLayout selected6={selected6} setSelected6={setSelected6}/>
+        return <ProductsLayout event={event} selected={selected} setSelected={setSelected}/>
         }else if(type==='ads_listing'){
         return <AdsListing selected5={selected5} setSelected5={setSelected5}/>
         }

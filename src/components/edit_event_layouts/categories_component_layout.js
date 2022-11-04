@@ -3,8 +3,9 @@ import { MultiSelect } from 'react-multi-select-component';
 import Swal from 'sweetalert2';
 import axios from 'axios';
 
-export default function CategoryLayout({selected,setSelected}){
+export default function CategoryLayout({event,selected,setSelected}){
     const [options,setOptions]=useState([]);
+    const [banner_color,setBanner_Color]=useState([]);
     const cancelalert=useRef(true);
 
        const loadCategories=()=>{
@@ -19,7 +20,6 @@ export default function CategoryLayout({selected,setSelected}){
                   )
             }else{
                response.forEach(option=>{
-                console.log(option)
                 setOptions(oldOption=>[...oldOption,{value:option._id, label:option.name}])
                })
                console.log(options)
@@ -43,6 +43,23 @@ export default function CategoryLayout({selected,setSelected}){
        },[])
 
 
+    useEffect(()=>{
+        if(event){
+        setBanner_Color(event.category_slider.banner_color)
+        setSelected(oldOption=>[...oldOption,{value:event.category_slider.categories.id, label:event.category_slider.categories.name}]);
+
+        {
+            let slide=[]
+            event.category_slider.categories.forEach(option=>{
+            slide.push({value:option._id, label:option.name})
+            });
+            setSelected(slide);
+        }
+        console.log(selected)
+
+    }
+
+    },[event])
 
 
     return(
@@ -50,7 +67,7 @@ export default function CategoryLayout({selected,setSelected}){
         <div className='admineditnamecon'>
             <div className='admineditname'>
             <p>Banner Color</p>
-            <input type='color' style={{height:'50px'}} name='banner_color'/>
+            <input type='color' style={{height:'50px'}} name='banner_color' value={banner_color} onChange={(e)=>setBanner_Color(e.target.value)}/>
             </div>
         </div>
         <div className='admineditnamecon2'>

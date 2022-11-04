@@ -3,8 +3,10 @@ import Select  from 'react-select';
 import Swal from 'sweetalert2';
 import axios from 'axios';
 
-export default function PopupEvent({selected2,setSelected2}){
+export default function PopupEvent({event,selected,setSelected}){
     const [options,setOptions]=useState([]);
+    const [message,setMessage]=useState('');
+    const [imggallerypreview,setImggallerypreview]=useState('');
     const cancelalert=useRef(true)
 
     const loadProducts=()=>{
@@ -59,6 +61,11 @@ export default function PopupEvent({selected2,setSelected2}){
         })
     }
 
+    function imggalleryPreview(e){
+        setImggallerypreview('')
+        setImggallerypreview(URL.createObjectURL(e.target.files[0]))
+    }
+
     useEffect(()=>{
         if(cancelalert.current){
             cancelalert.current=false;
@@ -66,44 +73,47 @@ export default function PopupEvent({selected2,setSelected2}){
             loadCategories();
         }
     
-       },[]);
+    },[]);
 
 
 
-    
+    useEffect(()=>{
+        if(event){
+            setMessage(event.pop_up.message);
+            setImggallerypreview(event.pop_up.img_link);
+            setSelected(oldOption=>[...oldOption,{value:`products/${event.pop_up.link}`, label:event.pop_up.name}])
+        }
+    },[event]);
 
     return(
         <>
+        <div className='previewimg' >
+        {imggallerypreview&&<img src={imggallerypreview} alt='Pop Up'/>}
+        </div>
         <div className='admineditnamecon'>
             <div className='admineditname'>
             <p>Image</p>
-            <input type='file' name='img_link'/>
+            <input type='file' name='img_link' onChange={imggalleryPreview}/>
             </div>
         </div>
 
         <div className='usereditadditionalinfocon' style={{padding:'10px 0'}}>
             <div className='usereditadditionalinfo'>
             <p>Message</p>
-            <input type='text' name='message'/>
+            <input type='text' name='message' value={message} onChange={(e)=>setMessage(e.target.value)}/>
             </div>
         </div>
 
         <div className='admineditnamecon2'>
             <div className='admineditname'>
-            <p>Products</p>
+            <p>Categories/Products</p>
         <Select
             options={options}
-            value={selected2}
+            value={selected}
             name='Select'
-            onChange={(e)=>(setSelected2(e))}
+            onChange={(e)=>(setSelected(e))}
             isSearchable={true}
             />
-            {/* style at adminaddcateg.scss */}
-            {/* <select>
-                {options.map((option,i)=>{
-                    return <option value={option.value}>{option.label}</option>
-                })}
-            </select> */}
             <p>Select Category or product where the user will be directed to after clicking View on the Pop Up Event.</p>
             </div>
         </div>

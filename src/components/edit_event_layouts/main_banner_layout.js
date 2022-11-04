@@ -96,19 +96,22 @@ export default function MainBanner({event,selected,setSelected,selected2,setSele
     },[]);
 
     useEffect(()=>{
-        setImggallerypreview1(event && event.main_banner.banner1.img_link)
-        setImggallerypreview2(event && event.main_banner.banner2.img_link)
-        event && setSelected(oldOption=>[...oldOption,{value:event.main_banner.banner1.slug, label:event.main_banner.banner1.name}]);
-        event && setSelected(oldOption=>[...oldOption,{value:event.main_banner.banner2.slug, label:event.main_banner.banner2.name}]);
+        if(event){
+        setImggallerypreview1(event.main_banner.banner1.img_link)
+        setImggallerypreview2(event.main_banner.banner2.img_link)
+        setSelected(oldOption=>[...oldOption,{value:event.main_banner.banner1.slug, label:event.main_banner.banner1.name}]);
+        setSelected(oldOption=>[...oldOption,{value:event.main_banner.banner2.slug, label:event.main_banner.banner2.name}]);
 
         {
             let slide=[]
-            event && event.main_banner.slides.forEach(option=>{
+            event.main_banner.slides.forEach(option=>{
             slide.push(option.img_link)
             setSelected2(oldOption=>[...oldOption,{value:option.slug, label:option.name}]);
             });
             setImggallerypreview3(slide)
         }
+        }
+
 
     },[event])
 
