@@ -26,7 +26,6 @@ export default function Admineventcoupon(){
               axios.post('http://localhost:80/events/delete-event',formData)
               .then(res=>{
                 let status=res.data.status;
-                let data=res.data.data;
                   if(status==='success'){
                     Swal.fire(
                       'Deleted!',
