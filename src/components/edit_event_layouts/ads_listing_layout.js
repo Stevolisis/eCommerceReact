@@ -3,7 +3,7 @@ import { MultiSelect } from 'react-multi-select-component';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 
-export default function AdsListing({selected5,setSelected5}){
+export default function AdsListing({event,selected,setSelected}){
     const [imggallery,setimggallery]=useState([]);
     const [options,setOptions]=useState([]);
     const cancelalert=useRef(true)
@@ -12,7 +12,6 @@ export default function AdsListing({selected5,setSelected5}){
         axios.get('http://localhost:80/categories/getcategories')
         .then(res=>{
             let response=res.data.data;
-            console.log(response);
             if(response==='Error Occured'){
                 Swal.fire(
                     'Error After Fetch!',
@@ -38,7 +37,6 @@ export default function AdsListing({selected5,setSelected5}){
         axios.get('http://localhost:80/products/getproducts')
         .then(res=>{
             let response=res.data.data;
-            console.log(response);
             if(response==='Error Occured'){
                 Swal.fire(
                     'Error After Fetch!',
@@ -81,6 +79,20 @@ export default function AdsListing({selected5,setSelected5}){
 
 
 
+       useEffect(()=>{
+        if(event){
+                let slide=[];
+                let imgSlide=[];
+
+                event.ads_listing.forEach(option=>{
+                imgSlide.push(option.img_link);
+                slide.push({value:option.slug, label:option.name})
+                });
+                
+                setimggallery(imgSlide);
+                setSelected(slide);
+        }
+       },[event])
 
 
 
@@ -112,8 +124,8 @@ export default function AdsListing({selected5,setSelected5}){
             <p>Label</p>
             <MultiSelect
             options={options}
-            value={selected5}
-            onChange={setSelected5}
+            value={selected}
+            onChange={setSelected}
             labelledBy='Select'
             />
             <p>Select label(Category/Product) to which the user will be sent to after clicking the banners.</p>

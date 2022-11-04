@@ -1,4 +1,4 @@
-import {React,useCallback,useEffect,useState} from 'react';
+import {React,useEffect,useState} from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import { useParams } from 'react-router-dom';
@@ -18,7 +18,6 @@ export default function Editevent(){
     const [type,setType]=useState('');
     const [selected,setSelected]=useState([])
     const [selected2,setSelected2]=useState([])
-    const [selected5,setSelected5]=useState([])
     const [event,setEvent]=useState(null)
 
     function viewEventOptions(){
@@ -37,7 +36,7 @@ export default function Editevent(){
         }else if(type==='products_slider'||type==='products_listing'){
         return <ProductsLayout event={event} selected={selected} setSelected={setSelected}/>
         }else if(type==='ads_listing'){
-        return <AdsListing selected5={selected5} setSelected5={setSelected5}/>
+        return <AdsListing event={event} selected={selected} setSelected={setSelected}/>
         }
     }
 

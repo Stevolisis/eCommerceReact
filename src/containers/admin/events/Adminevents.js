@@ -32,6 +32,7 @@ export default function Admineventcoupon(){
                       'Event Deleted.',
                       'success'
                     )
+                    loadEvents();
                   }else{
                     Swal.fire(
                       'Error Occured',
@@ -77,10 +78,11 @@ export default function Admineventcoupon(){
                     'warning'
                   )
             }else{
+              let eventOrder=[];
                data.forEach(event=>{
-                setOrder(oldOption=>[...oldOption,{id:event._id,title:event.title,type:event.type,status:event.status}])
+                eventOrder.push({id:event._id,title:event.title,type:event.type,status:event.status})
                })
-
+              setOrder(eventOrder)
             }
         }).catch(err=>{
             Swal.fire(
