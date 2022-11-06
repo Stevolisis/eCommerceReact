@@ -1,4 +1,3 @@
-import axios from 'axios';
 import {React,useState} from 'react';
 import Swal from 'sweetalert2';
 import TopBanner from '../../../components/event_layouts/top_banner_layout';
@@ -8,6 +7,7 @@ import PopupEvent from '../../../components/event_layouts/popup_layout';
 import CategoryLayout from '../../../components/event_layouts/categories_component_layout';
 import ProductsLayout from '../../../components/event_layouts/products_component_layout';
 import AdsListing from '../../../components/event_layouts/ads_listing_layout';
+import api from '../../../Utils/axiosConfig';
 
 export default function Addevent(){
     const [type,setType]=useState('');
@@ -49,7 +49,7 @@ export default function Addevent(){
         formData.append('selected6',JSON.stringify(selected6))
         console.log(e.target)
         console.log(selected)
-        axios.post('http://localhost:80/events/addevent',formData,{withCredentials:true})
+        api.post('events/addevent',formData,{withCredentials:true})
         .then(res=>{
             let status=res.data.status;
            if(status==='success'){

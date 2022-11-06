@@ -1,38 +1,37 @@
 import { createSlice,createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
-import { baseUrl } from "../../Utils/baseUrl";
 import Swal from "sweetalert2";
 import { loading } from "../../Loaders/setMainLoader";
+import api from "../../Utils/axiosConfig";
 
 
 
 
 export const fetchFaqs=createAsyncThunk('adminFaqs/fetchFaqs',async()=>{
     loading(true)
-    const response=await axios.get(`${baseUrl}/faq/getFaqs`)
+    const response=await api.get(`faq/getFaqs`)
     return response.data.data;
 });
 
 export const fetchFaq=createAsyncThunk('adminFaqs/fetchFaq',async(id)=>{
     loading(true);
-    const response=await axios.get(`${baseUrl}/faq/getfaqForEdit/${id}`)
+    const response=await api.get(`faq/getfaqForEdit/${id}`)
     return response.data.data;
 });
 
 export const addFaq=createAsyncThunk('adminFaqs/addFaq',async(formData)=>{
     loading(true);
-    const response=await axios.post(`${baseUrl}/faq/addFaq`,formData);
+    const response=await api.post('faq/addFaq',formData);
     return response.data;
 });
 
 export const editFaq=createAsyncThunk('adminFaqs/editFaq',async(formData)=>{
     loading(true);
-    const response=await axios.put(`${baseUrl}/faq/editFaq`,formData)
+    const response=await api.put('faq/editFaq',formData)
         return response.data;
 });
 export const deleteFaq=createAsyncThunk('adminFaqs/deleteFaq',async(id)=>{
     loading(true)
-    const response=await axios.delete(`${baseUrl}/faq/deleteFaq/${id}`)
+    const response=await api.delete(`faq/deleteFaq/${id}`)
         return {response:response.data,id:id};
 });
 

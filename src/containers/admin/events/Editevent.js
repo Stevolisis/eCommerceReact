@@ -1,5 +1,4 @@
 import {React,useEffect,useState} from 'react';
-import axios from 'axios';
 import Swal from 'sweetalert2';
 import { useParams } from 'react-router-dom';
 import TopBanner from '../../../components/edit_event_layouts/top_banner_layout';
@@ -9,6 +8,7 @@ import PopupEvent from '../../../components/edit_event_layouts/popup_layout';
 import CategoryLayout from '../../../components/edit_event_layouts/categories_component_layout';
 import ProductsLayout from '../../../components/edit_event_layouts/products_component_layout';
 import AdsListing from '../../../components/edit_event_layouts/ads_listing_layout';
+import api from '../../../Utils/axiosConfig';
 
 
 export default function Editevent(){
@@ -49,7 +49,7 @@ export default function Editevent(){
 
     
     const loadEvent=()=>{
-        axios.get(`http://localhost:80/events/get-event/${id}`)
+        api.get(`events/get-event/${id}`)
         .then(res=>{
           let status=res.data.status;
           let data=res.data.data;
@@ -68,7 +68,7 @@ export default function Editevent(){
             }
         }).catch(err=>{
             Swal.fire(
-                'Error At Axios2!',
+                'Error At api2!',
                 err.message,
                 'error'
               )
@@ -78,8 +78,7 @@ export default function Editevent(){
 
     function handleSubmit(e){
         e.preventDefault();
-        console.log('check')
-        setType('products_slider')
+       
     }
 
     useEffect(()=>{

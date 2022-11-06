@@ -1,33 +1,32 @@
 import { createSlice,createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
-import { baseUrl } from "../../Utils/baseUrl";
 import Swal from "sweetalert2";
 import { loading } from "../../Loaders/setMainLoader";
+import api from "../../Utils/axiosConfig";
 
 
 
 
 export const fetchUsers=createAsyncThunk('adminUsers/fetchUsers',async(limit)=>{
     loading(true)
-    const response=await axios.get(`${baseUrl}/users/getUsers?limit=${limit}`)
+    const response=await api.get(`users/getUsers?limit=${limit}`)
     return response.data.data;
 });
 
 export const fetchUser=createAsyncThunk('adminUsers/fetchUser',async(id)=>{
     loading(true);
-    const response=await axios.get(`${baseUrl}/users/getUser/${id}`)
+    const response=await api.get(`users/getUser/${id}`)
     return response.data.data;
 });
 
 
 export const editUser=createAsyncThunk('adminUsers/editUser',async(formData)=>{
     loading(true);
-    const response=await axios.put(`${baseUrl}/users/editUser`,formData)
+    const response=await api.put('users/editUser',formData)
         return response.data;
 });
 export const deleteUser=createAsyncThunk('adminUsers/deleteUser',async(id)=>{
     loading(true)
-    const response=await axios.delete(`${baseUrl}/users/deleteUser/${id}`)
+    const response=await api.delete(`users/deleteUser/${id}`)
         return {response:response.data,id:id};
 });
 

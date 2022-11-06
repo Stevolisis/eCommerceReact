@@ -1,21 +1,20 @@
 import { createSlice,createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
-import { baseUrl } from "../../Utils/baseUrl";
 import Swal from "sweetalert2";
 import { loading } from "../../Loaders/setMainLoader";
+import api from "../../Utils/axiosConfig";
 
 
 
 export const fetchSupport=createAsyncThunk('adminSupports/fetchSupport',async()=>{
     loading(true);
-    const response=await axios.get(`${baseUrl}/support/getsupportforedit`)
+    const response=await api.get('support/getsupportforedit')
     return response.data.data;
 });
 
 
 export const editSupport=createAsyncThunk('adminSupports/editSupport',async(formData)=>{
     loading(true);
-    const response=await axios.put(`${baseUrl}/support/editSupport1`,formData)
+    const response=await api.put('support/editSupport1',formData)
         return response.data;
 });
 

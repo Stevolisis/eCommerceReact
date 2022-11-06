@@ -1,37 +1,36 @@
 import { createSlice,createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
-import { baseUrl } from "../../Utils/baseUrl";
 import Swal from "sweetalert2";
 import { loading } from "../../Loaders/setMainLoader";
+import api from "../../Utils/axiosConfig";
 
 
 export const fetchProducts=createAsyncThunk('adminProducts/fetchProducts',async(limit)=>{
     loading(true);
-    const response=await axios.get(`${baseUrl}/products/getProducts?limit=${limit}`)
+    const response=await api.get(`products/getProducts?limit=${limit}`)
     return response.data.data;
 });
 
 export const fetchProduct=createAsyncThunk('adminProducts/fetchProduct',async(id)=>{
     loading(true);
-    const response=await axios.get(`${baseUrl}/products/getproductforedit/${id}`)
+    const response=await api.get(`products/getproductforedit/${id}`)
     return response.data.data;
 });
 
 export const addProduct=createAsyncThunk('adminProducts/addProducts',async(formData)=>{
     loading(true);
-    const response=await axios.post(`${baseUrl}/products/addproduct`,formData);
+    const response=await api.post('products/addproduct',formData);
     return response.data;
 });
 
 export const editProduct=createAsyncThunk('adminProducts/editProduct',async(formData)=>{
     loading(true);
-    const response=await axios.put(`${baseUrl}/products/editproduct`,formData)
+    const response=await api.put('products/editproduct',formData)
         return response.data;
 });
 
 export const deleteProduct=createAsyncThunk('adminProducts/deleteProduct',async(id)=>{
     loading(true);
-    const response=await axios.delete(`${baseUrl}/products/deleteProduct/${id}`)
+    const response=await api.delete(`products/deleteProduct/${id}`)
         return {data:response.data,id:id}
 });
 

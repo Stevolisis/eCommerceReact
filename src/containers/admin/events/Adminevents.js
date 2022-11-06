@@ -2,7 +2,7 @@ import {React, useEffect, useState, useRef} from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { ReactSortable } from "react-sortablejs";
-import axios from 'axios';
+import api from '../../../Utils/axiosConfig';
 
 export default function Admineventcoupon(){
     const navigate=useNavigate();
@@ -23,7 +23,7 @@ export default function Admineventcoupon(){
             if (result.isConfirmed) {
               let formData=new FormData();
               formData.append('id',id)
-              axios.post('http://localhost:80/events/delete-event',formData)
+              api.post('events/delete-event',formData)
               .then(res=>{
                 let status=res.data.status;
                   if(status==='success'){
@@ -67,7 +67,7 @@ export default function Admineventcoupon(){
 
 
       const loadEvents=()=>{
-        axios.get('http://localhost:80/events/get-events')
+        api.get('events/get-events')
         .then(res=>{
           let status=res.data.status;
           let data=res.data.data;
@@ -86,7 +86,7 @@ export default function Admineventcoupon(){
             }
         }).catch(err=>{
             Swal.fire(
-                'Error At Axios2!',
+                'Error At api2!',
                 err.message,
                 'error'
               )
@@ -105,7 +105,7 @@ export default function Admineventcoupon(){
         confirmButtonText: 'Yes, Reorder it!'
       }).then((result) => {
         if (result.isConfirmed) {
-          axios.post('http://localhost:80/events/reorder-events',{order:order})
+          api.post('events/reorder-events',{order:order})
           .then(res=>{
             let status=res.data.status;
 

@@ -1,38 +1,37 @@
 import { createSlice,createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
-import { baseUrl } from "../../Utils/baseUrl";
 import Swal from "sweetalert2";
 import { loading } from "../../Loaders/setMainLoader";
+import api from "../../Utils/axiosConfig";
 
 
 
 
 export const fetchCategories=createAsyncThunk('adminCategories/fetchCategories',async(limit)=>{
     loading(true)
-    const response=await axios.get(`${baseUrl}/categories/getcategories?limit=${limit}`)
+    const response=await api.get(`categories/getcategories?limit=${limit}`)
     return response.data.data;
 });
 
 export const fetchCategory=createAsyncThunk('adminCategories/fetchCategory',async(id)=>{
     loading(true);
-    const response=await axios.get(`${baseUrl}/categories/getcategoryforedit/${id}`)
+    const response=await api.get(`categories/getcategoryforedit/${id}`)
     return response.data.data;
 });
 
 export const addCategory=createAsyncThunk('adminCategories/addCategory',async(formData)=>{
     loading(true);
-    const response=await axios.post(`${baseUrl}/categories/addCategory`,formData);
+    const response=await api.post('categories/addCategory',formData);
     return response.data;
 });
 
 export const editCategory=createAsyncThunk('adminCategories/editCategory',async(formData)=>{
     loading(true);
-    const response=await axios.put(`${baseUrl}/categories/editCategory`,formData)
+    const response=await api.put('categories/editCategory',formData)
         return response.data;
 });
 export const deleteCategory=createAsyncThunk('adminCategories/deleteCategory',async(id)=>{
     loading(true)
-    const response=await axios.delete(`${baseUrl}/categories/deleteCategory/${id}`)
+    const response=await api.delete(`categories/deleteCategory/${id}`)
         return {response:response.data,id:id};
 });
 
