@@ -3,11 +3,10 @@ import {React, useState, useEffect, useRef} from 'react';
 import { MultiSelect } from 'react-multi-select-component';
 import Swal from 'sweetalert2';
 
-export default function MainBanner({event,selected,setSelected,selected2,setSelected2}){
+export default function MainBanner({event,selected,setSelected,selected2,setSelected2,slides,setSlides}){
     const [options,setOptions]=useState([]);
     const [imggallerypreview1,setImggallerypreview1]=useState('');
     const [imggallerypreview2,setImggallerypreview2]=useState('');
-    const [imggallerypreview3,setImggallerypreview3]=useState([]);
     const cancelalert=useRef(true)
 
 
@@ -72,16 +71,16 @@ export default function MainBanner({event,selected,setSelected,selected2,setSele
         setImggallerypreview1(URL.createObjectURL(e.target.files[0]))
     }
 
-        function imggalleryPreview2(e){
+    function imggalleryPreview2(e){
             setImggallerypreview2('')
             setImggallerypreview2(URL.createObjectURL(e.target.files[0]))
     }
 
     function imggalleryPreview3(e){
-        setImggallerypreview3([])
+        setSlides([])
         const toSet=Array.from(e.target.files);
         toSet.forEach(set=>{
-            setImggallerypreview3(oldstat=>[...oldstat,URL.createObjectURL(set)])
+            setSlides(oldstat=>[...oldstat,URL.createObjectURL(set)])
         });
     }
 
@@ -108,7 +107,7 @@ export default function MainBanner({event,selected,setSelected,selected2,setSele
             slide.push(option.img_link)
             setSelected2(oldOption=>[...oldOption,{value:option.slug, label:option.name}]);
             });
-            setImggallerypreview3(slide)
+            setSlides(slide)
         }
         }
 
@@ -130,6 +129,9 @@ export default function MainBanner({event,selected,setSelected,selected2,setSele
         </div>
         </div>
 
+
+
+
         <div className='usereditnamecon' style={{padding:'8px 0'}}>
         <div className='usereditname'>
             <p>Banner 1</p>
@@ -142,6 +144,11 @@ export default function MainBanner({event,selected,setSelected,selected2,setSele
 
         </div>
 
+
+
+
+
+
         <div className='admineditnamecon2'>
             <div className='admineditname'>
             <p>Label</p>
@@ -152,13 +159,16 @@ export default function MainBanner({event,selected,setSelected,selected2,setSele
             labelledBy='Select'
             />
             <p>Select label(Category/Product) to which the user will be sent to after clicking the banners.</p>
-            <p><b>Note: </b>Select the labels chronologically, e.g the first label you ticked, will be allocated to the first banner and so on.</p>
+            <p><b>Note: </b>Select the labels chronologically, e.g the first label you ticked, will be allocated to the first slider and so on.</p>
             </div>
         </div>
 
+
+
+
         <div className='previewimg2'>
         {
-            imggallerypreview3&&imggallerypreview3.map((imgprev,i)=>{
+            slides&&slides.map((imgprev,i)=>{
                 return (
             <div className='previewimg' key={i}>
             <img src={imgprev} alt={imgprev}/>
@@ -167,6 +177,10 @@ export default function MainBanner({event,selected,setSelected,selected2,setSele
             })
             }
         </div>
+
+
+
+
         <div className='admineditnamecon'>
             <div className='usereditadditionalinfo'>
             <p>Slider Images</p>
@@ -175,8 +189,9 @@ export default function MainBanner({event,selected,setSelected,selected2,setSele
             </div>
         </div>
 
+
         <div className='admineditnamecon2'>
-            <div className='admineditname'>
+            <div className='admineditname' style={{boxSizing:'border'}}>
             <p>Label</p>
             <MultiSelect
             options={options}
@@ -188,6 +203,7 @@ export default function MainBanner({event,selected,setSelected,selected2,setSele
             <p><b>Note: </b>Select the labels chronologically, e.g the first label you ticked, will be allocated to the first slider and so on.</p>
             </div>
         </div>
+
         </>
     )
 }

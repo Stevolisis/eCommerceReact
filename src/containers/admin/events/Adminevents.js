@@ -80,7 +80,7 @@ export default function Admineventcoupon(){
             }else{
               let eventOrder=[];
                data.forEach(event=>{
-                eventOrder.push({id:event._id,title:event.title,type:event.type,status:event.status})
+                eventOrder.push({id:event._id,name:event.name,title:event.title,type:event.type,status:event.status})
                })
               setOrder(eventOrder)
             }
@@ -176,7 +176,7 @@ export default function Admineventcoupon(){
           {order.map((item) => (
           <tr key={item.id} >
             <td className='handler' style={{cursor:"grab",textAlign:'center'}}><i className='fa fa-bars'/></td>
-            <td>{item.title}</td>
+            <td>{item.name}</td>
             <td>{item.type}</td>
             <td><Link to={`/admin/editevent/${item.type}-${item.id}`}><i className='fa fa-edit'/></Link></td>
             <td><button onClick={()=>deletespec2(item.id)}>Delete</button></td>

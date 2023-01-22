@@ -2,14 +2,14 @@ import {React}from 'react';
 import { Link } from 'react-router-dom';
 import Searchbar from './Searchbar';
 
-export default function MainContainer({route,setTogglefilter,togglefilter}){
+export default function MainContainer({route,setTogglefilter,togglefilter,top_banner_img}){
     return(
         <div className='headercon'>
 
 
-            <div className='headerAdsCon'>
-                <img src='/media3/headerAds.webp' alt='headerAds'/>
-            </div>
+        <div className='headerAdsCon'>
+            <img src={top_banner_img} alt='headerAds'/>
+        </div>
 
 
 
@@ -19,12 +19,14 @@ export default function MainContainer({route,setTogglefilter,togglefilter}){
 <div className='header2'>
     <div className='categoryspace2'>
     <h2><Link to='/'><img src='https://ecommerce.stephcom.com.ng/favicon.svg' alt='Logo'/> GrandProSales </Link></h2>
+    
     {route==='products'? 
     <div className='currentcateg' style={{display:'block'}}>
     <i className='fa fa-caret-right ' />
     <span>Computers and Tablets</span>
     </div>
-:''}
+    :''}
+
 </div>
 <div className='usercon2'>
 <Link to='/help'><i className='fa fa-question-circle'></i></Link>

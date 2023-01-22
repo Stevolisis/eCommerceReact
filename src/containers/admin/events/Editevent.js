@@ -19,6 +19,7 @@ export default function Editevent(){
     const [selected,setSelected]=useState([])
     const [selected2,setSelected2]=useState([])
     const [event,setEvent]=useState(null)
+    const [slides,setSlides]=useState([]);
 
     function viewEventOptions(){
         if(type===''){
@@ -26,7 +27,7 @@ export default function Editevent(){
         }else if(type==='top_banner'){
             return <TopBanner event={event}/>
         }else if(type==='main_banner'){
-            return <MainBanner event={event} selected={selected} setSelected={setSelected} selected2={selected2} setSelected2={setSelected2}/>
+            return <MainBanner slides={slides} setSlides={setSlides} event={event} selected={selected} setSelected={setSelected} selected2={selected2} setSelected2={setSelected2}/>
         }else if(type==='meta_data'){
             return <MetaData event={event}/>
         }else if(type==='pop_up'){
@@ -36,7 +37,7 @@ export default function Editevent(){
         }else if(type==='products_slider'||type==='products_listing'){
         return <ProductsLayout event={event} selected={selected} setSelected={setSelected}/>
         }else if(type==='ads_listing'){
-        return <AdsListing event={event} selected={selected} setSelected={setSelected}/>
+        return <AdsListing slides={slides} setSlides={setSlides} event={event} selected={selected} setSelected={setSelected}/>
         }
     }
 
@@ -78,8 +79,35 @@ export default function Editevent(){
 
     function handleSubmit(e){
         e.preventDefault();
-       
+        const formData=new FormData(e.target);
+        formData.append('selected',JSON.stringify(selected))
+        formData.append('selected2',JSON.stringify(selected2))
+        formData.append('slides',JSON.stringify(slides))
+        api.post(`events/edit-event/${id}`,formData,{withCredentials:true})
+        .then(res=>{
+            let status=res.data.status;
+           if(status==='success'){
+            Swal.fire(
+                'Successful',
+                'Event Edited Successfully',
+                'success'
+            )
+           }else{
+            Swal.fire(
+                'Error Occured',
+                status,
+                'info'
+            )
+           }
+        }).catch(err=>{
+            Swal.fire(
+                'Error Occured',
+                err.message,
+                'error'
+            )
+        });
     }
+
 
     useEffect(()=>{
         setType(id.split('-')[0])
@@ -93,6 +121,8 @@ export default function Editevent(){
         <div className='userorderheading'>
         <p>Edit Event</p>
         </div>
+
+        
         <div className='addcategcon'>
             <form onSubmit={handleSubmit}>
         <div className='admineditnamecon'>
@@ -104,15 +134,9 @@ export default function Editevent(){
 
 
         {viewEventOptions()}
-        <div className='admineditnamecon'>
-            <div className='admineditname'>
-            <p>Status</p>
-            <select name='status' value={status} onChange={(e)=>setStatus(e.target.value)}>
-            <option value='active'>Activate</option>
-            <option value='inactive'>Deactivate</option>
-            </select>
-            </div>
-        </div>
+
+
+
         <div className='usereditbtn'>
         <button>Edit Event</button>
         </div>

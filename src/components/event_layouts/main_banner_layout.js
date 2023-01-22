@@ -110,6 +110,9 @@ export default function MainBanner({selected3,setSelected3,selected4,setSelected
         </div>
         </div>
 
+
+
+
         <div className='usereditnamecon' style={{padding:'8px 0'}}>
         <div className='usereditname'>
             <p>Banner 1</p>
@@ -121,6 +124,11 @@ export default function MainBanner({selected3,setSelected3,selected4,setSelected
         </div>
 
         </div>
+
+
+
+
+
 
         <div className='admineditnamecon2'>
             <div className='admineditname'>
@@ -136,6 +144,10 @@ export default function MainBanner({selected3,setSelected3,selected4,setSelected
             </div>
         </div>
 
+
+
+
+
         <div className='previewimg2'>
         {
             imggallerypreview3&&imggallerypreview3.map((imgprev,i)=>{
@@ -147,6 +159,9 @@ export default function MainBanner({selected3,setSelected3,selected4,setSelected
             })
             }
         </div>
+
+
+
         <div className='admineditnamecon'>
             <div className='usereditadditionalinfo'>
             <p>Slider Images</p>
@@ -154,6 +169,10 @@ export default function MainBanner({selected3,setSelected3,selected4,setSelected
             <p>select multiple images for you slider. Recommended number of images (6)</p>
             </div>
         </div>
+
+
+
+
 
         <div className='admineditnamecon2'>
             <div className='admineditname'>

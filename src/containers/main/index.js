@@ -1,6 +1,5 @@
 import {React,useState,useEffect,useCallback,useRef} from 'react'
 import { Link, useNavigate } from 'react-router-dom';
-import Swal from 'sweetalert2';
 import Firstslider from '../../components/Firstslider'
 import Mainheader from '../../components/Mainheader'
 import Mainfooter from '../../components/Mainfooter'

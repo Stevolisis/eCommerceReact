@@ -2,6 +2,7 @@ import {React} from 'react'
 import {BrowserRouter,Routes,Route} from 'react-router-dom';
 //------------Main Pages------------
 import Index from './containers/main/index';
+import Index2 from './containers/main/index2';
 import Products from './containers/main/Products';
 import Product from './containers/main/Product';
 import Cart from './containers/main/Cart';
@@ -100,7 +101,8 @@ function App() {
     <BrowserRouter>
       <Routes>  
       {/* -------------Main Route------------- */}
-        <Route path='/' element={<Index />} />
+      <Route path='/' element={<Index />} />
+      <Route path='/index2' element={<Index2 />} />
         <Route path='/passwordReset/:passwordResetLink' element={<PasswordReset />} />
         <Route path='/products' element={<Products />} />
         <Route path='/product' element={<Product />} />

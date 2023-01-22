@@ -3,8 +3,7 @@ import { MultiSelect } from 'react-multi-select-component';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 
-export default function AdsListing({event,selected,setSelected}){
-    const [imggallery,setimggallery]=useState([]);
+export default function AdsListing({event,selected,setSelected,slides,setSlides}){
     const [options,setOptions]=useState([]);
     const cancelalert=useRef(true)
 
@@ -59,11 +58,11 @@ export default function AdsListing({event,selected,setSelected}){
     }
 
 
-    function imggalleryPreview(e){
-        setimggallery([])
+    function imagePreview(e){
+        setSlides([])
         const toSet=Array.from(e.target.files);
         toSet.forEach(set=>{
-            setimggallery(oldstat=>[...oldstat,URL.createObjectURL(set)])
+            setSlides(oldstat=>[...oldstat,URL.createObjectURL(set)])
         });
     }
 
@@ -89,7 +88,7 @@ export default function AdsListing({event,selected,setSelected}){
                 slide.push({value:option.slug, label:option.name})
                 });
                 
-                setimggallery(imgSlide);
+                setSlides(imgSlide);
                 setSelected(slide);
         }
        },[event])
@@ -101,7 +100,7 @@ export default function AdsListing({event,selected,setSelected}){
         <>
         <div className='previewimg2'>
             {
-            imggallery&&imggallery.map((imgprev,i)=>{
+            slides&&slides.map((imgprev,i)=>{
                 return (
             <div className='previewimg' key={i}>
             <img src={imgprev} alt={imgprev}/>
@@ -114,7 +113,7 @@ export default function AdsListing({event,selected,setSelected}){
         <div className='admineditnamecon' style={{paddingTop:'6px'}}>
             <div className='usereditadditionalinfo'>
             <p>BannerAds Images</p>
-            <input  type='file' multiple name='bannerAds' onChange={imggalleryPreview}/>
+            <input  type='file' multiple name='bannerAds' onChange={imagePreview}/>
             <p>select multiple images for you slider. Recommended number of images (6)</p>
             </div>
         </div>
