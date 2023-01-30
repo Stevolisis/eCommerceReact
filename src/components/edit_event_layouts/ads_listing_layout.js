@@ -1,59 +1,31 @@
 import {React, useEffect, useState, useRef} from 'react';
 import { MultiSelect } from 'react-multi-select-component';
-import axios from 'axios';
-import Swal from 'sweetalert2';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchCategories } from '../../Redux/Admin/categories';
+import { fetchProducts } from '../../Redux/Admin/products';
 
-export default function AdsListing({event,selected,setSelected,slides,setSlides}){
+export default function AdsListing({selected,setSelected,slides,setSlides}){
     const [options,setOptions]=useState([]);
     const cancelalert=useRef(true)
-
+    const event=useSelector(state=>state.eventReducer.event);
+    const dispatch=useDispatch();
+    
     const loadCategories=()=>{
-        axios.get('http://localhost:80/categories/getcategories')
-        .then(res=>{
-            let response=res.data.data;
-            if(response==='Error Occured'){
-                Swal.fire(
-                    'Error After Fetch!',
-                    `Error Occured: ${response}`,
-                    'warning'
-                  )
-            }else{
-               response.forEach(option=>{
-                setOptions(oldOption=>[...oldOption,{value:`products/${option.slug}`, label:`${option.name} (Category)`}])
-               })
+        dispatch(fetchCategories())
+        .then(response=>{
+            response.payload.forEach(option=>{
+            setOptions(oldOption=>[...oldOption,{value:`${option.slug}`, label:`${option.name} (Category)`}])
 
-            }
-        }).catch(err=>{
-            Swal.fire(
-                'Error At Axios2!',
-                `Error Occured: ${err}`,
-                'warning'
-              )
-        })
+            });
+        });
     }
 
     const loadProducts=()=>{
-        axios.get('http://localhost:80/products/getproducts')
-        .then(res=>{
-            let response=res.data.data;
-            if(response==='Error Occured'){
-                Swal.fire(
-                    'Error After Fetch!',
-                    `Error Occured: ${response}`,
-                    'warning'
-                  )
-            }else{
-               response.forEach(option=>{
-                setOptions(oldOption=>[...oldOption,{value:`product/${option.slug}`, label:`${option.name} (Product)`}])
-               })
-
-            }
-        }).catch(err=>{
-            Swal.fire(
-                'Error At Axios2!',
-                `Error Occured: ${err}`,
-                'warning'
-              )
+        dispatch(fetchProducts())
+        .then(response=>{
+               response.payload.forEach(option=>{
+                setOptions(oldOption=>[...oldOption,{value:`${option.slug}`, label:`${option.name} (Product)`}])
+               })            
         })
     }
 
@@ -79,10 +51,9 @@ export default function AdsListing({event,selected,setSelected,slides,setSlides}
 
 
        useEffect(()=>{
-        if(event){
+        if(event&&event.ads_listing){
                 let slide=[];
                 let imgSlide=[];
-
                 event.ads_listing.forEach(option=>{
                 imgSlide.push(option.img_link);
                 slide.push({value:option.slug, label:option.name})

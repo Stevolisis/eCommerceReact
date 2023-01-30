@@ -21,7 +21,7 @@ export default function AdsListing({selected5,setSelected5}){
                   )
             }else{
                response.forEach(option=>{
-                setOptions(oldOption=>[...oldOption,{value:`products/${option.slug}`, label:`${option.name} (Category)`}])
+                setOptions(oldOption=>[...oldOption,{value:`${option.slug}`, label:`${option.name} (Category)`}])
                })
 
             }
@@ -47,7 +47,7 @@ export default function AdsListing({selected5,setSelected5}){
                   )
             }else{
                response.forEach(option=>{
-                setOptions(oldOption=>[...oldOption,{value:`product/${option.slug}`, label:`${option.name} (Product)`}])
+                setOptions(oldOption=>[...oldOption,{value:`${option.slug}`, label:`${option.name} (Product)`}])
                })
 
             }

@@ -1,35 +1,21 @@
 import {React, useEffect, useRef, useState} from 'react';
 import { MultiSelect } from 'react-multi-select-component';
-import Swal from 'sweetalert2';
-import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchProducts } from '../../Redux/Admin/products';
 
-export default function ProductsLayout({event,selected,setSelected}){
+export default function ProductsLayout({selected,setSelected}){
     const [options,setOptions]=useState([]);
     const [banner_color,setBanner_Color]=useState([]);
     const cancelalert=useRef(true);
-
-       const loadProducts=()=>{
-        axios.get('http://localhost:80/products/getProducts')
-        .then(res=>{
-            let response=res.data.data;
-            if(!Array.isArray(response)){
-                Swal.fire(
-                    'Error After Fetch!',
-                    `Error Occured: ${response}`,
-                    'warning'
-                  )
-            }else{
-               response.forEach(option=>{
+    const event=useSelector(state=>state.eventReducer.event);
+    const dispatch=useDispatch();
+    
+    const loadProducts=()=>{
+        dispatch(fetchProducts())
+        .then(response=>{
+               response.payload.forEach(option=>{
                 setOptions(oldOption=>[...oldOption,{value:option._id, label:option.name}])
                })
-
-            }
-        }).catch(err=>{
-            Swal.fire(
-                'Error At Axios2!',
-                `Error Occured: ${err}`,
-                'warning'
-              )
         })
     }
 
@@ -39,26 +25,23 @@ export default function ProductsLayout({event,selected,setSelected}){
             loadProducts();
         }
     
-       },[])
+    },[])
 
 
        useEffect(()=>{
-        if(event){
+        if(event&&event.product_component){
         setBanner_Color(event.product_component.banner_color)
-        setSelected(oldOption=>[...oldOption,{value:event.product_component.products.id, label:event.product_component.products.name}]);
 
-        {
             let slide=[]
             event.product_component.products.forEach(option=>{
             slide.push({value:option._id, label:option.name})
             });
             setSelected(slide);
+
         }
-        console.log(selected)
+        },[event]);
 
-    }
 
-    },[event])
 
     return(
         <>

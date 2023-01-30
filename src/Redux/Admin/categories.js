@@ -151,6 +151,7 @@ const categorySlice=createSlice({
                 'Category Delete Successful',
                 'success'
             )
+            console.log('shooww',{filterBackup:[...state.filterBackup].filter(item => item._id !== payload.id),categories:[...state.categories].filter(item => item._id !== payload.id)})
             return {...state,filterBackup:[...state.filterBackup].filter(item => item._id !== payload.id),categories:[...state.categories].filter(item => item._id !== payload.id)}
         },
         [deleteCategory.rejected]: (state,{error})=>{

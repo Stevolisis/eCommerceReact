@@ -1,6 +1,7 @@
 import {React, useEffect, useState} from 'react';
+import {  useSelector } from 'react-redux';
 
-export default function MetaData({event}){
+export default function MetaData(){
     const [imggallerypreview1,setImggallerypreview1]=useState('');
     const [imggallerypreview2,setImggallerypreview2]=useState('');
     const [imggallerypreview3,setImggallerypreview3]=useState('');
@@ -9,7 +10,7 @@ export default function MetaData({event}){
     const [info2,setInfo2]=useState('');
     const [info3,setInfo3]=useState('');
     const [info4,setInfo4]=useState('');
-
+    const event=useSelector(state=>state.eventReducer.event);
 
     function imggalleryPreview1(e){
         setImggallerypreview1('')
@@ -34,7 +35,7 @@ export default function MetaData({event}){
 
 
     useEffect(()=>{
-        if(event){
+        if(event&&event.meta_data){
             setImggallerypreview1(event.meta_data.meta1.img_link)
             setImggallerypreview2(event.meta_data.meta2.img_link)
             setImggallerypreview3(event.meta_data.meta3.img_link)
@@ -46,6 +47,9 @@ export default function MetaData({event}){
         }
     },[event])
 
+
+
+    
     return(
         <>
         <div className='previewimg2' style={{justifyContent:'space-between',width:'100%'}}>

@@ -2,64 +2,34 @@ import {React, useEffect, useRef, useState} from 'react';
 import Select  from 'react-select';
 import Swal from 'sweetalert2';
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { fetchProducts } from '../../Redux/Admin/products';
+import { fetchCategories } from '../../Redux/Admin/categories';
 
 export default function PopupEvent({selected2,setSelected2}){
     const [options,setOptions]=useState([]);
     const [imggallerypreview,setImggallerypreview]=useState('');
-    const cancelalert=useRef(true)
+    const cancelalert=useRef(true);
+    const dispatch=useDispatch();
 
     const loadProducts=()=>{
-        axios.get('http://localhost:80/products/getProducts')
-        .then(res=>{
-            let response=res.data.data;
-            if(!Array.isArray(response)){
-                Swal.fire(
-                    'Error After Fetch!',
-                    `Error Occured: ${response}`,
-                    'warning'
-                  )
-            }else{
-               response.forEach(option=>{
-                setOptions(oldOption=>[...oldOption,{value:`product/${option.slug}`, label:`${option.name} (Product)`}])
-               })
-
-            }
-        }).catch(err=>{
-            Swal.fire(
-                'Error At Axios2!',
-                `Error Occured: ${err}`,
-                'warning'
-              )
-        })
+        dispatch(fetchProducts())
+        .then(response=>{
+               response.payload.forEach(option=>{
+                setOptions(oldOption=>[...oldOption,{value:`${option.slug}`, label:`${option.name} (Product)`}])
+               });
+            });
     }
-
 
     const loadCategories=()=>{
-        axios.get('http://localhost:80/categories/getcategories')
-        .then(res=>{
-            let response=res.data.data;
-            //console.log(response);
-            if(response==='Error Occured'){
-                Swal.fire(
-                    'Error After Fetch!',
-                    `Error Occured: ${response}`,
-                    'warning'
-                  )
-            }else{
-               response.forEach(option=>{
-                setOptions(oldOption=>[...oldOption,{value:`products/${option.slug}`, label:`${option.name} (category)`}])
+        dispatch(fetchCategories())
+        .then(response=>{
+               response.payload.forEach(option=>{
+                setOptions(oldOption=>[...oldOption,{value:`${option.slug}`, label:`${option.name} (category)`}])
                })
 
-            }
-        }).catch(err=>{
-            Swal.fire(
-                'Error At Axios2!',
-                `Error Occured: ${err}`,
-                'warning'
-              )
-        })
+            });
     }
-
 
     function imggalleryPreview(e){
         setImggallerypreview('')
@@ -108,25 +78,9 @@ export default function PopupEvent({selected2,setSelected2}){
             onChange={(e)=>(setSelected2(e))}
             isSearchable={true}
             />
-            {/* style at adminaddcateg.scss */}
-            {/* <select>
-                {options.map((option,i)=>{
-                    return <option value={option.value}>{option.label}</option>
-                })}
-            </select> */}
             <p>Select Category or product where the user will be directed to after clicking View on the Pop Up Event.</p>
             </div>
         </div>
-        {/* <div className='admineditnamecon'>
-        <div className='admineditname'>
-            <p>Valid from</p>
-            <input type='datetime-local' name='start'/>
-        </div>
-        <div className='admineditname'>
-            <p>to</p>
-            <input type='datetime-local' name='end'/>
-        </div>
-        </div> */}
         </>
     )
 }

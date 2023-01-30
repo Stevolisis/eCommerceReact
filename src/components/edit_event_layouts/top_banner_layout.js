@@ -1,8 +1,9 @@
 import {React, useEffect, useState} from 'react';
+import { useSelector } from 'react-redux';
 
-export default function TopBanner({event}){
+export default function TopBanner(){
     const [imggallerypreview,setImggallerypreview]=useState();
-
+    const event=useSelector(state=>state.eventReducer.event);
 
     function imggalleryPreview(e){
         setImggallerypreview('')
@@ -10,7 +11,7 @@ export default function TopBanner({event}){
     }
 
     useEffect(()=>{
-        setImggallerypreview(event && event.top_banner.img_link)
+        setImggallerypreview(event && event.top_banner && event.top_banner.img_link)
     },[event])
 
     return(

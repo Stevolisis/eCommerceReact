@@ -2,63 +2,35 @@ import {React, useEffect, useRef, useState} from 'react';
 import Select  from 'react-select';
 import Swal from 'sweetalert2';
 import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchProducts } from '../../Redux/Admin/products';
+import { fetchCategories } from '../../Redux/Admin/categories';
 
-export default function PopupEvent({event,selected,setSelected}){
+export default function PopupEvent({selected,setSelected}){
     const [options,setOptions]=useState([]);
     const [message,setMessage]=useState('');
     const [imggallerypreview,setImggallerypreview]=useState('');
     const cancelalert=useRef(true)
+    const event=useSelector(state=>state.eventReducer.event);
+    const dispatch=useDispatch();
 
     const loadProducts=()=>{
-        axios.get('http://localhost:80/products/getProducts')
-        .then(res=>{
-            let response=res.data.data;
-            if(!Array.isArray(response)){
-                Swal.fire(
-                    'Error After Fetch!',
-                    `Error Occured: ${response}`,
-                    'warning'
-                  )
-            }else{
-               response.forEach(option=>{
-                setOptions(oldOption=>[...oldOption,{value:`product/${option.slug}`, label:`${option.name} (Product)`}])
-               })
-
-            }
-        }).catch(err=>{
-            Swal.fire(
-                'Error At Axios2!',
-                `Error Occured: ${err}`,
-                'warning'
-              )
-        })
+        dispatch(fetchProducts())
+        .then(response=>{
+               response.payload.forEach(option=>{
+                setOptions(oldOption=>[...oldOption,{value:`${option.slug}`, label:`${option.name} (Product)`}])
+               });
+            });
     }
 
-
     const loadCategories=()=>{
-        axios.get('http://localhost:80/categories/getcategories')
-        .then(res=>{
-            let response=res.data.data;
-            //console.log(response);
-            if(response==='Error Occured'){
-                Swal.fire(
-                    'Error After Fetch!',
-                    `Error Occured: ${response}`,
-                    'warning'
-                  )
-            }else{
-               response.forEach(option=>{
-                setOptions(oldOption=>[...oldOption,{value:`products/${option.slug}`, label:`${option.name} (category)`}])
+        dispatch(fetchCategories())
+        .then(response=>{
+               response.payload.forEach(option=>{
+                setOptions(oldOption=>[...oldOption,{value:`${option.slug}`, label:`${option.name} (category)`}])
                })
 
-            }
-        }).catch(err=>{
-            Swal.fire(
-                'Error At Axios2!',
-                `Error Occured: ${err}`,
-                'warning'
-              )
-        })
+            });
     }
 
     function imggalleryPreview(e){
@@ -78,12 +50,15 @@ export default function PopupEvent({event,selected,setSelected}){
 
 
     useEffect(()=>{
-        if(event){
+        if(event&&event.pop_up){
             setMessage(event.pop_up.message);
             setImggallerypreview(event.pop_up.img_link);
-            setSelected(oldOption=>[...oldOption,{value:`products/${event.pop_up.link}`, label:event.pop_up.name}])
+            setSelected(oldOption=>[...oldOption,{value:`products/${event.pop_up.slug}`, label:event.pop_up.name}])
         }
     },[event]);
+
+
+
 
     return(
         <>

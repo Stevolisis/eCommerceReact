@@ -1,66 +1,39 @@
 import axios from 'axios';
 import {React, useState, useEffect, useRef} from 'react';
 import { MultiSelect } from 'react-multi-select-component';
+import { useDispatch, useSelector } from 'react-redux';
 import Swal from 'sweetalert2';
+import { fetchCategories } from '../../Redux/Admin/categories';
+import { fetchProducts } from '../../Redux/Admin/products';
 
-export default function MainBanner({event,selected,setSelected,selected2,setSelected2,slides,setSlides}){
+export default function MainBanner({selected,setSelected,selected2,setSelected2,slides,setSlides}){
     const [options,setOptions]=useState([]);
     const [imggallerypreview1,setImggallerypreview1]=useState('');
     const [imggallerypreview2,setImggallerypreview2]=useState('');
     const cancelalert=useRef(true)
+    const event=useSelector(state=>state.eventReducer.event);
+    const dispatch=useDispatch();
 
 
     const loadCategories=()=>{
-        axios.get('http://localhost:80/categories/getcategories')
-        .then(res=>{
-            let response=res.data.data;
-            console.log(response);
-            if(response==='Error Occured'){
-                Swal.fire(
-                    'Error After Fetch!',
-                    `Error Occured: ${response}`,
-                    'warning'
-                  )
-            }else{
-               response.forEach(option=>{
+        dispatch(fetchCategories())
+        .then(response=>{
+               response.payload.forEach(option=>{
                 setOptions(oldOption=>[...oldOption,{value:`products/${option.slug}`, label:`${option.name} (Category)`}])
                })
 
-            }
-        }).catch(err=>{
-            Swal.fire(
-                'Error At Axios2!',
-                `Error Occured: ${err}`,
-                'warning'
-              )
-        })
+            });
     }
 
 
     const loadProducts=()=>{
-        axios.get('http://localhost:80/products/getproducts')
-        .then(res=>{
-            let response=res.data.data;
-            console.log(response);
-            if(response==='Error Occured'){
-                Swal.fire(
-                    'Error After Fetch!',
-                    `Error Occured: ${response}`,
-                    'warning'
-                  )
-            }else{
-               response.forEach(option=>{
+        dispatch(fetchProducts())
+        .then(response=>{
+               response.payload.forEach(option=>{
                 setOptions(oldOption=>[...oldOption,{value:`product/${option.slug}`, label:`${option.name} (Product)`}])
                })
 
-            }
-        }).catch(err=>{
-            Swal.fire(
-                'Error At Axios2!',
-                `Error Occured: ${err}`,
-                'warning'
-              )
-        })
+            });
     }
 
 
@@ -95,20 +68,17 @@ export default function MainBanner({event,selected,setSelected,selected2,setSele
     },[]);
 
     useEffect(()=>{
-        if(event){
+        if(event&&event.main_banner){
         setImggallerypreview1(event.main_banner.banner1.img_link)
         setImggallerypreview2(event.main_banner.banner2.img_link)
         setSelected(oldOption=>[...oldOption,{value:event.main_banner.banner1.slug, label:event.main_banner.banner1.name}]);
         setSelected(oldOption=>[...oldOption,{value:event.main_banner.banner2.slug, label:event.main_banner.banner2.name}]);
-
-        {
-            let slide=[]
-            event.main_banner.slides.forEach(option=>{
-            slide.push(option.img_link)
-            setSelected2(oldOption=>[...oldOption,{value:option.slug, label:option.name}]);
-            });
-            setSlides(slide)
-        }
+        let slide=[]
+        event.main_banner.slides.forEach(option=>{
+        slide.push(option.img_link)
+        setSelected2(oldOption=>[...oldOption,{value:option.slug, label:option.name}]);
+        });
+        setSlides(slide)
         }
 
 

@@ -1,37 +1,22 @@
 import {React, useEffect, useRef, useState} from 'react';
 import { MultiSelect } from 'react-multi-select-component';
-import Swal from 'sweetalert2';
-import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchCategories } from '../../Redux/Admin/categories';
 
-export default function CategoryLayout({event,selected,setSelected}){
+export default function CategoryLayout({selected,setSelected}){
     const [options,setOptions]=useState([]);
     const [banner_color,setBanner_Color]=useState([]);
     const cancelalert=useRef(true);
+    const event=useSelector(state=>state.eventReducer.event);
+    const dispatch=useDispatch();
 
-       const loadCategories=()=>{
-        axios.get('http://localhost:80/categories/getCategories?o')
-        .then(res=>{
-            let response=res.data.data;
-            if(!Array.isArray(response)){
-                Swal.fire(
-                    'Error After Fetch!',
-                    `Error Occured: ${response}`,
-                    'warning'
-                  )
-            }else{
-               response.forEach(option=>{
+    const loadCategories=()=>{
+        dispatch(fetchCategories())
+        .then(response=>{
+               response.payload.forEach(option=>{
                 setOptions(oldOption=>[...oldOption,{value:option._id, label:option.name}])
                })
-               console.log(options)
-
-            }
-        }).catch(err=>{
-            Swal.fire(
-                'Error At Axios2!',
-                `Error Occured: ${err}`,
-                'warning'
-              )
-        })
+            });
     }
 
     useEffect(()=>{
@@ -44,23 +29,20 @@ export default function CategoryLayout({event,selected,setSelected}){
 
 
     useEffect(()=>{
-        if(event){
+        if(event&&event.category_slider){
         setBanner_Color(event.category_slider.banner_color)
         setSelected(oldOption=>[...oldOption,{value:event.category_slider.categories.id, label:event.category_slider.categories.name}]);
-
-        {
-            let slide=[]
-            event.category_slider.categories.forEach(option=>{
-            slide.push({value:option._id, label:option.name})
-            });
-            setSelected(slide);
-        }
-        console.log(selected)
-
+        let slide=[]
+        event.category_slider.categories.forEach(option=>{
+        slide.push({value:option._id, label:option.name})
+        });
+        setSelected(slide);
     }
-
     },[event])
 
+
+
+    
 
     return(
         <>

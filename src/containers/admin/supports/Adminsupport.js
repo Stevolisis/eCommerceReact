@@ -1,7 +1,6 @@
 import {React,useState,useRef, useEffect} from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import axios from 'axios'
 import FaqList from '../../../components/listings/FaqList';
 import { useDispatch } from 'react-redux';
 import { fetchSupport, editSupport} from '../../../Redux/Admin/supports';
@@ -20,8 +19,6 @@ export default function Adminsupport(){
     const [facebookLink,setFacebookLink]=useState('');
     const [twitterLink,setTwitterLink]=useState('');
     const [instagramLink,setInstagramLink]=useState('');
-    const [faqs,setFaqs]=useState([]);
-    const cancelalert=useRef(true);
     const dispatch=useDispatch();
 
 
@@ -48,18 +45,20 @@ export default function Adminsupport(){
         dispatch(fetchSupport())
         .then(res=>{
             let data=res.payload;
-            setImggallerypreview(data.supportImage);
-            console.log(imggallerypreview)
-            setSupportHeader(data.supportHeader);
-            setSupportText(data.supportText);
-            setWhatsappStatus(data.whatsappStatus);
-            setFacebookStatus(data.facebookStatus);
-            setTwitterStatus(data.twitterStatus);
-            setInstagramStatus(data.instagramStatus);
-            setWhatsappLink(data.whatsappLink);
-            setFacebookLink(data.facebookLink);
-            setTwitterLink(data.twitterLink);
-            setInstagramLink(data.instagramLink);
+            if(data){
+                setImggallerypreview(data.supportImage);
+                console.log(imggallerypreview)
+                setSupportHeader(data.supportHeader);
+                setSupportText(data.supportText);
+                setWhatsappStatus(data.whatsappStatus);
+                setFacebookStatus(data.facebookStatus);
+                setTwitterStatus(data.twitterStatus);
+                setInstagramStatus(data.instagramStatus);
+                setWhatsappLink(data.whatsappLink);
+                setFacebookLink(data.facebookLink);
+                setTwitterLink(data.twitterLink);
+                setInstagramLink(data.instagramLink);
+            }
         }).catch(err=>{
             Swal.fire(
                 'Error Occured!!',

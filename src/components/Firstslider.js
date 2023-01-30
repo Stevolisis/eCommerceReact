@@ -3,22 +3,24 @@ import { Link } from 'react-router-dom';
 
 export default function Firstslider({nextslide,prevslide,images,currentslide}){
 
-
 const slides=images.filter((data,i)=>{
-        if(i===currentslide){
-        return data
-        }else{
-        return null
-        }
+    if(i===currentslide){
+    return data
+    }else{
+    return null
+    }
+
     }).map((image,i)=>{
+
     return (
-<Link to='/product' key={i}>
-        <div className='slidebanner' 
-        style={{backgroundImage:`url(${image.url})`,
-        backgroundSize:'cover',backgroundRepeat:'no-repeat'}}>
-        </div>
-</Link>
+        <Link to={image.slug} key={i}>
+                <div className='slidebanner' 
+                style={{backgroundImage:`url(${image.img_link})`,
+                backgroundSize:'cover',backgroundRepeat:'no-repeat'}}>
+                </div>
+        </Link>
     )
+
 });
 
 

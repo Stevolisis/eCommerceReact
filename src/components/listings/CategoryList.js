@@ -17,7 +17,7 @@ export default function CategoryList({deletecateg}) {
             <td>{createdAt.split('T')[0]}</td>
             <td><Link to={`/admin/editcategory/${_id}`}><i className='fa fa-edit'/></Link></td>
             <td><button onClick={()=>deletecateg(_id)}>Delete</button></td>
-            <td>{status}</td>
+            <td>{status}</td> 
             </tr>
         )
      })

@@ -7,14 +7,14 @@ import api from "../../Utils/axiosConfig";
 
 export const fetchSupport=createAsyncThunk('adminSupports/fetchSupport',async()=>{
     loading(true);
-    const response=await api.get('support/getsupportforedit')
+    const response=await api.get('support/get-support')
     return response.data.data;
 });
 
 
 export const editSupport=createAsyncThunk('adminSupports/editSupport',async(formData)=>{
     loading(true);
-    const response=await api.put('support/editSupport1',formData)
+    const response=await api.put('support/edit-support',formData)
         return response.data;
 });
 

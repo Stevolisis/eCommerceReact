@@ -1,7 +1,7 @@
 import {React} from 'react';
 import { Link } from 'react-router-dom';
 
-export default function Ads_Listing_layout(){
+export default function Ads_Listing_layout({data}){
 
     return(
     <>
@@ -11,26 +11,18 @@ export default function Ads_Listing_layout(){
         <div className='section4'>
         <div className='midbannercon'>
 
+
+        {data.ads_listing.map(ads=>{
+            return (
         <div className='midbanner'>
-        <Link to='/product'>
-        <img src='/media3/advert4.jpg' alt='midbanner' /> 
+        <Link to={ads.slug}>
+        <img src={ads.img_link} alt={ads.name} /> 
         </Link>
-        </div>
-        <div className='midbanner'>
-        <Link to='/product'>
-        <img src='/media3/advert5.jpg' alt='midbanner' />
-        </Link>
-        </div>
-        <div className='midbanner'>
-        <Link to='/product'>
-        <img src='/media3/nniva_advert.jpg' alt='midbanner' />
-        </Link>
-        </div>
-        <div className='midbanner'>
-        <Link to='/product'>
-        <img src='/media3/advert7.jpg' alt='midbanner' />
-        </Link>
-        </div>
+        </div>                
+            )
+
+        })
+        }
         </div>
         </div>
 

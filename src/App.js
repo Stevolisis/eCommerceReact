@@ -104,8 +104,9 @@ function App() {
       <Route path='/' element={<Index />} />
       <Route path='/index2' element={<Index2 />} />
         <Route path='/passwordReset/:passwordResetLink' element={<PasswordReset />} />
-        <Route path='/products' element={<Products />} />
-        <Route path='/product' element={<Product />} />
+        <Route path='/category/:id' element={<Products />} />
+        <Route path='/products/:id' element={<Products />} />
+        <Route path='/product/:id' element={<Product />} />
         <Route path='cart' element={<Cart />} />
         <Route path='checkout' element={<Checkout />} />
         <Route path='help' element={<Help />} />

@@ -3,95 +3,46 @@ import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { ReactSortable } from "react-sortablejs";
 import api from '../../../Utils/axiosConfig';
+import { fetchEvents, deleteEvent, reorderEvent, getEvents } from '../../../Redux/Admin/events';
+import { useDispatch, useSelector } from 'react-redux';
 
 export default function Admineventcoupon(){
     const navigate=useNavigate();
     const [order, setOrder] = useState([]);
     const cancelalert=useRef(true)
+    const dispatch=useDispatch();
+    const events=useSelector(getEvents);
 
 
-       const deletespec2=((id)=>{
-        Swal.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
-            icon: 'question',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
+    const delete_event=((id)=>{
+      Swal.fire({
+          title: 'Are you sure?',
+          text: "Confirm Action On Event",
+          icon: 'question',
+          showCancelButton: true,
+          confirmButtonColor: '#5972b9',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Yes, Delete it!'
           }).then((result) => {
-            if (result.isConfirmed) {
-              let formData=new FormData();
-              formData.append('id',id)
-              api.post('events/delete-event',formData)
-              .then(res=>{
-                let status=res.data.status;
-                  if(status==='success'){
-                    Swal.fire(
-                      'Deleted!',
-                      'Event Deleted.',
-                      'success'
-                    )
-                    loadEvents();
-                  }else{
-                    Swal.fire(
-                      'Error Occured',
-                      status,
-                      'warning'
-                    )
-                  }
-              }).catch(err=>{
-                Swal.fire(
-                  'Error Occured',
-                  err.message,
-                  'error'
-                )
-              })
-            }
-          })
-       })
-
-
-      //  function move(array, from, to) {
-      //   if( to === from ) return array;
-      
-      //   var target = array[from];                         
-      //   var increment = to < from ? -1 : 1;
-      
-      //   for(var k = from; k !== to; k += increment){
-      //     array[k] = array[k + increment];
-      //   }
-      //   array[to] = target;
-      //   return array;
-      // }
+          if (result.isConfirmed) {
+              dispatch(deleteEvent(id))
+              loadEvents();
+                
+          }
+      });
+  })
 
 
       const loadEvents=()=>{
-        api.get('events/get-events')
-        .then(res=>{
-          let status=res.data.status;
-          let data=res.data.data;
-            if(status!=='success'){
-                Swal.fire(
-                    'Error Occured',
-                    status,
-                    'warning'
-                  )
-            }else{
-              let eventOrder=[];
-               data.forEach(event=>{
-                eventOrder.push({id:event._id,name:event.name,title:event.title,type:event.type,status:event.status})
-               })
-              setOrder(eventOrder)
-            }
-        }).catch(err=>{
-            Swal.fire(
-                'Error At api2!',
-                err.message,
-                'error'
-              )
+        dispatch(fetchEvents())
+        .then(order2=>{
+          let eventOrder=[];
+          order2.payload.forEach(event=>{
+            eventOrder.push({id:event._id,name:event.name,title:event.title,type:event.type,status:event.status})
+           })
+          setOrder(eventOrder)
         })
-    }
+      }
 
 
     function saveSortedArr(){
@@ -105,43 +56,22 @@ export default function Admineventcoupon(){
         confirmButtonText: 'Yes, Reorder it!'
       }).then((result) => {
         if (result.isConfirmed) {
-          api.post('events/reorder-events',{order:order})
-          .then(res=>{
-            let status=res.data.status;
-
-            if(status==='success'){
-                Swal.fire(
-                  'Reordered!',
-                  'Layout Reordered.',
-                  'success'
-                )
-              }else{
-                Swal.fire(
-                  'Error Occured',
-                  status,
-                  'warning'
-                )
-              }
-          }).catch(err=>{
-            Swal.fire(
-              'Error Occured',
-              err.message,
-              'error'
-            )
-          })
+          dispatch(reorderEvent(order));
         }
-      })    }
+      })    
+    }
 
 
 
       useEffect(()=>{
         if(cancelalert.current){
           cancelalert.current=false;
-        loadEvents();
         }
       },[])
 
-
+      useEffect(()=>{
+        loadEvents();
+      },[dispatch]);
 
 
     return(
@@ -172,14 +102,14 @@ export default function Admineventcoupon(){
             </tr>
 </tbody>
 
-          <ReactSortable tag="tbody" list={order} setList={setOrder} handle='.handler'>
+          <ReactSortable tag="tbody" list={order} setList={setOrder} handle='.handler' onChange={console.log()}>
           {order.map((item) => (
           <tr key={item.id} >
             <td className='handler' style={{cursor:"grab",textAlign:'center'}}><i className='fa fa-bars'/></td>
             <td>{item.name}</td>
             <td>{item.type}</td>
             <td><Link to={`/admin/editevent/${item.type}-${item.id}`}><i className='fa fa-edit'/></Link></td>
-            <td><button onClick={()=>deletespec2(item.id)}>Delete</button></td>
+            <td><button onClick={()=>delete_event(item.id)}>Delete</button></td>
             <td>{item.status}</td>
           </tr>
           ))}

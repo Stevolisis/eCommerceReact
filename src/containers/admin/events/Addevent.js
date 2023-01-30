@@ -7,7 +7,8 @@ import PopupEvent from '../../../components/event_layouts/popup_layout';
 import CategoryLayout from '../../../components/event_layouts/categories_component_layout';
 import ProductsLayout from '../../../components/event_layouts/products_component_layout';
 import AdsListing from '../../../components/event_layouts/ads_listing_layout';
-import api from '../../../Utils/axiosConfig';
+import { useDispatch } from 'react-redux';
+import { addEvent } from '../../../Redux/Admin/events';
 
 export default function Addevent(){
     const [type,setType]=useState('');
@@ -17,6 +18,20 @@ export default function Addevent(){
     const [selected4,setSelected4]=useState([])
     const [selected5,setSelected5]=useState([])
     const [selected6,setSelected6]=useState([])
+    const dispatch=useDispatch();
+
+    function handleSubmit(e){
+        e.preventDefault();
+        const formData=new FormData(e.target);
+        formData.append('selected',JSON.stringify(selected))
+        formData.append('selected2',JSON.stringify(selected2))
+        formData.append('selected3',JSON.stringify(selected3))
+        formData.append('selected4',JSON.stringify(selected4))
+        formData.append('selected5',JSON.stringify(selected5))
+        formData.append('selected6',JSON.stringify(selected6))
+        dispatch(addEvent(formData))
+    }
+
 
     function viewEventOptions(){
         if(type===''){
@@ -38,35 +53,6 @@ export default function Addevent(){
         }
     }
 
-    function handleSubmit(e){
-        e.preventDefault();
-        const formData=new FormData(e.target);
-        formData.append('selected',JSON.stringify(selected))
-        formData.append('selected2',JSON.stringify(selected2))
-        formData.append('selected3',JSON.stringify(selected3))
-        formData.append('selected4',JSON.stringify(selected4))
-        formData.append('selected5',JSON.stringify(selected5))
-        formData.append('selected6',JSON.stringify(selected6))
-        console.log(e.target)
-        console.log(selected)
-        api.post('events/addevent',formData,{withCredentials:true})
-        .then(res=>{
-            let status=res.data.status;
-           if(status==='success'){
-            Swal.fire(
-                'Successful',
-                'Event Added',
-                'success'
-            )
-           }else{
-            Swal.fire(
-                'Error Occured',
-                status,
-                'info'
-            )
-           }
-        })
-    }
 
 
     return(
