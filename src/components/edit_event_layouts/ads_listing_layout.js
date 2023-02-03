@@ -13,7 +13,7 @@ export default function AdsListing({selected,setSelected,slides,setSlides}){
     const loadCategories=()=>{
         dispatch(fetchCategories())
         .then(response=>{
-            response.payload.forEach(option=>{
+            response.payload.filter(option=>option.status==='active').map(option=>{
             setOptions(oldOption=>[...oldOption,{value:`${option.slug}`, label:`${option.name} (Category)`}])
 
             });
@@ -23,7 +23,7 @@ export default function AdsListing({selected,setSelected,slides,setSlides}){
     const loadProducts=()=>{
         dispatch(fetchProducts())
         .then(response=>{
-               response.payload.forEach(option=>{
+               response.payload.filter(option=>option.status==='active').map(option=>{
                 setOptions(oldOption=>[...oldOption,{value:`${option.slug}`, label:`${option.name} (Product)`}])
                })            
         })

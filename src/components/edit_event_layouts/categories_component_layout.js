@@ -13,7 +13,7 @@ export default function CategoryLayout({selected,setSelected}){
     const loadCategories=()=>{
         dispatch(fetchCategories())
         .then(response=>{
-               response.payload.forEach(option=>{
+               response.payload.filter(option=>option.status==='active').map(option=>{
                 setOptions(oldOption=>[...oldOption,{value:option._id, label:option.name}])
                })
             });

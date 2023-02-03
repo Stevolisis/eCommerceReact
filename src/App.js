@@ -87,6 +87,7 @@ import MainLoader from './Loaders/MainLoader';
 
 //------------Loader Styles------------
 import './Loaders/styles/mainLoader.scss';
+import ScrollToTop from './components/Scroll-To-Top';
 
 
 
@@ -99,13 +100,15 @@ function App() {
 <>
  <MainLoader/> 
     <BrowserRouter>
+    <ScrollToTop/>
+
       <Routes>  
       {/* -------------Main Route------------- */}
       <Route path='/' element={<Index />} />
       <Route path='/index2' element={<Index2 />} />
         <Route path='/passwordReset/:passwordResetLink' element={<PasswordReset />} />
-        <Route path='/category/:id' element={<Products />} />
-        <Route path='/products/:id' element={<Products />} />
+        <Route path='/:category/:slug' element={<Products />} />
+        {/* <Route path='/products/:slug' element={<Products />} /> */}
         <Route path='/product/:id' element={<Product />} />
         <Route path='cart' element={<Cart />} />
         <Route path='checkout' element={<Checkout />} />

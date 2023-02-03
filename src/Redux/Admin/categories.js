@@ -57,7 +57,7 @@ const categorySlice=createSlice({
             }else if(payload==='descend'){
                 return {...state,categories:[...state.filterBackup].sort((a,b)=>a._id < b._id ? -1:1)}
             }else if(payload==='mostProduct'){
-                return {...state,categories:[...state.filterBackup].sort((a,b)=>a.products < b.products ? 1:-1)}
+                return {...state,categories:[...state.filterBackup].sort((a,b)=>a.product < b.product ? 1:-1)}
             }else if(payload==='active'){
                 return {...state,categories:[...state.filterBackup].filter(item=>item.status==='active')}
             }else if(payload==='inactive'){

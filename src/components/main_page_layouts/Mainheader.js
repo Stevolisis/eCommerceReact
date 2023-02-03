@@ -1,15 +1,34 @@
+import { useEffect } from 'react';
 import {React}from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import Searchbar from './Searchbar';
+import { getCategory } from '../../Redux/Main/mainRedux';
+import Searchbar from '../Searchbar';
+import $ from 'jquery';
 
-export default function MainContainer({route,setTogglefilter,togglefilter,top_banner_img}){
+export default function MainContainer({route,name,setTogglefilter,togglefilter,data}){
+    const categ=useSelector(getCategory);
+
+    // useEffect(()=>{
+    //     $(".headercon").css("top", $(window).scrollTop());
+    // }) 
+
+
+
     return(
         <div className='headercon'>
 
-
+{data&& data.map(layout=>{
+ if(layout.type==='top_banner'){
+   return <>
         <div className='headerAdsCon'>
-            <img src={top_banner_img} alt='headerAds'/>
-        </div>
+            <img src={layout.top_banner.img_link} alt='headerAds'/>
+        </div>   
+   </>
+}
+})
+}
+
 
 
 
@@ -18,12 +37,12 @@ export default function MainContainer({route,setTogglefilter,togglefilter,top_ba
 
 <div className='header2'>
     <div className='categoryspace2'>
-    <h2><Link to='/'><img src='https://ecommerce.stephcom.com.ng/favicon.svg' alt='Logo'/> GrandProSales </Link></h2>
+    <h2><Link to='/'><img src='https://ecommerce.stephcom.com.ng/favicon.svg' alt=''/> GrandProSales </Link></h2>
     
     {route==='products'? 
     <div className='currentcateg' style={{display:'block'}}>
     <i className='fa fa-caret-right ' />
-    <span>Computers and Tablets</span>
+    <span>{categ&&categ.name}</span>
     </div>
     :''}
 
@@ -42,11 +61,11 @@ export default function MainContainer({route,setTogglefilter,togglefilter,top_ba
 
 <div className='header'>
     <div className='categoryspace'>
-    <h2><Link to='/'><img src='https://ecommerce.stephcom.com.ng/favicon.svg' alt='Logo'/> GrandProSales </Link></h2>
+    <h2><Link to='/'><img src='/favicon.svg' alt=''/> GrandProSales </Link></h2>
     {route==='products'? 
     <div className='currentcateg' style={{display:'block'}}>
     <i className='fa fa-caret-right ' />
-    <span>Computers and Tablets</span>
+    <span>{categ&&categ.name}</span>
     </div>
 :''}
     </div>

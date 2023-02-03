@@ -15,7 +15,7 @@ export default function PopupEvent({selected2,setSelected2}){
     const loadProducts=()=>{
         dispatch(fetchProducts())
         .then(response=>{
-               response.payload.forEach(option=>{
+               response.payload.filter(option=>option.status==='active').map(option=>{
                 setOptions(oldOption=>[...oldOption,{value:`${option.slug}`, label:`${option.name} (Product)`}])
                });
             });
@@ -24,7 +24,7 @@ export default function PopupEvent({selected2,setSelected2}){
     const loadCategories=()=>{
         dispatch(fetchCategories())
         .then(response=>{
-               response.payload.forEach(option=>{
+               response.payload.filter(option=>option.status==='active').map(option=>{
                 setOptions(oldOption=>[...oldOption,{value:`${option.slug}`, label:`${option.name} (category)`}])
                })
 

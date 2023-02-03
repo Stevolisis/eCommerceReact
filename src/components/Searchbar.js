@@ -2,6 +2,7 @@ import {React,useEffect,useState} from 'react';
 
 export default function Searchbar({route,setTogglefilter,togglefilter}){
     const [filterStatus,setfilterStatus]=useState(false);
+    const [data,setData]=useState([{info:'Nice One'},{info:'e.target.value'},{info:'e.target.value'}]);
 
     useEffect(()=>{
         if(route==='products' && window.innerWidth < 750){
@@ -10,7 +11,11 @@ export default function Searchbar({route,setTogglefilter,togglefilter}){
             setfilterStatus(false)
         }
         console.log('What Now!!')
-    },[window.innerWidth])
+    },[window.innerWidth]);
+
+    // function addtoData(e){
+    //     setData(e)
+    // }
 
 
     
@@ -37,11 +42,11 @@ export default function Searchbar({route,setTogglefilter,togglefilter}){
 
 
 
-
-        {/* <div class="result-container">
-        <div>Hello World</div>
-        <div>Hello World</div>
-        <div>Hello World</div>
+{/* 
+        <div class="result-container">
+            {data&&data.map((list,i)=>{
+                return <div key={i}>{list.info}</div>
+            })}
         </div> */}
         
         </div>

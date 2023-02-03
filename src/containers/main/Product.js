@@ -6,7 +6,7 @@ import Swal from 'sweetalert2';
 // import { faHeart,faBell,faStar } from '@fortawesome/free-regular-svg-icons'
 // import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import Ratings from '../../components/Ratings';
-import Mainheader from '../../components/Mainheader'
+import Mainheader from '../../components/main_page_layouts/Mainheader';
 import Mainfooter from '../../components/Mainfooter'
 
 export default function Product(){

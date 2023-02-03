@@ -1,7 +1,7 @@
 import {React} from 'react'
 import { Link,useNavigate } from 'react-router-dom'
 import Swal from 'sweetalert2';
-import Mainheader from '../../components/Mainheader'
+import Mainheader from '../../components/main_page_layouts/Mainheader';
 import Mainfooter from '../../components/Mainfooter'
 
 export default function Cart(){

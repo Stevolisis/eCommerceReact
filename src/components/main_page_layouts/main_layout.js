@@ -7,20 +7,23 @@ import Firstslider from '../Firstslider';
 
 export default function Main_layout({images}){
     const [currentslide,setCurrentslide]=useState(0);
+
+    
     const nextslide=useCallback(()=>{
-        setCurrentslide(currentslide===images.length-1 ? 0 : currentslide+1)
-      },[currentslide,images.length])
+        setCurrentslide(currentslide===images.slides.length-1 ? 0 : currentslide+1)
+      },[currentslide,images.slides.length])
     
     
     const prevslide=useCallback(()=>{
-        setCurrentslide(currentslide===0 ? images.length-1 : currentslide-1);
-    },[currentslide,images.length])
+        setCurrentslide(currentslide===0 ? images.slides.length-1 : currentslide-1);
+    },[currentslide,images.slides.length])
     
 
     useEffect(()=>{
-        setTimeout(() => {
+        const resetVal=setTimeout(() => {
             nextslide();
         }, 3000);
+       return ()=> clearTimeout(resetVal) ;
     },[currentslide,nextslide]);
         
 

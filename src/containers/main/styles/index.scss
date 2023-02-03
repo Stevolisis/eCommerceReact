@@ -24,7 +24,7 @@ align-items: center;
 
 .submain{
     width:90vw; 
-    margin-top: 132px;
+    margin-top: 12px;
 }
 
 .banner{
@@ -40,7 +40,8 @@ margin-bottom: 30px;
 
 .headercon{
     width: 100%;
-    position: fixed;
+    position: sticky;
+    top: 0;
     z-index: 200;
     background: $color40;
     box-shadow: 0 1px 2px 0 rgba(0,0,0,.2);
@@ -625,7 +626,7 @@ display: none !important;
  
     .submain{
         width:95vw;
-        margin-top: 151px;
+        margin-top: 11px;
     }
  
     

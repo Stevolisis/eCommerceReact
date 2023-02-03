@@ -10,7 +10,8 @@ export default function Addsupport(){
 
     function handleSubmit(e){
         e.preventDefault();
-        const formData=new FormData(e.target)
+        const formData=new FormData(e.target);
+        formData.append('answer',editorRef.current.getContent());
         dispatch(addFaq(formData))
     }
 

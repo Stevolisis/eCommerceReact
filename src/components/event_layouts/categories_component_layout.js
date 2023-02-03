@@ -2,37 +2,25 @@ import {React, useEffect, useRef, useState} from 'react';
 import { MultiSelect } from 'react-multi-select-component';
 import Swal from 'sweetalert2';
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { fetchCategories } from '../../Redux/Admin/categories';
 
 export default function CategoryLayout({selected,setSelected}){
     const [options,setOptions]=useState([]);
     const cancelalert=useRef(true);
+    const dispatch=useDispatch();
 
-       const loadCategories=()=>{
-        axios.get('http://localhost:80/categories/getCategories?o')
-        .then(res=>{
-            let response=res.data.data;
-            if(!Array.isArray(response)){
-                Swal.fire(
-                    'Error After Fetch!',
-                    `Error Occured: ${response}`,
-                    'warning'
-                  )
-            }else{
-               response.forEach(option=>{
-                console.log(option)
+
+    
+    const loadCategories=()=>{
+        dispatch(fetchCategories())
+        .then(response=>{
+               response.payload.filter(option=>option.status==='active').map(option=>{
                 setOptions(oldOption=>[...oldOption,{value:option._id, label:option.name}])
                })
-               console.log(options)
-
-            }
-        }).catch(err=>{
-            Swal.fire(
-                'Error At Axios2!',
-                `Error Occured: ${err}`,
-                'warning'
-              )
-        })
+            });
     }
+
 
     useEffect(()=>{
         if(cancelalert.current){

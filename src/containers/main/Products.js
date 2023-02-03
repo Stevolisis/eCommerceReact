@@ -1,14 +1,28 @@
 import {React, useState} from 'react'
-import { useNavigate } from 'react-router-dom';
+import {  useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import Mainheader from '../../components/Mainheader'
+import Mainheader from '../../components/main_page_layouts/Mainheader';
 import Mainfooter from '../../components/Mainfooter'
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { fetchCategory, fetchEvent, filterProducts } from '../../Redux/Main/mainRedux';
+import Category_products_Listing_layout from '../../components/main_page_layouts/category_products_listing_layout';
 
 export default function Products(){
-   const navigate=useNavigate();
    const [togglefilter,setTogglefilter]=useState(false);
+   const dispatch=useDispatch();
+   const {category}=useParams();
+   const {slug}=useParams();
 
-const Toast = Swal.mixin({
+
+
+   useEffect(()=>{
+    if(category==='category') dispatch(fetchCategory(category+'***'+slug));
+    if(category==='products') dispatch(fetchEvent(category+'***'+slug));
+   },[]);
+
+
+   const Toast = Swal.mixin({
     toast: true,
     position: 'top-end',
     showConfirmButton: false,
@@ -19,11 +33,12 @@ const Toast = Swal.mixin({
       toast.addEventListener('mouseleave', Swal.resumeTimer)
     }
   })
+
 const addcart=(()=>{
 Toast.fire({
     icon: 'success',
     title: 'Product added to cart'
-  })
+})
 })
 
 
@@ -50,11 +65,11 @@ Toast.fire({
 
 <div className='sort1'>
  <div className='sortheading'>Sort by</div>
- <div className='sortref'><p>Popularity</p></div>
- <div className='sortref'><p>New in</p></div>
- <div className='sortref'><p>Best Rating</p></div>
- <div className='sortref'><p>Lowest Price</p></div>
- <div className='sortref'><p>Highest Price</p></div>
+ <div className='sortref' onClick={()=>dispatch(filterProducts('popularity'))}><p>Popularity</p></div>
+ <div className='sortref' onClick={()=>dispatch(filterProducts('new in'))}><p>New in</p></div>
+ <div className='sortref' onClick={()=>dispatch(filterProducts('rating'))}><p>Best Rating</p></div>
+ <div className='sortref' onClick={()=>dispatch(filterProducts('lowest price'))}><p>Lowest Price</p></div>
+ <div className='sortref' onClick={()=>dispatch(filterProducts('highest price'))}><p>Highest Price</p></div>
 </div>
 
 <div className='sort1'>
@@ -129,11 +144,11 @@ Toast.fire({
 
 <div className='sort1'>
  <div className='sortheading'>Sort by</div>
- <div className='sortref'><p>Popularity</p></div>
- <div className='sortref'><p>New in</p></div>
- <div className='sortref'><p>Best Rating</p></div>
- <div className='sortref'><p>Lowest Price</p></div>
- <div className='sortref'><p>Highest Price</p></div>
+ <div className='sortref' onClick={()=>dispatch(filterProducts('popularity'))}><p>Popularity</p></div>
+ <div className='sortref' onClick={()=>dispatch(filterProducts('new in'))}><p>New in</p></div>
+ <div className='sortref' onClick={()=>dispatch(filterProducts('rating'))}><p>Best Rating</p></div>
+ <div className='sortref' onClick={()=>dispatch(filterProducts('lowest price'))}><p>Lowest Price</p></div>
+ <div className='sortref' onClick={()=>dispatch(filterProducts('highest price'))}><p>Highest Price</p></div>
 </div>
 
 <div className='sort1'>
@@ -199,217 +214,7 @@ Toast.fire({
 
 
 
-<div className='categproductscon'>
-<div className='categproducts'>
-
-<div className='specialproduct2'>
-
-<div className='specialproductimg2' onClick={()=>navigate('/product')}>
-<div className='discount2'><p>-20%</p></div>
-<div className='productimg2'><img src='/media3/advert6.jpg' alt='productimg' /></div>
-</div>
-
-<div className='specialproductinfo2'>
-
-<div className='productname2'>
-<p>Heinz Salad Cream 285 Kg</p>
-</div>
-
-<div className='productprices2'>
-<span>₦ 500</span> <span>₦ 550</span>
-</div>
-
-<div className='productprices2'>
-    <i className='fa fa-star'/>
-    <i className='fa fa-star'/>
-    <i className='fa fa-star'/>
-    <i className='fa fa-star'/>
-    <i className='fa fa-star'/>
-    <span className='productvolume2'>50 items left</span>
-</div>
-
-<div className='productprices2'>
-<button onClick={()=>addcart()}>ADD TO CART</button>
-</div>
-
-</div>
-
-</div>
-
-
-<div className='specialproduct2'>
-
-<div className='specialproductimg2' onClick={()=>navigate('/product')}>
-<div className='discount2'><p>-20%</p></div>
-<div className='productimg2'><img src='/media3/advert6.jpg' alt='productimg' /></div>
-</div>
-
-<div className='specialproductinfo2'>
-
-<div className='productname2'>
-<p>Heinz Salad Cream 285 Kg</p>
-</div>
-
-<div className='productprices2'>
-<span>₦ 500</span> <span>₦ 550</span>
-</div>
-
-<div className='productprices2'>
-    <i className='fa fa-star'/>
-    <i className='fa fa-star'/>
-    <i className='fa fa-star'/>
-    <i className='fa fa-star'/>
-    <i className='fa fa-star'/>
-    <span className='productvolume2'>50 items left</span>
-</div>
-
-<div className='productprices2'>
-<button onClick={()=>addcart()}>ADD TO CART</button>
-</div>
-
-</div>
-
-</div>
-
-
-<div className='specialproduct2'>
-
-<div className='specialproductimg2' onClick={()=>navigate('/product')}>
-<div className='discount2'><p>-20%</p></div>
-<div className='productimg2'><img src='/media3/advert6.jpg' alt='productimg' /></div>
-</div>
-
-<div className='specialproductinfo2'>
-
-<div className='productname2'>
-<p>Heinz Salad Cream 285 Kg</p>
-</div>
-
-<div className='productprices2'>
-<span>₦ 500</span> <span>₦ 550</span>
-</div>
-
-<div className='productprices2'>
-    <i className='fa fa-star'/>
-    <i className='fa fa-star'/>
-    <i className='fa fa-star'/>
-    <i className='fa fa-star'/>
-    <i className='fa fa-star'/>
-</div>
-
-<div className='productprices2'>
-<button onClick={()=>addcart()}>ADD TO CART</button>
-</div>
-
-</div>
-
-</div>
-
-
-<div className='specialproduct2'>
-
-<div className='specialproductimg2' onClick={()=>navigate('/product')}>
-<div className='discount2'><p>-20%</p></div>
-<div className='productimg2'><img src='/media3/advert6.jpg' alt='productimg' /></div>
-</div>
-
-<div className='specialproductinfo2'>
-
-<div className='productname2'>
-<p>Heinz Salad Cream 285 Kg</p>
-</div>
-
-<div className='productprices2'>
-<span>₦ 500</span> <span>₦ 550</span>
-</div>
-
-<div className='productprices2'>
-    <i className='fa fa-star'/>
-    <i className='fa fa-star'/>
-    <i className='fa fa-star'/>
-    <i className='fa fa-star'/>
-    <i className='fa fa-star'/>
-</div>
-
-<div className='productprices2'>
-<button onClick={()=>addcart()}>ADD TO CART</button>
-</div>
-
-</div>
-
-</div>
-
-
-<div className='specialproduct2'>
-
-<div className='specialproductimg2' onClick={()=>navigate('/product')}>
-<div className='discount2'><p>-20%</p></div>
-<div className='productimg2'><img src='/media3/advert6.jpg' alt='productimg' /></div>
-</div>
-
-<div className='specialproductinfo2'>
-
-<div className='productname2'>
-<p>Heinz Salad Cream 285 Kg</p>
-</div>
-
-<div className='productprices2'>
-<span>₦ 500</span> <span>₦ 550</span>
-</div>
-
-<div className='productprices2'>
-    <i className='fa fa-star'/>
-    <i className='fa fa-star'/>
-    <i className='fa fa-star'/>
-    <i className='fa fa-star'/>
-    <i className='fa fa-star'/>
-</div>
-
-<div className='productprices2'>
-<button onClick={()=>addcart()}>ADD TO CART</button>
-</div>
-
-</div>
-
-</div>
-
-
-<div className='specialproduct2'>
-
-<div className='specialproductimg2' onClick={()=>navigate('/product')}>
-<div className='discount2'><p>-20%</p></div>
-<div className='productimg2'><img src='/media3/advert6.jpg' alt='productimg' /></div>
-</div>
-
-<div className='specialproductinfo2'>
-
-<div className='productname2'>
-<p>Heinz Salad Cream 285 Kg</p>
-</div>
-
-<div className='productprices2'>
-<span>₦ 500</span> <span>₦ 550</span>
-</div>
-
-<div className='productprices2'>
-    <i className='fa fa-star'/>
-    <i className='fa fa-star'/>
-    <i className='fa fa-star'/>
-    <i className='fa fa-star'/>
-    <i className='fa fa-star'/>
-</div>
-
-<div className='productprices2'>
-<button onClick={()=>addcart()}>ADD TO CART</button>
-</div>
-
-</div>
-
-</div>
-
-
-</div>
-</div>
+<Category_products_Listing_layout addcart={addcart}/>
 
 
 

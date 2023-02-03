@@ -18,7 +18,7 @@ export default function Category_slider_layout({data}){
             <div className='slidecategcon'>
 
 
-            {data.category_slider.categories.map((category,i)=>{
+            {data.category_slider.categories.filter(category=>category.status==='active').map((category,i)=>{
                 return (
                 <div className='slidecateg' key={i}>
                 <Link to={category.slug}>

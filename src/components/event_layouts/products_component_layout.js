@@ -1,36 +1,23 @@
 import {React, useEffect, useRef, useState} from 'react';
 import { MultiSelect } from 'react-multi-select-component';
-import Swal from 'sweetalert2';
-import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { fetchProducts } from '../../Redux/Admin/products';
 
 export default function ProductsLayout({selected6,setSelected6}){
     const [options,setOptions]=useState([]);
     const cancelalert=useRef(true);
+    const dispatch=useDispatch();
 
-       const loadProducts=()=>{
-        axios.get('http://localhost:80/products/getProducts')
-        .then(res=>{
-            let response=res.data.data;
-            if(!Array.isArray(response)){
-                Swal.fire(
-                    'Error After Fetch!',
-                    `Error Occured: ${response}`,
-                    'warning'
-                  )
-            }else{
-               response.forEach(option=>{
+
+    const loadProducts=()=>{
+        dispatch(fetchProducts())
+        .then(response=>{
+               response.payload.filter(option=>option.status==='active').map(option=>{
                 setOptions(oldOption=>[...oldOption,{value:option._id, label:option.name}])
                })
-
-            }
-        }).catch(err=>{
-            Swal.fire(
-                'Error At Axios2!',
-                `Error Occured: ${err}`,
-                'warning'
-              )
         })
     }
+
 
     useEffect(()=>{
         if(cancelalert.current){

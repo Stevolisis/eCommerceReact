@@ -1,7 +1,7 @@
 import {React,useState,useEffect,useCallback,useRef} from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import Firstslider from '../../components/Firstslider'
-import Mainheader from '../../components/Mainheader'
+import Mainheader from '../../components/main_page_layouts/main_layout';
 import Mainfooter from '../../components/Mainfooter'
 
 export default function Index(){

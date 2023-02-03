@@ -23,13 +23,13 @@ export default function Products_slider_layout({data}){
 
         <div className='specialcategproducts'>
 
-        {data.product_component.products.map(product=>{
+        {data.product_component.products.filter(product=>product.status==='active').map(product=>{
             return (
                 <>
         <div className='specialproduct'>
         <Link to={product.slug}>
         <div className='specialproductimg'>
-        <div className='discount'><p>{(product.regular_price-product.sale_price)/100}%</p></div>
+        <div className='discount'><p>-{(product.regular_price-product.sale_price)/100}%</p></div>
         <div className='productimg'><img src={product.img_gallery[0]} alt={product.name} /></div>
         </div>
 

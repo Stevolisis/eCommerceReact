@@ -13,7 +13,7 @@ export default function ProductsLayout({selected,setSelected}){
     const loadProducts=()=>{
         dispatch(fetchProducts())
         .then(response=>{
-               response.payload.forEach(option=>{
+               response.payload.filter(product=>product.status==='active').map(option=>{
                 setOptions(oldOption=>[...oldOption,{value:option._id, label:option.name}])
                })
         })

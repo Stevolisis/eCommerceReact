@@ -18,8 +18,8 @@ export default function MainBanner({selected,setSelected,selected2,setSelected2,
     const loadCategories=()=>{
         dispatch(fetchCategories())
         .then(response=>{
-               response.payload.forEach(option=>{
-                setOptions(oldOption=>[...oldOption,{value:`products/${option.slug}`, label:`${option.name} (Category)`}])
+               response.payload.filter(option=>option.status==='active').map(option=>{
+                setOptions(oldOption=>[...oldOption,{value:`${option.slug}`, label:`${option.name} (Category)`}])
                })
 
             });
@@ -29,8 +29,8 @@ export default function MainBanner({selected,setSelected,selected2,setSelected2,
     const loadProducts=()=>{
         dispatch(fetchProducts())
         .then(response=>{
-               response.payload.forEach(option=>{
-                setOptions(oldOption=>[...oldOption,{value:`product/${option.slug}`, label:`${option.name} (Product)`}])
+               response.payload.filter(option=>option.status==='active').map(option=>{
+                setOptions(oldOption=>[...oldOption,{value:`${option.slug}`, label:`${option.name} (Product)`}])
                })
 
             });

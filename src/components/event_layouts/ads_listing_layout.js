@@ -1,64 +1,35 @@
 import {React, useEffect, useState, useRef} from 'react';
 import { MultiSelect } from 'react-multi-select-component';
-import axios from 'axios';
-import Swal from 'sweetalert2';
+import { useDispatch } from 'react-redux';
+import { fetchCategories } from '../../Redux/Admin/categories';
+import { fetchProducts } from '../../Redux/Admin/products';
 
 export default function AdsListing({selected5,setSelected5}){
     const [imggallery,setimggallery]=useState([]);
     const [options,setOptions]=useState([]);
-    const cancelalert=useRef(true)
+    const cancelalert=useRef(true);
+    const dispatch=useDispatch();
 
+    
     const loadCategories=()=>{
-        axios.get('http://localhost:80/categories/getcategories')
-        .then(res=>{
-            let response=res.data.data;
-            console.log(response);
-            if(response==='Error Occured'){
-                Swal.fire(
-                    'Error After Fetch!',
-                    `Error Occured: ${response}`,
-                    'warning'
-                  )
-            }else{
-               response.forEach(option=>{
-                setOptions(oldOption=>[...oldOption,{value:`${option.slug}`, label:`${option.name} (Category)`}])
-               })
+        dispatch(fetchCategories())
+        .then(response=>{
+            response.payload.filter(product=>product.status==='active').map(option=>{
+            setOptions(oldOption=>[...oldOption,{value:`${option.slug}`, label:`${option.name} (Category)`}])
 
-            }
-        }).catch(err=>{
-            Swal.fire(
-                'Error At Axios2!',
-                `Error Occured: ${err}`,
-                'warning'
-              )
-        })
+            });
+        });
     }
 
     const loadProducts=()=>{
-        axios.get('http://localhost:80/products/getproducts')
-        .then(res=>{
-            let response=res.data.data;
-            console.log(response);
-            if(response==='Error Occured'){
-                Swal.fire(
-                    'Error After Fetch!',
-                    `Error Occured: ${response}`,
-                    'warning'
-                  )
-            }else{
-               response.forEach(option=>{
+        dispatch(fetchProducts())
+        .then(response=>{
+               response.payload.filter(product=>product.status==='active').map(option=>{
                 setOptions(oldOption=>[...oldOption,{value:`${option.slug}`, label:`${option.name} (Product)`}])
-               })
-
-            }
-        }).catch(err=>{
-            Swal.fire(
-                'Error At Axios2!',
-                `Error Occured: ${err}`,
-                'warning'
-              )
+               })            
         })
     }
+
 
 
     function imggalleryPreview(e){
