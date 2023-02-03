@@ -75,16 +75,11 @@ export default function Product(){
 <div className='productcon'>
 
 <div className='productimgslidercon'>
-<div className='productimgslider'>
 
-<img src={product.img_gallery&&product.img_gallery[0]} alt='sliderimages' key={product.name}/>
-</div>
-<div className='productimgslidescon'>
 
 
 <ProductSlides/>
 
-</div>
 </div>
 
 <div className='productinfocon'>

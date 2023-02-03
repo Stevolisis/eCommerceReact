@@ -13,6 +13,14 @@ export default function ProductSlides({}){
     }
 
 
+    const slides=product.img_gallery&&product.img_gallery.map((image,i)=>{
+        return (
+        <div key={i} className='productimgslides'>
+        <img src={image} alt={product.name} onClick={()=>moveslide(i)}/>
+        </div>
+        )
+        });
+
     const slide=product.img_gallery&&product.img_gallery.filter((data,i)=>{
         if(i===currentslide){
         return data
@@ -20,8 +28,9 @@ export default function ProductSlides({}){
         return null
         }
     }).map((image,i)=>{
+        console.log('grefwdr',image)
     return (
-     <img src={image.url} alt='sliderimages' key={i}/>
+     <img src={image} alt={product.name} key={i}/>
     )
     });
 
@@ -34,15 +43,16 @@ export default function ProductSlides({}){
 
 
     return(
-        <>{
-            product.img_gallery&&product.img_gallery.map((image,i)=>{
-                return (
-                    <div key={i} className='productimgslides'>
-                    <img src={image} alt={product&&product.name} onClick={()=>moveslide(i)}/>
-                    </div>
-                )
-            })
-        }</>
+        <>
+        <div className='productimgslider'>
+
+            {slide}
+            </div>
+            <div className='productimgslidescon'>
+            {slides}            
+            </div>
+
+        </>
     )
 
 }

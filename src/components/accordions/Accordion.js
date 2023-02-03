@@ -2,6 +2,7 @@ import {React} from 'react';
 import Accordtoggle from './Accordtoggle';
 import Accordtoggle2 from './Accordtoggle2';
 import Reviews from '../Reviews';
+import parse from 'html-react-parser';
 
 export default function Accordion({heading,preshow,children,id,type}){
 

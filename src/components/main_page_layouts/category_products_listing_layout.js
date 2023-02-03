@@ -16,7 +16,7 @@ export default function Category_products_Listing_layout({data,addcart}){
 <div className='categproducts'>
 
 {
-products.map(product=>{
+products.filter(product=>product.status==='active').map(product=>{
 return <>
 <div className='specialproduct2'>
 
