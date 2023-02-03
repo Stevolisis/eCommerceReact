@@ -2,6 +2,7 @@ import {React} from 'react';
 import { useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { getProducts } from '../../Redux/Main/mainRedux';
+import Ratings from '../Ratings';
 
 export default function Category_products_Listing_layout({data,addcart}){
     const navigate=useNavigate();
@@ -35,11 +36,7 @@ return <>
 </div>
 
 <div className='productprices2'>
-    <i className='fa fa-star'/>
-    <i className='fa fa-star'/>
-    <i className='fa fa-star'/>
-    <i className='fa fa-star'/>
-    <i className='fa fa-star'/>
+    {<Ratings value={product.rating}/>}
     <span className='productvolume2'>{product.stock} items left</span>
 </div>
 

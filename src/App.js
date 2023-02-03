@@ -109,7 +109,7 @@ function App() {
         <Route path='/passwordReset/:passwordResetLink' element={<PasswordReset />} />
         <Route path='/:category/:slug' element={<Products />} />
         {/* <Route path='/products/:slug' element={<Products />} /> */}
-        <Route path='/product/:id' element={<Product />} />
+        <Route path='/product/:slug' element={<Product />} />
         <Route path='cart' element={<Cart />} />
         <Route path='checkout' element={<Checkout />} />
         <Route path='help' element={<Help />} />

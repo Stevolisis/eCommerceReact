@@ -1,24 +1,20 @@
 import {React} from 'react';
 
 export default function Ratings({value}){
-    const goldenstars=(()=>{
-        for (let i=0; i < parseInt(value);i++) {
-                return ( 
-                    <>
-                    <i className='fa fa-star' style={{color:'Gold'}}/>
-                    <i className='fa fa-star' style={{color:'Gold'}}/>
-                    <i className='fa fa-star' style={{color:'Gold'}}/>
-                    <i className='fa fa-star' style={{color:'Gold'}}/>
-                    </>
-                );
-        }
-    })
-    return(
-        <>
-    <div className='ratings1'>
-    {goldenstars()}
 
-    </div>
+    
+    return(
+    <>
+        {value==undefined||null?'':
+            [...Array(value)].map(()=>{
+                return <i className='fa fa-star' style={{color:'gold'}}/>
+            })
+            }
+            {value===undefined||null?'':
+            [...Array(5-value)].map(rating=>{
+                return <i className='fa fa-star' style={{color:'lightgray'}}/>
+            })            
+        }
         </>
     )
 }

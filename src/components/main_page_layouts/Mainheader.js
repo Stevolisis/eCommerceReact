@@ -4,35 +4,26 @@ import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getCategory } from '../../Redux/Main/mainRedux';
 import Searchbar from '../Searchbar';
-import $ from 'jquery';
 
 export default function MainContainer({route,name,setTogglefilter,togglefilter,data}){
     const categ=useSelector(getCategory);
-
-    // useEffect(()=>{
-    //     $(".headercon").css("top", $(window).scrollTop());
-    // }) 
 
 
 
     return(
         <div className='headercon'>
 
-{data&& data.map(layout=>{
- if(layout.type==='top_banner'){
-   return <>
-        <div className='headerAdsCon'>
-            <img src={layout.top_banner.img_link} alt='headerAds'/>
-        </div>   
-   </>
-}
-})
-}
+            {data&& data.map(layout=>{
+            if(layout.type==='top_banner'){
 
-
-
-
-
+            return <>
+                    <div className='headerAdsCon'>
+                        <img src={layout.top_banner.img_link} alt='headerAds'/>
+                    </div>   
+            </>
+            }
+            })
+            }
 
 
 <div className='header2'>

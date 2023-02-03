@@ -12,17 +12,25 @@ export const fetchEvents=createAsyncThunk('mainRedux/fetchEvents',async()=>{
     return response.data.data;
 });
 
+export const fetchEvent=createAsyncThunk('mainRedux/fetchEvent',async(slug)=>{
+    loading(true);
+    const response=await api.get(`events/get-event-bySlug/${slug}`)
+    return response.data;
+});
+
 export const fetchCategory=createAsyncThunk('mainRedux/fetchCategory',async(slug)=>{
     loading(true);
     const response=await api.get(`categories/getcategory/${slug}`)
     return response.data;
 });
 
-export const fetchEvent=createAsyncThunk('mainRedux/fetchEvent',async(slug)=>{
+export const fetchProduct=createAsyncThunk('mainRedux/fetchProduct',async(slug)=>{
     loading(true);
-    const response=await api.get(`events/get-event-bySlug/${slug}`)
+    const response=await api.get(`products/getProduct/${slug}`)
     return response.data;
 });
+
+
 
 
 
@@ -30,6 +38,7 @@ export const fetchEvent=createAsyncThunk('mainRedux/fetchEvent',async(slug)=>{
 const initialState={
     events:[],
     category:{},
+    product:{},
     productsListing:[],
     filterBackup:[]
 }
@@ -52,6 +61,15 @@ const mainReduxSlice=createSlice({
             }else{
                 return;
             }
+        },
+        priceRange:(state,{payload})=>{
+            console.log('priceRange',payload);
+            let min=payload.split('***')[0];
+            let max=payload.split('***')[1];
+            return {...state,productsListing:[...state.filterBackup].filter(product=>product.sale_price>=min&&product.sale_price<=max)}
+        },
+        filterRatings:(state,{payload})=>{
+                return {...state,productsListing:[...state.filterBackup].filter(product=>product.rating===parseInt(payload))}
         }
     },
     extraReducers:{
@@ -113,6 +131,29 @@ const mainReduxSlice=createSlice({
                 'error'
             )
         },
+        [fetchProduct.fulfilled]: (state,{payload})=>{
+            loading(false);
+            let status=payload.status;
+            let data=payload.data;
+
+            if(status!=='success' || data==null){
+                Swal.fire(
+                    'Error Occured!',
+                    `${status}`,
+                    'warning'
+                );
+            }
+
+            return {...state,product:payload.data}
+        },
+        [fetchProduct.rejected]: (state,{error})=>{
+            loading(false);
+            Swal.fire(
+                "Error Occured",
+                error.message,
+                'error'
+            )
+        },
     }
 })
 
@@ -122,8 +163,9 @@ const mainReduxSlice=createSlice({
 
 
 
-export const {filterProducts}=mainReduxSlice.actions;
+export const {filterProducts,priceRange,filterRatings}=mainReduxSlice.actions;
 export const getEvents=(state)=>state.mainReduxReducer.events;
 export const getProducts=(state)=>state.mainReduxReducer.productsListing;
 export const getCategory=(state)=>state.mainReduxReducer.category;
+export const getProduct=(state)=>state.mainReduxReducer.product;
 export default mainReduxSlice.reducer;

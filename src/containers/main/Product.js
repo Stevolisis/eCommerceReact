@@ -1,5 +1,5 @@
-import {React,useState} from 'react'
-import { Link } from 'react-router-dom'
+import {React,useState,useEffect} from 'react'
+import { Link, useParams } from 'react-router-dom'
 import Accordion from '../../components/accordions/Accordion'
 import Reviews from '../../components/Reviews'
 import Swal from 'sweetalert2';
@@ -8,46 +8,16 @@ import Swal from 'sweetalert2';
 import Ratings from '../../components/Ratings';
 import Mainheader from '../../components/main_page_layouts/Mainheader';
 import Mainfooter from '../../components/Mainfooter'
+import ProductSlides from '../../components/ProductSlides';
+import { fetchProduct, getProduct } from '../../Redux/Main/mainRedux';
+import { useDispatch, useSelector } from 'react-redux';
 
 export default function Product(){
-    const [currentslide,setCurrentslide]=useState(0);
     const[wishColor,setWishColor]=useState(false);
+    const {slug}=useParams();
+    const dispatch=useDispatch();
+    const product=useSelector(getProduct);
 
-
-    const images=[
-        {url:'/media3/ecommerceGrandPro2.png',link:'/categories',alt:'firstbanner'},
-        {url:'/media3/advert4.jpg',link:'/categories',alt:'firstbanner'},
-        {url:'/media3/advert5.jpg',link:'/categories',alt:'firstbanner'},
-        {url:'/media3/pexel4.jpg',link:'/categories',alt:'firstbanner'},
-        {url:'/media3/pexel4.jpg',link:'/categories',alt:'firstbanner'},
-        {url:'/media3/pexel4.jpg',link:'/categories',alt:'firstbanner'},
-        {url:'/media3/pexel4.jpg',link:'/categories',alt:'firstbanner'},
-        {url:'/media3/pexel6.jpg',link:'/categories',alt:'firstbanner'}
-    ];
-
-    const moveslide=(id)=>{
-        setCurrentslide(id)
-    }
-
-const slide=images.filter((data,i)=>{
-        if(i===currentslide){
-        return data
-        }else{
-        return null
-        }
-    }).map((image,i)=>{
-    return (
-<img src={image.url} alt='sliderimages' key={i}/>
-    )
-});
-
-const slides=images.map((image,i)=>{
-return (
-<div key={i} className='productimgslides'>
-<img src={image.url} alt={image.alt} onClick={()=>moveslide(i)}/>
-</div>
-)
-});
 
 
     const Toast = Swal.mixin({
@@ -83,6 +53,14 @@ return (
     }
 
 
+    useEffect(()=>{
+        dispatch(fetchProduct('product***'+slug));
+    },[]);
+
+
+
+
+
 
     return(
         <>
@@ -98,21 +76,23 @@ return (
 
 <div className='productimgslidercon'>
 <div className='productimgslider'>
-{slide}
+
+<img src={product.img_gallery&&product.img_gallery[0]} alt='sliderimages' key={product.name}/>
 </div>
 <div className='productimgslidescon'>
 
 
-{slides}
+<ProductSlides/>
 
 </div>
 </div>
 
 <div className='productinfocon'>
-<div className='gproductname'><p>Heinz Salad Cream 285 Kg</p></div>
-<div className='gproductcateg'><p>Brand : NIVEA | Similar products from NIVEA</p></div>
+<div className='gproductname'><p>{product.name}</p></div>
+<div className='gproductcateg'><p>Category : {product.category&&product.category.map(categ=> categ.name+' | ')}</p></div>
 <div className='gproductratings'>
-<Ratings value='5' />
+<Ratings value={5} />
+
 
     <div className='gratings2'>
     {/* <FontAwesomeIcon icon={faHeart}/> */}
@@ -121,8 +101,8 @@ return (
     </i>
     </div>
 </div>
-<div className='gproductprice'><span>₦ 500</span> <span>₦ 550</span><span>-20%</span></div>
-<div className='gproductshippinginfo'>+ shipping from ₦ 180 to LEKKI-AJAH (SANGOTEDO)</div>
+<div className='gproductprice'><span>₦ {product.sale_price}</span> <span>₦ {product.regular_price}</span><span>-20%</span></div>
+<div className='gproductshippinginfo'>+ shipping : ₦ {product.shipping} </div>
 <div className='gproductshippinginfo'>
 
 <div className='gproductData'>
@@ -153,38 +133,7 @@ return (
  id='accordioncon'
  type='slide'
  preshow='hidden'
- >
-<h4>NIVEA MEN DEEP</h4> Anti-Perspirant Deodorant Spray with a Black Charcoal formula acts
- powerfully against bacteria and sweat while eliminating body odour with a modern
-  and masculine Dark Wood Fragrance. The effective formula leaves you feeling as 
-  if you have just stepped out of the shower and gives you long-lasting dryness all day. 
-The Spray is the 48 hour deodorant men need to get through the day and is combined with
- a deep and invigorating scent.Specially designed for men, NIVEA's Anti-Perspirant men's
-  deodorant spray protects and cares for your skin during the day with its 
-  anti-bacterial Black Charcoal formula while leaving no black residue on skin 
-  or clothes. 
-Skin tolerance dermatologically approved; the spray is kind to your skin whilst 
-offering great protection from sweat and body odour.
-<br/>
-<br/>
-<br/>
-<h4>Directions:</h4> Apply in the morning or after showering. Shake well before use and then hold the can 15cm from the underarm and spray.
- Do not apply to broken or irritated skin. Allow product to dry completely before dressing.
-Product benefits; 
-
-Anti-Perspirant Deodorant
-Dark Wood Fragrance
-Black Charcoal Formula
-Leaves No Residue
-
-<br/>
-<br/>
-<br/>
-
-<h4>INGREDIENTS</h4>
-Aluminum Chlorohydrate, PPG-15 Stearyl Ether, Steareth-2, Steareth-21, 
-Parfum, Persea Gratissima Oil, Charcoal Powder, Trisodium EDTA, BHT, Linalool, Limonene, Citronellol, Alpha-Isomethyl Ionone, Geraniol
-</Accordion>    
+ >{product.product_details}</Accordion>    
 
 <Accordion 
  heading='Specifications'
@@ -198,6 +147,8 @@ Parfum, Persea Gratissima Oil, Charcoal Powder, Trisodium EDTA, BHT, Linalool, L
 
  </Accordion>
 
+
+
     <Accordion 
     heading='Reviews (6)'
     id='accordioncon3'
@@ -210,6 +161,9 @@ Parfum, Persea Gratissima Oil, Charcoal Powder, Trisodium EDTA, BHT, Linalool, L
 
 
  
+
+
+
 
 <div className='section3'>
 <div className='specialcateg'>
@@ -249,151 +203,6 @@ Parfum, Persea Gratissima Oil, Charcoal Powder, Trisodium EDTA, BHT, Linalool, L
 </Link>
 </div>
 
-
-
-
-<div className='specialproduct'>
-<Link to='/'>
-<div className='specialproductimg'>
-<div className='discount'><p>-20%</p></div>
-<div className='productimg'><img src='/media3/advert6.jpg' alt='productimg' /></div>
-</div>
-
-<div className='specialproductinfo'>
-
-<div className='productname'>
-<p>Heinz Salad Cream 285 Kg</p>
-</div>
-
-<div className='productprices'>
-<span>₦ 500</span> <span>₦ 550</span>
-</div>
-
-
-</div>
-</Link>
-</div>
-
-
-
-
-<div className='specialproduct'>
-<Link to='/'>
-<div className='specialproductimg'>
-<div className='discount'><p>-20%</p></div>
-<div className='productimg'><img src='/media3/advert6.jpg' alt='productimg' /></div>
-</div>
-
-<div className='specialproductinfo'>
-
-<div className='productname'>
-<p>Heinz Salad Cream 285 Kg</p>
-</div>
-
-<div className='productprices'>
-<span>₦ 500</span> <span>₦ 550</span>
-</div>
-
-
-</div>
-</Link>
-</div>
-
-
-
-
-<div className='specialproduct'>
-<Link to='/'>
-<div className='specialproductimg'>
-<div className='discount'><p>-20%</p></div>
-<div className='productimg'><img src='/media3/advert6.jpg' alt='productimg' /></div>
-</div>
-
-<div className='specialproductinfo'>
-
-<div className='productname'>
-<p>Heinz Salad Cream 285 Kg</p>
-</div>
-
-<div className='productprices'>
-<span>₦ 500</span> <span>₦ 550</span>
-</div>
-
-
-</div>
-</Link>
-</div>
-
-
-
-
-<div className='specialproduct'>
-<Link to='/'>
-<div className='specialproductimg'>
-<div className='discount'><p>-20%</p></div>
-<div className='productimg'><img src='/media3/advert6.jpg' alt='productimg' /></div>
-</div>
-
-<div className='specialproductinfo'>
-
-<div className='productname'>
-<p>Heinz Salad Cream 285 Kg</p>
-</div>
-
-<div className='productprices'>
-<span>₦ 500</span> <span>₦ 550</span>
-</div>
-
-
-</div>
-</Link>
-</div>
-
-
-
-<div className='specialproduct'>
-<Link to='/'>
-<div className='specialproductimg'>
-<div className='discount'><p>-20%</p></div>
-<div className='productimg'><img src='/media3/advert6.jpg' alt='productimg' /></div>
-</div>
-
-<div className='specialproductinfo'>
-
-<div className='productname'>
-<p>Heinz Salad Cream 285 Kg</p>
-</div>
-
-<div className='productprices'>
-<span>₦ 500</span> <span>₦ 550</span>
-</div>
-
-
-</div>
-</Link>
-</div>
-
-<div className='specialproduct'>
-<Link to='/'>
-<div className='specialproductimg'>
-<div className='discount'><p>-20%</p></div>
-<div className='productimg'><img src='/media3/advert6.jpg' alt='productimg' /></div>
-</div>
-
-<div className='specialproductinfo'>
-
-<div className='productname'>
-<p>Heinz Salad Cream 285 Kg</p>
-</div>
-
-<div className='productprices'>
-<span>₦ 500</span> <span>₦ 550</span>
-</div>
-
-
-</div>
-</Link>
-</div>
 
 
 

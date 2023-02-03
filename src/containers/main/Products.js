@@ -5,14 +5,18 @@ import Mainheader from '../../components/main_page_layouts/Mainheader';
 import Mainfooter from '../../components/Mainfooter'
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { fetchCategory, fetchEvent, filterProducts } from '../../Redux/Main/mainRedux';
+import { fetchCategory, fetchEvent, filterProducts, filterRatings, priceRange } from '../../Redux/Main/mainRedux';
 import Category_products_Listing_layout from '../../components/main_page_layouts/category_products_listing_layout';
+import Ratings from '../../components/Ratings';
 
 export default function Products(){
-   const [togglefilter,setTogglefilter]=useState(false);
-   const dispatch=useDispatch();
+    const [togglefilter,setTogglefilter]=useState(false);
+    const [min,setMin]=useState(0);
+    const [max,setMax]=useState(0);
+    const dispatch=useDispatch();
    const {category}=useParams();
    const {slug}=useParams();
+   let ry=3;
 
 
 
@@ -59,6 +63,14 @@ Toast.fire({
 <div className='section1categ'>
 
 
+
+
+
+
+
+
+
+
 <div className='filtercon' style={{display: `${togglefilter===true ? 'block' : 'none'}`}}>
 
 <div className='filter'>
@@ -72,65 +84,64 @@ Toast.fire({
  <div className='sortref' onClick={()=>dispatch(filterProducts('highest price'))}><p>Highest Price</p></div>
 </div>
 
-<div className='sort1'>
- <div className='sortheading'>Price ($)</div>
- <div className='sortref'>
-    <input type='number' placeholder='Min'/> - <input type='number' placeholder='Max'/>
- </div>
-</div>
+
 
 <div className='sort2'>
 <div className='sortheading'>Product Rating</div>
 <div className='sortref'>
-    <input type='checkbox'/>
-    <i className='fa fa-star'/>
-    <i className='fa fa-star'/>
-    <i className='fa fa-star'/>
-    <i className='fa fa-star'/>
-    <i className='fa fa-star'/>
+<input name='lk' value='0'  type='radio' id='0star' onChange={(e)=>dispatch(filterRatings(e.target.value))}/>
+    <label htmlFor='0star'><Ratings value={0}/></label>
 </div>
 <div className='sortref'>
-    <input type='checkbox'/>
-    <i className='fa fa-star'/>
-    <i className='fa fa-star'/>
-    <i className='fa fa-star'/>
-    <i className='fa fa-star'/>
-    <i className='fa fa-star'/>
+<input name='lk' value='1'  type='radio' id='1star' onChange={(e)=>dispatch(filterRatings(e.target.value))}/>
+    <label htmlFor='1star'><Ratings value={1}/></label>
 </div>
 <div className='sortref'>
-    <input type='checkbox'/>
-    <i className='fa fa-star'/>
-    <i className='fa fa-star'/>
-    <i className='fa fa-star'/>
-    <i className='fa fa-star'/>
-    <i className='fa fa-star'/>
+<input name='lk' value='2'  type='radio' id='2star' onChange={(e)=>dispatch(filterRatings(e.target.value))}/>
+    <label htmlFor='2star'><Ratings value={2}/></label>
 </div>
 <div className='sortref'>
-    <input type='checkbox'/>
-    <i className='fa fa-star'/>
-    <i className='fa fa-star'/>
-    <i className='fa fa-star'/>
-    <i className='fa fa-star'/>
-    <i className='fa fa-star'/>
+<input name='lk' value='3'  type='radio' id='3star' onChange={(e)=>dispatch(filterRatings(e.target.value))}/>
+    <label htmlFor='3star'><Ratings value={3}/></label>
 </div>
 <div className='sortref'>
-    <input type='checkbox'/>
-    <i className='fa fa-star'/>
-    <i className='fa fa-star'/>
-    <i className='fa fa-star'/>
-    <i className='fa fa-star'/>
-    <i className='fa fa-star'/>
+<input name='lk' value='4'  type='radio' id='4star' onChange={(e)=>dispatch(filterRatings(e.target.value))}/>
+    <label htmlFor='4star'><Ratings value={4}/></label>
+</div>
+<div className='sortref'>
+<input name='lk' value='5'  type='radio' id='5star' onChange={(e)=>dispatch(filterRatings(e.target.value))}/>
+    <label htmlFor='5star'><Ratings value={5}/></label>
 </div>
 </div>
+
+<div className='sort1'>
+ <div className='sortheading'>Price ($)</div>
+ <div className='sortref'>
+    <input type='number' placeholder='Min' value={min} onChange={(e)=>setMin(e.target.value)} /> - <input type='number' placeholder='Max' value={max} onChange={(e)=>setMax(e.target.value)} />
+ </div>
+</div>
+
 
 <div className='sort4'>
- <div className='sortheading'><button>Save</button></div>
+ <div className='sortheading'><button onClick={()=>dispatch(priceRange(min+'***'+max))} >Filter</button></div>
 </div>
 
 
 
 </div>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 <div className='filtercon2'>
@@ -151,59 +162,50 @@ Toast.fire({
  <div className='sortref' onClick={()=>dispatch(filterProducts('highest price'))}><p>Highest Price</p></div>
 </div>
 
-<div className='sort1'>
- <div className='sortheading'>Price ($)</div>
- <div className='sortref'>
-    <input type='number' placeholder='Min'/> - <input type='number' placeholder='Max'/>
- </div>
-</div>
+
+
 
 <div className='sort2'>
 <div className='sortheading'>Product Rating</div>
 <div className='sortref'>
-    <input type='checkbox'/>
-    <i className='fa fa-star'/>
-    <i className='fa fa-star'/>
-    <i className='fa fa-star'/>
-    <i className='fa fa-star'/>
-    <i className='fa fa-star'/>
+<input name='lk' value='0'  type='radio' id='0star' onChange={(e)=>dispatch(filterRatings(e.target.value))}/>
+    <label htmlFor='0star'><Ratings value={0}/></label>
 </div>
 <div className='sortref'>
-    <input type='checkbox'/>
-    <i className='fa fa-star'/>
-    <i className='fa fa-star'/>
-    <i className='fa fa-star'/>
-    <i className='fa fa-star'/>
-    <i className='fa fa-star'/>
+<input name='lk' value='1'  type='radio' id='1star' onChange={(e)=>dispatch(filterRatings(e.target.value))}/>
+    <label htmlFor='1star'><Ratings value={1}/></label>
 </div>
 <div className='sortref'>
-    <input type='checkbox'/>
-    <i className='fa fa-star'/>
-    <i className='fa fa-star'/>
-    <i className='fa fa-star'/>
-    <i className='fa fa-star'/>
-    <i className='fa fa-star'/>
+<input name='lk' value='2'  type='radio' id='2star' onChange={(e)=>dispatch(filterRatings(e.target.value))}/>
+    <label htmlFor='2star'><Ratings value={2}/></label>
 </div>
 <div className='sortref'>
-    <input type='checkbox'/>
-    <i className='fa fa-star'/>
-    <i className='fa fa-star'/>
-    <i className='fa fa-star'/>
-    <i className='fa fa-star'/>
-    <i className='fa fa-star'/>
+<input name='lk' value='3'  type='radio' id='3star' onChange={(e)=>dispatch(filterRatings(e.target.value))}/>
+    <label htmlFor='3star'><Ratings value={3}/></label>
 </div>
 <div className='sortref'>
-    <input type='checkbox'/>
-    <i className='fa fa-star'/>
-    <i className='fa fa-star'/>
-    <i className='fa fa-star'/>
-    <i className='fa fa-star'/>
-    <i className='fa fa-star'/>
+<input name='lk' value='4'  type='radio' id='4star' onChange={(e)=>dispatch(filterRatings(e.target.value))}/>
+    <label htmlFor='4star'><Ratings value={4}/></label>
+</div>
+<div className='sortref'>
+<input name='lk' value='5'  type='radio' id='5star' onChange={(e)=>dispatch(filterRatings(e.target.value))}/>
+    <label htmlFor='5star'><Ratings value={5}/></label>
 </div>
 </div>
 
+
+
+
+<div className='sort1'>
+ <div className='sortheading'>Price ($)</div>
+ <div className='sortref'>
+    <input type='number' placeholder='Min' value={min} onChange={(e)=>setMin(e.target.value)} /> - <input type='number' placeholder='Max' value={max} onChange={(e)=>setMax(e.target.value)} />
+ </div>
+</div>
+
+
 <div className='sort4'>
- <div className='sortheading'><button>Save</button></div>
+ <div className='sortheading'><button onClick={()=>dispatch(priceRange(min+'***'+max))} >Filter</button></div>
 </div>
 
 

@@ -4,6 +4,7 @@
     justify-content: center;
     align-items: center;
     height: 34vw;
+    box-sizing: border-box;
 }
 
 .sub1section1{
@@ -12,13 +13,14 @@
     margin-right: 10px;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     flex-direction: column;
     height: 100%;
 }
 
 .subimage{
     width: 100%;
-    height: 50%;
+    height: 49%;
     box-shadow: 0 1px 2px 0 rgba(0,0,0,.2);
     background: $color40;
     border-radius: 5px;
@@ -32,9 +34,9 @@
     }
 }
 
-.sub1section1 div:nth-of-type(2){
-    margin-top: 10px;
-}
+// .sub1section1 div:nth-of-type(2){
+//     margin-top: 10px;
+// }
 
 
 .sub2section1{
