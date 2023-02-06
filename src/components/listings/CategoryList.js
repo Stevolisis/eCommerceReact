@@ -7,10 +7,10 @@ export default function CategoryList({deletecateg}) {
    const categories=useSelector(getAllCategories);
 
      const categoryLists=categories.map((category,i)=>{
-        let {_id,img_link,name,slug,product,createdAt,status}=category;
+        let {_id,img,name,slug,product,createdAt,status}=category;
         return(
             <tr key={i}>
-            <td><img src={img_link} alt={name}/></td>
+            <td><img src={img.url} alt={name}/></td>
             <td>{name}</td>
             <td>{slug}</td>
             <td>{product}</td>

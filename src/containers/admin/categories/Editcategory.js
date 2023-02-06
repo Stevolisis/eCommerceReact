@@ -45,7 +45,7 @@ export default function Editcategory(){
         let category=res.payload;
         setName(category.name);
         setSlug(category.slug);
-        setImgpreview(category.img_link);
+        setImgpreview(category.img.url);
         setStatus(category.status)
     }).catch(err=>{Swal.fire('Error Occured', `${err.message}`,'error')});
 
