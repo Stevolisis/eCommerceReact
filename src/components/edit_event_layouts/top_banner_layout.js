@@ -11,7 +11,7 @@ export default function TopBanner(){
     }
 
     useEffect(()=>{
-        setImggallerypreview(event && event.top_banner && event.top_banner.img_link)
+        setImggallerypreview(event && event.top_banner && event.top_banner.url)
     },[event])
 
     return(

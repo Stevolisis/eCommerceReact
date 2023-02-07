@@ -17,7 +17,7 @@ export default function ProductList({deleteproduct}) {
 
   return(
   <tr key={i}>
-  <td><img src={img_gallery[0]} alt={name}/></td>
+  <td><img src={img_gallery[0].url} alt={name}/></td>
   <td>{name}</td>
   <td>{stock}</td>
   <td>{sale_price}</td>

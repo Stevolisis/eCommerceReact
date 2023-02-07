@@ -69,13 +69,13 @@ export default function MainBanner({selected,setSelected,selected2,setSelected2,
 
     useEffect(()=>{
         if(event&&event.main_banner){
-        setImggallerypreview1(event.main_banner.banner1.img_link)
-        setImggallerypreview2(event.main_banner.banner2.img_link)
+        setImggallerypreview1(event.main_banner.banner1.img.url)
+        setImggallerypreview2(event.main_banner.banner2.img.url)
         setSelected(oldOption=>[...oldOption,{value:event.main_banner.banner1.slug, label:event.main_banner.banner1.name}]);
         setSelected(oldOption=>[...oldOption,{value:event.main_banner.banner2.slug, label:event.main_banner.banner2.name}]);
         let slide=[]
         event.main_banner.slides.forEach(option=>{
-        slide.push(option.img_link)
+        slide.push(option.img.url)
         setSelected2(oldOption=>[...oldOption,{value:option.slug, label:option.name}]);
         });
         setSlides(slide)

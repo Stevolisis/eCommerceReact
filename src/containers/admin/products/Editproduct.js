@@ -77,7 +77,9 @@ export default function Editproduct(){
         setSale_price(data.sale_price||'');
         setShipping(data.shipping)
         setStatus(data.status||'');
-        setImggallerypreview(data.img_gallery||[]);
+        data.img_gallery.forEach(img=>{
+            setImggallerypreview(oldImg=>[...oldImg,img.url]);
+        });
         setInitialValue(data.product_details)
         data.category.forEach(option=>{
         setSelected(oldOption=>[...oldOption,{value:option.name, label:option.name}]);
