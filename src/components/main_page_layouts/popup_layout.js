@@ -15,7 +15,7 @@ export default function PopUp_layout({data}){
             Swal.fire({
                 title: data.name,
                 text: data.message,
-                imageUrl: data.img.url,
+                imageUrl: data.img&&data.img.url,
                 imageHeight: 230,
                 imageWidth: 540,
                 imageAlt: data.name,
