@@ -15,7 +15,7 @@ const slides=images.filter((data,i)=>{
     return (
         <Link to={image.slug} key={i}>
                 <div className='slidebanner' 
-                style={{backgroundImage:`url(${image.img_link})`,
+                style={{backgroundImage:`url(${image.img.url})`,
                 backgroundSize:'cover',backgroundRepeat:'no-repeat'}}>
                 </div>
         </Link>

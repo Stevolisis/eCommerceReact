@@ -30,7 +30,7 @@ export default function Products_slider_layout({data}){
         <Link to={product.slug}>
         <div className='specialproductimg'>
         <div className='discount'><p>-{(product.regular_price-product.sale_price)/100}%</p></div>
-        <div className='productimg'><img src={product.img_gallery[0]} alt={product.name} /></div>
+        <div className='productimg'><img src={product.img_gallery[0].url} alt={product.name} /></div>
         </div>
 
         <div className='specialproductinfo'>

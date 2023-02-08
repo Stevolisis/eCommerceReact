@@ -32,11 +32,11 @@ export default function Main_layout({images}){
             <div className='section1'>
             <div className='sub1section1'>
             <div className='subimage'>
-            <Link to={images.banner1.slug}><img src={images.banner1.img_link} alt='mainbanner' />
+            <Link to={images.banner1.slug}><img src={images.banner1.img.url} alt='mainbanner' />
             </Link>
             </div>
             <div className='subimage'>
-            <Link to={images.banner2.slug}><img src={images.banner2.img_link} alt='mainbanner' />
+            <Link to={images.banner2.slug}><img src={images.banner2.img.url} alt='mainbanner' />
             </Link>
             </div>
             </div>

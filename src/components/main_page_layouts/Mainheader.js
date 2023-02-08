@@ -18,7 +18,7 @@ export default function MainContainer({route,name,setTogglefilter,togglefilter,d
 
             return <>
                     <div className='headerAdsCon'>
-                        <img src={layout.top_banner.img_link} alt='headerAds'/>
+                        <img src={layout.top_banner.img.url} alt='headerAds'/>
                     </div>   
             </>
             }

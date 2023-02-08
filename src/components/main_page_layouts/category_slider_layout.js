@@ -23,7 +23,7 @@ export default function Category_slider_layout({data}){
                 <div className='slidecateg' key={i}>
                 <Link to={category.slug}>
                 <div className='slidecategimg'>
-                <img src={category.img_link} alt={category.name}/>
+                <img src={category.img&&category.img.url} alt={category.name}/>
                 </div>
     
                 <div className='slidecategname'>

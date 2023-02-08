@@ -22,7 +22,7 @@ return <>
 
 <div className='specialproductimg2' onClick={()=>navigate('/'+product.slug)}>
 <div className='discount2'><p>-{(product.regular_price-product.sale_price)/100}%</p></div>
-<div className='productimg2'><img src={product.img_gallery[0]} alt={product.name} /></div>
+<div className='productimg2'><img src={product.img_gallery[0].url} alt={product.name} /></div>
 </div>
 
 <div className='specialproductinfo2'>

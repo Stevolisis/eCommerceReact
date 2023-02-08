@@ -74,10 +74,12 @@ export default function MainBanner({selected,setSelected,selected2,setSelected2,
         setSelected(oldOption=>[...oldOption,{value:event.main_banner.banner1.slug, label:event.main_banner.banner1.name}]);
         setSelected(oldOption=>[...oldOption,{value:event.main_banner.banner2.slug, label:event.main_banner.banner2.name}]);
         let slide=[]
+        let selectd2=[]
         event.main_banner.slides.forEach(option=>{
         slide.push(option.img.url)
-        setSelected2(oldOption=>[...oldOption,{value:option.slug, label:option.name}]);
+        selectd2.push({value:option.slug, label:option.name});
         });
+        setSelected2(selectd2)
         setSlides(slide)
         }
 

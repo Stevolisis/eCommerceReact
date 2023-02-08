@@ -36,10 +36,10 @@ export default function MetaData(){
 
     useEffect(()=>{
         if(event&&event.meta_data){
-            setImggallerypreview1(event.meta_data.meta1.img_link)
-            setImggallerypreview2(event.meta_data.meta2.img_link)
-            setImggallerypreview3(event.meta_data.meta3.img_link)
-            setImggallerypreview4(event.meta_data.meta4.img_link)
+            setImggallerypreview1(event.meta_data.meta1.img.url)
+            setImggallerypreview2(event.meta_data.meta2.img.url)
+            setImggallerypreview3(event.meta_data.meta3.img.url)
+            setImggallerypreview4(event.meta_data.meta4.img.url)
             setInfo1(event.meta_data.meta1.text)
             setInfo2(event.meta_data.meta2.text)
             setInfo3(event.meta_data.meta3.text)

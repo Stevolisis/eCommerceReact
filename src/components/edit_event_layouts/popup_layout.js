@@ -52,7 +52,7 @@ export default function PopupEvent({selected,setSelected}){
     useEffect(()=>{
         if(event&&event.pop_up){
             setMessage(event.pop_up.message);
-            setImggallerypreview(event.pop_up.img_link);
+            setImggallerypreview(event.pop_up.img.url);
             setSelected(oldOption=>[...oldOption,{value:`products/${event.pop_up.slug}`, label:event.pop_up.name}])
         }
     },[event]);

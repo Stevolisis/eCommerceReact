@@ -52,15 +52,15 @@ export default function AdsListing({selected,setSelected,slides,setSlides}){
 
        useEffect(()=>{
         if(event&&event.ads_listing){
-                let slide=[];
-                let imgSlide=[];
-                event.ads_listing.forEach(option=>{
-                imgSlide.push(option.img_link);
-                slide.push({value:option.slug, label:option.name})
-                });
-                
-                setSlides(imgSlide);
-                setSelected(slide);
+            let slide=[];
+            let imgSlide=[];
+            event.ads_listing.forEach(option=>{
+            imgSlide.push({public_id:option.img.public_id,url:option.img.url});
+            slide.push({value:option.slug, label:option.name})
+            });
+            
+            setSlides(imgSlide);
+            setSelected(slide);
         }
        },[event])
 
@@ -74,7 +74,7 @@ export default function AdsListing({selected,setSelected,slides,setSlides}){
             slides&&slides.map((imgprev,i)=>{
                 return (
             <div className='previewimg' key={i}>
-            <img src={imgprev} alt={imgprev}/>
+            <img src={typeof imgprev=='object' ? imgprev.url : imgprev} alt={imgprev}/>
             </div>
                 )
             })

@@ -16,7 +16,7 @@ export default function Ads_Listing_layout({data}){
             return (
         <div className='midbanner'>
         <Link to={ads.slug}>
-        <img src={ads.img_link} alt={ads.name} /> 
+        <img src={ads.img&&ads.img.url} alt={ads.name} /> 
         </Link>
         </div>                
             )

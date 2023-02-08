@@ -16,7 +16,7 @@ export default function ProductSlides({}){
     const slides=product.img_gallery&&product.img_gallery.map((image,i)=>{
         return (
         <div key={i} className='productimgslides'>
-        <img src={image} alt={product.name} onClick={()=>moveslide(i)}/>
+        <img src={image.url} alt={product.name} onClick={()=>moveslide(i)}/>
         </div>
         )
         });
@@ -30,7 +30,7 @@ export default function ProductSlides({}){
     }).map((image,i)=>{
         console.log('grefwdr',image)
     return (
-     <img src={image} alt={product.name} key={i}/>
+     <img src={image.url} alt={product.name} key={i}/>
     )
     });
 
