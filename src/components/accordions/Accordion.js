@@ -4,7 +4,7 @@ import Accordtoggle2 from './Accordtoggle2';
 import Reviews from '../Reviews';
 import parse from 'html-react-parser';
 
-export default function Accordion({heading,preshow,children,id,type}){
+export default function Accordion({heading,preshow,children,id,type,parsed}){
 
     return(
 <>
@@ -27,7 +27,7 @@ export default function Accordion({heading,preshow,children,id,type}){
 
 <div className={`${id}`} style={{display:'none'}} id='hiddendetails'>
 <div>
-{children}
+{parsed?parse(`${children}`):children}
 </div>
 </div>
 

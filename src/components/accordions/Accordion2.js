@@ -21,6 +21,7 @@ export default function Accordion2({heading,detail,id,type,editdelid,deletefaq})
 <div className={`${id}`} style={{display:'none'}} id='helphidden'>
 <div>
 {parse(detail)}
+dfhgjhkjl
 </div>
 </div>
 </div>

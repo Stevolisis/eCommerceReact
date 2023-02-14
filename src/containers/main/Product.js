@@ -14,6 +14,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 export default function Product(){
     const[wishColor,setWishColor]=useState(false);
+    const[count,setCount]=useState(false);
     const {slug}=useParams();
     const dispatch=useDispatch();
     const product=useSelector(getProduct);
@@ -97,22 +98,23 @@ export default function Product(){
     </div>
 </div>
 <div className='gproductprice'><span>₦ {product.sale_price}</span> <span>₦ {product.regular_price}</span><span>-20%</span></div>
-<div className='gproductshippinginfo'>+ shipping : ₦ {product.shipping} </div>
+<div className='gproductshippinginfo'>{product.shipping&&'+ shipping : ₦'+product.shipping } </div>
+<div className='gproductshippinginfo'>{product.stock&&'+ In Stock : '+product.stock } </div>
 <div className='gproductshippinginfo'>
 
 <div className='gproductData'>
-<div className='quantityCon' style={{boxShadow:'1px 2px transparent',border:'0'}}>
+{/* <div className='quantityCon' style={{boxShadow:'1px 2px transparent',border:'0'}}>
 <select>
 <option>L</option>
 <option>XL</option>
 <option>X</option>
 </select>
-</div>
+</div> */}
 
 <div className='quantityCon'>
-<button>+</button>    
-<span>5</span>    
 <button>-</button>    
+<span>5</span>    
+<button>+</button>    
 </div>
 </div>
 
@@ -128,8 +130,13 @@ export default function Product(){
  id='accordioncon'
  type='slide'
  preshow='hidden'
- >{product.product_details}</Accordion>    
+ parsed={true}>
+ {product.product_details}
+</Accordion>    
 
+
+
+{/* 
 <Accordion 
  heading='Specifications'
  id='accordioncon2'
@@ -140,7 +147,7 @@ export default function Product(){
 <h4>Weight (kg):</h4> 1
 <h4>Shop Type:</h4> Jumia Mall
 
- </Accordion>
+ </Accordion> */}
 
 
 
