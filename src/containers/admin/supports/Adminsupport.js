@@ -46,7 +46,7 @@ export default function Adminsupport(){
         .then(res=>{
             let data=res.payload;
             if(data){
-                setImggallerypreview(data.supportImage);
+                {data.supportImage&&setImggallerypreview(data.supportImage.url)}
                 console.log(imggallerypreview)
                 setSupportHeader(data.supportHeader);
                 setSupportText(data.supportText);
@@ -104,25 +104,30 @@ export default function Adminsupport(){
             </div>
 
             <div className='addcategcon'>
-<form onSubmit={handleSubmit}>
-<div className='usereditadditionalinfocon' style={{display:'flex',alignItems:'center',overflowY:'auto'}}>
-<div className='customercarerecog'>
-<div><img src={imggallerypreview} alt='support Pic'/></div>
-<h2>{supportHeader}</h2>
-<p>{supportText}</p>
-</div>
-<div className='usereditadditionalinfo' >
-<p>Choose image</p>
-<input type='file' name='supportImage' onChange={imggalleryPreview}/>
-<p>Heading 1</p>
-<input type='text' name='supportHeader' value={supportHeader} onChange={(e)=>setSupportHeader(e.target.value)}/>
-<p>heading 2</p>
-<input type='text' name='supportText' value={supportText} onChange={(e)=>setSupportText(e.target.value)}/>
-<div className='usereditbtn' style={{marginTop:'15px'}}>
-</div>
-</div>
 
-</div>
+        <form onSubmit={handleSubmit}>
+        <div className='usereditadditionalinfocon' style={{display:'flex',alignItems:'center',overflowY:'auto'}}>
+        <div className='customercarerecog'>
+        <div><img src={imggallerypreview} alt='support Pic'/></div>
+        <h2>{supportHeader}</h2>
+        <p>{supportText}</p>
+        </div>
+
+        <div className='usereditadditionalinfo' >
+        <p>Choose image</p>
+        <input type='file' name='supportImage' onChange={imggalleryPreview}/>
+
+        <p>Heading 1</p>
+        <input type='text' name='supportHeader' value={supportHeader} onChange={(e)=>setSupportHeader(e.target.value)}/>
+        
+        <p>heading 2</p>
+        <input type='text' name='supportText' value={supportText} onChange={(e)=>setSupportText(e.target.value)}/>
+        <div className='usereditbtn' style={{marginTop:'15px'}}>
+        
+        </div>
+        </div>
+
+        </div>
 
 
         <div className='customercarelinks' >
