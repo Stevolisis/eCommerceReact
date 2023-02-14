@@ -131,8 +131,8 @@ export default function Adminsupport(){
 
 
         <div className='customercarelinks' >
-        <a href={whatsappLink} style={{background:'#128C7E'}} relative="path"><i className='fa fa-whatsapp'/>Whatsapp</a>
-        <a href={facebookLink} style={{background:'#3b5998'}} relative="path"><i className='fa fa-facebook'/>Facebook</a>
+        <Link to={whatsappLink} style={{background:'#128C7E'}} relative="path"><i className='fa fa-whatsapp'/>Whatsapp</Link>
+        <Link to={facebookLink} style={{background:'#3b5998'}} relative="path"><i className='fa fa-facebook'/>Facebook</Link>
         <Link to={twitterLink} style={{background:'#00acee'}}><i className='fa fa-twitter'/>Twitter</Link>
         <Link to={instagramLink} style={{background:'linear-gradient(40deg,#e95950,#bc2a8d)'}}><i className='fa fa-instagram'/>Instagram</Link>
         </div>
