@@ -4,7 +4,6 @@ import { getProduct } from "../Redux/Main/mainRedux";
 
 export default function ProductSlides({}){
     const [currentslide,setCurrentslide]=useState(0);
-    const[images,setImages]=useState([]);
     const product=useSelector(getProduct);
     
 

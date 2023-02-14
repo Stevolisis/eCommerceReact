@@ -1,4 +1,4 @@
-import {React,useState,useEffect} from 'react'
+import {React,useState,useEffect, useReducer} from 'react'
 import { Link, useParams } from 'react-router-dom'
 import Accordion from '../../components/accordions/Accordion'
 import Reviews from '../../components/Reviews'
@@ -14,10 +14,15 @@ import { useDispatch, useSelector } from 'react-redux';
 
 export default function Product(){
     const[wishColor,setWishColor]=useState(false);
-    const[count,setCount]=useState(false);
     const {slug}=useParams();
     const dispatch=useDispatch();
     const product=useSelector(getProduct);
+
+    const [count, setCount] = useReducer((state, action) =>
+        action.type === 'increment'? state < product.stock ? state + 1 
+        : state: action.type === 'decrement'? state > 0 ? state - 1
+        : state: (() => { throw new Error(`Unsupported action type: ${action.type}`) })()
+    , 0);
 
 
 
@@ -87,7 +92,9 @@ export default function Product(){
 <div className='gproductname'><p>{product.name}</p></div>
 <div className='gproductcateg'><p>Category : {product.category&&product.category.map(categ=> categ.name+' | ')}</p></div>
 <div className='gproductratings'>
-<Ratings value={5} />
+    <div className='gproductrating'>
+        <Ratings value={product.rating} />
+    </div>
 
 
     <div className='gratings2'>
@@ -112,9 +119,9 @@ export default function Product(){
 </div> */}
 
 <div className='quantityCon'>
-<button>-</button>    
-<span>5</span>    
-<button>+</button>    
+<button onClick={()=>setCount({ type: 'decrement' })}>-</button>    
+<span>{count}</span>    
+<button onClick={()=>setCount({ type: 'increment' })}>+</button>    
 </div>
 </div>
 
