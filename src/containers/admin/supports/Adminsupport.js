@@ -131,10 +131,10 @@ export default function Adminsupport(){
 
 
         <div className='customercarelinks' >
-        <Link to={whatsappLink} style={{background:'#128C7E'}}><i className='fa fa-whatsapp'/>Whatsapp</Link>
-        <Link to={facebookLink} style={{background:'#3b5998'}}><i className='fa fa-facebook'/>Facebook</Link>
-        <Link to={twitterLink} style={{background:'#00acee'}}><i className='fa fa-twitter'/>Twitter</Link>
-        <Link to={instagramLink} style={{background:'linear-gradient(40deg,#e95950,#bc2a8d)'}}><i className='fa fa-instagram'/>Instagram</Link>
+        <Link to={'/'+whatsappLink} style={{background:'#128C7E'}}><i className='fa fa-whatsapp'/>Whatsapp</Link>
+        <Link to={'/'+facebookLink} style={{background:'#3b5998'}}><i className='fa fa-facebook'/>Facebook</Link>
+        <Link to={'/'+twitterLink} style={{background:'#00acee'}}><i className='fa fa-twitter'/>Twitter</Link>
+        <Link to={'/'+instagramLink} style={{background:'linear-gradient(40deg,#e95950,#bc2a8d)'}}><i className='fa fa-instagram'/>Instagram</Link>
         </div>
         <div className='usereditnumbercon'>
 
