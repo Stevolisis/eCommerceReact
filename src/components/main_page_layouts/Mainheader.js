@@ -28,7 +28,7 @@ export default function MainContainer({route,name,setTogglefilter,togglefilter,d
 
 <div className='header2'>
     <div className='categoryspace2'>
-    <h2><Link to='/'><img src='https://ecommerce.stephcom.com.ng/favicon.svg' alt=''/> GrandProSales </Link></h2>
+    <h2><Link to='/'><img src='https://e-commerce-three-neon.vercel.app/favicon.svg' alt=''/> GrandProSales </Link></h2>
     
     {route==='products'? 
     <div className='currentcateg' style={{display:'block'}}>
