@@ -78,6 +78,7 @@ export default function Product(){
             setDatas({
                 name:'Related Products',
                 product_component:{
+                    banner_color:'#5972b9',
                     products:relProducts
                 }
 
