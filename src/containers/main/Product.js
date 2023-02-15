@@ -128,8 +128,8 @@ export default function Product(){
     </div>
 </div>
 <div className='gproductprice'><span>₦ {product.sale_price}</span> <span>₦ {product.regular_price}</span><span>-20%</span></div>
-<div className='gproductshippinginfo'>{product.shipping&&'+ shipping : ₦'+product.shipping } </div>
-<div className='gproductshippinginfo'>{product.stock&&'+ In Stock : '+product.stock } </div>
+<div className='gproductshippinginfo'><p>{product.shipping&&'+ shipping : ₦'+product.shipping }</p> </div>
+<div className='gproductshippinginfo'><p>{product.stock&&'+ In Stock : '+product.stock }</p> </div>
 <div className='gproductshippinginfo'>
 
 <div className='gproductData'>

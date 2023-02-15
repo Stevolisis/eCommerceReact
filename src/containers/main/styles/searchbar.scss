@@ -1,4 +1,5 @@
 @import './variables2';
+
 .searchcon{
     flex-grow: 2;
     padding: 0 10px;
@@ -8,12 +9,25 @@
 .search{
     display: flex;
     align-items: center;
+    margin-right: 18px;
 
     input{
-        border: 1px solid $color108;
+        border: none;
         padding: 11px 8px;
+        padding-right: 38px !important;
         border-radius: 5px;
-        width: 60%;
+        width: 80%;
+        background: rgb(89, 114, 185,0.2);
+        color: rgb(89, 114, 185);
+    }
+
+    input:focus{
+        outline: none;
+    }
+
+    i{
+        margin-left: -30px;
+        color: rgb(89, 114, 185);
     }
 
     button{
@@ -56,8 +70,7 @@
 
     input{
         padding: 9px 9px;
-        border-radius: 8px;
-        width: calc(100% - 24% - 8px);
+        width: 100%;
         font-size: 13px;
     }
 

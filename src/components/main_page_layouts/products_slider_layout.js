@@ -31,7 +31,7 @@ export default function Products_slider_layout({data,route}){
         return (
             <>
                 <div className='specialproduct'>
-                <Link to={product.slug}>
+                <Link to={'/'+product.slug}>
                 <div className='specialproductimg'>
                 <div className='discount'><p>-{(product.regular_price-product.sale_price)/100}%</p></div>
                 <div className='productimg'><img src={product.img_gallery[0].url} alt={product.name} /></div>
@@ -60,7 +60,7 @@ export default function Products_slider_layout({data,route}){
 
     :
 
-    
+
     data.product_component.products.filter(product=>product.status==='active').map(product=>{
         return (
             <>

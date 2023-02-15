@@ -36,7 +36,7 @@ export default function Searchbar({route,setTogglefilter,togglefilter}){
         </> : <>
         <div className='search'>
         <input type='text' placeholder='Search products,brands and categories...'/>
-        <button>Search</button>
+        <i className='fa fa-search'/>
         </div>        
         </> }
 
