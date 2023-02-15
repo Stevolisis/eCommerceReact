@@ -10,6 +10,7 @@ import Mainheader from '../../components/main_page_layouts/Mainheader';
 import Mainfooter from '../../components/Mainfooter'
 import ProductSlides from '../../components/ProductSlides';
 import { fetchProduct, getProduct } from '../../Redux/Main/mainRedux';
+import { fetchProducts } from '../../Redux/Main/relatedProducts';
 import { useDispatch, useSelector } from 'react-redux';
 
 export default function Product(){
@@ -62,6 +63,12 @@ export default function Product(){
     useEffect(()=>{
         dispatch(fetchProduct('product***'+slug));
     },[]);
+
+    useEffect(()=>{
+        if(product.category){
+            dispatch(fetchProducts(product.category));
+        }
+    },[product]);
 
 
 

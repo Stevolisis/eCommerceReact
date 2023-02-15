@@ -6,6 +6,7 @@ import eventReducer from './Admin/events';
 import supportReducer from './Admin/supports';
 import faqReducer from './Admin/supportFaqs';
 import mainRedux from "./Main/mainRedux";
+import relatedProductsReducer from "./Main/relatedProducts";
 
 
 
@@ -16,7 +17,8 @@ const reducer = combineReducers({
     eventReducer:eventReducer,
     supportReducer: supportReducer,
     faqReducer: faqReducer,
-    mainReduxReducer:mainRedux
+    mainReduxReducer:mainRedux,
+    relatedProductsReducer:relatedProductsReducer
 })
 
 export const store=configureStore({reducer});
