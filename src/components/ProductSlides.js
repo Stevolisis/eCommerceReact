@@ -27,7 +27,6 @@ export default function ProductSlides({}){
         return null
         }
     }).map((image,i)=>{
-        console.log('grefwdr',image)
     return (
      <img src={image.url} alt={product.name} key={i}/>
     )

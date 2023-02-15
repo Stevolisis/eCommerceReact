@@ -22,7 +22,6 @@ const relatedProductsSlice=createSlice({
     extraReducers:{
         [fetchProducts.fulfilled]:(state,{payload})=>{
             loading(false)
-            console.log(payload)
             return {...state,products:payload}
         },
         [fetchProducts.rejected]:(state,{error})=>{
@@ -37,5 +36,5 @@ const relatedProductsSlice=createSlice({
     }
 })
 
-export const getProduct2=(state)=>state.relatedProductsReducer.products;
+export const getRelProducts=(state)=>state.relatedProductsReducer.products;
 export default relatedProductsSlice.reducer;

@@ -3,21 +3,29 @@ import { Link, useParams } from 'react-router-dom'
 import Accordion from '../../components/accordions/Accordion'
 import Reviews from '../../components/Reviews'
 import Swal from 'sweetalert2';
-// import { faHeart,faBell,faStar } from '@fortawesome/free-regular-svg-icons'
-// import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import Ratings from '../../components/Ratings';
 import Mainheader from '../../components/main_page_layouts/Mainheader';
 import Mainfooter from '../../components/Mainfooter'
 import ProductSlides from '../../components/ProductSlides';
 import { fetchProduct, getProduct } from '../../Redux/Main/mainRedux';
-import { fetchProducts } from '../../Redux/Main/relatedProducts';
+import { fetchProducts, getRelProducts } from '../../Redux/Main/relatedProducts';
 import { useDispatch, useSelector } from 'react-redux';
+import Products_slider_layout from '../../components/main_page_layouts/products_slider_layout';
 
 export default function Product(){
     const[wishColor,setWishColor]=useState(false);
+    const[datas,setDatas]=useState({
+        name:'related Products',
+        product_component:{
+            products:[]
+        }
+
+    });
     const {slug}=useParams();
     const dispatch=useDispatch();
     const product=useSelector(getProduct);
+    const relProducts=useSelector(getRelProducts);
+
 
     const [count, setCount] = useReducer((state, action) =>
         action.type === 'increment'? state < product.stock ? state + 1 
@@ -65,9 +73,16 @@ export default function Product(){
     },[]);
 
     useEffect(()=>{
-        if(product.category){
+        if(product){
             dispatch(fetchProducts(product.category));
-        }
+            setDatas({
+                name:'Related Products',
+                product_component:{
+                    products:relProducts
+                }
+
+            })      
+        }                
     },[product]);
 
 
@@ -176,55 +191,9 @@ export default function Product(){
     </Accordion>
 
 
- 
+{datas&&<Products_slider_layout data={datas} route='prodListing'/>}
 
 
-
-
-<div className='section3'>
-<div className='specialcateg'>
-
-<div className='specialcateghead' style={{background:'#191a1c'}}>
-<div className='specialhead1'>
-<p>Related Products</p>
-</div>
-<div className='specialhead1'>
-<Link to='/'>See All</Link>
-</div>
-
-</div>
-
-<div className='specialcategproducts'>
-
-
-<div className='specialproduct'>
-<Link to='/'>
-<div className='specialproductimg'>
-<div className='discount'><p>-20%</p></div>
-<div className='productimg'><img src='/media3/advert6.jpg' alt='productimg' /></div>
-</div>
-
-<div className='specialproductinfo'>
-
-<div className='productname'>
-<p>Heinz Salad Cream 285 Kg</p>
-</div>
-
-<div className='productprices'>
-<span>₦ 500</span> <span>₦ 550</span>
-</div>
-
-
-</div>
-</Link>
-</div>
-
-
-
-
-</div>
-</div>
-</div>
 </div>
 
 
