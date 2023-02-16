@@ -4,6 +4,34 @@
     display: flex;
 }
 
+
+.search2{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-right: 15px;
+
+    input{
+        border: none;
+        padding: 11px 8px;
+        padding-right: 38px !important;
+        border-radius: 5px;
+        width: 75%;
+        background: rgb(89, 114, 185,0.2);
+        color: rgb(89, 114, 185);
+    }
+
+    input:focus{
+        outline: none;
+    }
+
+    i{
+        margin-left: -30px;
+        color: rgb(89, 114, 185);
+    }
+}
+
+
 nav{
     width: 35%;
     margin-right: 30px;
@@ -191,13 +219,13 @@ p{
 
 @media (max-width:750px) {
     #nav{
-        padding:0 10px 0 2px;
+        padding:0 15px;
         display: block;
+        margin-right: -20px;
+        position: absolute;
+        right: 0;
     }
     
-    .userdashboardcon{
-        margin-top: -35px;
-    }
     
     nav{
         height: 95vh;

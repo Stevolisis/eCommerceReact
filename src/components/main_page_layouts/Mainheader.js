@@ -10,13 +10,17 @@ import $ from 'jquery';
 export default function MainContainer({route,name,setTogglefilter,togglefilter,data}){
     const categ=useSelector(getCategory);
     const [searchStat,setSearchStat]=useState(false)
-console.log(searchStat)
 
-function liftSearch(){
-    if($(window).innerWidth()<744){
-        setSearchStat(!searchStat)
+    function liftSearch(){
+        if($(window).innerWidth()<744){
+            setSearchStat(!searchStat)
+        }
     }
-}
+
+
+
+
+    
 
     return(
         <div className='headercon'>

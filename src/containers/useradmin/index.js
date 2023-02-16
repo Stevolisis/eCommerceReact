@@ -1,23 +1,41 @@
 import {React,useState} from 'react';
 import { Link ,Outlet,useNavigate} from 'react-router-dom';
 import Navbar from '../../components/Navbar';
+import $ from 'jquery';
+import SearchLift from '../../components/searchLift';
+
+
 
 export default function Index(){
     const [trigger,setTrigger]=useState(false);
+    const [searchStat,setSearchStat]=useState(false);
     const navigate=useNavigate();
  
+    function liftSearch(){
+        if($(window).innerWidth()<744){
+            setSearchStat(!searchStat)
+        }
+    }
+
+
+
 
     return(
         <>
 {trigger &&<div className='popupaddresscon' >
 </div>}
+{searchStat&&<SearchLift liftSearch={liftSearch}/>}
+
 <div className='main' >
 
 
 <div className='headercon'>
+
+
+
 <div className='header2'>
 <div className='categoryspace2'>
-        <h2><Link to='/'><img src='https://ecommerce.stephcom.com.ng/favicon.svg' alt='Logo'/> GrandProSales </Link></h2>
+        <h2><Link to='/'><img src='https://ecommerce.stephcom.com.ng/favicon.svg' alt='L-'/> GrandProSales </Link></h2>
 </div>
 
 
@@ -33,17 +51,28 @@ export default function Index(){
 </div>
 
 
+
+
+
+
+
+
+
+
+
+
 <div className='header'>
     <div className='categoryspace'>
-            <h2><Link to='/'><img src='https://ecommerce.stephcom.com.ng/favicon.svg' alt='Logo'/> GrandProSales </Link></h2>
+            <h2><Link to='/'><img src='https://ecommerce.stephcom.com.ng/favicon.svg' alt='L-'/> GrandProSales </Link></h2>
     </div>
 
 
 <div className='searchcon'>
-    <div className='search'>
+    <div className='search2'>
+    <input type='text' placeholder='Search products,brands and categories...' onFocus={()=>liftSearch()}/>
+    <i className='fa fa-search' onClick={()=>liftSearch()}/>
     <Navbar id='nav' setTrigger={setTrigger}/>    
-    <input type='text' placeholder='Search products,brands and categories...'/>
-    <button className='searchbtn'>Search</button>
+
     </div>
 </div>
 
@@ -58,6 +87,13 @@ export default function Index(){
 <Link to='/user/useraccount'><i className='fa fa-user-circle'></i></Link>
 </div>
 </div>
+
+
+
+
+
+
+
 </div>
 
 
