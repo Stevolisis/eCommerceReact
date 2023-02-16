@@ -1,17 +1,27 @@
-import { useEffect } from 'react';
+import { useState } from 'react';
 import {React}from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getCategory } from '../../Redux/Main/mainRedux';
 import Searchbar from '../Searchbar';
+import SearchLift from '../searchLift';
+import $ from 'jquery';
 
 export default function MainContainer({route,name,setTogglefilter,togglefilter,data}){
     const categ=useSelector(getCategory);
+    const [searchStat,setSearchStat]=useState(false)
+console.log(searchStat)
 
-
+function liftSearch(){
+    if($(window).innerWidth()<744){
+        setSearchStat(!searchStat)
+    }
+}
 
     return(
         <div className='headercon'>
+            {searchStat&&<SearchLift liftSearch={liftSearch}/>}
+
 
             {data&& data.map(layout=>{
             if(layout.type==='top_banner'){
@@ -62,7 +72,7 @@ export default function MainContainer({route,name,setTogglefilter,togglefilter,d
     </div>
 
 
-<Searchbar setTogglefilter={setTogglefilter} togglefilter={togglefilter} route={route}/>
+<Searchbar liftSearch={liftSearch} setTogglefilter={setTogglefilter} togglefilter={togglefilter} route={route}/>
 
 
 <div className='usercon'>

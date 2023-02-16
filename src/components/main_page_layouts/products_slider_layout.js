@@ -48,7 +48,7 @@ export default function Products_slider_layout({data,route}){
                 </div>
 
                 <div className='productvolume'>
-                <p>{product.stock} items left</p>
+                {product.stock>=100 ?<p>100+ items left</p>:<p>{product.stock} items left</p>}
                 </div>
                 </div>
                 </Link>
@@ -82,7 +82,7 @@ export default function Products_slider_layout({data,route}){
                 </div>
 
                 <div className='productvolume'>
-                <p>{product.stock} items left</p>
+                {product.stock>=100 ?<p>100+ items left</p>:<p>{product.stock} items left</p>}
                 </div>
                 </div>
                 </Link>

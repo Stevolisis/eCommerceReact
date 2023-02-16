@@ -12,6 +12,7 @@ import PasswordReset from './containers/main/PasswordReset';
 //-----------Main Css----------
 import './containers/main/styles/index.scss';
 import './containers/main/styles/searchbar.scss';
+import './containers/main/styles/searchLift.scss';
 import './containers/main/styles/products.scss';
 import './containers/main/styles/product.scss';
 import './containers/main/styles/cart.scss';

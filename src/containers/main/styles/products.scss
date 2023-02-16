@@ -2,30 +2,31 @@
 
 
 .search2{
-    width: 100%;
     display: flex;
-    justify-content: center;
     align-items: center;
+    margin-right: 15px;
 
     input{
-        border: 1px solid $color108;
+        border: none;
         padding: 11px 8px;
+        padding-right: 38px !important;
         border-radius: 5px;
-        width: 60%;
+        width: 80%;
+        background: rgb(89, 114, 185,0.2);
+        color: rgb(89, 114, 185);
     }
 
-    button{
-        border: 0;
-        padding: 10px 15px;
-        margin-left: 8px;
-        border-radius: 5px;
-        box-shadow: 0 4px 8px 0 rgba(0,0,0,.2);
-        background: $color60;
-        color:$color40;
-        
-        cursor: pointer;
+    input:focus{
+        outline: none;
+    }
+
+    i{
+        margin-left: -30px;
+        color: rgb(89, 114, 185);
     }
 }
+
+
 .section1categ{
     display: flex;
     justify-content: center;
@@ -292,18 +293,6 @@ cursor: pointer;
     .search2{
         width: 100%;
         justify-content: flex-start;
-        
-        input{
-            padding: 9px 9px;
-            border-radius: 8px;
-            width:74%;
-            font-size: 13px;
-        }
-    
-        button{
-            font-size: 12px;
-            display: none;
-        }
     }
   
 

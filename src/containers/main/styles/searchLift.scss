@@ -1,0 +1,67 @@
+@import './variables2';
+
+
+
+.searchLiftCon{
+    display: none;
+}
+
+
+
+
+@media(max-width:760px){
+.searchLiftCon{
+width: 100vw;
+height: 100vh;
+background-color: $color50;
+z-index: 300;
+position: fixed;
+padding: 15px;
+box-sizing: border-box;
+display: block;
+
+.searchercon{
+    z-index: 310;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 17px;
+
+    input{
+        border: none;
+        padding: 11px 8px;
+        padding-right: 38px !important;
+        border-radius: 5px;
+        width: 100%;
+        background: rgb(89, 114, 185,0.2);
+        color: rgb(89, 114, 185);
+    }
+
+    input:focus{
+        outline: none;
+    }
+
+    i{
+        margin-left: -30px;
+        color: rgb(89, 114, 185);
+    }
+}
+
+}
+
+.resultCon{
+
+    a{
+        text-decoration: none;
+    }
+
+    p{
+        padding: 8px 2px;
+        text-decoration: none;
+        font-size: 12px;
+        border-bottom: 1px solid #d3d1d1;
+        color: $color102;
+        word-break: break-all;
+    }
+}
+}
