@@ -24,7 +24,7 @@ export default function SearchLift({liftSearch}){
             <div className='searchercon'>
             {/* <i className='fa fa-arrow-left'/> */}
 
-                <input type='text' placeholder='Search products,brands and categories...' onChange={(e)=>setSearchValue(e.target.value)}/>
+                <input type='text' placeholder='Search products,brands and categories...' autoFocus onChange={(e)=>setSearchValue(e.target.value)}/>
                 <i className='fa fa-search' onClick={()=>liftSearch()}/>
             </div>
 
