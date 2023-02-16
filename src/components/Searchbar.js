@@ -1,8 +1,13 @@
 import {React,useEffect,useState} from 'react';
+import { useDispatch } from 'react-redux';
+import { fetchSearchResult } from '../Redux/Main/searchResult';
+import Searches from './Searches';
 
 export default function Searchbar({route,setTogglefilter,togglefilter,liftSearch}){
     const [filterStatus,setfilterStatus]=useState(false);
-    const [data,setData]=useState([{info:'Nice One'},{info:'e.target.value'},{info:'e.target.value'}]);
+    const [searchesStat,setSearchesStat]=useState(false);
+    const [searchValue,setSearchValue]=useState(true);
+    const dispatch=useDispatch();
 
     useEffect(()=>{
         if(route==='products' && window.innerWidth < 750){
@@ -10,8 +15,14 @@ export default function Searchbar({route,setTogglefilter,togglefilter,liftSearch
         }else{
             setfilterStatus(false)
         }
-        console.log('What Now!!')
     },[window.innerWidth]);
+
+    useEffect(()=>{
+        if(searchValue!==""&&searchValue.length>2){
+            dispatch(fetchSearchResult(searchValue))
+            console.log(searchValue);
+        }
+    },[searchValue])
 
 
 
@@ -34,24 +45,14 @@ export default function Searchbar({route,setTogglefilter,togglefilter,liftSearch
         </div>       
         </> : <>
         <div className='search'>
-        <input type='text' placeholder='Search products,brands and categories...' onFocus={()=>liftSearch()}/>
+        <input type='text' placeholder='Search products,brands and categories...' onFocus={()=>(liftSearch(),setSearchesStat(true))} onChange={(e)=>setSearchValue(e.target.value)} onBlur={()=>setSearchesStat(false)} />
         <i className='fa fa-search' onClick={()=>liftSearch()}/>
         </div>        
         </> 
         }
 
 
-
-
-        <div class="result-container">
-            {data&&data.map((list,i)=>{
-                return <>
-                
-                <div className='search'>
-        <a href='#'>Search products,brands and categories...</a>
-        </div> </>
-            })}
-        </div>
+        {searchesStat&&<Searches/>}
         
         </div>
 

@@ -35,7 +35,7 @@ export default function Index(){
 
 <div className='header2'>
 <div className='categoryspace2'>
-        <h2><Link to='/'><img src='https://ecommerce.stephcom.com.ng/favicon.svg' alt='L-'/> GrandProSales </Link></h2>
+        <h2><Link to='/'><img src='https://e-commerce-three-neon.vercel.app/favicon.svg' alt='L-'/> GrandProSales </Link></h2>
 </div>
 
 
@@ -63,12 +63,12 @@ export default function Index(){
 
 <div className='header'>
     <div className='categoryspace'>
-            <h2><Link to='/'><img src='https://ecommerce.stephcom.com.ng/favicon.svg' alt='L-'/> GrandProSales </Link></h2>
+            <h2><Link to='/'><img src='https://e-commerce-three-neon.vercel.app/favicon.svg' alt='L-'/> GrandProSales </Link></h2>
     </div>
 
 
 <div className='searchcon'>
-    <div className='search2'>
+    <div className='search3'>
     <input type='text' placeholder='Search products,brands and categories...' onFocus={()=>liftSearch()}/>
     <i className='fa fa-search' onClick={()=>liftSearch()}/>
     <Navbar id='nav' setTrigger={setTrigger}/>    
