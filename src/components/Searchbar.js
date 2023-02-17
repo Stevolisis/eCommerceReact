@@ -20,7 +20,6 @@ export default function Searchbar({route,setTogglefilter,togglefilter,liftSearch
     useEffect(()=>{
         if(searchValue!==""&&searchValue.length>2){
             dispatch(fetchSearchResult(searchValue))
-            console.log(searchValue);
         }
     },[searchValue])
 

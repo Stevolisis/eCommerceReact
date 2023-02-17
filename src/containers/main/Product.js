@@ -26,7 +26,6 @@ export default function Product(){
     const product=useSelector(getProduct);
     const relProducts=useSelector(getRelProducts);
 
-console.log('fffffffffffff')
     const [count, setCount] = useReducer((state, action) =>
         action.type === 'increment'? state < product.stock ? state + 1 
         : state: action.type === 'decrement'? state > 0 ? state - 1

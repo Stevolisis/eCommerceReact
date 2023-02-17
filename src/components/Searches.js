@@ -13,7 +13,7 @@ export default function Searches(){
                 if(list){
                     return <>
                         <div className='search' key={i}>
-                        <Link to={'/'+list.slug}>{list.name} <span style={{background:`${list.stock?'#fa568d':'#5972b9'}`}}>{list.stock?'product':'category'}</span></Link>
+                        <Link  to={'/'+list.slug}>{list.name} <span style={{background:`${list.stock?'#fa568d':'#5972b9'}`}}>{list.stock?'product':'category'}</span></Link>
                         </div> 
                         </>                    
                 }
