@@ -207,16 +207,18 @@ console.log(location);
 
 
 
-    <Accordion 
+    {/* <Accordion 
     heading='Reviews (6)'
     id='accordioncon3'
     type='slide'
-    preshow='show'>
+    >
         <Reviews
         listing='All'
         />
-    </Accordion>
+    </Accordion> */}
 
+    <Reviews listing='All'/>
+  
 
 {datas&&<Products_slider_layout data={datas} route='prodListing'/>}
 
