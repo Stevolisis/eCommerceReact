@@ -1,5 +1,5 @@
 import {React,useState,useEffect, useReducer} from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useLocation, useParams } from 'react-router-dom'
 import Accordion from '../../components/accordions/Accordion'
 import Reviews from '../../components/Reviews'
 import Swal from 'sweetalert2';
@@ -25,14 +25,14 @@ export default function Product(){
     const dispatch=useDispatch();
     const product=useSelector(getProduct);
     const relProducts=useSelector(getRelProducts);
-
+    const location = useLocation();
     const [count, setCount] = useReducer((state, action) =>
         action.type === 'increment'? state < product.stock ? state + 1 
         : state: action.type === 'decrement'? state > 0 ? state - 1
         : state: (() => { throw new Error(`Unsupported action type: ${action.type}`) })()
     , 0);
 
-
+console.log(location);
 
     const Toast = Swal.mixin({
         toast: true,
@@ -151,6 +151,33 @@ export default function Product(){
 <div className='gproductaction'><button onClick={()=>addcart('Product added to cart')}>ADD TO CART</button></div>
 </div>
 </div>
+
+
+
+<div className='productdetailscon'>
+
+<div className='summary'>
+<div><h4>Share this Product</h4></div>
+
+</div>
+
+
+
+<div className='hiddendetails'>
+<div>
+<a href={'https://facebook.com/sharer.php?u='+'https://e-commerce-three-neon.vercel.app'+location.pathname} className='socialLinks'><img src='/facebook.svg'/></a>
+<a href={'https://twitter.com/intent/tweet?url='+'https://e-commerce-three-neon.vercel.app'+location.pathname} className='socialLinks'><img src='/twitter2.svg'/></a>
+<a href={'https://wa.me/?text='+'https://e-commerce-three-neon.vercel.app'+location.pathname} className='socialLinks'><img src='/whatsapp.svg'/></a>
+<a href={'https://www.linkedin.com/sharing/share-offsite/?url='+'https://e-commerce-three-neon.vercel.app'+location.pathname} className='socialLinks'><img src='/linkedin.svg'/></a>
+</div>
+</div>
+
+
+</div>
+
+
+
+
 
 
 
