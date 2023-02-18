@@ -1,3 +1,5 @@
+import { useState } from 'react';
+import { useEffect } from 'react';
 import {React} from 'react';
 import { useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
@@ -5,10 +7,16 @@ import CategoryProductListings from '../../Loaders/products-categoryPageLoaders/
 import { getProducts } from '../../Redux/Main/mainRedux';
 import Ratings from '../Ratings';
 
-export default function Category_products_Listing_layout({data,addcart}){
+export default function Category_products_Listing_layout({addcart}){
     const navigate=useNavigate();
     const products=useSelector(getProducts);
-console.log(products)
+    const [data,setData]=useState(null)
+
+
+    useEffect(()=>{
+        setData(products)
+    },[products]);
+
 
     return(
         <>
@@ -17,7 +25,7 @@ console.log(products)
 <div className='categproducts'>
 
 {
-    products.length===0 ? <CategoryProductListings/>:
+    !data ? <CategoryProductListings/>:
 products.filter(product=>product.status==='active').map(product=>{
 return <>
 <div className='specialproduct2'>

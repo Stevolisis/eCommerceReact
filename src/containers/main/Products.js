@@ -16,7 +16,6 @@ export default function Products(){
     const dispatch=useDispatch();
    const {category}=useParams();
    const {slug}=useParams();
-   let ry=3;
 
 
 
