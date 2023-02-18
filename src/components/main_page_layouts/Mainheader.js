@@ -11,6 +11,7 @@ import TopBanner from '../../Loaders/homepageLoaders/topbanner';
 export default function MainContainer({route,name,setTogglefilter,togglefilter,data}){
     const categ=useSelector(getCategory);
     const [searchStat,setSearchStat]=useState(false)
+    console.log(data)
 
     function liftSearch(){
         if($(window).innerWidth()<744){

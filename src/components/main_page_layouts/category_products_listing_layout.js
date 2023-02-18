@@ -8,7 +8,7 @@ import Ratings from '../Ratings';
 export default function Category_products_Listing_layout({data,addcart}){
     const navigate=useNavigate();
     const products=useSelector(getProducts);
-
+console.log(products)
 
     return(
         <>
@@ -17,7 +17,7 @@ export default function Category_products_Listing_layout({data,addcart}){
 <div className='categproducts'>
 
 {
-    products===undefined ? <CategoryProductListings/>:
+    products.length===0 ? <CategoryProductListings/>:
 products.filter(product=>product.status==='active').map(product=>{
 return <>
 <div className='specialproduct2'>
