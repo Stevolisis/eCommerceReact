@@ -92,6 +92,7 @@ import './Loaders/styles/mainBanner.scss';
 import './Loaders/styles/categorySlider.scss';
 import './Loaders/styles/productComponents.scss';
 import './Loaders/styles/CategoryProductListings.scss';
+import './Loaders/styles/topbanner.scss';
 import ScrollToTop from './components/Scroll-To-Top';
 
 

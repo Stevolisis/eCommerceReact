@@ -9,9 +9,9 @@ export default function Products_Listing_layout(){
         <div className='section3' id='section3'>
         <div className='specialcateg'>
 
-        <div className='productcateghead'>
+        <div className='productcateghead' id='productcateghead'>
         <div className='producthead1'>
-        <p>----</p>
+        <p></p>
         </div>
         </div>
 

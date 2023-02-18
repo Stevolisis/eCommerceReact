@@ -6,6 +6,7 @@ import { getCategory } from '../../Redux/Main/mainRedux';
 import Searchbar from '../Searchbar';
 import SearchLift from '../searchLift';
 import $ from 'jquery';
+import TopBanner from '../../Loaders/homepageLoaders/topbanner';
 
 export default function MainContainer({route,name,setTogglefilter,togglefilter,data}){
     const categ=useSelector(getCategory);
@@ -27,11 +28,11 @@ export default function MainContainer({route,name,setTogglefilter,togglefilter,d
             {searchStat&&<SearchLift liftSearch={liftSearch}/>}
 
 
-            {data&& data.map(layout=>{
+            {data==undefined ? <TopBanner/> : data.map(layout=>{
             if(layout.type==='top_banner'){
 
             return <>
-                    <div className='headerAdsCon'>
+                    <div className='headerAdsCon' >
                         <img src={layout.top_banner.url} alt='headerAds'/>
                     </div>   
             </>
