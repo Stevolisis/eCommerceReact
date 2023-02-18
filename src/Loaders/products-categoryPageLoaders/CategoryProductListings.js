@@ -9,8 +9,6 @@ export default function CategoryProductListings(){
     return(
         <>
 
-<div className='categproductscon'>
-<div className='categproducts'>
 
 {
 data.map(product=>{
@@ -46,9 +44,6 @@ return <>
 })
 }
 
-
-</div>
-</div>
 
         </>
     )

@@ -44,14 +44,20 @@ export default function Searchbar({route,setTogglefilter,togglefilter,liftSearch
         </div>       
         </> : <>
         <div className='search'>
-        <input type='text' placeholder='Search products,brands and categories...' onFocus={()=>(liftSearch(),setSearchesStat(true))} onChange={(e)=>setSearchValue(e.target.value)} onBlur={()=>setSearchesStat(false)} />
+
+        <input type='text' placeholder='Search products,brands and categories...' 
+        onFocus={()=>(liftSearch(),setSearchesStat(true))} 
+        onChange={(e)=>setSearchValue(e.target.value)} 
+        onBlur={()=>setSearchesStat(false)} />
+
         <i className='fa fa-search' onClick={()=>liftSearch()}/>
+
         </div>        
         </> 
         }
 
 
-        {searchesStat&&<Searches/>}
+        {searchesStat&&<Searches setSearchesStat={setSearchesStat}/>}
         
         </div>
 

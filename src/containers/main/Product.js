@@ -12,7 +12,7 @@ import { fetchProducts, getRelProducts } from '../../Redux/Main/relatedProducts'
 import { useDispatch, useSelector } from 'react-redux';
 import Products_slider_layout from '../../components/main_page_layouts/products_slider_layout';
 
-export default function Product(){
+export default function Product(props){
     const[wishColor,setWishColor]=useState(false);
     const[datas,setDatas]=useState({
         name:'related Products',
@@ -32,7 +32,6 @@ export default function Product(){
         : state: (() => { throw new Error(`Unsupported action type: ${action.type}`) })()
     , 0);
 
-console.log(location);
 
     const Toast = Swal.mixin({
         toast: true,
@@ -69,7 +68,7 @@ console.log(location);
 
     useEffect(()=>{
         dispatch(fetchProduct('product***'+slug));
-    },[]);
+    },[location.key]);
 
     useEffect(()=>{
         if(product){

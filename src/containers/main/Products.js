@@ -1,5 +1,5 @@
 import {React, useState} from 'react'
-import {  useParams } from 'react-router-dom';
+import {  useLocation, useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import Mainheader from '../../components/main_page_layouts/Mainheader';
 import Mainfooter from '../../components/Mainfooter'
@@ -16,13 +16,14 @@ export default function Products(){
     const dispatch=useDispatch();
    const {category}=useParams();
    const {slug}=useParams();
+   const location = useLocation();
 
 
 
    useEffect(()=>{
     if(category==='category') dispatch(fetchCategory(category+'***'+slug));
     if(category==='products') dispatch(fetchEvent(category+'***'+slug));
-   },[]);
+   },[location.key]);
 
 
    const Toast = Swal.mixin({
