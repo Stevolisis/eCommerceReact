@@ -88,6 +88,10 @@ import MainLoader from './Loaders/MainLoader';
 
 //------------Loader Styles------------
 import './Loaders/styles/mainLoader.scss';
+import './Loaders/styles/mainBanner.scss';
+import './Loaders/styles/categorySlider.scss';
+import './Loaders/styles/productComponents.scss';
+import './Loaders/styles/CategoryProductListings.scss';
 import ScrollToTop from './components/Scroll-To-Top';
 
 

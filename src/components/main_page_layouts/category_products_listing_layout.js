@@ -1,6 +1,7 @@
 import {React} from 'react';
 import { useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
+import CategoryProductListings from '../../Loaders/products-categoryPageLoaders/CategoryProductListings';
 import { getProducts } from '../../Redux/Main/mainRedux';
 import Ratings from '../Ratings';
 
@@ -16,6 +17,7 @@ export default function Category_products_Listing_layout({data,addcart}){
 <div className='categproducts'>
 
 {
+    products===undefined ? <CategoryProductListings/>:
 products.filter(product=>product.status==='active').map(product=>{
 return <>
 <div className='specialproduct2'>

@@ -1,0 +1,19 @@
+@import '../../containers/main/styles/variables2';
+
+
+#productimg{
+    @include skeleton-load;
+}
+
+#specialcateghead{
+    @include skeleton-load;
+}
+
+#section3{
+    margin-top: 20px;
+
+    p{
+        height: 5px;
+        @include skeleton-load;
+    }
+}

@@ -1,6 +1,7 @@
 import {React} from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import ProductsSlider from '../../Loaders/homepageLoaders/productSlider';
 import { getRelProducts } from '../../Redux/Main/relatedProducts';
 
 export default function Products_slider_layout({data,route}){
@@ -27,7 +28,7 @@ export default function Products_slider_layout({data,route}){
         <div className='specialcategproducts'>
 
         {route==='prodListing'?
-        relProducts&&relProducts.filter(product=>product.status==='active').map(product=>{
+        relProducts==undefined ? <ProductsSlider/> :relProducts.filter(product=>product.status==='active').map(product=>{
         return (
             <>
                 <div className='specialproduct'>

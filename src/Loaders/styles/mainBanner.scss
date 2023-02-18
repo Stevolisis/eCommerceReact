@@ -1,0 +1,10 @@
+@import '../../containers/main/styles/variables2';
+
+#subimage{
+    background-color: gray;
+    @include skeleton-load;
+}
+
+#sub2section1{
+    @include skeleton-load;
+}

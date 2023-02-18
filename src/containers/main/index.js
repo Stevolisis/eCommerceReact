@@ -1,5 +1,4 @@
 import {React,useState} from 'react'
-import {  useNavigate } from 'react-router-dom';
 import Mainfooter from '../../components/Mainfooter'
 import { useMemo } from 'react';
 import Mainheader from '../../components/main_page_layouts/Mainheader';
@@ -10,16 +9,16 @@ import Products_slider_layout from '../../components/main_page_layouts/products_
 import Ads_Listing_layout from '../../components/main_page_layouts/ads_listing_layout';
 import Products_Listing_layout from '../../components/main_page_layouts/products_listing_layout';
 import { useDispatch } from 'react-redux';
-import { useRef } from 'react';
 import PopUp_layout from '../../components/main_page_layouts/popup_layout';
 import { fetchEvents } from '../../Redux/Main/mainRedux';
+import MainBannerLoader from '../../Loaders/homepageLoaders/mainBannerLoader';
+import CategorySlider from '../../Loaders/homepageLoaders/categorySlider';
+import ProductsSlider from '../../Loaders/homepageLoaders/productSlider';
+import ProductListings from '../../Loaders/homepageLoaders/productListings';
 
 export default function Index(){
-    const navigate=useNavigate();
     const [layouts, setLayouts] = useState(null);
-    const [togglefilter, setTogglefilter] = useState(null);
     const dispatch=useDispatch();
-    const cancelalert=useRef(true)
     
 
 
@@ -60,7 +59,14 @@ dispatch(fetchEvents())
 <div className='submain'>
 
 
-{layouts && layouts.map((layout,i)=>{
+{layouts==null ?(
+    <>
+    <MainBannerLoader/>
+    <CategorySlider/>
+    <ProductsSlider/>
+    <ProductListings/>
+    </>
+): layouts.map((layout,i)=>{
 
  if(layout.type==='main_banner'){
     return <Main_layout images={layout.main_banner}/>
@@ -69,7 +75,7 @@ dispatch(fetchEvents())
    }else if(layout.type==='category_slider'){
     return <Category_slider_layout data={layout}/>
    }else if(layout.type==='pop_up'){
-    // return <PopUp_layout data={layout.pop_up}/>
+    return <PopUp_layout data={layout.pop_up}/>
    }else if(layout.type==='products_slider'){
     return <Products_slider_layout data={layout}/>
    }else if(layout.type==='ads_listing'){

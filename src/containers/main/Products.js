@@ -3,7 +3,7 @@ import {  useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import Mainheader from '../../components/main_page_layouts/Mainheader';
 import Mainfooter from '../../components/Mainfooter'
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { fetchCategory, fetchEvent, filterProducts, filterRatings, priceRange } from '../../Redux/Main/mainRedux';
 import Category_products_Listing_layout from '../../components/main_page_layouts/category_products_listing_layout';
@@ -212,7 +212,6 @@ Toast.fire({
 
 </div>
 </div>
-
 
 
 

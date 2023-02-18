@@ -17,7 +17,7 @@ export default function Product(){
     const[datas,setDatas]=useState({
         name:'related Products',
         product_component:{
-            products:[]
+            products:null
         }
 
     });

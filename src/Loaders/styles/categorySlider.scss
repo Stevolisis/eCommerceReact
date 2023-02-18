@@ -1,0 +1,19 @@
+@import '../../containers/main/styles/variables2';
+
+
+#slidecategimg{
+    @include skeleton-load;
+}
+
+#specialcateghead{
+    @include skeleton-load;
+}
+
+#slidecategname{
+    p{
+        margin-top: 10px;
+        height: 5px;
+        width: 40px;
+        @include skeleton-load;
+    }
+}

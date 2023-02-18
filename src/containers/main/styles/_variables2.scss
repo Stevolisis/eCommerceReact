@@ -20,6 +20,21 @@ $color109: #758db9;
 $shadow:0 1px 2px 0 rgba(0, 0, 0, 0.2);
 $gradient1:linear-gradient(40deg,$color60,$color70);
 
+   
+
+@keyframes skeleton-loading {
+    0%{
+        background-color: hsl(200, 20%, 70%);
+    }
+    100%{
+        background-color: hsl(200, 20%, 95%);
+    }
+}
+
+@mixin skeleton-load($theme: DarkGray) {
+    opacity: .7;
+    animation: skeleton-loading 1s linear infinite alternate;
+}
 
     @font-face {
     font-family: font1;
