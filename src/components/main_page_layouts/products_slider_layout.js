@@ -20,7 +20,7 @@ export default function Products_slider_layout({data,route}){
         <p>Time Left: 18h : 21m : 07s</p>
         </div> */}
         <div className='specialhead1'>
-        {/* <Link to={data.product_component.slug}>See All</Link> */}
+        <Link to={'/'+data.product_component.slug}>See All</Link>
         </div>
 
         </div>

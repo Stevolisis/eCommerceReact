@@ -32,7 +32,7 @@ export default function Product(props){
         : state: (() => { throw new Error(`Unsupported action type: ${action.type}`) })()
     , 0);
 
-
+console.log(slug)
     const Toast = Swal.mixin({
         toast: true,
         position: 'top-end',
@@ -68,7 +68,7 @@ export default function Product(props){
 
     useEffect(()=>{
         dispatch(fetchProduct('product***'+slug));
-    },[location.key]);
+    },[slug]);
 
     useEffect(()=>{
         if(product){

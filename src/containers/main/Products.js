@@ -14,8 +14,7 @@ export default function Products(){
     const [min,setMin]=useState(0);
     const [max,setMax]=useState(0);
     const dispatch=useDispatch();
-   const {category}=useParams();
-   const {slug}=useParams();
+   const {category,slug}=useParams();
    const location = useLocation();
 
 
@@ -23,7 +22,7 @@ export default function Products(){
    useEffect(()=>{
     if(category==='category') dispatch(fetchCategory(category+'***'+slug));
     if(category==='products') dispatch(fetchEvent(category+'***'+slug));
-   },[location.key]);
+   },[slug]);
 
 
    const Toast = Swal.mixin({
