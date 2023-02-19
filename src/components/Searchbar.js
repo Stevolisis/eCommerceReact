@@ -2,6 +2,7 @@ import {React,useEffect,useState} from 'react';
 import { useDispatch } from 'react-redux';
 import { fetchSearchResult } from '../Redux/Main/searchResult';
 import Searches from './Searches';
+import $ from 'jquery';
 
 export default function Searchbar({route,setTogglefilter,togglefilter,liftSearch}){
     const [filterStatus,setfilterStatus]=useState(false);
@@ -26,7 +27,25 @@ export default function Searchbar({route,setTogglefilter,togglefilter,liftSearch
 
 
 
-    
+    function blureDropdown(){
+        $(document).on("click", function(event){
+            if(event.target.className!=='dropdownClose'){
+                setSearchesStat(false)
+            }
+        })     
+    }
+
+    // useEffect(() => {
+    //   $(document).on("click", function(event){
+    //     console.log(event.target.className);
+    // })     
+    //     return () => {
+    //         $(document).off("click")
+    //     }
+    // },[]);
+
+
+
     return(
         <>
         <div className='searchcon'>
@@ -48,9 +67,9 @@ export default function Searchbar({route,setTogglefilter,togglefilter,liftSearch
         <input type='text' placeholder='Search products,brands and categories...' 
         onFocus={()=>(liftSearch(),setSearchesStat(true))} 
         onChange={(e)=>setSearchValue(e.target.value)} 
-        />
+        onBlur={()=>blureDropdown()} className='dropdownClose'/>
 
-        <i className='fa fa-search' onClick={()=>liftSearch()}/>
+        <i className='fa fa-search' onClick={()=>liftSearch()}  />
 
         </div>        
         </> 

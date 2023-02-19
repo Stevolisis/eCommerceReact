@@ -15,7 +15,6 @@ export default function Products(){
     const [max,setMax]=useState(0);
     const dispatch=useDispatch();
    const {category,slug}=useParams();
-   const location = useLocation();
 
 
 
