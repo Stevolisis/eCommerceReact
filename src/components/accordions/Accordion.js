@@ -27,7 +27,7 @@ export default function Accordion({heading,preshow,children,id,type,parsed}){
 
 <div className={`${id}`} style={{display:'none'}} id='hiddendetails'>
 <div>
-{parsed?parse(`${children}`,options):children}
+{parsed?parse(`${children}`):children}
 </div>
 </div>
 
