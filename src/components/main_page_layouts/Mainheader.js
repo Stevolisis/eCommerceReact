@@ -7,9 +7,11 @@ import Searchbar from '../Searchbar';
 import SearchLift from '../searchLift';
 import $ from 'jquery';
 import TopBanner from '../../Loaders/homepageLoaders/topbanner';
+import { getProducts_in_cart } from '../../Redux/Main/cart';
 
 export default function MainContainer({route,name,setTogglefilter,togglefilter,data}){
     const categ=useSelector(getCategory);
+    const products_in_cart=useSelector(getProducts_in_cart);
     const [searchStat,setSearchStat]=useState(false)
 
     function liftSearch(){
@@ -57,7 +59,7 @@ export default function MainContainer({route,name,setTogglefilter,togglefilter,d
 <Link to='/help'><i className='fa fa-question-circle'></i></Link>
 
 <div className='cart'>
-<Link to='/cart'><i className='fa fa-shopping-cart'></i><sup>23</sup></Link>
+<Link to='/cart'><i className='fa fa-shopping-cart'></i>{products_in_cart.length===0?'':<sup>{products_in_cart.length}</sup>}</Link>
 </div>
 
 <Link to='/user/dashboard'><i className='fa fa-user-circle'></i></Link>
@@ -84,7 +86,7 @@ export default function MainContainer({route,name,setTogglefilter,togglefilter,d
 <Link to='/help'><i className='fa fa-question-circle'></i></Link>
 
 <div className='cart'>
-<Link to='/cart'><i className='fa fa-shopping-cart'></i><sup>23</sup></Link>
+<Link to='/cart'><i className='fa fa-shopping-cart'></i>{products_in_cart.length===0?'':<sup>{products_in_cart.length}</sup>}</Link>
 </div>
 
 <Link to='/user/dashboard'><i className='fa fa-user-circle'></i></Link>

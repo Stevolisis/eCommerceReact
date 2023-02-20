@@ -3,6 +3,8 @@ import { Link ,Outlet,useNavigate} from 'react-router-dom';
 import Navbar from '../../components/Navbar';
 import $ from 'jquery';
 import SearchLift from '../../components/searchLift';
+import { useSelector } from 'react-redux';
+import { getProducts_in_cart } from '../../Redux/Main/cart';
 
 
 
@@ -10,7 +12,8 @@ export default function Index(){
     const [trigger,setTrigger]=useState(false);
     const [searchStat,setSearchStat]=useState(false);
     const navigate=useNavigate();
- 
+    const products_in_cart=useSelector(getProducts_in_cart);
+
     function liftSearch(){
         if($(window).innerWidth()<744){
             setSearchStat(!searchStat)
@@ -43,7 +46,7 @@ export default function Index(){
 <Link to='/help'><i className='fa fa-question-circle'></i></Link>
 
 <div className='cart'>
-<Link to='/cart'><i className='fa fa-shopping-cart'></i><sup>23</sup></Link>
+<Link to='/cart'><i className='fa fa-shopping-cart'></i>{products_in_cart.length===0?'':<sup>{products_in_cart.length}</sup>}</Link>
 </div>
 
 <Link to='/user/useraccount'><i className='fa fa-user-circle'></i></Link>
@@ -81,7 +84,7 @@ export default function Index(){
 <Link to='/help'><i className='fa fa-question-circle'></i></Link>
 
 <div className='cart'>
-<Link to='/cart'><i className='fa fa-shopping-cart'></i><sup>23</sup></Link>
+<Link to='/cart'><i className='fa fa-shopping-cart'></i>{products_in_cart.length===0?'':<sup>{products_in_cart.length}</sup>}</Link>
 </div>
 
 <Link to='/user/useraccount'><i className='fa fa-user-circle'></i></Link>

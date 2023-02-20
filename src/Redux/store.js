@@ -8,6 +8,7 @@ import faqReducer from './Admin/supportFaqs';
 import mainRedux from "./Main/mainRedux";
 import relatedProductsReducer from "./Main/relatedProducts";
 import searchResultReducer from "./Main/searchResult";
+import cartReducer from "./Main/cart";
 
 
 
@@ -20,7 +21,8 @@ const reducer = combineReducers({
     faqReducer: faqReducer,
     mainReduxReducer:mainRedux,
     relatedProductsReducer:relatedProductsReducer,
-    searchResultReducer:searchResultReducer
+    searchResultReducer:searchResultReducer,
+    cartReducer:cartReducer
 })
 
 export const store=configureStore({reducer});

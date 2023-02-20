@@ -1,5 +1,5 @@
 import {React,useState,useEffect, useReducer} from 'react'
-import { Link, useLocation, useParams } from 'react-router-dom'
+import { useLocation, useParams } from 'react-router-dom'
 import Accordion from '../../components/accordions/Accordion'
 import Reviews from '../../components/Reviews'
 import Swal from 'sweetalert2';
@@ -28,9 +28,9 @@ export default function Product(props){
     const location = useLocation();
     const [count, setCount] = useReducer((state, action) =>
         action.type === 'increment'? state < product.stock ? state + 1 
-        : state: action.type === 'decrement'? state > 0 ? state - 1
+        : state: action.type === 'decrement'? state > 1 ? state - 1
         : state: (() => { throw new Error(`Unsupported action type: ${action.type}`) })()
-    , 0);
+    , 1);
 
     const Toast = Swal.mixin({
         toast: true,
@@ -82,6 +82,10 @@ export default function Product(props){
             })      
         }                
     },[product]);
+
+
+
+
 
 
 
@@ -154,7 +158,7 @@ export default function Product(props){
 <div className='productdetailscon'>
 
 <div className='summary'>
-<div><h4>Share this Product</h4></div>
+<div><h4>Share Product With Friends</h4></div>
 
 </div>
 
@@ -185,34 +189,8 @@ export default function Product(props){
  preshow='hidden'
  parsed={true}>
  {product.product_details}
-</Accordion>    
+</Accordion>
 
-
-
-{/* 
-<Accordion 
- heading='Specifications'
- id='accordioncon2'
- type='slide'
- preshow='hidden'
- >
-<h4>SKU:</h4> NI930ST26E710NAFAMZ
-<h4>Weight (kg):</h4> 1
-<h4>Shop Type:</h4> Jumia Mall
-
- </Accordion> */}
-
-
-
-    {/* <Accordion 
-    heading='Reviews (6)'
-    id='accordioncon3'
-    type='slide'
-    >
-        <Reviews
-        listing='All'
-        />
-    </Accordion> */}
 
     <Reviews listing='All'/>
   
