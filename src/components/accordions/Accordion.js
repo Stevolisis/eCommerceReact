@@ -5,15 +5,8 @@ import Reviews from '../Reviews';
 import parse from 'html-react-parser';
 
 export default function Accordion({heading,preshow,children,id,type,parsed}){
-    const options = {
-        transform : function transform(domNode, index) {
-           if ( domNode.type === 'script') {
-              return <script key={index} src={domNode?.attribs?.src}>{domNode?.children[0]?.data}</script>;
-          }
-        }
-      };
 
-      
+    
     return(
 <>
 <div className='productdetailscon'>
@@ -31,7 +24,6 @@ export default function Accordion({heading,preshow,children,id,type,parsed}){
     listing='some'
     />
 </div>
-
 
 <div className={`${id}`} style={{display:'none'}} id='hiddendetails'>
 <div>
