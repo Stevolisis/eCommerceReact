@@ -28,10 +28,9 @@ export default function Products_slider_layout({data,route}){
         <div className='specialcategproducts'>
 
         {route==='prodListing'?
-        relProducts==undefined ? <ProductsSlider/> :relProducts.filter(product=>product.status==='active').map(product=>{
+        relProducts==undefined ? <ProductsSlider/> :relProducts.filter(product=>product.status==='active').map((product,i)=>{
         return (
-            <>
-                <div className='specialproduct'>
+                <div className='specialproduct' key={i}>
                 <Link to={'/'+product.slug}>
                 <div className='specialproductimg'>
                 <div className='discount'><p>-{(product.regular_price-product.sale_price)/100}%</p></div>
@@ -54,7 +53,6 @@ export default function Products_slider_layout({data,route}){
                 </div>
                 </Link>
                 </div>
-            </>
             )
         })
 
@@ -62,10 +60,9 @@ export default function Products_slider_layout({data,route}){
     :
 
 
-    data.product_component.products.filter(product=>product.status==='active').map(product=>{
+    data.product_component.products.filter(product=>product.status==='active').map((product,i)=>{
         return (
-            <>
-                <div className='specialproduct'>
+                <div className='specialproduct' key={i}>
                 <Link to={product.slug}>
                 <div className='specialproductimg'>
                 <div className='discount'><p>-{(product.regular_price-product.sale_price)/100}%</p></div>
@@ -88,7 +85,6 @@ export default function Products_slider_layout({data,route}){
                 </div>
                 </Link>
                 </div>
-            </>
             )
         })
     }

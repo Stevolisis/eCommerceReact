@@ -17,10 +17,9 @@ export default function ProductsSlider(){
         <div className='specialcategproducts'>
 
         {
-        data.map(product=>{
+        data.map((product,i)=>{
         return (
-            <>
-                <div className='specialproduct'>
+                <div className='specialproduct' key={i}>
                 <Link to=''>
                 <div className='specialproductimg'>
                 <div className='productimg' id='productimg'></div>
@@ -45,7 +44,6 @@ export default function ProductsSlider(){
                 </div>
                 </Link>
                 </div>
-            </>
             )
         })
     }

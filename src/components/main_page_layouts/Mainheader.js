@@ -30,14 +30,13 @@ export default function MainContainer({route,name,setTogglefilter,togglefilter,d
             {searchStat&&<SearchLift liftSearch={liftSearch}/>}
 
 
-            {data==undefined ? <TopBanner/> : data.map(layout=>{
+            {data==undefined ? <TopBanner/> : data.map((layout,i)=>{
             if(layout.type==='top_banner'){
 
-            return <>
-                    <div className='headerAdsCon' >
+            return  <div className='headerAdsCon' key={i}>
                         <img src={layout.top_banner.url} alt='headerAds'/>
                     </div>   
-            </>
+
             }
             })
             }

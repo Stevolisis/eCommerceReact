@@ -69,23 +69,22 @@ dispatch(fetchEvents())
 ): layouts.map((layout,i)=>{
 
  if(layout.type==='main_banner'){
-    return <Main_layout images={layout.main_banner}/>
+    return <Main_layout images={layout.main_banner} key={i}/>
    }else if(layout.type==='meta_data'){
-    return <Meta_data_layout data={layout.meta_data}/>
+    return <Meta_data_layout data={layout.meta_data} key={i}/>
    }else if(layout.type==='category_slider'){
-    return <Category_slider_layout data={layout}/>
+    return <Category_slider_layout data={layout} key={i}/>
    }else if(layout.type==='pop_up'){
-    return <PopUp_layout data={layout.pop_up}/>
+    return <PopUp_layout data={layout.pop_up} key={i}/>
    }else if(layout.type==='products_slider'){
-    return <Products_slider_layout data={layout}/>
+    return <Products_slider_layout data={layout} key={i}/>
    }else if(layout.type==='ads_listing'){
-    return <Ads_Listing_layout data={layout}/>
+    return <Ads_Listing_layout data={layout} key={i}/>
    }else if(layout.type==='products_listing'){
-    return <Products_Listing_layout data={layout}/>
+    return <Products_Listing_layout data={layout} key={i}/>
    }
    
 })}
-
 
 </div>
 

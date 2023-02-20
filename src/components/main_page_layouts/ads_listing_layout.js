@@ -12,9 +12,9 @@ export default function Ads_Listing_layout({data}){
         <div className='midbannercon'>
 
 
-        {data.ads_listing.map(ads=>{
+        {data.ads_listing.map((ads,i)=>{
             return (
-        <div className='midbanner'>
+        <div className='midbanner' key={i}>
         <Link to={ads.slug}>
         <img src={ads.img&&ads.img.url} alt={ads.name} /> 
         </Link>

@@ -33,7 +33,7 @@ export default function SearchLift({liftSearch}){
             {data&&data.map((list,i)=>{
                 if(list){
                     return <>
-                    <Link to={list.product_component&&list.product_component? '/'+list.product_component.slug:'/'+list.slug} onClick={()=>liftSearch()}>
+                    <Link key={i} to={list.product_component&&list.product_component? '/'+list.product_component.slug:'/'+list.slug} onClick={()=>liftSearch()}>
                         <p>{list.name}</p> 
                         <span style={{background:`${list.stock?'#fa568d':'#5972b9'}`}}>
                             {list.stock?'product':'category'}

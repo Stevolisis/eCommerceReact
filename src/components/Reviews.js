@@ -74,7 +74,9 @@ export default function Reviews({listing}){
 
 
 <div className='commentCon'>
-<div className='reviewsdetailscon'>
+
+{[1,2,3,4,5,6,7,8].map((i)=>{
+    return <div className='reviewsdetailscon' key={i}>
     <div className='reviewsdetails'>
    <p>by Mary Obi</p>
    <p>10-06-2022</p>
@@ -87,76 +89,9 @@ export default function Reviews({listing}){
         until is washed</p>
    </div>
 </div>
+})
+}
 
-<div className='reviewsdetailscon'>
-    <div className='reviewsdetails'>
-   <p>by Mary Obi</p>
-   <p>10-06-2022</p>
-   </div>
-
-   <div className='reviewsratings'><Ratings value={3}/></div>
-
-   <div className='reviewscoments'>
-    <p>It stain the body and cloth,it bring out permanent spot on the cloth 
-        until is washed</p>
-   </div>
-</div>
-
-<div className='reviewsdetailscon'>
-    <div className='reviewsdetails'>
-   <p>by Mary Obi</p>
-   <p>10-06-2022</p>
-   </div>
-
-   <div className='reviewsratings'><Ratings value={3}/></div>
-
-   <div className='reviewscoments'>
-    <p>It stain the body and cloth,it bring out permanent spot on the cloth 
-        until is washed</p>
-   </div>
-</div>
-<div className='reviewsdetailscon'>
-    <div className='reviewsdetails'>
-   <p>by Mary Obi</p>
-   <p>10-06-2022</p>
-   </div>
-
-   <div className='reviewsratings'><Ratings value={3}/></div>
-
-   <div className='reviewscoments'>
-    <p>It stain the body and cloth,it bring out permanent spot on the cloth 
-        until is washed</p>
-   </div>
-</div>
-
-
-<div className='reviewsdetailscon'>
-    <div className='reviewsdetails'>
-   <p>by Mary Obi</p>
-   <p>10-06-2022</p>
-   </div>
-
-   <div className='reviewsratings'><Ratings value={4}/></div>
-
-   <div className='reviewscoments'>
-    <p>It stain the body and cloth,it bring out permanent spot on the cloth 
-        until is washed</p>
-   </div>
-</div>
-
-<div className='reviewsdetailscon'>
-    <div className='reviewsdetails'>
-   <p>by Mary Obi</p>
-   <p>10-06-2022</p>
-   </div>
-
-   <div className='reviewsratings'><Ratings value={1}/></div>
-
-   <div className='reviewscoments'>
-    <p>It stain the body and cloth,it bring out permanent spot on the cloth 
-        until is washed</p>
-   </div>
-</div>
 </div>
 
 

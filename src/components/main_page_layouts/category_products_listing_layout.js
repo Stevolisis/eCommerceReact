@@ -26,9 +26,8 @@ export default function Category_products_Listing_layout({addcart}){
 
 {
     !data ? <CategoryProductListings/>:
-products.filter(product=>product.status==='active').map(product=>{
-return <>
-<div className='specialproduct2'>
+products.filter(product=>product.status==='active').map((product,i)=>{
+return <div className='specialproduct2' key={i}>
 
 <div className='specialproductimg2' onClick={()=>navigate('/'+product.slug)}>
 <div className='discount2'><p>-{(product.regular_price-product.sale_price)/100}%</p></div>
@@ -57,7 +56,7 @@ return <>
 </div>
 
 </div>
-</>
+
 })
 }
 

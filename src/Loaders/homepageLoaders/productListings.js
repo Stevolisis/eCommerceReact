@@ -19,9 +19,9 @@ export default function Products_Listing_layout(){
         <div className='categproducts'>
 
 
-        {data.map(product=>{
+        {data.map((product,i)=>{
             return(
-        <div className='specialproduct'>
+        <div className='specialproduct' key={i}>
         <Link to=''>
         <div className='specialproductimg' >
         <div className='productimg' id='productimg'></div>

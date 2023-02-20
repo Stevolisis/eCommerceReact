@@ -11,9 +11,8 @@ export default function CategoryProductListings(){
 
 
 {
-data.map(product=>{
-return <>
-<div className='specialproduct2'>
+data.map((product,i)=>{
+return <div className='specialproduct2' key={i}>
 
 <div className='specialproductimg2'>
 <div className='productimg2'></div>
@@ -40,7 +39,7 @@ return <>
 </div>
 
 </div>
-</>
+
 })
 }
 

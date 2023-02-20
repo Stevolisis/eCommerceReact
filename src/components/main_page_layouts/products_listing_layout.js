@@ -18,9 +18,9 @@ export default function Products_Listing_layout({data}){
         <div className='categproducts'>
 
 
-        {data.product_component.products.filter(product=>product.status==='active').map(product=>{
+        {data.product_component.products.filter(product=>product.status==='active').map((product,i)=>{
             return(
-        <div className='specialproduct'>
+        <div className='specialproduct' key={i}>
         <Link to={product.slug}>
         <div className='specialproductimg'>
         <div className='discount'><p>-{(product.regular_price-product.sale_price)/100}%</p></div>
