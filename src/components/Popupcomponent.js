@@ -13,48 +13,30 @@ export default function Popupcomponent(){
     const inview=useSelector(getInview);
     const dispatch=useDispatch()
 
- useMemo(()=>{
-
-    if(inview !=='signin'){
-        $(window).click((e)=>{
-            if(e.target.className==='popupaddresscon'||e.target.className==='popupaddress'){
-                dispatch(setTrigger(false))
-            }
-        });  
-    }else{
-        $(window).click((e)=>{
-            if(e.target.className==='popupaddresscon'||e.target.className==='popupaddress'){
-                dispatch(setTrigger(true))
-            }
-
-        });  
-    } 
-
-},[inview]);
 
       
     function inviews(){
-        if (inview==='useraddress') {
+        if (inview.view==='useraddress') {
             return (
             <div className='popupaddress'>
             <Useraddresses popup='true'/>
             </div>
             ) 
-        }else if (inview==='adduseraddress') {
+        }else if (inview.view==='adduseraddress') {
             return (
             <div className='popupaddress'>
             <Addaddress/> 
             </div>
             )  
-        }else if (inview==='signin') {
+        }else if (inview.view==='signin') {
             return <Signin/>   
         }
-        else if (inview==='signup') {
+        else if (inview.view==='signup') {
             return <Signup/>   
         }
-        else if (inview==='resetpassword') {
+        else if (inview.view==='resetpassword') {
            return <Resetpassword/>   
-        }else if (inview==='passcode') {
+        }else if (inview.view==='passcode') {
             return <Passcode/>   
         }
     }

@@ -1,8 +1,11 @@
 import {React} from 'react';
 import axios from 'axios'
 import Swal from 'sweetalert2';
+import { setInview, setTrigger } from '../../Redux/Main/userAuthForm';
+import { useDispatch } from 'react-redux';
 
-export default function Signin({setInview,setTrigger}){
+export default function Signin(){
+    const dispatch=useDispatch();
 
     function handleSubmit(e){
         e.preventDefault();
@@ -43,11 +46,11 @@ export default function Signin({setInview,setTrigger}){
             <input type='password' name='password'/>
             </div>
         </div>
-        <div className='signlink'><p onClick={()=>setInview('resetpassword')}>Forgot Password?</p></div>
-        <div className='signlink'><p onClick={()=>setInview('passcode')}>Pass Code</p></div>
+        <div className='signlink'><p onClick={()=>(dispatch(setInview({view:'resetpassword'})),dispatch(setTrigger(true)))}>Forgot Password?</p></div>
+        <div className='signlink'><p onClick={()=>(dispatch(setInview({view:'passcode'})),dispatch(setTrigger(true)))}>Pass Code</p></div>
         <div className='usereditbtn'>
         <button>SUBMIT</button>
-        <div className='signlink2'>Don't have an account?  <span onClick={()=>setInview('signup')}>Sign Up</span></div>
+        <div className='signlink2'>Don't have an account?  <span onClick={()=>(dispatch(setInview({view:'signup'})),dispatch(setTrigger(true)))}>Sign Up</span></div>
         </div>
         </form>
         </div>

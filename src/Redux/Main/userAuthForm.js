@@ -7,14 +7,14 @@ const userAuthSlice=createSlice({
     name:'userAuth',
     initialState:{
         trigger:false,
-        inview:''
+        inview:{view:'',type:''}
     },
     reducers:{
         setTrigger:(state,{payload})=>{
             state.trigger=payload
         },
         setInview:(state,{payload})=>{
-            state.inview=payload
+            state.inview={view:payload.view,type:payload.type}
         }
     }
 })

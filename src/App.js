@@ -1,4 +1,4 @@
-import {React} from 'react'
+import {React, useMemo} from 'react'
 import {BrowserRouter,Routes,Route} from 'react-router-dom';
 //------------Main Pages------------
 import Index from './containers/main/index';
@@ -95,17 +95,34 @@ import './Loaders/styles/CategoryProductListings.scss';
 import './Loaders/styles/topbanner.scss';
 import ScrollToTop from './components/Scroll-To-Top';
 import Popupcomponent from './components/Popupcomponent';
-import { useSelector } from 'react-redux';
-import { getTrigger } from './Redux/Main/userAuthForm';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { getInview, getTrigger, setTrigger } from './Redux/Main/userAuthForm';
+import $ from 'jquery';
 
 
 function App() {
-const trigger=useSelector(getTrigger);
+  const trigger=useSelector(getTrigger);
+  const inview=useSelector(getInview);
+  const dispatch=useDispatch();
+
+
+useMemo(()=>{
+
+      $(window).click((e)=>{
+          if(e.target.className==='popupaddresscon'||e.target.className==='popupaddress'){
+              inview.type==='static'? dispatch(setTrigger(true)) :dispatch(setTrigger(false))
+          }
+
+      });  
+
+},[inview]);
+
+
+
+
+
 
   return (
- 
-
 <>
  <MainLoader/> 
     <BrowserRouter>
