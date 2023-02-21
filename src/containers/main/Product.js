@@ -46,10 +46,10 @@ export default function Product(props){
 
 
 
-    const addcart=((info)=>{
+    const addcart=(()=>{
     Toast.fire({
         icon: 'success',
-        title: info
+        title: 'Product added to cart'
       })
     })
 
@@ -149,7 +149,7 @@ export default function Product(props){
 </div>
 
 </div>
-<div className='gproductaction'><button onClick={()=>addcart('Product added to cart')}>ADD TO CART</button></div>
+<div className='gproductaction'><button onClick={()=>addcart()}>ADD TO CART</button></div>
 </div>
 </div>
 

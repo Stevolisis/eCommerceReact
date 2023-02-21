@@ -28,6 +28,7 @@
     "react-search-box": "^2.3.0",
     "react-select": "^5.4.0",
     "react-sortablejs": "^6.1.4",
+    "redux-persist": "^6.0.0",
     "sass": "^1.54.4",
     "slugify": "^1.6.5",
     "sortablejs": "^1.15.0",

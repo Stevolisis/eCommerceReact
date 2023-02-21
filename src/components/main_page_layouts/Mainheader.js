@@ -7,11 +7,11 @@ import Searchbar from '../Searchbar';
 import SearchLift from '../searchLift';
 import $ from 'jquery';
 import TopBanner from '../../Loaders/homepageLoaders/topbanner';
-import { getProducts_in_cart } from '../../Redux/Main/cart';
+import { getCartItems } from '../../Redux/Main/cart';
 
 export default function MainContainer({route,name,setTogglefilter,togglefilter,data}){
     const categ=useSelector(getCategory);
-    const products_in_cart=useSelector(getProducts_in_cart);
+    const products_in_cart=useSelector(getCartItems);
     const [searchStat,setSearchStat]=useState(false)
 
     function liftSearch(){

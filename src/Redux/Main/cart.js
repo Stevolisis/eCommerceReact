@@ -7,7 +7,11 @@ import Swal from "sweetalert2";
 
 
 const initialState={
-    products_in_cart:[],
+    cartItems: [],
+    totalCount: 0,
+    tax: 0,
+    subAmount: 0,
+    totalAmount: 0
 }
 
 const cartReduxSlice=createSlice({
@@ -17,5 +21,5 @@ const cartReduxSlice=createSlice({
 
 
 
-export const getProducts_in_cart=(state)=>state.cartReducer.products_in_cart;
+export const getCartItems=(state)=>state.cartReducer.cartItems;
 export default cartReduxSlice.reducer;

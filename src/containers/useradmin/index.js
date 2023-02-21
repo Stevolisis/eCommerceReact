@@ -4,7 +4,7 @@ import Navbar from '../../components/Navbar';
 import $ from 'jquery';
 import SearchLift from '../../components/searchLift';
 import { useSelector } from 'react-redux';
-import { getProducts_in_cart } from '../../Redux/Main/cart';
+import { getCartItems } from '../../Redux/Main/cart';
 
 
 
@@ -12,7 +12,7 @@ export default function Index(){
     const [trigger,setTrigger]=useState(false);
     const [searchStat,setSearchStat]=useState(false);
     const navigate=useNavigate();
-    const products_in_cart=useSelector(getProducts_in_cart);
+    const products_in_cart=useSelector(getCartItems);
 
     function liftSearch(){
         if($(window).innerWidth()<744){
