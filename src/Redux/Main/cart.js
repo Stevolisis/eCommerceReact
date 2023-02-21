@@ -19,15 +19,25 @@ const cartReduxSlice=createSlice({
     initialState,
     reducers:{
         addCartProduct:(state,{payload})=>{
-            let cartIndex=state.cartItems.findIndex(item=>item._id===payload._id);
+            let cartIndex=state.cartItems.findIndex(item=>item._id===payload.product._id);
             if(cartIndex >= 0){
-                state.cartItems[cartIndex].quantity += 1
+                console.log(state.cartItems[cartIndex].quantity+payload.quantity>state.cartItems[cartIndex].stock)
+                if(state.cartItems[cartIndex].quantity+payload.quantity>state.cartItems[cartIndex].stock){
+                    Swal.fire(
+                        'Limit Exceeded',
+                        `product quantity is more than is in stock`,
+                        'warning'
+                    );
+                    alert('Limit Exceeded')
+
+                }else state.cartItems[cartIndex].quantity += payload.quantity;
+                
             }else{
-                let product = { ...payload, quantity: 1 }
+                let product = { ...payload.product, quantity: payload.quantity }
                 state.cartItems.push(product);
             }
         },
-        clearCart:(state,{payload})=>{
+        clearCart:(state)=>{
             return {...state,cartItems:[]}
         }
     }

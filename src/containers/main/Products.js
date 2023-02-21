@@ -38,7 +38,7 @@ export default function Products(){
   })
 
 const addcart=((product)=>{
-    dispatch(addCartProduct(product))
+    dispatch(addCartProduct({product:product,quantity:1}))
 Toast.fire({
     icon: 'success',
     title: 'Product added to cart'
