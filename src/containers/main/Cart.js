@@ -3,9 +3,13 @@ import { Link,useNavigate } from 'react-router-dom'
 import Swal from 'sweetalert2';
 import Mainheader from '../../components/main_page_layouts/Mainheader';
 import Mainfooter from '../../components/Mainfooter'
+import { useDispatch, useSelector } from 'react-redux';
+import { clearCart, getCartItems } from '../../Redux/Main/cart';
 
 export default function Cart(){
    const navigate=useNavigate();
+   const cartItems=useSelector(getCartItems);
+   const dispatch=useDispatch();
    
    const deletecartitem=(()=>{
     Swal.fire({
@@ -41,38 +45,47 @@ export default function Cart(){
 <div className='cartcon'>
 
 <div className='cartproductcon2'>
-<div className='cartheading'><h2>Cart (2)</h2></div>
+<div className='cartheading'>
+  <h2>Cart (2)</h2>
+  <button onClick={()=>dispatch(clearCart())}>Clear Cart</button>
+  </div>
 
 
-
-<div className='cartproductcon'>
-<div className='cartproduct'>
-<div className='cartimg'>
-<div className='cartdiscount'><p>-20%</p></div>
-<img src='/media3/advert6.jpg' alt='cartimg' />
-</div>
-
-<div className='cartinfo'>
-<div>
-<div className='cartproductname'><p>Heinz Salad Cream 285 Kg</p></div>
-<div className='cartproductprice'><span>₦ 500</span> <span>₦ 550</span></div>
-</div>
-
-<div className='quantityCon'>
-<button>+</button>    
-<span>5</span>    
-<button>-</button>    
-</div>
-
-
-</div>
-</div>
-
-<div className='cartactions'>
-<button onClick={()=>deletecartitem()}>Remove</button>
-</div>
-
-</div>
+{
+ cartItems.length===0 ? 
+  <div className='cartEmpty'>No Item in Cart</div>
+  :
+  cartItems.map((product,i)=>{
+    return <div className='cartproductcon' key={i}>
+    <div className='cartproduct'>
+    <div className='cartimg'>
+    <div className='cartdiscount'><p>{(product.regular_price-product.sale_price)/100}%</p></div>
+    <img src={product.img_gallery[0].url} alt={product.name} />
+    </div>
+    
+    <div className='cartinfo'>
+    <div>
+    <div className='cartproductname'><p>{product.name}</p></div>
+    <div className='cartproductprice'><span>₦ {product.sale_price}</span> <span>₦ {product.regular_price}</span></div>
+    </div>
+    
+    <div className='quantityCon'>
+    <button>+</button>    
+    <span>{product.quantity}</span>    
+    <button>-</button>    
+    </div>
+    
+    
+    </div>
+    </div>
+    
+    <div className='cartactions'>
+    <button onClick={()=>deletecartitem(product._id)}>Remove</button>
+    </div>
+    
+    </div>
+  })
+}
 
 
 

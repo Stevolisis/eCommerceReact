@@ -8,6 +8,7 @@ import { useEffect } from 'react';
 import { fetchCategory, fetchEvent, filterProducts, filterRatings, priceRange } from '../../Redux/Main/mainRedux';
 import Category_products_Listing_layout from '../../components/main_page_layouts/category_products_listing_layout';
 import Ratings from '../../components/Ratings';
+import { addCartProduct } from '../../Redux/Main/cart';
 
 export default function Products(){
     const [togglefilter,setTogglefilter]=useState(false);
@@ -36,7 +37,8 @@ export default function Products(){
     }
   })
 
-const addcart=(()=>{
+const addcart=((product)=>{
+    dispatch(addCartProduct(product))
 Toast.fire({
     icon: 'success',
     title: 'Product added to cart'

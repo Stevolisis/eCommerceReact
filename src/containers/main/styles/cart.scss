@@ -13,6 +13,18 @@
     padding: 20px 15px;
     background: $color40;
     font-size: 15px;
+    display: flex;
+    justify-content: space-between;
+
+    button{
+        border: 0;
+        padding: 8px 16px;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);
+        background: $color60;
+        color:$color40;
+        cursor: pointer;
+    }
 }
 
 .cartproductcon{
@@ -130,7 +142,9 @@ padding: 10px 0;
     }
 }
 
-
+.cartEmpty{
+    padding: 20px;
+}
 
 
 

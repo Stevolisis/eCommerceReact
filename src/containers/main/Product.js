@@ -11,6 +11,7 @@ import { fetchProduct, getProduct } from '../../Redux/Main/mainRedux';
 import { fetchProducts, getRelProducts } from '../../Redux/Main/relatedProducts';
 import { useDispatch, useSelector } from 'react-redux';
 import Products_slider_layout from '../../components/main_page_layouts/products_slider_layout';
+import { addCartProduct } from '../../Redux/Main/cart';
 
 export default function Product(props){
     const[wishColor,setWishColor]=useState(false);
@@ -26,7 +27,7 @@ export default function Product(props){
     const product=useSelector(getProduct);
     const relProducts=useSelector(getRelProducts);
     const location = useLocation();
-    const [count, setCount] = useReducer((state, action) =>
+    const [quantity, setQuantity] = useReducer((state, action) =>
         action.type === 'increment'? state < product.stock ? state + 1 
         : state: action.type === 'decrement'? state > 1 ? state - 1
         : state: (() => { throw new Error(`Unsupported action type: ${action.type}`) })()
@@ -36,7 +37,7 @@ export default function Product(props){
         toast: true,
         position: 'top-end',
         showConfirmButton: false,
-        timer: 3000,
+        timer: 2000,
         timerProgressBar: true,
         didOpen: (toast) => {
           toast.addEventListener('mouseenter', Swal.stopTimer)
@@ -47,6 +48,7 @@ export default function Product(props){
 
 
     const addcart=(()=>{
+        dispatch(addCartProduct(product));
     Toast.fire({
         icon: 'success',
         title: 'Product added to cart'
@@ -142,9 +144,9 @@ export default function Product(props){
 </div> */}
 
 <div className='quantityCon'>
-<button onClick={()=>setCount({ type: 'decrement' })}>-</button>    
-<span>{count}</span>    
-<button onClick={()=>setCount({ type: 'increment' })}>+</button>    
+<button onClick={()=>setQuantity({ type: 'decrement' })}>-</button>    
+<span>{quantity}</span>    
+<button onClick={()=>setQuantity({ type: 'increment' })}>+</button>    
 </div>
 </div>
 

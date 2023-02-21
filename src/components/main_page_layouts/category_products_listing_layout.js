@@ -50,7 +50,7 @@ return <div className='specialproduct2' key={i}>
 </div>
 
 <div className='productprices2'>
-<button onClick={()=>addcart()}>ADD TO CART</button>
+<button onClick={()=>addcart(product)}>ADD TO CART</button>
 </div>
 
 </div>
