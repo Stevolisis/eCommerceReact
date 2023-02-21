@@ -94,11 +94,14 @@ import './Loaders/styles/productComponents.scss';
 import './Loaders/styles/CategoryProductListings.scss';
 import './Loaders/styles/topbanner.scss';
 import ScrollToTop from './components/Scroll-To-Top';
+import Popupcomponent from './components/Popupcomponent';
+import { useSelector } from 'react-redux';
+import { getTrigger } from './Redux/Main/userAuthForm';
 
 
 
 function App() {
-
+const trigger=useSelector(getTrigger);
 
   return (
  
@@ -107,7 +110,7 @@ function App() {
  <MainLoader/> 
     <BrowserRouter>
     <ScrollToTop/>
-
+    {trigger &&<Popupcomponent/>}
       <Routes>  
       {/* -------------Main Route------------- */}
       <Route path='/' element={<Index />} />

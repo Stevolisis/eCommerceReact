@@ -6,27 +6,29 @@ import Signin from '../containers/main/Signin';
 import Signup from '../containers/main/Signup';
 import Useraddresses from '../containers/useradmin/address/Useraddresses';
 import $ from 'jquery';
+import { useDispatch, useSelector } from 'react-redux';
+import { getInview, setTrigger } from '../Redux/Main/userAuthForm';
 
-export default function Popupcomponent({inview,setTrigger,setInview}){
+export default function Popupcomponent(){
+    const inview=useSelector(getInview);
+    const dispatch=useDispatch()
 
-useMemo(()=>{
+ useMemo(()=>{
 
-if(inview !=='passcode'){
+    if(inview !=='signin'){
+        $(window).click((e)=>{
+            if(e.target.className==='popupaddresscon'||e.target.className==='popupaddress'){
+                dispatch(setTrigger(false))
+            }
+        });  
+    }else{
+        $(window).click((e)=>{
+            if(e.target.className==='popupaddresscon'||e.target.className==='popupaddress'){
+                dispatch(setTrigger(true))
+            }
 
-$(window).click((e)=>{
-if(e.target.className==='popupaddresscon'||e.target.className==='popupaddress'){
-setTrigger(false)
-}
-});  
-
-}else{
-$(window).click((e)=>{
-if(e.target.className==='popupaddresscon'||e.target.className==='popupaddress'){
-setTrigger(true)
-}
-
-});  
-} 
+        });  
+    } 
 
 },[inview]);
 
@@ -35,7 +37,7 @@ setTrigger(true)
         if (inview==='useraddress') {
             return (
             <div className='popupaddress'>
-            <Useraddresses popup='true' setInview={setInview}/>
+            <Useraddresses popup='true'/>
             </div>
             ) 
         }else if (inview==='adduseraddress') {
@@ -45,17 +47,19 @@ setTrigger(true)
             </div>
             )  
         }else if (inview==='signin') {
-            return <Signin setInview={setInview} setTrigger={setTrigger}/>   
+            return <Signin/>   
         }
         else if (inview==='signup') {
-            return <Signup setInview={setInview}/>   
+            return <Signup/>   
         }
         else if (inview==='resetpassword') {
-           return <Resetpassword setInview={setInview}/>   
+           return <Resetpassword/>   
         }else if (inview==='passcode') {
-            return <Passcode setInview={setInview}/>   
+            return <Passcode/>   
         }
     }
+
+
     return(
         <>
         <div className='popupaddresscon' >

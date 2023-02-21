@@ -112,53 +112,6 @@ export default function Cart(){
 
 
 
-<div className='section3'>
-<div className='specialcateg'>
-
-<div className='specialcateghead' style={{background:'#191a1c'}}>
-<div className='specialhead1'>
-<p>Related Products</p>
-</div>
-<div className='specialhead1'>
-<Link to='/'>See All</Link>
-</div>
-
-</div>
-
-<div className='specialcategproducts'>
-{[1,2,3,4,5,6,7,8].map((specprod,i)=>{
-  return <div className='specialproduct' key={i}>
-
-<Link to='/'>
-<div className='specialproductimg'>
-<div className='discount'><p>-20%</p></div>
-<div className='productimg'><img src='/media3/advert6.jpg' alt='productimg' /></div>
-</div>
-
-<div className='specialproductinfo'>
-
-<div className='productname'>
-<p>Heinz Salad Cream 285 Kg</p>
-</div>
-
-<div className='productprices'>
-<span>₦ 500</span> <span>₦ 550</span>
-</div>
-
-
-</div>
-</Link>
-</div>
- 
-})}
-
-
-</div>
-</div>
-</div>
-
-
-
 
 
 </div>

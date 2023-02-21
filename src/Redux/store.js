@@ -11,6 +11,7 @@ import mainRedux from "./Main/mainRedux";
 import relatedProductsReducer from "./Main/relatedProducts";
 import searchResultReducer from "./Main/searchResult";
 import cartReducer from "./Main/cart";
+import userAuthReducer from "./Main/userAuthForm";
 
 
 const persistConfig = {
@@ -31,6 +32,7 @@ const reducer = combineReducers({
     relatedProductsReducer:relatedProductsReducer,
     searchResultReducer:searchResultReducer,
     cartReducer:cartReducer,
+    userAuthReducer:userAuthReducer,
 })
 
 

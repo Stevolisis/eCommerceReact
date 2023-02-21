@@ -3,10 +3,12 @@ import Popupcomponent from '../../components/Popupcomponent';
 import Swal from 'sweetalert2';
 import Mainheader from '../../components/main_page_layouts/Mainheader';
 import Mainfooter from '../../components/Mainfooter'
+import { useDispatch } from 'react-redux';
+import { setInview, setTrigger } from '../../Redux/Main/userAuthForm';
 
 export default function Checkout(){
-    const [trigger,setTrigger]=useState(false);
-    const [inview,setInview]=useState('useraddress');
+
+    const dispatch=useDispatch();
 
    const Toast = Swal.mixin({
     toast: true,
@@ -30,7 +32,6 @@ Toast.fire({
 
 return(
         <>
-        {trigger && <Popupcomponent setTrigger={setTrigger} inview={inview} setInview={setInview}/>}
 
 <div className='main'>
 
@@ -43,8 +44,8 @@ return(
 <div className='checkoutinfocon'>
 <div className='checkoutaddresscon'>
     <div className='userorderheading'>
-        <p onClick={()=>(setTrigger(true), setInview('signin'))}>ADDRESS DETAILS</p>
-        <button onClick={()=>(setTrigger(true), setInview('useraddress'))}>CHANGE</button>
+        <p>ADDRESS DETAILS</p>
+        <button onClick={()=>(dispatch(setInview('signin'),dispatch(setTrigger(true))))}>CHANGE</button>
         </div>
     <div className='checkoutaddress'>
         <p>Steven Joseph</p>
