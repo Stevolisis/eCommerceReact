@@ -1,17 +1,20 @@
-import {React} from 'react'
+import {React, useEffect} from 'react'
 import { Link,useNavigate } from 'react-router-dom'
 import Swal from 'sweetalert2';
 import Mainheader from '../../components/main_page_layouts/Mainheader';
 import Mainfooter from '../../components/Mainfooter'
 import { useDispatch, useSelector } from 'react-redux';
-import { clearCart, getCartItems } from '../../Redux/Main/cart';
+import { clearCart, decrement, deleteCartProduct, getCartcount, getCartItems, getCartTotal, getSubAmount, increment } from '../../Redux/Main/cart';
 
 export default function Cart(){
    const navigate=useNavigate();
    const cartItems=useSelector(getCartItems);
+   const cartCount=useSelector(getCartcount);
+   const cartSubAmount=useSelector(getSubAmount);
    const dispatch=useDispatch();
+
    
-   const deletecartitem=(()=>{
+   const deletecartitem=((id)=>{
     Swal.fire({
         title: 'Are you sure?',
         text: "You won't be able to revert this!",
@@ -22,11 +25,7 @@ export default function Cart(){
         confirmButtonText: 'Yes, remove it!'
       }).then((result) => {
         if (result.isConfirmed) {
-          Swal.fire(
-            'Removed!',
-            'Product removed from cart.',
-            'success'
-          )
+          dispatch(deleteCartProduct(id))
         }
       })
    })
@@ -46,9 +45,9 @@ export default function Cart(){
 
 <div className='cartproductcon2'>
 <div className='cartheading'>
-  <h2>Cart (2)</h2>
+  <h2>Cart ({cartCount})</h2>
   <button onClick={()=>dispatch(clearCart())}>Clear Cart</button>
-  </div>
+</div>
 
 
 {
@@ -70,9 +69,9 @@ export default function Cart(){
     </div>
     
     <div className='quantityCon'>
-    <button>+</button>    
+    <button onClick={()=>dispatch(decrement(product._id))}>-</button>     
     <span>{product.quantity}</span>    
-    <button>-</button>    
+    <button onClick={()=>dispatch(increment(product._id))}>+</button>    
     </div>
     
     
@@ -99,10 +98,10 @@ export default function Cart(){
 <div className='cartsummaryheading'>CART SUMMARY</div>
 <div className='cartsummaryinfo'>
 <div><p>Subtotal</p></div>
-<div><p>₦ 3,690</p></div>
+<div><p>₦{cartSubAmount}</p></div>
 </div>
 <div className='cartsummarybutton'>
-    <button onClick={()=>navigate('/checkout')}>CHECKOUT (₦3,690)</button>
+    <button onClick={()=>navigate('/checkout')}>CHECKOUT</button>
 </div>
 </div>
 </div>

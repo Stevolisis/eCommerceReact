@@ -33,26 +33,10 @@ export default function Product(props){
         : state: (() => { throw new Error(`Unsupported action type: ${action.type}`) })()
     , 1);
 
-    const Toast = Swal.mixin({
-        toast: true,
-        position: 'top-end',
-        showConfirmButton: false,
-        timer: 2000,
-        timerProgressBar: true,
-        didOpen: (toast) => {
-          toast.addEventListener('mouseenter', Swal.stopTimer)
-          toast.addEventListener('mouseleave', Swal.resumeTimer)
-        }
-      })
-
 
 
     const addcart=(()=>{
         dispatch(addCartProduct({product:product,quantity:quantity}));
-    Toast.fire({
-        icon: 'success',
-        title: 'Product added to cart'
-      })
     })
 
 

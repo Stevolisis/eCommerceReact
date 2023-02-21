@@ -46,7 +46,7 @@ return <div className='specialproduct2' key={i}>
 
 <div className='productprices2'>
     {<Ratings value={product.rating}/>}
-    <span className='productvolume2'>{product.stock>=100 ?<p>100+ items left</p>:<p>{product.stock} items left</p>}</span>
+    <div className='productvolume2'>{product.stock>=100 ?<p>100+ items left</p>:<p>{product.stock} items left</p>}</div>
 </div>
 
 <div className='productprices2'>

@@ -1,18 +1,20 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {React}from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getCategory } from '../../Redux/Main/mainRedux';
 import Searchbar from '../Searchbar';
 import SearchLift from '../searchLift';
 import $ from 'jquery';
 import TopBanner from '../../Loaders/homepageLoaders/topbanner';
-import { getCartItems } from '../../Redux/Main/cart';
+import { getCartcount, getCartItems, getCartTotal } from '../../Redux/Main/cart';
 
-export default function MainContainer({route,name,setTogglefilter,togglefilter,data}){
+export default function MainContainer({route,setTogglefilter,togglefilter,data}){
     const categ=useSelector(getCategory);
-    const products_in_cart=useSelector(getCartItems);
-    const [searchStat,setSearchStat]=useState(false)
+    const cartCount=useSelector(getCartcount);
+    const cartItems=useSelector(getCartItems);
+    const [searchStat,setSearchStat]=useState(false);
+    const dispatch=useDispatch();
 
     function liftSearch(){
         if($(window).innerWidth()<744){
@@ -20,6 +22,9 @@ export default function MainContainer({route,name,setTogglefilter,togglefilter,d
         }
     }
 
+    useEffect(()=>{
+        dispatch(getCartTotal());
+    },[cartItems])
 
 
 
@@ -58,7 +63,7 @@ export default function MainContainer({route,name,setTogglefilter,togglefilter,d
 <Link to='/help'><i className='fa fa-question-circle'></i></Link>
 
 <div className='cart'>
-<Link to='/cart'><i className='fa fa-shopping-cart'></i>{products_in_cart.length===0?'':<sup>{products_in_cart.length}</sup>}</Link>
+<Link to='/cart'><i className='fa fa-shopping-cart'></i>{!cartCount?'':<sup>{cartCount}</sup>}</Link>
 </div>
 
 <Link to='/user/dashboard'><i className='fa fa-user-circle'></i></Link>
@@ -85,7 +90,7 @@ export default function MainContainer({route,name,setTogglefilter,togglefilter,d
 <Link to='/help'><i className='fa fa-question-circle'></i></Link>
 
 <div className='cart'>
-<Link to='/cart'><i className='fa fa-shopping-cart'></i>{products_in_cart.length===0?'':<sup>{products_in_cart.length}</sup>}</Link>
+<Link to='/cart'><i className='fa fa-shopping-cart'></i>{!cartCount?'':<sup>{cartCount}</sup>}</Link>
 </div>
 
 <Link to='/user/dashboard'><i className='fa fa-user-circle'></i></Link>
