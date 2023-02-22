@@ -1,13 +1,17 @@
 import {React, useRef, useState} from 'react';
 import Swal from 'sweetalert2';
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { customerSignUp, setInview, setTrigger } from '../../Redux/Main/userAuthForm';
 
-export default function Signup({setInview}){
-    const password=useRef()
-    const confirmpassword=useRef()
-    const [checkLength,setcheckLength]=useState('')
-    const [checkMatch,setcheckMatch]=useState('')
+export default function Signup(){
+    const password=useRef();
+    const confirmpassword=useRef();
+    const [checkLength,setcheckLength]=useState('');
+    const [checkMatch,setcheckMatch]=useState('');
+    const dispatch=useDispatch();
 
+    
  function passwordLength(){
     console.log((password.current.value).length)
     if ((password.current.value).length <= 8) {
@@ -28,27 +32,15 @@ export default function Signup({setInview}){
  function handleSubmit(e){
     e.preventDefault();
     const formData=new FormData(e.target);
-    axios.post('http://localhost:80/auth/signup',formData,{withCredentials:true})
-    .then(res=>{
-        let data=res.data.data;
-        if(data==='Please verify your account.'){
-            Swal.fire(
-                'Account Created!',
-                `${data}`,
-                'success'
-              )
-              setInview('passcode');
-        }else{
-            Swal.fire(
-                'Account SignUp Process Interrupted!',
-                `${data}`,
-                'success'
-              )
-        }
-    }).catch(e=>{
-        alert(e);
-    })
+    dispatch(customerSignUp(formData))
  }
+
+
+
+
+
+
+
     return(
         <>
         <div className='signincon'>
@@ -95,7 +87,7 @@ export default function Signup({setInview}){
         </div>
         <div className='usereditbtn'>
         <button>SUBMIT</button>
-        <div className='signlink2'>Already have an account?  <span onClick={()=>setInview('signin')}>Sign In</span></div>
+        <div className='signlink2'>Already have an account?  <span onClick={()=>(dispatch(setInview({view:'signin'})),dispatch(setTrigger(true)))}>Sign In</span></div>
         </div>
         </form>
         </div>

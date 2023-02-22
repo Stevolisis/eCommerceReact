@@ -1,33 +1,19 @@
 import {React} from 'react';
-import axios from 'axios'
-import Swal from 'sweetalert2';
+import { useDispatch } from 'react-redux';
+import { verifyCustomer } from '../../Redux/Main/userAuthForm';
 
-export default function Passcode({setInview}){
+export default function Passcode(){
+    const dispatch=useDispatch();
 
     function handleSubmit(e){
         e.preventDefault();
         const formData=new FormData(e.target);
-        axios.post('http://localhost:80/auth/passcode',formData,{withCredentials:true})
-        .then(res=>{
-            let data=res.data.data;
-            if(data==='success'){
-                Swal.fire(
-                    'Account Created!',
-                    `${data}`,
-                    'success'
-                  )
-                  setInview('signin');
-            }else{
-                Swal.fire(
-                    'Alert!',
-                    `${data}`,
-                    'info'
-                  )
-            }
-        }).catch(e=>{
-            alert(e);
-        })
-     }
+        dispatch(verifyCustomer(formData));
+    }
+
+
+
+
     return(
         <>
         <div className='signincon'>

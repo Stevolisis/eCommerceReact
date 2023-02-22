@@ -12,6 +12,7 @@
     background: rgba(0,0,0,.2);
     box-sizing: border-box;
     overflow-y: auto;
+    backdrop-filter: blur(2px);
 }
 
 .popupaddress{
