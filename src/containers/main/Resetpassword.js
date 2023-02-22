@@ -10,18 +10,17 @@ export default function Resetpassword(){
 
         axios.post('http://localhost:80/auth/passwordReset',formData,{withCredentials:true})
         .then(res=>{
-            let data=res.data.data;
-            if(data==='Password Reset Link has been sent to your email.'){
-                
+            let status=res.data.status;
+            if(status==='success'){
                 Swal.fire(
                     'Successful!',
-                    `Data Done: ${data}`,
+                    `Link sent to email`,
                     'success'
                   )
                 }else{
                 Swal.fire(
-                    'Error!',
-                    `${data}`,
+                    'Error Occured!',
+                    `${status}`,
                     'info'
                   )
                 }

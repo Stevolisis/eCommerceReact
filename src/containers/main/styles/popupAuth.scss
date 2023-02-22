@@ -1,7 +1,7 @@
 @import './variables2';
 
 
-.popupaddresscon{
+.popupCon{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -15,7 +15,7 @@
     backdrop-filter: blur(2px);
 }
 
-.popupaddress{
+.popup{
 width: 60vw;
 height: 80vh;
 overflow-y: auto;
@@ -26,11 +26,11 @@ overflow-y: auto;
 
 
 @media (max-width:750px) {
-    .popupaddress{
+    .popup{
         padding: 6%;
     }
 
-    .popupaddress{
+    .popup{
         width: 85vw;
         }
        

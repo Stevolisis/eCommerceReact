@@ -17,7 +17,7 @@ import './containers/main/styles/products.scss';
 import './containers/main/styles/product.scss';
 import './containers/main/styles/cart.scss';
 import './containers/main/styles/checkout.scss';
-import './containers/main/styles/checkoutaddress.scss';
+import './containers/main/styles/popupAuth.scss';
 import './containers/main/styles/help.scss';
 import './containers/main/styles/signin.scss';
 

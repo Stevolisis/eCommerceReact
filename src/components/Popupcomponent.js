@@ -24,7 +24,7 @@ export default function Popupcomponent(){
             ) 
         }else if (inview.view==='adduseraddress') {
             return (
-            <div className='popupaddress'>
+            <div className='popup'>
             <Addaddress/> 
             </div>
             )  
@@ -44,7 +44,7 @@ export default function Popupcomponent(){
 
     return(
         <>
-        <div className='popupaddresscon' >
+        <div className='popupCon' >
        {inviews()} 
         </div>
         </>
