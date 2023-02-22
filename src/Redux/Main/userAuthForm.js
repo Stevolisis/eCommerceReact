@@ -89,8 +89,6 @@ const userAuthSlice=createSlice({
                    `${status}`,
                    'warning'
                );
-               state.inview={view:'signin'};
-               state.trigger=true;  
            }
         },
         [customerSignUp.rejected]: (state,{error})=>{
