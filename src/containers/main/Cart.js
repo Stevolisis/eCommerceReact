@@ -5,6 +5,7 @@ import Mainheader from '../../components/main_page_layouts/Mainheader';
 import Mainfooter from '../../components/Mainfooter'
 import { useDispatch, useSelector } from 'react-redux';
 import { clearCart, decrement, deleteCartProduct, getCartcount, getCartItems, getCartTotal, getSubAmount, increment } from '../../Redux/Main/cart';
+import { setInview, setTrigger } from '../../Redux/Main/userAuthForm';
 
 export default function Cart(){
    const navigate=useNavigate();
@@ -29,6 +30,21 @@ export default function Cart(){
         }
       })
    })
+
+
+
+   const checkout=()=>{
+    dispatch(setInview({view:'signin'}));
+    dispatch(setTrigger(true));
+   }
+
+
+
+
+
+
+
+
 
     return(
         <>
@@ -101,7 +117,7 @@ export default function Cart(){
 <div><p>₦{cartSubAmount}</p></div>
 </div>
 <div className='cartsummarybutton'>
-    <button onClick={()=>navigate('/checkout')}>CHECKOUT</button>
+    <button onClick={()=>checkout()}>CHECKOUT</button>
 </div>
 </div>
 </div>

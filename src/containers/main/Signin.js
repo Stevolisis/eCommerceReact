@@ -1,7 +1,7 @@
 import {React} from 'react';
 import axios from 'axios'
 import Swal from 'sweetalert2';
-import { setInview, setTrigger } from '../../Redux/Main/userAuthForm';
+import { customerLogin, setInview, setTrigger } from '../../Redux/Main/userAuthForm';
 import { useDispatch } from 'react-redux';
 
 export default function Signin(){
@@ -10,26 +10,12 @@ export default function Signin(){
     function handleSubmit(e){
         e.preventDefault();
         const formData=new FormData(e.target);
-        axios.post('http://localhost:80/auth/signin',formData,{withCredentials:true})
-        .then(res=>{
-            let data=res.data.data;
-            if(data==='success'){
-            setTrigger(false);
-            }else{
-            Swal.fire(
-                'Alert!',
-                `${data}`,
-                'info'
-                )
-            }
-        }).catch(e=>{
-            alert(e);
-        })
-     }
+        dispatch(customerLogin(formData));
+    }
     
 
 
-     return(
+    return(
         <>
         <div className='signincon'>
             <div className='siginheading'><p>Sign In</p></div>
