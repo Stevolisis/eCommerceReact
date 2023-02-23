@@ -1,16 +1,16 @@
 import React, { useRef, useState } from 'react';
-import axios from 'axios'
-import Swal from 'sweetalert2';
-import { useNavigate, useParams } from 'react-router-dom';
+import {  useParams, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { resetPassword } from '../../Redux/Main/userAuthForm';
 
-export default function ResetPassword({setTrigger}){
+export default function ResetPassword(){
    const {passwordResetLink}=useParams();
-   const navigate=useNavigate();
    const password=useRef();
    const confirmpassword=useRef();
    const [checkLength,setcheckLength]=useState('');
    const [checkMatch,setcheckMatch]=useState('');
-
+   const dispatch=useDispatch();
+   const navigate=useNavigate();
 
 
    function passwordLength(){
@@ -34,22 +34,10 @@ export default function ResetPassword({setTrigger}){
     function handleSubmit(e){
         e.preventDefault();
         const formData=new FormData(e.target);
-        axios.post('http://localhost:80/auth/resetPassword',formData,{withCredentials:true})
-        .then(res=>{
-            let status=res.data.status;
-            if(status==='success'){
-            navigate('/');
-            }else{
-            Swal.fire(
-                'Alert!',
-                `${status}`,
-                'info'
-                )
-            }
-        }).catch(e=>{
-            alert(e);
+        dispatch(resetPassword(formData)).then(res=>{
+            if(res.payload.status=='success') navigate('/');
         })
-     }
+    }
     
 
 
@@ -63,7 +51,7 @@ export default function ResetPassword({setTrigger}){
             <div className='admineditnamecon'>
 
             <div className='admineditname'>
-            <p style={{color:'black'}}>New Pacssword</p>
+            <p style={{color:'black'}}>New Password</p>
             <input required='required' type='password' name='password' ref={password} onChange={()=>(passwordMatch(),passwordLength())}/>
             <p style={{color:checkLength === 'Password must be more than 8 characters'? 'red' : 'green'}}>{checkLength}</p>
             </div>
