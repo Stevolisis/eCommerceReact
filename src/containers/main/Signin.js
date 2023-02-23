@@ -32,7 +32,7 @@ export default function Signin(){
             <input type='password' name='password'/>
             </div>
         </div>
-        <div className='signlink'><p onClick={()=>(dispatch(setInview({view:'resetpassword'})),dispatch(setTrigger(true)))}>Forgot Password?</p></div>
+        <div className='signlink'><p onClick={()=>(dispatch(setInview({view:'passwordreset'})),dispatch(setTrigger(true)))}>Forgot Password?</p></div>
         <div className='usereditbtn'>
         <button>SUBMIT</button>
         <div className='signlink2'>Don't have an account?  <span onClick={()=>(dispatch(setInview({view:'signup'})),dispatch(setTrigger(true)))}>Sign Up</span></div>

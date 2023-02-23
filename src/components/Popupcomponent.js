@@ -1,12 +1,12 @@
 import {React, useMemo} from 'react';
 import Addaddress from '../containers/useradmin/address/Addaddress';
 import Passcode from '../containers/main/Passcode';
-import Resetpassword from '../containers/main/PasswordReset';
 import Signin from '../containers/main/Signin';
 import Signup from '../containers/main/Signup';
 import Useraddresses from '../containers/useradmin/address/Useraddresses';
 import { useSelector } from 'react-redux';
 import { getInview } from '../Redux/Main/userAuthForm';
+import PasswordReset from '../containers/main/PasswordReset';
 
 export default function Popupcomponent(){
     const inview=useSelector(getInview);
@@ -31,8 +31,8 @@ export default function Popupcomponent(){
         else if (inview.view==='signup') {
             return <Signup/>   
         }
-        else if (inview.view==='resetpassword') {
-           return <Resetpassword/>   
+        else if (inview.view==='passwordreset') {
+           return <PasswordReset/>   
         }else if (inview.view==='passcode') {
             return <Passcode/>   
         }
