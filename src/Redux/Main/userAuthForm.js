@@ -30,6 +30,12 @@ export const sendPasswordResetLink=createAsyncThunk('userAuth/sendPasswordResetL
 })
 
 
+export const resetPassword=createAsyncThunk('userAuth/resetPassword',async (data)=>{
+    loading(true);
+    const response=await api.post('/auth/resetPassword',data);
+    return response.data;
+})
+
 
 
 
@@ -157,6 +163,35 @@ const userAuthSlice=createSlice({
            }
         },
         [sendPasswordResetLink.rejected]: (state,{error})=>{
+            loading(false);
+            Swal.fire(
+                "Error Occured",
+                error.message,
+                'error'
+            )
+        },
+        [resetPassword.fulfilled]: (state,{payload})=>{
+            loading(false);
+            let status=payload.status;
+
+            if(status==='success'){
+                Swal.fire(
+                   'Successful!',
+                   'Your Password has been updated',
+                   'success'
+               ); 
+               state.inview={view:'navigatetomain'};
+               state.trigger=false;             
+           }else{
+               Swal.fire(
+                   'Error Occured!',
+                   `${status}`,
+                   'warning'
+               );
+
+           }
+        },
+        [resetPassword.rejected]: (state,{error})=>{
             loading(false);
             Swal.fire(
                 "Error Occured",
