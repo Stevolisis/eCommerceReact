@@ -101,7 +101,8 @@ import $ from 'jquery';
 // import ResetPassword from './containers/main/Resetpassword';
 import ResetPassword from './containers/main/Resetpassword';
 
-//
+//Pls work
+
 function App() {
   const trigger=useSelector(getTrigger);
   const inview=useSelector(getInview);
