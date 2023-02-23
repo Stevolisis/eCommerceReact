@@ -1,18 +1,15 @@
 import {React, useMemo} from 'react';
 import Addaddress from '../containers/useradmin/address/Addaddress';
 import Passcode from '../containers/main/Passcode';
-import Resetpassword from '../containers/main/Resetpassword';
+import Resetpassword from '../containers/main/PasswordReset';
 import Signin from '../containers/main/Signin';
 import Signup from '../containers/main/Signup';
 import Useraddresses from '../containers/useradmin/address/Useraddresses';
-import $ from 'jquery';
-import { useDispatch, useSelector } from 'react-redux';
-import { getInview, setTrigger } from '../Redux/Main/userAuthForm';
+import { useSelector } from 'react-redux';
+import { getInview } from '../Redux/Main/userAuthForm';
 
 export default function Popupcomponent(){
     const inview=useSelector(getInview);
-    const dispatch=useDispatch()
-
 
       
     function inviews(){

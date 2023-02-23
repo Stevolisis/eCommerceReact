@@ -8,7 +8,7 @@ import Product from './containers/main/Product';
 import Cart from './containers/main/Cart';
 import Checkout from './containers/main/Checkout';
 import Help from './containers/main/Help';
-import PasswordReset from './containers/main/PasswordReset';
+
 //-----------Main Css----------
 import './containers/main/styles/index.scss';
 import './containers/main/styles/searchbar.scss';
@@ -98,6 +98,7 @@ import Popupcomponent from './components/Popupcomponent';
 import { useDispatch, useSelector } from 'react-redux';
 import { getInview, getTrigger, setTrigger } from './Redux/Main/userAuthForm';
 import $ from 'jquery';
+import ResetPassword from './containers/main/ResetPassword';
 
 
 function App() {
@@ -132,7 +133,7 @@ useMemo(()=>{
       {/* -------------Main Route------------- */}
       <Route path='/' element={<Index />} />
       <Route path='/index2' element={<Index2 />} />
-        <Route path='/passwordReset/:passwordResetLink' element={<PasswordReset />} />
+        <Route path='/resetPassword/:passwordResetLink' element={<ResetPassword />} />
         <Route path='/:category/:slug' element={<Products />} />
         {/* <Route path='/products/:slug' element={<Products />} /> */}
         <Route path='/product/:slug' element={<Product />} />
