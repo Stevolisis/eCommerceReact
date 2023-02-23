@@ -1,37 +1,17 @@
 import {React} from 'react';
-import Swal from 'sweetalert2';
-import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { sendPasswordResetLink } from '../../Redux/Main/userAuthForm';
+
+
 
 export default function Resetpassword(){
+    const dispatch=useDispatch();
+
 
     function handleSubmit(e){
         e.preventDefault();
-        const formData=new FormData(e.target)
-
-        axios.post('http://localhost:80/auth/passwordReset',formData,{withCredentials:true})
-        .then(res=>{
-            let status=res.data.status;
-            if(status==='success'){
-                Swal.fire(
-                    'Successful!',
-                    `Link sent to email`,
-                    'success'
-                  )
-                }else{
-                Swal.fire(
-                    'Error Occured!',
-                    `${status}`,
-                    'info'
-                  )
-                }
-            }).catch(err=>{
-    
-                Swal.fire(
-                    'Error At Axios!',
-                    `Error Occured: ${err}`,
-                    'success'
-                )
-            })
+        const formData=new FormData(e.target);
+        dispatch(sendPasswordResetLink(formData));
     }
 
     return(

@@ -73,7 +73,7 @@ export default function Signup(){
         <div className='admineditnamecon'>
             <div className='admineditname'>
             <p style={{color:'black'}}>Password</p>
-            <input type='password' name='password' ref={password}
+            <input required='required' type='password' name='password' ref={password}
             onChange={()=>(passwordMatch(),passwordLength())}/>
             <p style={{color:checkLength === 'Password must be more than 8 characters'? 'red' : 'green'}}>{checkLength}</p>
             </div>
@@ -81,7 +81,7 @@ export default function Signup(){
         <div className='admineditnamecon'>
             <div className='admineditname'>
             <p style={{color:'black'}}>Confirm Password</p>
-            <input type='password' name='confirm_password' ref={confirmpassword} onChange={passwordMatch}/>
+            <input required='required' type='password' name='confirm_password' ref={confirmpassword} onChange={passwordMatch}/>
             <p style={{color:checkMatch === 'Password Mismatched'? 'red' : 'green'}}>{checkMatch}</p>
             </div>
         </div>

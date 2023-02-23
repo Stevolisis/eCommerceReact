@@ -23,6 +23,13 @@ export const verifyCustomer=createAsyncThunk('userAuth/verifyCustomer',async (da
 })
 
 
+export const sendPasswordResetLink=createAsyncThunk('userAuth/sendPasswordResetLink',async (data)=>{
+    loading(true);
+    const response=await api.post('/auth/passwordResetLink',data);
+    return response.data;
+})
+
+
 
 
 
@@ -121,6 +128,35 @@ const userAuthSlice=createSlice({
            }
         },
         [verifyCustomer.rejected]: (state,{error})=>{
+            loading(false);
+            Swal.fire(
+                "Error Occured",
+                error.message,
+                'error'
+            )
+        },
+        [sendPasswordResetLink.fulfilled]: (state,{payload})=>{
+            loading(false);
+            let status=payload.status;
+
+            if(status==='success'){
+                Swal.fire(
+                   'Successful!',
+                   'Link sent to email',
+                   'success'
+               ); 
+               state.inview={view:'signin'};
+               state.trigger=true;             
+           }else{
+               Swal.fire(
+                   'Error Occured!',
+                   `${status}`,
+                   'warning'
+               );
+
+           }
+        },
+        [sendPasswordResetLink.rejected]: (state,{error})=>{
             loading(false);
             Swal.fire(
                 "Error Occured",

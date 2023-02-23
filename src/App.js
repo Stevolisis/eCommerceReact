@@ -109,7 +109,7 @@ function App() {
 useMemo(()=>{
 
       $(window).click((e)=>{
-          if(e.target.className==='popupaddresscon'||e.target.className==='popupaddress'){
+          if(e.target.className==='popupCon'||e.target.className==='popup'){
               inview.type==='static'? dispatch(setTrigger(true)) :dispatch(setTrigger(false))
           }
 
