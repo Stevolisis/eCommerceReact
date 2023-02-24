@@ -28,7 +28,7 @@
     a{
         text-decoration: none;
         color:$color30;
-        font-size: 22px;
+        font-size: 19px;
     }
 
     img{
@@ -91,5 +91,11 @@
     .admindashcon{
         width: 95vw;
         margin-top: -6px;
+    }
+    .admincategoryspace{
+        a{
+            font-size: 15px;
+        }
+    
     }
 }
