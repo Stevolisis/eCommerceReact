@@ -25,7 +25,7 @@ export const verifyCustomer=createAsyncThunk('userAuth/verifyCustomer',async (da
 
 export const sendPasswordResetLink=createAsyncThunk('userAuth/sendPasswordResetLink',async (data)=>{
     loading(true);
-    const response=await api.post('/auth/passwordResetLink',data);
+    const response=await api.post('/auth/passwordResetLink',data,{withCredentials:true});
     return response.data;
 })
 
