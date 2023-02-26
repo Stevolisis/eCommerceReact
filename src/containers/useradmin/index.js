@@ -5,6 +5,9 @@ import $ from 'jquery';
 import SearchLift from '../../components/searchLift';
 import { useSelector } from 'react-redux';
 import { getCartItems } from '../../Redux/Main/cart';
+import ProtectedRoute from '../../ProtectedRoute';
+import MainFooter from '../../components/Mainfooter';
+import UserDashboardNavbar from '../../components/userDashboardNavbar';
 
 
 
@@ -104,36 +107,6 @@ export default function Index(){
 
 <div className='userdashboardcon'>
 
-<nav>
-<div className='navlinkscon'>
-<div className='navusername'><i className='fa fa-user-circle'/><span>Steven Joseph</span></div>
-<div className='usernavlinkscon'>
-<p>Customer Links</p>    
-<div className='navlinks' onClick={()=>navigate('dashboard')}><Link className='navlink' to='dashboard'>My Account</Link></div>
-<div className='navlinks' onClick={()=>navigate('orders')}><Link className='navlink' to='userorders'>My Orders</Link></div>
-<div className='navlinks' onClick={()=>navigate('address')}><Link className='navlink' to='useraddress'>Addresses</Link></div>
-<div className='navlinks' onClick={()=>navigate('wishlist')}><Link className='navlink' to='wishlist'>Wishlist</Link></div>
-<div className='navlinks' onClick={()=>navigate('dashboard')}><Link className='navlink' to='dashboard'>Logout</Link></div>
-</div>
-
-<div className='navcetegories'>
-<p>categories</p>    
-<div className='navlinks' onClick={()=>navigate('dashboard')}><Link className='navlink' to='/product'>Phones and Tablets</Link></div>
-<div className='navlinks' onClick={()=>navigate('dashboard')}><Link className='navlink' to='/product'>Kitchen</Link></div>
-<div className='navlinks' onClick={()=>navigate('dashboard')}><Link className='navlink' to='/product'>Electronics</Link></div>
-<div className='navlinks' onClick={()=>navigate('dashboard')}><Link className='navlink' to='/product'>Nike</Link></div>
-<div className='navlinks' onClick={()=>navigate('dashboard')}><Link className='navlink' to='/product'>Hats</Link></div>
-<div className='navlinks' onClick={()=>navigate('dashboard')}><Link className='navlink' to='/product'>Music Instruments</Link></div>
-<div className='navlinks' onClick={()=>navigate('dashboard')}><Link className='navlink' to='/product'>Sports</Link></div>
-<div className='navlinks' onClick={()=>navigate('dashboard')}><Link className='navlink' to='/product'>Sports</Link></div>
-<div className='navlinks' onClick={()=>navigate('dashboard')}><Link className='navlink' to='/product'>Sports</Link></div>
-<div className='navlinks' onClick={()=>navigate('dashboard')}><Link className='navlink' to='/product'>Sports</Link></div>
-<div className='navlinks' onClick={()=>navigate('dashboard')}><Link className='navlink' to='/product'>Sports</Link></div>
-<div className='navlinks' onClick={()=>navigate('dashboard')}><Link className='navlink' to='/product'>Sports</Link></div>
-</div>
-
-</div>
-</nav>
 
 
 
@@ -153,7 +126,11 @@ export default function Index(){
 
 
 
+
+<ProtectedRoute>
+<UserDashboardNavbar/>
 <Outlet/>
+</ProtectedRoute>
 
 
 
@@ -174,65 +151,7 @@ export default function Index(){
 
 </div>
 
-
-
-
-
-<div className='footercon'>
-    <div className='infocollection'>
-     <form>
-        <input type='email' placeholder='email address'/>
-        <button>Sign Up</button>
-     </form>
-    </div>
-
-    
-<footer>
-<div className='footer1'>
-
-<div className='links'>
-<Link to='/'>Need Help?</Link>
-</div>
-<div className='links'>
-<Link to='/'>How to shop on GrandPro?</Link>
-</div>
-<div className='links'>
-<Link to='/'>Report a product</Link>
-</div>
-
-</div>
-<div className='footer1'>
-<div className='links'>
-<Link to='/'>Need Help?</Link>
-</div>
-<div className='links'>
-<Link to='/'>How to shop on GrandPro?</Link>
-</div>
-<div className='links'>
-<Link to='/'>Report a product</Link>
-</div>
-</div>
-
-
-<div className='footer1'>
-<div className='links'>
-<Link to='/'>Need Help?</Link>
-</div>
-<div className='links'>
-<Link to='/'>How to shop on GrandPro?</Link>
-</div>
-<div className='links'>
-<Link to='/'>Report a product</Link>
-</div>
-</div>
-
-
-</footer>
-
-    <div className='infocollection2'>
-    <p>Copyright © 2022 GrandProsales.com. All rights reserved</p>
-    </div>
-</div>
+<MainFooter/>
 </div>
         </>
     )

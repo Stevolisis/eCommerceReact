@@ -37,6 +37,12 @@ export const resetPassword=createAsyncThunk('userAuth/resetPassword',async (data
 })
 
 
+export const customerAuthStatus=createAsyncThunk('userAuth/customerAuthStatus',async ()=>{
+    loading(true);
+    const response=await api.get('/auth/isCustomerAuth',{withCredentials:true});
+    return response.data;
+})
+
 
 
 const userAuthSlice=createSlice({
@@ -198,6 +204,20 @@ const userAuthSlice=createSlice({
                 error.message,
                 'error'
             )
+        },
+        [customerAuthStatus.fulfilled]: (state,{payload})=>{
+            loading(false);
+            let status=payload.status;
+
+            if(status!=='success'){
+                state.inview={view:'signin'};
+                state.trigger=true;     
+           }
+        },
+        [customerAuthStatus.rejected]: (state,{error})=>{
+            loading(false);
+            state.inview={view:'signin'};
+            state.trigger=true; 
         }
     }
 })

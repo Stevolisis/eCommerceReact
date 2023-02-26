@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-export default function MainContainer(){
+export default function MainFooter(){
 
     return(
 <div className='footercon'>

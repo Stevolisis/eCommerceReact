@@ -93,16 +93,17 @@ import './Loaders/styles/categorySlider.scss';
 import './Loaders/styles/productComponents.scss';
 import './Loaders/styles/CategoryProductListings.scss';
 import './Loaders/styles/topbanner.scss';
+
+
+//-----------------Others--------------------
 import ScrollToTop from './components/Scroll-To-Top';
 import Popupcomponent from './components/Popupcomponent';
 import { useDispatch, useSelector } from 'react-redux';
 import { getInview, getTrigger, setTrigger } from './Redux/Main/userAuthForm';
 import $ from 'jquery';
 import ResetPassword from './containers/main/ResetPassword';
-// import ResetPassword from './containers/main/Resetpassword';
-// import ResetPassword from './containers/main/ResetPassword';
+import ProtectedRoute from './ProtectedRoute';
 
-//Pls work
 
 function App() {
   const trigger=useSelector(getTrigger);
@@ -145,7 +146,7 @@ useMemo(()=>{
         <Route path='help' element={<Help />} />
 
       {/* --------------User Admin Route------------ */}
-      <Route path='/user' element={<Usercontainer/>} >
+      <Route path='/user' element={<Usercontainer />}>
         <Route path='dashboard' element={<Userdashboard />} />
         <Route path='address' element={<Useraddresses/>} />
         <Route path='editaddress/:id' element={<Editaddress/>} />
