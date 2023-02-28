@@ -1,5 +1,5 @@
 import {React,useState} from 'react';
-import { Link ,Outlet,useNavigate} from 'react-router-dom';
+import { Link ,Outlet} from 'react-router-dom';
 import Navbar from '../../components/Navbar';
 import $ from 'jquery';
 import SearchLift from '../../components/searchLift';
@@ -14,7 +14,6 @@ import UserDashboardNavbar from '../../components/userDashboardNavbar';
 export default function Index(){
     const [trigger,setTrigger]=useState(false);
     const [searchStat,setSearchStat]=useState(false);
-    const navigate=useNavigate();
     const products_in_cart=useSelector(getCartItems);
 
     function liftSearch(){

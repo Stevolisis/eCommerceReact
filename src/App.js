@@ -102,7 +102,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getInview, getTrigger, setTrigger } from './Redux/Main/userAuthForm';
 import $ from 'jquery';
 import ResetPassword from './containers/main/ResetPassword';
-import ProtectedRoute from './ProtectedRoute';
 
 
 function App() {
