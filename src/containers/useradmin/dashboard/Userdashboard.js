@@ -1,7 +1,11 @@
 import {React} from 'react';
+import { useSelector } from 'react-redux';
 import Swal from 'sweetalert2';
+import { getCustomerdetails } from '../../../Redux/UserDashboard/customerDetails';
 
 export default function Useraccount(){
+  const customer=useSelector(getCustomerdetails);
+
     const confirmchangepassword=(()=>{
         Swal.fire({
             title: 'Are you sure?',
@@ -27,7 +31,7 @@ export default function Useraccount(){
         <div className='userorderheading'>
             <p>Account Overview</p>
         </div>
-<div className='username'><p>Hi, Steven</p></div>
+<div className='username'><p>Hi, {customer.first_name}</p></div>
 
 
 <div className='overviewcon'>
@@ -36,17 +40,17 @@ export default function Useraccount(){
 <div className='overviewdetails'>
 <div><p>ACCOUNT DETAILS</p></div>
 <div>
-<p><b>Steven Joseph</b></p>
-<p>stevolisisjoseph@gmail.com</p>
+<p><b>{customer.first_name+' '+customer.last_name}</b></p>
+<p>{customer.email}</p>
 </div>
-<div><button onClick={()=>confirmchangepassword()}>CHANGE PASSWORD</button></div>
+<div><button onClick={()=>confirmchangepassword(customer._id)}>CHANGE PASSWORD</button></div>
 </div>
 
 </div>
 
 <div className='overview'>
 
-<div className='overviewdetails'>
+{customer.addresses.length!==0 ?<div className='overviewdetails'>
 <div><p>ADDRESS BOOK</p></div>
 <div>
 <p><b>Your default shipping address:</b></p>
@@ -57,6 +61,17 @@ Yelwa / Fed. Poly, Bauchi
 </div>
 <div><button>EDIT ADDRESS</button></div>
 </div>
+
+:
+
+<div className='overviewdetails'>
+<div><p>ADDRESS BOOK</p></div>
+<div>
+<p>No Address Found</p>
+</div>
+<div><button>ADD ADDRESS</button></div>
+</div>
+}
 
 </div>
 

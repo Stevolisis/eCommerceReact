@@ -3,11 +3,13 @@ import { Link ,Outlet} from 'react-router-dom';
 import Navbar from '../../components/Navbar';
 import $ from 'jquery';
 import SearchLift from '../../components/searchLift';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getCartItems } from '../../Redux/Main/cart';
 import ProtectedRoute from '../../ProtectedRoute';
 import MainFooter from '../../components/Mainfooter';
 import UserDashboardNavbar from '../../components/userDashboardNavbar';
+import { getCustomer } from '../../Redux/UserDashboard/customerDetails';
+import { useEffect } from 'react';
 
 
 
@@ -15,6 +17,7 @@ export default function Index(){
     const [trigger,setTrigger]=useState(false);
     const [searchStat,setSearchStat]=useState(false);
     const products_in_cart=useSelector(getCartItems);
+    const dispatch=useDispatch();
 
     function liftSearch(){
         if($(window).innerWidth()<744){
@@ -23,6 +26,9 @@ export default function Index(){
     }
 
 
+    useEffect(()=>{
+        dispatch(getCustomer());
+    },[])
 
 
     return(
