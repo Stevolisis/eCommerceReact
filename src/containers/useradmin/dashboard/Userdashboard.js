@@ -1,12 +1,16 @@
 import {React} from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import { sendPasswordResetLink } from '../../../Redux/Main/userAuthForm';
 import { getCustomerdetails } from '../../../Redux/UserDashboard/customerDetails';
 
 export default function Useraccount(){
   const customer=useSelector(getCustomerdetails);
+  const navigate=useNavigate();
+  const dispatch=useDispatch();
 
-    const confirmchangepassword=(()=>{
+    const confirmchangepassword=((email)=>{
         Swal.fire({
             title: 'Are you sure?',
             text: "Reset link will be sent to your email!",
@@ -17,11 +21,9 @@ export default function Useraccount(){
             confirmButtonText: 'Yes'
           }).then((result) => {
             if (result.isConfirmed) {
-              Swal.fire(
-                'Email Sent!',
-                'Reset link sent to your email.',
-                'success'
-              )
+              const formdata=new FormData();
+              formdata.append('email',email);
+              dispatch(sendPasswordResetLink(formdata));
             }
           })
        })
@@ -43,24 +45,26 @@ export default function Useraccount(){
 <p><b>{customer.first_name+' '+customer.last_name}</b></p>
 <p>{customer.email}</p>
 </div>
-<div><button onClick={()=>confirmchangepassword(customer._id)}>CHANGE PASSWORD</button></div>
+<div><button onClick={()=>confirmchangepassword(customer.email)}>CHANGE PASSWORD</button></div>
 </div>
 
 </div>
 
 <div className='overview'>
 
-{customer.addresses.length!==0 ?<div className='overviewdetails'>
+{customer.addresses.length!==0 ?
+customer.addresses.filter(address=>address.default==true).map((addressDefault,i)=>{
+<div className='overviewdetails' key={i}>
 <div><p>ADDRESS BOOK</p></div>
 <div>
 <p><b>Your default shipping address:</b></p>
-<p>Steven Joseph
-Abubakar tafawa balewa university,yelwa canpus
-Yelwa / Fed. Poly, Bauchi
-+234 8103987495 </p>
+<p>{addressDefault.first_name+' '+addressDefault.last_name}
+{addressDefault.address+' /'+addressDefault.location.city+','+addressDefault.state+','+addressDefault.country}
+{addressDefault.phone_number1} </p>
 </div>
-<div><button>EDIT ADDRESS</button></div>
+<div><button onClick={()=>navigate(`/user/editaddress`)}>EDIT ADDRESS</button></div>
 </div>
+})
 
 :
 
@@ -69,7 +73,7 @@ Yelwa / Fed. Poly, Bauchi
 <div>
 <p>No Address Found</p>
 </div>
-<div><button>ADD ADDRESS</button></div>
+<div><button onClick={()=>navigate(`/user/addaddress`)}>ADD ADDRESS</button></div>
 </div>
 }
 
