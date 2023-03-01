@@ -1,7 +1,12 @@
+import { useEffect } from 'react';
 import {React} from 'react'
+import { useDispatch } from 'react-redux';
 import Swal from 'sweetalert2';
+import { getCustomer } from '../../../Redux/UserDashboard/customerDetails';
 
 export default function Userwishlist(){
+  const dispatch=useDispatch();
+
   const deleteitem=(()=>{
     Swal.fire({
         title: 'Are you sure?',
@@ -20,7 +25,14 @@ export default function Userwishlist(){
           )
         }
       })
-   })
+   });
+
+
+  useEffect(()=>{
+    dispatch(getCustomer());
+  },[])
+
+
     return(
         <>
           <div className='usermaincon'>

@@ -68,7 +68,7 @@ export default function Addcategory(){
         </div>
 
         <div className='usereditbtn'>
-        <button >ADD</button>
+        <button>ADD</button>
         </div>
         </div>
         </form>            

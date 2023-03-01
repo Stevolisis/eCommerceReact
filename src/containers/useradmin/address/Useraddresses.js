@@ -1,109 +1,73 @@
+import { useEffect } from 'react';
 import {React} from  'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import { getCustomer, getCustomerdetails } from '../../../Redux/UserDashboard/customerDetails';
+import { setDefaultAddress } from '../../../Redux/UserDashboard/userAddress';
 
-export default function Useraddresses({popup,setInview}){
+export default function Useraddresses(){
     const navigate=useNavigate();
-    const setdefault=(()=>{
-        Swal.fire({
-            title: 'Confirm?',
-            text: "Are you sure you want to make this your default address?",
-            icon: 'question',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes'
-          }).then((result) => {
-            if (result.isConfirmed) {
-              Swal.fire(
-                'Default Address!',
-                'This is set as your default address.',
-                'success'
-              )
-            }
-          })
-       })
+    const dispatch=useDispatch();
+    const customer=useSelector(getCustomerdetails);
+
+
+    useEffect(()=>{
+        dispatch(getCustomer());
+    },[])
 
     return(
         <>
         <div className='usermaincon'>
         <div className='userorderheading'>
             <p>Address(3)</p>
-           {popup==='true'? 
-            <button onClick={()=>setInview('adduseraddress')}>Add Popup</button>
+           {/* {popup==='true'? 
+            <button onClick={()=>setInview('adduseraddress')}>Add Address</button>
            :
-             <button onClick={()=>navigate('/user/addaddress')}>Add</button>} 
+             <button onClick={()=>navigate('/user/addaddress')}>Add</button>}  */}
+             <button onClick={()=>navigate('/user/addaddress')}>Add</button>
         </div>
+
         <div className='userorderscon'>
             <div className='useraddresscon'>
-            <div className='overview'>
 
-            <div className='overviewdetails'>
-            <div><p>ADDRESS BOOK</p></div>
-            <div>
-            <p><b>Your default shipping address:</b></p>
-            <p>Steven Joseph</p>
-            <p>Abubakar tafawa balewa university,yelwa campus</p>
-            <p>Yelwa / Fed. Poly, Bauchi</p>
-            <p>+234 8103987495 </p>
-            </div>
-            <div>
-            {popup==='true'? 
-            ''
-            :
-            <button onClick={()=>navigate('/user/editaddress/2343')}>EDIT ADDRESS</button>
-            }
-            <button onClick={()=>setdefault()}>SET AS DEFAULT ADDRESS</button>
-            </div>
-            </div>
+               {customer.addresses&&customer.addresses.length===0 ? 
+               
+                  <div className='overview'>
+                  <div className='overviewdetails'>
+                  No Address Found
+                  </div>
+                  </div>
+         
+               : customer.addresses&&customer.addresses.map(address=>{
+                  return <div className='overview'>
 
-            </div>
+                  <div className='overviewdetails'>
+                  <div><p>ADDRESS BOOK</p></div>
+                  <div>
+                  <p><b>Your default shipping address:</b></p>
+                  <p>{address.first_name+' '+address.last_name}</p>
+                  <p>{address.address}</p>
+                  <p>{address.location.city+' / '+address.location.state+','+address.location.country}</p>
+                  <p>{address.phone_number1} </p>
+                  {address.phone_number2&&<p>{address.phone_number2}</p>} 
+                  </div>
+                  <div>
+                  {/* {popup==='true'? 
+                  ''
+                  :
+                  <button onClick={()=>navigate(`/user/editaddress/${customer._id}`)}>EDIT ADDRESS</button>
+                  } */}
 
-            <div className='overview'>
+                  <button onClick={()=>navigate(`/user/editaddress/${address._id}`)}>EDIT ADDRESS</button>
+                
+                  {!address.default&&<button onClick={()=>dispatch(setDefaultAddress(address._id))}>SET AS DEFAULT ADDRESS</button>}
+                  </div>
+                  </div>
+      
+                  </div>
+               })}
 
-            <div className='overviewdetails'>
-            <div><p>ADDRESS BOOK</p></div>
-            <div>
-            <p><b>Your default shipping address:</b></p>
-            <p>Steven Joseph</p>
-            <p>Abubakar tafawa balewa university,yelwa campus</p>
-            <p>Yelwa / Fed. Poly, Bauchi</p>
-            <p>+234 8103987495 </p>
-            </div>
-            <div>
-            {popup==='true'? 
-            ''
-            :
-            <button onClick={()=>navigate('/user/editaddress/2343')}>EDIT ADDRESS</button>
-            }
-            <button onClick={()=>setdefault()}>SET AS DEFAULT ADDRESS</button>
-            </div>
-            </div>
-
-            </div>
-
-            <div className='overview'>
-
-            <div className='overviewdetails'>
-            <div><p>ADDRESS BOOK</p></div>
-            <div>
-            <p><b>Your default shipping address:</b></p>
-            <p>Steven Joseph</p>
-            <p>Abubakar tafawa balewa university,yelwa campus</p>
-            <p>Yelwa / Fed. Poly, Bauchi</p>
-            <p>+234 8103987495 </p>
-            </div>
-            <div>
-            {popup==='true'? 
-            ''
-            :
-            <button onClick={()=>navigate('/user/editaddress/2343')}>EDIT ADDRESS</button>
-            }
-            <button onClick={()=>setdefault()}>SET AS DEFAULT ADDRESS</button>
-            </div>
-            </div>
-
-            </div>
             </div>
         </div>    
         </div>    

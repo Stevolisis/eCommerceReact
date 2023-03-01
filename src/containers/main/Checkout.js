@@ -45,7 +45,7 @@ return(
 <div className='checkoutaddresscon'>
     <div className='userorderheading'>
         <p>ADDRESS DETAILS</p>
-        <button onClick={()=>(dispatch(setInview({view:'signin'}),dispatch(setTrigger(true))))}>CHANGE</button>
+        <button onClick={()=>(dispatch(setInview({view:'useraddress'}),dispatch(setTrigger(true))))}>CHANGE</button>
         </div>
     <div className='checkoutaddress'>
         <p>Steven Joseph</p>

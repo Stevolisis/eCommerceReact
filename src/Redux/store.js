@@ -13,13 +13,14 @@ import searchResultReducer from "./Main/searchResult";
 import cartReducer from "./Main/cart";
 import userAuthReducer from "./Main/userAuthForm";
 import customerReducer from "./UserDashboard/customerDetails";
+import addressReducer from "./UserDashboard/userAddress";
 
 
 const persistConfig = {
     key: 'root',
     storage,
     version: 1,
-    whitelist:['cartReducer','customerReducer']
+    whitelist:['cartReducer']
   }
   
 const reducer = combineReducers({
@@ -35,6 +36,7 @@ const reducer = combineReducers({
     cartReducer:cartReducer,
     userAuthReducer:userAuthReducer,
     customerReducer:customerReducer,
+    addressReducer:addressReducer,
 })
 
 

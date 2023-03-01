@@ -15,7 +15,7 @@ export default function Popupcomponent(){
     function inviews(){
         if (inview.view==='useraddress') {
             return (
-            <div className='popupaddress'>
+            <div className='popup'>
             <Useraddresses popup='true'/>
             </div>
             ) 

@@ -32,7 +32,14 @@ const customerSlice=createSlice({
                    'warning'
                );
            }
-        }
+        },[getCustomer.rejected]: (state,{error})=>{
+            loading(false);
+            Swal.fire(
+                "Error Occured",
+                error.message,
+                'error'
+            )
+        },
     }
 })
 

@@ -49,7 +49,8 @@ const userAuthSlice=createSlice({
     name:'userAuth',
     initialState:{
         trigger:false,
-        inview:{view:'',type:''}
+        inview:{view:'',type:''},
+        redirectPath:''
     },
     reducers:{
         setTrigger:(state,{payload})=>{

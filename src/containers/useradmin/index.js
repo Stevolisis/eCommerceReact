@@ -3,13 +3,11 @@ import { Link ,Outlet} from 'react-router-dom';
 import Navbar from '../../components/Navbar';
 import $ from 'jquery';
 import SearchLift from '../../components/searchLift';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { getCartItems } from '../../Redux/Main/cart';
-import ProtectedRoute from '../../ProtectedRoute';
 import MainFooter from '../../components/Mainfooter';
 import UserDashboardNavbar from '../../components/userDashboardNavbar';
-import { getCustomer } from '../../Redux/UserDashboard/customerDetails';
-import { useEffect } from 'react';
+
 
 
 
@@ -17,7 +15,6 @@ export default function Index(){
     const [trigger,setTrigger]=useState(false);
     const [searchStat,setSearchStat]=useState(false);
     const products_in_cart=useSelector(getCartItems);
-    const dispatch=useDispatch();
 
     function liftSearch(){
         if($(window).innerWidth()<744){
@@ -26,9 +23,7 @@ export default function Index(){
     }
 
 
-    useEffect(()=>{
-        dispatch(getCustomer());
-    },[])
+
 
 
     return(
@@ -66,25 +61,19 @@ export default function Index(){
 
 
 
-
-
-
-
-
-
 <div className='header'>
     <div className='categoryspace'>
             <h2><Link to='/'><img src='https://e-commerce-three-neon.vercel.app/favicon.svg' alt='L-'/> GrandProSales </Link></h2>
     </div>
 
 
-<div className='searchcon'>
+<div className='searchcon' style={{display:'flex',alignItems:'center',justifyContent:'space-between'}}>
     <div className='search3'>
     <input type='text' placeholder='Search products,brands and categories...' onFocus={()=>liftSearch()}/>
     <i className='fa fa-search' onClick={()=>liftSearch()}/>
-    <Navbar id='nav' setTrigger={setTrigger}/>    
 
-    </div>
+    </div>    <Navbar id='nav' setTrigger={setTrigger}/>    
+
 </div>
 
 
@@ -132,10 +121,8 @@ export default function Index(){
 
 
 
-<ProtectedRoute>
 <UserDashboardNavbar/>
 <Outlet/>
-</ProtectedRoute>
 
 
 

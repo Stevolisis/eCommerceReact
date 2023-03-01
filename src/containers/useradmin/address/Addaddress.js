@@ -1,14 +1,15 @@
 import {React} from 'react';
-import Swal from 'sweetalert2';
+import { useDispatch } from 'react-redux';
+import { addAddress } from '../../../Redux/UserDashboard/userAddress';
 
 export default function Adduseraddress(){
-    const addspec=(()=>{
-        Swal.fire(
-          'Successful!',
-          'Added to your Addresses.',
-          'success'
-        )
-        });
+    const dispatch=useDispatch();
+
+    function handleSubmit(e){
+        e.preventDefault();
+        const formData=new FormData(e.target)
+        dispatch(addAddress(formData));
+    };
 
     return(
         <>
@@ -16,14 +17,15 @@ export default function Adduseraddress(){
         <div className='userorderheading'><p>Add Address</p></div>
         <div className='userorderscon'>
          
+        <form onSubmit={handleSubmit}>
         <div className='usereditnamecon'>
         <div className='usereditname'>
             <p>First Name</p>
-            <input type='text'/>
+            <input required='required' name='first_name' type='text'/>
         </div>
         <div className='usereditname'>
             <p>Last Name</p>
-            <input type='text' />
+            <input required='required' name='last_name' type='text' />
         </div>
 
         </div>
@@ -33,26 +35,26 @@ export default function Adduseraddress(){
         <div className='usereditnumber'>
         <div className='usereditprefix'>
             <p>Prefix</p>
-            <select>
+            <select name='prefix1' required='required'>
                 <option defaultValue='selected' value='+234'>Nigeria (+234)</option>
             </select>
         </div>
         <div className='usereditphonenumber'>
             <p>Phone Number</p>
-            <input type='text' />
+            <input required='required' name='phone_number1' type='number' />
         </div>
         </div>
 
         <div className='usereditnumber'>
         <div className='usereditprefix'>
             <p>Prefix</p>
-            <select>
+            <select name='prefix2'>
                 <option defaultValue='selected' value='+234'>Nigeria (+234)</option>
             </select>
         </div>
         <div className='usereditphonenumber'>
             <p>Phone Number 2</p>
-            <input type='text' />
+            <input name='phone_number2' type='number' />
         </div>
         </div>
 
@@ -61,11 +63,11 @@ export default function Adduseraddress(){
         <div className='usereditnamecon'>
         <div className='usereditname'>
             <p>Address</p>
-            <input type='text' placeholder='Street address, P.O.box...'/>
+            <input required='required' name='address' type='text' placeholder='Street address, P.O.box...'/>
         </div>
         <div className='usereditname'>
             <p>Zip/Postal Code</p>
-            <input type='text'/>
+            <input required='required' name='postal_code' type='text'/>
         </div>
 
         </div>
@@ -73,45 +75,53 @@ export default function Adduseraddress(){
         <div className='usereditadditionalinfocon'>
             <div className='usereditadditionalinfo'>
             <p>Additional Information</p>
-            <input type='text' />
+            <input name='additional_info' type='text' />
             </div>
         </div>
 
         <div className='usereditloactioncon'>
             <div className='usereditloaction'>
             <p>Country</p>
-            <select>
-            <option defaultValue='selected' value='+234'>Afghanistan</option>
-            <option value='+234'>Angola</option>
-            <option value='+234'>Ethopia</option>
-            <option value='+234'>Germany</option>
+            <select name='country' required='required'>
+            <option defaultValue='selected' value='Afghanistan'>Afghanistan</option>
+            <option value='Angola'>Angola</option>
+            <option value='Ethopia'>Ethopia</option>
+            <option value='Germany'>Germany</option>
             </select>
             </div>
 
             <div className='usereditloaction'>
             <p>State</p>
-            <select>
-            <option defaultValue='selected' value='+234'>Abia</option>
-            <option value='+234'>Adamawa</option>
-            <option value='+234'>Bauchi</option>
-            <option value='+234'>Plateau</option>
+            <select name='state' required='required'>
+            <option defaultValue='selected' value='Abia'>Abia</option>
+            <option value='Adamawa'>Adamawa</option>
+            <option value='Bauchi'>Bauchi</option>
+            <option value='Plateau'>Plateau</option>
             </select>
             </div>
 
             <div className='usereditloaction'>
-            <p>Country</p>
-            <select>
-            <option defaultValue='selected' value='+234'>Yelwa</option>
-            <option value='+234'>Darazo </option>
-            <option value='+234'>Wunti </option>
-            <option value='+234'>ATBU </option>
+            <p>City</p>
+            <select name='city' required='required'>
+            <option defaultValue='selected' value='Yelwa'>Yelwa</option>
+            <option value='Darazo'>Darazo </option>
+            <option value='Wunti'>Wunti </option>
+            <option value='ATBU'>ATBU </option>
             </select>
             </div>
         </div>
 
-        <div className='usereditbtn'>
-        <button onClick={()=>addspec()}>ADD</button>
+        <div className='paymentmethods' style={{padding:'0 10px 20px 10px'}}>
+        <input type='checkbox' name='defaultAddress' value='Payment On Delivery' id='Stripe'/>
+        <p><label htmlFor='Stripe'>Set as default Address</label></p>
         </div>
+
+        <div className='usereditbtn'>
+        <button onClick={()=>addAddress()}>ADD</button>
+        </div>
+
+        </form>
+
         </div>    
         </div>    
         </>
