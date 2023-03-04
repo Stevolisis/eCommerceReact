@@ -35,14 +35,7 @@ export default function Searchbar({route,setTogglefilter,togglefilter,liftSearch
         })     
     }
 
-    // useEffect(() => {
-    //   $(document).on("click", function(event){
-    //     console.log(event.target.className);
-    // })     
-    //     return () => {
-    //         $(document).off("click")
-    //     }
-    // },[]);
+
 
 
 

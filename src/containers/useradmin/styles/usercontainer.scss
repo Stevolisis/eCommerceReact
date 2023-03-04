@@ -2,6 +2,7 @@
 
 .userdashboardcon{
     display: flex;
+    
 }
 
 
@@ -31,6 +32,42 @@
         color: rgb(89, 114, 185);
     }
 }
+
+
+
+.result-container2{
+    position: absolute;
+    width: 100%;
+	padding: 10px;
+    padding-left: 0;
+    box-sizing: border-box;
+    margin-top: -3px;
+
+    a{
+        border-bottom: 1px solid $color105;
+        padding: 10px;
+        padding-right: 38px !important;
+        width: 100%;
+        background: $color50;
+        color: $color60;
+        text-decoration: none;
+        font-size: 12px;
+    }
+
+    span{
+        margin-left: 10px;
+        font-size: 7px;
+        border-radius: 4px 4px 0 4px;
+        padding: 3px;
+        color: $color50;
+    }
+
+    .search{
+        margin-right: 0px;
+    }
+}
+
+
 
 
 nav{
