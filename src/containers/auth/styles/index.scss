@@ -1,0 +1,57 @@
+@import '../../main/styles/variables2';
+
+
+.authContainer{
+    width:100vw;
+    height:100vh;
+    display:flex;
+    flex-direction: column;
+    justify-content:center;
+    align-items:center;
+    background:#051b30;
+    overflow: hidden;
+}
+
+.authImg{
+    position: absolute;
+    overflow: hidden;
+    width:100vw;
+    height:100vh;
+
+    img{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}
+
+.authLogo{
+    z-index: 1;
+    img{
+        width: 30vw;
+        height: 10vw;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+@media (max-width:750px) {
+    
+.authLogo{
+    
+    img{
+        width: 35vw;
+        height: 15vw;
+    }
+}
+
+
+}

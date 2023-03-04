@@ -1,12 +1,12 @@
 import { React } from 'react';
 import Addaddress from '../containers/useradmin/address/Addaddress';
-import Passcode from '../containers/main/Passcode';
-import Signin from '../containers/main/Signin';
-import Signup from '../containers/main/Signup';
+import Passcode from '../components/auth/Passcode';
+import Signin from '../components/auth/Signin';
+import Signup from '../components/auth/Signup';
 import Useraddresses from '../containers/useradmin/address/Useraddresses';
 import { useSelector } from 'react-redux';
 import { getInview } from '../Redux/Main/userAuthForm';
-import PasswordReset from '../containers/main/PasswordReset';
+import PasswordReset from '../components/auth/PasswordReset';
 
 export default function Popupcomponent(){
     const inview=useSelector(getInview);

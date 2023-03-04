@@ -16,7 +16,7 @@ export default function Signin(){
     return(
         <>
         <div className='signincon'>
-            <div className='siginheading'><p>Sign In</p></div>
+            <div className='siginheading'><p>Log In</p></div>
             <form onSubmit={handleSubmit}>
             <div className='admineditnamecon'>
             <div className='admineditname'>

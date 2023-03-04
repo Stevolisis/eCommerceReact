@@ -101,7 +101,15 @@ import Popupcomponent from './components/Popupcomponent';
 import { useDispatch, useSelector } from 'react-redux';
 import { getInview, getTrigger, setTrigger } from './Redux/Main/userAuthForm';
 import $ from 'jquery';
-import ResetPassword from './containers/main/ResetPassword';
+// import ResetPassword from './components/auth/ResetPassword';
+import Auth from './containers/auth';
+import Login from './containers/auth/login';
+import SignUp from './containers/auth/signUp';
+import ResetPassword from './containers/auth/resetPassword';
+import PasswordReset from './containers/auth/passwordReset';
+import Passcode from './containers/auth/passcode';
+import './containers/auth/styles/index.scss';
+
 
 
 function App() {
@@ -131,18 +139,34 @@ useMemo(()=>{
  <MainLoader/> 
     <BrowserRouter>
     <ScrollToTop/>
-    {trigger &&<Popupcomponent/>}
+    {/* {trigger &&<Popupcomponent/>} */}
       <Routes>  
       {/* -------------Main Route------------- */}
       <Route path='/' element={<Index />} />
       <Route path='/index2' element={<Index2 />} />
-        <Route path='/resetPassword/:passwordResetLink' element={<ResetPassword />} />
+        {/* <Route path='/resetPassword/:passwordResetLink' element={<ResetPassword />} /> */}
         <Route path='/:category/:slug' element={<Products />} />
         {/* <Route path='/products/:slug' element={<Products />} /> */}
         <Route path='/product/:slug' element={<Product />} />
         <Route path='cart' element={<Cart />} />
         <Route path='checkout' element={<Checkout />} />
         <Route path='help' element={<Help />} />
+
+
+
+
+      {/* --------------Auth Route------------ */}
+      <Route path='/auth' element={<Auth />}>
+      <Route path='login' element={<Login />} />
+      <Route path='signup' element={<SignUp />} />
+      <Route path='resetPassword' element={<ResetPassword />} />
+      <Route path='passwordReset' element={<PasswordReset />} />
+      <Route path='passcode' element={<Passcode />} />
+      </Route>
+
+
+
+
 
       {/* --------------User Admin Route------------ */}
       <Route path='/user' element={<Usercontainer />}>
