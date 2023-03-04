@@ -120,22 +120,24 @@ border-radius: 5px;
     }
 
     .section1{
-        height: 45vw;
+        flex-direction: column-reverse;
+        height: auto;
     }
     .sub1section1{
-        display: none;
+        flex-direction: row;
+        width: 100%;
+        height: 30vw;
+        margin: 10px 0 0 0 !important;
     }
-    // .section1{
-    //     margin-top: 10px 0 !important;
-    //     // border-radius: 0px;
-    // }
+    .subimage{
+        height: 100%;
+        width: 49%;
+    }
     .slidebtncon{
         width: calc(87%);
     }
-    // .sub2section1{
-    //     border-radius: 0;
-    // }
-    // .slidebanner{
-    //     border-radius: 0;
-    // }
+    .sub2section1{
+        height: 45vw;
+    }
+
 }

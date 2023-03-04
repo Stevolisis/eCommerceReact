@@ -49,7 +49,7 @@ export default function MainContainer({route,setTogglefilter,togglefilter,data})
 
 <div className='header2'>
     <div className='categoryspace2'>
-    <h2><Link to='/'><img src='https://e-commerce-three-neon.vercel.app/favicon.svg' alt=''/> GrandProSales </Link></h2>
+    <h2><Link to='/'><img src='/elite-plaza17.png' alt=''/>  </Link></h2>
     
     {route==='products'? 
     <div className='currentcateg' style={{display:'block'}}>
@@ -73,7 +73,7 @@ export default function MainContainer({route,setTogglefilter,togglefilter,data})
 
 <div className='header'>
     <div className='categoryspace'>
-    <h2><Link to='/'><img src='/favicon.svg' alt=''/> GrandProSales </Link></h2>
+    <h2><Link to='/'><img src='/elite-plaza17.png' alt=''/>  </Link></h2>
     {route==='products'? 
     <div className='currentcateg' style={{display:'block'}}>
     <i className='fa fa-caret-right ' />

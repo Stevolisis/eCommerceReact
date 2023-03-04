@@ -1,4 +1,4 @@
 
-export const baseUrl='http://localhost:80';
-export const baseUrl2='https://ecommerce-api-ivory.vercel.app';
+export const baseUrl2='http://localhost:80';
+export const baseUrl='https://ecommerce-api-ivory.vercel.app';
 
