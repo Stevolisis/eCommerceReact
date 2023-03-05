@@ -59,8 +59,7 @@ const userAuthSlice=createSlice({
         setInview:(state,{payload})=>{
             state.inview={view:payload.view,type:payload.type}
         },
-        setRedirectPath:(state,payload)=>{
-            console.log(payload)
+        setRedirectPath:(state,{payload})=>{
             state.redirectPath=payload
         }
     },
@@ -71,7 +70,7 @@ const userAuthSlice=createSlice({
             let next=payload.next;
 
             if(status==='success'){
-                state.redirectPath=next&&next;             
+                state.redirectPath=next;             
             }else if(status==='Account not verified'){
                Swal.fire(
                'Verification',
@@ -228,4 +227,5 @@ const userAuthSlice=createSlice({
 export const{setTrigger, setInview, setRedirectPath}=userAuthSlice.actions;
 export const getTrigger=(state)=>state.userAuthReducer.trigger;
 export const getInview=(state)=>state.userAuthReducer.inview;
+export const getRedirectPath=(state)=>state.userAuthReducer.redirectPath;
 export default userAuthSlice.reducer;

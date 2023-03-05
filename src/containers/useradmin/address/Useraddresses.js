@@ -1,8 +1,9 @@
 import { useEffect } from 'react';
 import {React} from  'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import { setRedirectPath } from '../../../Redux/Auth/userAuthForm';
 import { getCustomer, getCustomerdetails } from '../../../Redux/UserDashboard/customerDetails';
 import { setDefaultAddress } from '../../../Redux/UserDashboard/userAddress';
 
@@ -10,10 +11,11 @@ export default function Useraddresses(){
     const navigate=useNavigate();
     const dispatch=useDispatch();
     const customer=useSelector(getCustomerdetails);
-    const [searchParams]=useSearchParams();
+    const location=useLocation();
 
     useEffect(()=>{
-        dispatch(getCustomer(searchParams.get('next')));
+        dispatch(getCustomer())
+        .then(res=>{if(res.payload.status!=='success') dispatch(setRedirectPath('/auth/login?next='+location.pathname))})
     },[])
 
     return(
@@ -39,8 +41,8 @@ export default function Useraddresses(){
                   </div>
                   </div>
          
-               : customer.addresses&&customer.addresses.map(address=>{
-                  return <div className='overview'>
+               : customer.addresses&&customer.addresses.map((address,i)=>{
+                  return <div className='overview' key={i}>
 
                   <div className='overviewdetails'>
                   <div><p>ADDRESS BOOK</p></div>
@@ -48,7 +50,7 @@ export default function Useraddresses(){
                   <p><b>Your default shipping address:</b></p>
                   <p>{address.first_name+' '+address.last_name}</p>
                   <p>{address.address}</p>
-                  <p>{address.location.city+' / '+address.location.state+','+address.location.country}</p>
+                  {/* <p>{address.location.city+' / '+address.location.state+','+address.location.country}</p> */}
                   <p>{address.phone_number1} </p>
                   {address.phone_number2&&<p>{address.phone_number2}</p>} 
                   </div>

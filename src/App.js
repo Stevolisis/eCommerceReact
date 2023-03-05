@@ -110,6 +110,7 @@ import PasswordReset from './containers/auth/passwordReset';
 import Passcode from './containers/auth/passcode';
 import './containers/auth/styles/index.scss';
 import { useEffect } from 'react';
+import Navigate from './components/auth/Navigate';
 
 
 
@@ -144,6 +145,7 @@ useEffect(()=>{
  <MainLoader/> 
     <BrowserRouter>
     <ScrollToTop/>
+    <Navigate/>
     {/* {trigger &&<Popupcomponent/>} */}
       <Routes>  
       {/* -------------Main Route------------- */}

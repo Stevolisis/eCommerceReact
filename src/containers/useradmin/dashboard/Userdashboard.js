@@ -1,15 +1,16 @@
 import { useEffect } from 'react';
 import {React} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import { sendPasswordResetLink } from '../../../Redux/Auth/userAuthForm';
+import { sendPasswordResetLink, setRedirectPath } from '../../../Redux/Auth/userAuthForm';
 import { getCustomer, getCustomerdetails } from '../../../Redux/UserDashboard/customerDetails';
 
 export default function Useraccount(){
   const customer=useSelector(getCustomerdetails);
   const navigate=useNavigate();
   const dispatch=useDispatch();
+  const location=useLocation();
 
     const confirmchangepassword=((email)=>{
         Swal.fire({
@@ -30,7 +31,8 @@ export default function Useraccount(){
        });
 
     useEffect(()=>{
-        dispatch(getCustomer());
+        dispatch(getCustomer())
+        .then(res=>{if(res.payload.status!=='success') dispatch(setRedirectPath('/auth/login?next='+location.pathname))})
     },[])
 
 

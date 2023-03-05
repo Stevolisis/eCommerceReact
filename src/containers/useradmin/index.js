@@ -18,7 +18,6 @@ export default function Index(){
     const [trigger,setTrigger]=useState(false);
     const [searchStat,setSearchStat]=useState(false);
     const products_in_cart=useSelector(getCartItems);
-    const [filterStatus,setfilterStatus]=useState(false);
     const [searchesStat,setSearchesStat]=useState(false);
     const [searchValue,setSearchValue]=useState(true);
     const dispatch=useDispatch();
