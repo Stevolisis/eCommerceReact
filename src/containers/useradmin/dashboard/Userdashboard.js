@@ -3,7 +3,7 @@ import {React} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import { sendPasswordResetLink } from '../../../Redux/Main/userAuthForm';
+import { sendPasswordResetLink } from '../../../Redux/Auth/userAuthForm';
 import { getCustomer, getCustomerdetails } from '../../../Redux/UserDashboard/customerDetails';
 
 export default function Useraccount(){

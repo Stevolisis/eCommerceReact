@@ -1,14 +1,16 @@
 import {React} from 'react';
 import { useDispatch } from 'react-redux';
+import { useSearchParams } from 'react-router-dom';
 import { addAddress } from '../../../Redux/UserDashboard/userAddress';
 
 export default function Adduseraddress(){
     const dispatch=useDispatch();
+    const [searchParams]=useSearchParams();
 
     function handleSubmit(e){
         e.preventDefault();
         const formData=new FormData(e.target)
-        dispatch(addAddress(formData));
+        dispatch(addAddress({next:searchParams.get('next'),data:formData}));
     };
 
     return(

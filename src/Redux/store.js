@@ -11,7 +11,7 @@ import mainRedux from "./Main/mainRedux";
 import relatedProductsReducer from "./Main/relatedProducts";
 import searchResultReducer from "./Main/searchResult";
 import cartReducer from "./Main/cart";
-import userAuthReducer from "./Main/userAuthForm";
+import userAuthReducer from "./Auth/userAuthForm";
 import customerReducer from "./UserDashboard/customerDetails";
 import addressReducer from "./UserDashboard/userAddress";
 

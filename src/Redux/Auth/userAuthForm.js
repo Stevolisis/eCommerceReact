@@ -6,8 +6,8 @@ import api from "../../Utils/axiosConfig";
 
 export const customerLogin=createAsyncThunk('userAuth/customerLogin',async (data)=>{
     loading(true);
-    const response=await api.post('/auth/customerLogin',data,{withCredentials:true});
-    return response.data;
+    const response=await api.post('/auth/customerLogin',data.data,{withCredentials:true});
+    return {next:data.next,data:response.data};
 })
 
 export const customerSignUp=createAsyncThunk('userAuth/customerSignUp',async (data)=>{
@@ -58,23 +58,27 @@ const userAuthSlice=createSlice({
         },
         setInview:(state,{payload})=>{
             state.inview={view:payload.view,type:payload.type}
+        },
+        setRedirectPath:(state,payload)=>{
+            console.log(payload)
+            state.redirectPath=payload
         }
     },
     extraReducers:{
         [customerLogin.fulfilled]: (state,{payload})=>{
             loading(false);
-            let status=payload.status;
+            let status=payload.data.status;
+            let next=payload.next;
 
             if(status==='success'){
-                state.trigger=false;             
+                state.redirectPath=next&&next;             
             }else if(status==='Account not verified'){
                Swal.fire(
                'Verification',
                'Account not verified',
                'warning'
             );   
-            state.inview={view:'passcode',type:'static'};
-            state.trigger=true;              
+            state.redirectPath='/auth/passcode'            
             }else{
                Swal.fire(
                    'Error Occured!',
@@ -101,8 +105,7 @@ const userAuthSlice=createSlice({
                    'Please verify your account',
                    'success'
                ); 
-               state.inview={view:'passcode',type:'static'};
-               state.trigger=true;              
+               state.redirectPath='/auth/passcode'             
            }else{
                Swal.fire(
                    'Error Occured!',
@@ -129,8 +132,7 @@ const userAuthSlice=createSlice({
                    'Account Verified',
                    'success'
                ); 
-               state.inview={view:'signin'};
-               state.trigger=true;             
+               state.redirectPath='/auth/login'            
            }else{
                Swal.fire(
                    'Error Occured!',
@@ -158,8 +160,7 @@ const userAuthSlice=createSlice({
                    'Link sent to email',
                    'success'
                ); 
-               state.inview={view:'signin'};
-               state.trigger=true;             
+               state.redirectPath='/auth/login';           
            }else{
                Swal.fire(
                    'Error Occured!',
@@ -187,8 +188,7 @@ const userAuthSlice=createSlice({
                    'Your Password has been updated',
                    'success'
                ); 
-               state.inview={view:'navigatetomain'};
-               state.trigger=false;             
+               state.redirectPath='/'           
            }else{
                Swal.fire(
                    'Error Occured!',
@@ -225,7 +225,7 @@ const userAuthSlice=createSlice({
 
 
 
-export const{setTrigger, setInview}=userAuthSlice.actions;
+export const{setTrigger, setInview, setRedirectPath}=userAuthSlice.actions;
 export const getTrigger=(state)=>state.userAuthReducer.trigger;
 export const getInview=(state)=>state.userAuthReducer.inview;
 export default userAuthSlice.reducer;

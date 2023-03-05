@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import {  useParams, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { resetPassword } from '../../Redux/Main/userAuthForm';
+import { resetPassword } from '../../Redux/Auth/userAuthForm';
 
 export default function ResetPassword(){
    const {passwordResetLink}=useParams();

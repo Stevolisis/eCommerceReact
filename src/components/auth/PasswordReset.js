@@ -1,6 +1,6 @@
 import {React} from 'react';
 import { useDispatch } from 'react-redux';
-import { sendPasswordResetLink } from '../../Redux/Main/userAuthForm';
+import { sendPasswordResetLink } from '../../Redux/Auth/userAuthForm';
 
 
 

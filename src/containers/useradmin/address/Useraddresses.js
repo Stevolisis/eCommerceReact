@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import {React} from  'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { getCustomer, getCustomerdetails } from '../../../Redux/UserDashboard/customerDetails';
 import { setDefaultAddress } from '../../../Redux/UserDashboard/userAddress';
@@ -10,10 +10,10 @@ export default function Useraddresses(){
     const navigate=useNavigate();
     const dispatch=useDispatch();
     const customer=useSelector(getCustomerdetails);
-
+    const [searchParams]=useSearchParams();
 
     useEffect(()=>{
-        dispatch(getCustomer());
+        dispatch(getCustomer(searchParams.get('next')));
     },[])
 
     return(

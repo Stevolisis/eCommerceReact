@@ -99,7 +99,7 @@ import './Loaders/styles/topbanner.scss';
 import ScrollToTop from './components/Scroll-To-Top';
 import Popupcomponent from './components/Popupcomponent';
 import { useDispatch, useSelector } from 'react-redux';
-import { getInview, getTrigger, setTrigger } from './Redux/Main/userAuthForm';
+import { getInview, getTrigger, setTrigger } from './Redux/Auth/userAuthForm';
 import $ from 'jquery';
 // import ResetPassword from './components/auth/ResetPassword';
 import Auth from './containers/auth';
@@ -109,6 +109,7 @@ import ResetPassword from './containers/auth/resetPassword';
 import PasswordReset from './containers/auth/passwordReset';
 import Passcode from './containers/auth/passcode';
 import './containers/auth/styles/index.scss';
+import { useEffect } from 'react';
 
 
 
@@ -128,6 +129,10 @@ useMemo(()=>{
       });  
 
 },[inview]);
+
+useEffect(()=>{
+
+},[])
 
 
 

@@ -1,6 +1,6 @@
 import {React} from 'react';
 import { useDispatch } from 'react-redux';
-import { verifyCustomer } from '../../Redux/Main/userAuthForm';
+import { verifyCustomer } from '../../Redux/Auth/userAuthForm';
 
 export default function Passcode(){
     const dispatch=useDispatch();

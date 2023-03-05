@@ -4,7 +4,7 @@ import Swal from 'sweetalert2';
 import Mainheader from '../../components/main_page_layouts/Mainheader';
 import Mainfooter from '../../components/Mainfooter'
 import { useDispatch } from 'react-redux';
-import { setInview, setTrigger } from '../../Redux/Main/userAuthForm';
+import { setInview, setTrigger } from '../../Redux/Auth/userAuthForm';
 
 export default function Checkout(){
 

@@ -7,7 +7,7 @@ import { Outlet} from 'react-router-dom';
 // import Useraddresses from '../containers/useradmin/address/Useraddresses';
 import { useSelector } from 'react-redux';
 // import PasswordReset from '../components/auth/PasswordReset';
-import { getInview } from '../../Redux/Main/userAuthForm';
+import { getInview } from '../../Redux/Auth/userAuthForm';
 
 export default function Auth(){
     const inview=useSelector(getInview);

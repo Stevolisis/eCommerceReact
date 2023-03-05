@@ -2,7 +2,8 @@ import {React, useRef, useState} from 'react';
 import Swal from 'sweetalert2';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
-import { customerSignUp, setInview, setTrigger } from '../../Redux/Main/userAuthForm';
+import { customerSignUp, setInview, setTrigger } from '../../Redux/Auth/userAuthForm';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
 export default function Signup(){
     const password=useRef();
@@ -10,6 +11,8 @@ export default function Signup(){
     const [checkLength,setcheckLength]=useState('');
     const [checkMatch,setcheckMatch]=useState('');
     const dispatch=useDispatch();
+    const navigate=useNavigate();
+    const [searchParams]=useSearchParams();
 
     
  function passwordLength(){
@@ -87,7 +90,7 @@ export default function Signup(){
         </div>
         <div className='usereditbtn'>
         <button>SUBMIT</button>
-        <div className='signlink2'>Already have an account?  <span onClick={()=>(dispatch(setInview({view:'signin'})),dispatch(setTrigger(true)))}>Sign In</span></div>
+        <div className='signlink2'>Already have an account?  <span onClick={()=>navigate(`/auth/login`)}>Sign In</span></div>
         </div>
         </form>
         </div>

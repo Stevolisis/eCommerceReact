@@ -5,7 +5,7 @@ import Signin from '../components/auth/Signin';
 import Signup from '../components/auth/Signup';
 import Useraddresses from '../containers/useradmin/address/Useraddresses';
 import { useSelector } from 'react-redux';
-import { getInview } from '../Redux/Main/userAuthForm';
+import { getInview } from '../Redux/Auth/userAuthForm';
 import PasswordReset from '../components/auth/PasswordReset';
 
 export default function Popupcomponent(){

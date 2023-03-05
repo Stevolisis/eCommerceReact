@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import Swal from "sweetalert2";
 import { loading } from "../../Loaders/setMainLoader";
 import api from "../../Utils/axiosConfig";
+import { setRedirectPath } from "../Auth/userAuthForm";
 
 
 
@@ -26,11 +27,7 @@ const customerSlice=createSlice({
             if(status==='success'){
                 state.customer=payload.data;
            }else{
-               Swal.fire(
-                   'Error Occured!',
-                   `${status}`,
-                   'warning'
-               );
+               setRedirectPath('/login')
            }
         },[getCustomer.rejected]: (state,{error})=>{
             loading(false);
