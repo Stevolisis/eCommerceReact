@@ -1,16 +1,24 @@
 import {React} from 'react';
 import { useDispatch } from 'react-redux';
-import { useSearchParams } from 'react-router-dom';
+import { useLocation, useSearchParams } from 'react-router-dom';
+import { setRedirectPath } from '../../../Redux/Auth/userAuthForm';
 import { addAddress } from '../../../Redux/UserDashboard/userAddress';
 
 export default function Adduseraddress(){
     const dispatch=useDispatch();
-    const [searchParams]=useSearchParams();
+    const location=useLocation();
+    const [queryString]=useSearchParams();
 
     function handleSubmit(e){
         e.preventDefault();
         const formData=new FormData(e.target)
-        dispatch(addAddress({next:searchParams.get('next'),data:formData}));
+        dispatch(addAddress(formData))
+        .then(res=>{
+            if(res.payload.status!=='success'){
+                if(queryString.get('next')) dispatch(setRedirectPath('/auth/login?next='+queryString.get('next')))
+                if(!queryString.get('next')) dispatch(setRedirectPath('/auth/login?next='+location.pathname))            
+            }
+        })
     };
 
     return(

@@ -26,6 +26,7 @@ const customerSlice=createSlice({
             if(status==='success'){
                 state.customer=payload.data;
            }
+           
         },[getCustomer.rejected]: (state,{error})=>{
             loading(false);
             Swal.fire(

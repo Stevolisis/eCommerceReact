@@ -12,11 +12,21 @@ export default function Useraddresses(){
     const dispatch=useDispatch();
     const customer=useSelector(getCustomerdetails);
     const location=useLocation();
+    const [queryString]=useSearchParams();
+
 
     useEffect(()=>{
         dispatch(getCustomer())
-        .then(res=>{if(res.payload.status!=='success') dispatch(setRedirectPath('/auth/login?next='+location.pathname))})
+        .then(res=>{
+            if(res.payload.status!=='success'){
+                if(queryString.get('next')) dispatch(setRedirectPath('/auth/login?next='+queryString.get('next')))
+                if(!queryString.get('next'))dispatch(setRedirectPath('/auth/login?next='+location.pathname))            
+            }
+        })
     },[])
+
+
+
 
     return(
         <>
@@ -50,16 +60,11 @@ export default function Useraddresses(){
                   <p><b>Your default shipping address:</b></p>
                   <p>{address.first_name+' '+address.last_name}</p>
                   <p>{address.address}</p>
-                  {/* <p>{address.location.city+' / '+address.location.state+','+address.location.country}</p> */}
+                  <p>{address.location.city+' / '+address.location.state+','+address.location.country}</p>
                   <p>{address.phone_number1} </p>
                   {address.phone_number2&&<p>{address.phone_number2}</p>} 
                   </div>
                   <div>
-                  {/* {popup==='true'? 
-                  ''
-                  :
-                  <button onClick={()=>navigate(`/user/editaddress/${customer._id}`)}>EDIT ADDRESS</button>
-                  } */}
 
                   <button onClick={()=>navigate(`/user/editaddress/${address._id}`)}>EDIT ADDRESS</button>
                 

@@ -24,19 +24,19 @@ export default function Navbar({id,setTrigger,admin}){
     return(
 <>
       {admin==='true' ?
-              <div className={id+id} id='nav'>
-              <i  className='fa fa-bars' onClick={()=>{
-              $(`${id}`).css('margin-left','0');
-              setTrigger(true);
-             }}></i>
-             </div>
-             :
-       <div className={id+id} id='nav'>
-       <i  className='fa fa-bars' onClick={()=>{
-       $(`${id}`).css('margin-left','0');
-       setTrigger(true);
-      }}></i></div>
-        
+            <div className={id+id} id='nav'>
+                <i  className='fa fa-bars' onClick={()=>{
+                $(`${id}`).css('margin-left','0');
+                setTrigger(true);
+                }}></i>
+            </div>
+        :
+            <div className={id+id} id='nav'>
+                <i  className='fa fa-bars' onClick={()=>{
+                $(`${id}`).css('margin-left','0');
+                setTrigger(true);
+                }}></i>
+            </div>
     }
 </>
     )

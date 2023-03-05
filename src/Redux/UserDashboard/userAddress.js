@@ -35,13 +35,8 @@ const addressSlice=createSlice({
                     'This is set as your default address.',
                     'success'
                   )         
-            }else{
-               Swal.fire(
-                   'Error Occured!',
-                   `${status}`,
-                   'warning'
-               );
-           }
+            }
+            
         },[addAddress.rejected]: (state,{error})=>{
             loading(false);
             Swal.fire(

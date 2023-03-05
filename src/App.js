@@ -17,9 +17,21 @@ import './containers/main/styles/products.scss';
 import './containers/main/styles/product.scss';
 import './containers/main/styles/cart.scss';
 import './containers/main/styles/checkout.scss';
-import './containers/main/styles/popupAuth.scss';
+import './containers/main/styles/navbar.scss';
 import './containers/main/styles/help.scss';
 import './containers/main/styles/signin.scss';
+
+//--------------Auth Pages-------------
+import Auth from './containers/auth';
+import Login from './containers/auth/login';
+import SignUp from './containers/auth/signUp';
+import ResetPassword from './containers/auth/resetPassword';
+import PasswordReset from './containers/auth/passwordReset';
+import Passcode from './containers/auth/passcode';
+
+
+//--------------Auth Css-------------
+import './containers/auth/styles/index.scss';
 
 //------------User Admin Pages---------
 import Usercontainer from './containers/useradmin/index';
@@ -101,14 +113,6 @@ import Popupcomponent from './components/Popupcomponent';
 import { useDispatch, useSelector } from 'react-redux';
 import { getInview, getTrigger, setTrigger } from './Redux/Auth/userAuthForm';
 import $ from 'jquery';
-// import ResetPassword from './components/auth/ResetPassword';
-import Auth from './containers/auth';
-import Login from './containers/auth/login';
-import SignUp from './containers/auth/signUp';
-import ResetPassword from './containers/auth/resetPassword';
-import PasswordReset from './containers/auth/passwordReset';
-import Passcode from './containers/auth/passcode';
-import './containers/auth/styles/index.scss';
 import { useEffect } from 'react';
 import Navigate from './components/auth/Navigate';
 
@@ -146,7 +150,7 @@ useEffect(()=>{
     <BrowserRouter>
     <ScrollToTop/>
     <Navigate/>
-    {/* {trigger &&<Popupcomponent/>} */}
+    {trigger &&<Popupcomponent/>}
       <Routes>  
       {/* -------------Main Route------------- */}
       <Route path='/' element={<Index />} />
