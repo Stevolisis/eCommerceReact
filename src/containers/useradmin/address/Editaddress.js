@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { setRedirectPath } from '../../../Redux/Auth/userAuthForm';
-import { fetchAddress, getAddress } from '../../../Redux/UserDashboard/userAddress';
+import { editAddress, fetchAddress, getAddress } from '../../../Redux/UserDashboard/userAddress';
 
 export default function Editaddress(){
     const {id}=useParams();
@@ -27,16 +27,25 @@ export default function Editaddress(){
     const location=useLocation();
     const addressEdit=useSelector(fetchAddress);
 
-    const editaddress=(()=>{
-        Swal.fire(
-          'Successful!',
-          'Edit Address Successful.',
-          'success'
-        )
-    });
 
     function handleSubmit(e){
         e.preventDefault();
+        const formData=new FormData(e.target)
+        formData.append('id',id);
+
+        Swal.fire({
+            title: 'Confirm?',
+            text: "Edit address",
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              dispatch(editAddress(formData))
+            }
+        })
     }
 
     useLayoutEffect(()=>{
@@ -65,6 +74,12 @@ export default function Editaddress(){
             setDefaultAddress(addressEdit.default);
         }
     },[addressEdit])
+
+
+
+
+
+
 
     return(
         <>
@@ -176,7 +191,7 @@ export default function Editaddress(){
         </div>
 
         <div className='usereditbtn'>
-        <button onClick={()=>editaddress()}>EDIT</button>
+        <button>EDIT</button>
         </div>
 
         </form>

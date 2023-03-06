@@ -26,7 +26,7 @@ export default function Useraddresses(){
             if (result.isConfirmed) {
               dispatch(setDefaultAddress(id))
             }
-          })
+        })
     }
 
 
@@ -75,7 +75,10 @@ export default function Useraddresses(){
                   <p><b>Your default shipping address:</b></p>
                   <p>{address.first_name+' '+address.last_name}</p>
                   <p>{address.address}</p>
-                  <p>{address.location.city+' / '+address.location.state+','+address.location.country}</p>
+                  <p>{address.location.city+' / '
+                  +address.location.state+','
+                  +address.location.country}
+                  </p>
                   <p>{address.phone_number1} </p>
                   {address.phone_number2&&<p>{address.phone_number2}</p>} 
                   </div>

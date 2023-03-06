@@ -63,10 +63,15 @@ export default function Useraccount(){
 
 </div>
 
+
+
+
+
+
 <div className='overview'>
 
 {
-   customer.addresses&&customer.addresses.length!==0 ?
+
   customer.addresses
   .filter(address=>address.default==true)
   .map((addressDefault,i)=>{
@@ -83,18 +88,18 @@ export default function Useraccount(){
     </div>
   })
 
-  :
-
-  <div className='overviewdetails'>
-  <div><p>ADDRESS BOOK</p></div>
-  <div>
-  <p>No Default Address Found</p>
-  </div>
-  <div><button onClick={()=>navigate(`/user/addaddress`)}>ADD ADDRESS</button></div>
-  </div>
 }
 
 </div>
+
+
+
+
+
+
+
+
+
 
 
 </div>

@@ -22,6 +22,12 @@ export const addAddress=createAsyncThunk('address/addAddress',async (data)=>{
     return response.data;
 });
 
+export const editAddress=createAsyncThunk('address/editAddress',async (data)=>{
+    loading(true);
+    const response=await api.post('/users/editAddress',data,{withCredentials:true});
+    return response.data;
+});
+
 export const setDefaultAddress=createAsyncThunk('address/setDefaultAdress',async (id)=>{
     loading(true);
     const response=await api.post('/users/setDefaultAdress',{id:id},{withCredentials:true});
@@ -84,6 +90,26 @@ const addressSlice=createSlice({
             }
             
         },[addAddress.rejected]: (state,{error})=>{
+            loading(false);
+            Swal.fire(
+                "Error Occured",
+                error.message,
+                'error'
+            )
+        },
+        [editAddress.fulfilled]: (state,{payload})=>{
+            loading(false);
+            let status=payload.status;
+
+            if(status==='success'){
+                Swal.fire(
+                    'Successful!',
+                    'Edit Address Successful.',
+                    'success'
+                )
+            }
+            
+        },[editAddress.rejected]: (state,{error})=>{
             loading(false);
             Swal.fire(
                 "Error Occured",
