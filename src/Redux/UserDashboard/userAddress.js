@@ -30,7 +30,7 @@ export const editAddress=createAsyncThunk('address/editAddress',async (data)=>{
 
 export const deleteAddress=createAsyncThunk('address/deleteAddress',async (id)=>{
     loading(true);
-    const response=await api.post(`/users/deleteAddress${id}`,{withCredentials:true});
+    const response=await api.post(`/users/deleteAddress/${id}`,{withCredentials:true});
     return {id:id,data:response.data};
 });
 
@@ -38,7 +38,7 @@ export const deleteAddress=createAsyncThunk('address/deleteAddress',async (id)=>
 export const setDefaultAddress=createAsyncThunk('address/setDefaultAdress',async (id)=>{
     loading(true);
     const response=await api.post('/users/setDefaultAdress',{id:id},{withCredentials:true});
-    return {id:id,data:response.data};
+    return response.data;
 });
 
 
@@ -148,8 +148,7 @@ const addressSlice=createSlice({
         },
         [setDefaultAddress.fulfilled]: (state,{payload})=>{
             loading(false);
-            let status=payload.data.status;
-            let id=payload.id;
+            let status=payload.status;
 
             if(status==='success'){
                 Swal.fire(

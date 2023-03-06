@@ -12,6 +12,12 @@ export const fetchCategories=createAsyncThunk('adminCategories/fetchCategories',
     return response.data.data;
 });
 
+export const fetchCategories2=createAsyncThunk('adminCategories/fetchCategories2',async(limit)=>{
+    loading(true)
+    const response=await api.get(`categories/getcategories2?limit=${limit}`)
+    return response.data.data;
+});
+
 export const fetchCategory=createAsyncThunk('adminCategories/fetchCategory',async(id)=>{
     loading(true);
     const response=await api.get(`categories/getcategoryforedit/${id}`)
@@ -73,6 +79,18 @@ const categorySlice=createSlice({
             return {...state,categories:payload,filterBackup:payload}
         },
         [fetchCategories.rejected]: (state,{error})=>{
+            loading(false)
+            Swal.fire(
+                "Error Occured",
+                error.message,
+                'error'
+            )
+        },
+        [fetchCategories2.fulfilled]: (state,{payload})=>{
+            loading(false)
+            return {...state,categories:payload,filterBackup:payload}
+        },
+        [fetchCategories2.rejected]: (state,{error})=>{
             loading(false)
             Swal.fire(
                 "Error Occured",

@@ -10,6 +10,8 @@ import UserDashboardNavbar from '../../components/userDashboardNavbar';
 import Searches from '../../components/Searches';
 import { fetchSearchResult } from '../../Redux/Main/searchResult';
 import { useEffect } from 'react';
+import { useLayoutEffect } from 'react';
+import { fetchCategories2 } from '../../Redux/Admin/categories';
 
 
 
@@ -40,12 +42,20 @@ export default function Index(){
         if(searchValue!==""&&searchValue.length>2){
             dispatch(fetchSearchResult(searchValue))
         }
-    },[searchValue])
+    },[searchValue]);
+
+    useLayoutEffect(()=>{
+        dispatch(fetchCategories2(12))
+    })
 
 
 
-
-
+    // useLayoutEffect(()=>{
+    //     dispatch(customerAuthStatus())
+    //     .then(res=>{
+    //       if(res.payload.status==='success') setAuthStat(true);
+    //     });
+    // },[location.pathname])
 
 
 
@@ -76,7 +86,7 @@ export default function Index(){
 <Link to='/cart'><i className='fa fa-shopping-cart'></i>{products_in_cart.length===0?'':<sup>{products_in_cart.length}</sup>}</Link>
 </div>
 
-<Link to='/user/useraccount'><i className='fa fa-user-circle'></i></Link>
+<Link to='/user/dashboard'><i className='fa fa-user-circle'></i></Link>
 </div>
 </div>
 
@@ -120,7 +130,7 @@ export default function Index(){
 <div className='cart'>
 <Link to='/cart'><i className='fa fa-shopping-cart'></i>{products_in_cart.length===0?'':<sup>{products_in_cart.length}</sup>}</Link>
 </div>
-<Link to='/user/useraccount'><i className='fa fa-user-circle'></i></Link>
+<Link to='/user/dashboard'><i className='fa fa-user-circle'></i></Link>
 </div>
 </div>
 

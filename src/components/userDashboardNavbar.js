@@ -1,8 +1,11 @@
 import {React} from 'react';
+import { useSelector } from 'react-redux';
 import { Link ,useNavigate} from 'react-router-dom';
+import { getAllCategories } from '../Redux/Admin/categories';
 
 export default function UserDashboardNavbar(){
     const navigate=useNavigate();
+    const categories=useSelector(getAllCategories)
 
     return(
         <>
@@ -20,18 +23,10 @@ export default function UserDashboardNavbar(){
 
             <div className='navcetegories'>
             <p>categories</p>    
-            <div className='navlinks' onClick={()=>navigate('dashboard')}><Link className='navlink' to='/product'>Phones and Tablets</Link></div>
-            <div className='navlinks' onClick={()=>navigate('dashboard')}><Link className='navlink' to='/product'>Kitchen</Link></div>
-            <div className='navlinks' onClick={()=>navigate('dashboard')}><Link className='navlink' to='/product'>Electronics</Link></div>
-            <div className='navlinks' onClick={()=>navigate('dashboard')}><Link className='navlink' to='/product'>Nike</Link></div>
-            <div className='navlinks' onClick={()=>navigate('dashboard')}><Link className='navlink' to='/product'>Hats</Link></div>
-            <div className='navlinks' onClick={()=>navigate('dashboard')}><Link className='navlink' to='/product'>Music Instruments</Link></div>
-            <div className='navlinks' onClick={()=>navigate('dashboard')}><Link className='navlink' to='/product'>Sports</Link></div>
-            <div className='navlinks' onClick={()=>navigate('dashboard')}><Link className='navlink' to='/product'>Sports</Link></div>
-            <div className='navlinks' onClick={()=>navigate('dashboard')}><Link className='navlink' to='/product'>Sports</Link></div>
-            <div className='navlinks' onClick={()=>navigate('dashboard')}><Link className='navlink' to='/product'>Sports</Link></div>
-            <div className='navlinks' onClick={()=>navigate('dashboard')}><Link className='navlink' to='/product'>Sports</Link></div>
-            <div className='navlinks' onClick={()=>navigate('dashboard')}><Link className='navlink' to='/product'>Sports</Link></div>
+            {categories&&categories.map((category,i)=>{
+                return <div className='navlinks' onClick={()=>navigate('/'+category.slug)}><Link className='navlink' to={'/'+category.slug}>{category.name}</Link></div>
+
+            })}
             </div>
 
             </div>

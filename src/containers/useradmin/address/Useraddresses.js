@@ -1,10 +1,9 @@
-import { useEffect } from 'react';
-import {React} from  'react';
+import { React, useLayoutEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { setRedirectPath } from '../../../Redux/Auth/userAuthForm';
-import { fetchAddresses, getAddresses, setDefaultAddress } from '../../../Redux/UserDashboard/userAddress';
+import { deleteAddress, fetchAddresses, getAddresses, setDefaultAddress } from '../../../Redux/UserDashboard/userAddress';
 
 export default function Useraddresses(){
     const navigate=useNavigate();
@@ -25,12 +24,41 @@ export default function Useraddresses(){
           }).then((result) => {
             if (result.isConfirmed) {
               dispatch(setDefaultAddress(id))
+              .then(res=>{
+                if(res.payload.status!=='success'){
+                    if(queryString.get('next')) dispatch(setRedirectPath('/auth/login?next='+queryString.get('next')))
+                    if(!queryString.get('next')) dispatch(setRedirectPath('/auth/login?next='+location.pathname))            
+                }
+            })
+            }
+        })
+    }
+
+    function removeAddress(id){
+        Swal.fire({
+            title: 'Confirm?',
+            text: "Are you sure you want to delete this address?",
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              dispatch(deleteAddress(id))
+              .then(res=>{
+                console.log(res)
+                if(res.payload.data.status!=='success'){
+                    // if(queryString.get('next')) dispatch(setRedirectPath('/auth/login?next='+queryString.get('next')))
+                    // if(!queryString.get('next')) dispatch(setRedirectPath('/auth/login?next='+location.pathname))            
+                }
+            })
             }
         })
     }
 
 
-    useEffect(()=>{
+    useLayoutEffect(()=>{
         dispatch(getAddresses())
         .then(res=>{
             if(res.payload.status!=='success'){
@@ -88,7 +116,7 @@ export default function Useraddresses(){
                 
                   {!address.default&&<button onClick={()=>defaultAddress(address._id)}>SET AS DEFAULT ADDRESS</button>}
                   
-                  <button className='deleteBtn' onClick={()=>dispatch(`/user/editaddress/${address._id}`)}>DELETE</button>
+                  <button className='deleteBtn' onClick={()=>removeAddress(address._id)}>DELETE</button>
 
                   </div>
                   </div>
