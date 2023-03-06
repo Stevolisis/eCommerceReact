@@ -87,6 +87,9 @@ export default function Useraddresses(){
                   <button onClick={()=>navigate(`/user/editaddress/${address._id}`)}>EDIT ADDRESS</button>
                 
                   {!address.default&&<button onClick={()=>defaultAddress(address._id)}>SET AS DEFAULT ADDRESS</button>}
+                  
+                  <button className='deleteBtn' onClick={()=>dispatch(`/user/editaddress/${address._id}`)}>DELETE</button>
+
                   </div>
                   </div>
       

@@ -71,23 +71,32 @@ export default function Useraccount(){
 <div className='overview'>
 
 {
-
+   customer.addresses&&customer.addresses.length!==0 ?
   customer.addresses
-  .filter(address=>address.default==true)
-  .map((addressDefault,i)=>{
-    return <div className='overviewdetails' key={i}>
-    <div><p>ADDRESS BOOK</p></div>
-    <div>
-    <p><b>Your default shipping address:</b></p>
-    <p>{addressDefault.first_name+' '+addressDefault.last_name}</p>
-    <p>{addressDefault.address+' /'+addressDefault.location.city+','+addressDefault.state+','+addressDefault.country}</p>
-    <p>{addressDefault.phone_number1} </p>
-    {addressDefault.phone_number2&&<p>{addressDefault.phone_number2}</p>} 
-    </div>
-    <div><button onClick={()=>navigate(`/user/editaddress`)}>EDIT ADDRESS</button></div>
-    </div>
-  })
+    .filter(address=>address.default==true)
+    .map((addressDefault,i)=>{
+      return <div className='overviewdetails' key={i}>
+      <div><p>ADDRESS BOOK</p></div>
+      <div>
+      <p><b>Your default shipping address:</b></p>
+      <p>{addressDefault.first_name+' '+addressDefault.last_name}</p>
+      <p>{addressDefault.address+' /'+addressDefault.location.city+', '+addressDefault.location.state+', '+addressDefault.location.country}</p>
+      <p>{addressDefault.phone_number1} </p>
+      {addressDefault.phone_number2&&<p>{addressDefault.phone_number2}</p>} 
+      </div>
+      <div><button onClick={()=>navigate(`/user/editaddress/${addressDefault._id}`)}>EDIT ADDRESS</button></div>
+      </div>
+    })
 
+  :
+
+  <div className='overviewdetails'>
+  <div><p>ADDRESS BOOK</p></div>
+  <div>
+  <p>No Default Address Found</p>
+  </div>
+  <div><button onClick={()=>navigate(`/user/addaddress`)}>ADD ADDRESS</button></div>
+  </div>
 }
 
 </div>

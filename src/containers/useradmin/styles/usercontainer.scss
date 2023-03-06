@@ -215,6 +215,10 @@ border-radius: 5px 5px 0 0;
         margin: 5px;
         cursor: pointer;
     }
+
+    .deleteBtn{
+        color: $color80 !important;
+    }
 }
 
 .overviewdetails div:nth-child(1){
@@ -236,6 +240,8 @@ p{
 
 #nav{
     display: none;
+    cursor: pointer;
+    color: $color60;
 }
 
 
