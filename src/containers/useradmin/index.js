@@ -46,7 +46,7 @@ export default function Index(){
 
     useLayoutEffect(()=>{
         dispatch(fetchCategories2(12))
-    })
+    },[])
 
 
 
