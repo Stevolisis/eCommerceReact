@@ -14,6 +14,7 @@ import cartReducer from "./Main/cart";
 import userAuthReducer from "./Auth/userAuthForm";
 import customerReducer from "./UserDashboard/customerDetails";
 import addressReducer from "./UserDashboard/userAddress";
+import wishlistReducer from "./UserDashboard/wishlist";
 
 
 const persistConfig = {
@@ -37,6 +38,7 @@ const reducer = combineReducers({
     userAuthReducer:userAuthReducer,
     customerReducer:customerReducer,
     addressReducer:addressReducer,
+    wishlistReducer:wishlistReducer,
 })
 
 

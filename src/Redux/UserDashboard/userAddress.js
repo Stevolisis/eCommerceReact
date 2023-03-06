@@ -24,13 +24,13 @@ export const addAddress=createAsyncThunk('address/addAddress',async (data)=>{
 
 export const editAddress=createAsyncThunk('address/editAddress',async (data)=>{
     loading(true);
-    const response=await api.post(`/users/editAddress`,data,{withCredentials:true});
+    const response=await api.patch(`/users/editAddress`,data,{withCredentials:true});
     return response.data;
 });
 
 export const deleteAddress=createAsyncThunk('address/deleteAddress',async (id)=>{
     loading(true);
-    const response=await api.post(`/users/deleteAddress/${id}`,{withCredentials:true});
+    const response=await api.delete(`/users/deleteAddress/${id}`,{withCredentials:true});
     return {id:id,data:response.data};
 });
 

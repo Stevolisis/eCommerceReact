@@ -24,7 +24,7 @@ export default function UserDashboardNavbar(){
             <div className='navcetegories'>
             <p>categories</p>    
             {categories&&categories.map((category,i)=>{
-                return <div className='navlinks' onClick={()=>navigate('/'+category.slug)}><Link className='navlink' to={'/'+category.slug}>{category.name}</Link></div>
+                return <div key={i} className='navlinks' onClick={()=>navigate('/'+category.slug)}><Link className='navlink' to={'/'+category.slug}>{category.name}</Link></div>
 
             })}
             </div>

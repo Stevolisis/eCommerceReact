@@ -21,7 +21,7 @@ export const fetchUser=createAsyncThunk('adminUsers/fetchUser',async(id)=>{
 
 export const editUser=createAsyncThunk('adminUsers/editUser',async(formData)=>{
     loading(true);
-    const response=await api.put('users/editUser',formData)
+    const response=await api.patch('users/editUser',formData)
         return response.data;
 });
 export const deleteUser=createAsyncThunk('adminUsers/deleteUser',async(id)=>{

@@ -26,7 +26,7 @@ export const addFaq=createAsyncThunk('adminFaqs/addFaq',async(formData)=>{
 
 export const editFaq=createAsyncThunk('adminFaqs/editFaq',async(formData)=>{
     loading(true);
-    const response=await api.put('faq/editFaq',formData)
+    const response=await api.patch('faq/editFaq',formData)
         return response.data;
 });
 export const deleteFaq=createAsyncThunk('adminFaqs/deleteFaq',async(id)=>{

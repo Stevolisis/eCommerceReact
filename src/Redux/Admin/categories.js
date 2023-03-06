@@ -32,7 +32,7 @@ export const addCategory=createAsyncThunk('adminCategories/addCategory',async(fo
 
 export const editCategory=createAsyncThunk('adminCategories/editCategory',async(formData)=>{
     loading(true);
-    const response=await api.put('categories/editCategory',formData)
+    const response=await api.patch('categories/editCategory',formData)
         return response.data;
 });
 export const deleteCategory=createAsyncThunk('adminCategories/deleteCategory',async(id)=>{

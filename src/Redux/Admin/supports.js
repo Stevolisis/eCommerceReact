@@ -14,7 +14,7 @@ export const fetchSupport=createAsyncThunk('adminSupports/fetchSupport',async()=
 
 export const editSupport=createAsyncThunk('adminSupports/editSupport',async(formData)=>{
     loading(true);
-    const response=await api.put('support/edit-support',formData)
+    const response=await api.patch('support/edit-support',formData)
         return response.data;
 });
 

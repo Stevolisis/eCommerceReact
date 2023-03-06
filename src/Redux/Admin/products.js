@@ -24,7 +24,7 @@ export const addProduct=createAsyncThunk('adminProducts/addProducts',async(formD
 
 export const editProduct=createAsyncThunk('adminProducts/editProduct',async(formData)=>{
     loading(true);
-    const response=await api.put('products/editproduct',formData)
+    const response=await api.patch('products/editproduct',formData)
         return response.data;
 });
 

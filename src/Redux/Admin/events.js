@@ -26,13 +26,13 @@ export const addEvent=createAsyncThunk('adminEvents/addEvent',async(formData)=>{
 
 export const editEvent=createAsyncThunk('adminEvents/editEvent',async(formData)=>{
     loading(true);
-    const response=await api.post(`events/edit-event`,formData)
+    const response=await api.patch(`events/edit-event`,formData)
         return response.data;
 });
 
 export const deleteEvent=createAsyncThunk('adminEvents/deleteEvent',async(id)=>{
     loading(true)
-    const response=await api.post(`events/delete-event`,{id:id})
+    const response=await api.delete(`events/delete-event`,{id:id})
         return {response:response.data,id:id};
 });
 
