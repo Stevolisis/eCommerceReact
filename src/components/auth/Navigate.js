@@ -10,7 +10,6 @@ export default function Navigate(){
     useEffect(()=>{
         if(redirectPath){
             navigate(redirectPath)
-            console.log('redirectPath',redirectPath)
         }
     },[redirectPath])
 

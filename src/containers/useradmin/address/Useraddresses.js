@@ -4,23 +4,22 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { setRedirectPath } from '../../../Redux/Auth/userAuthForm';
-import { getCustomer, getCustomerdetails } from '../../../Redux/UserDashboard/customerDetails';
-import { setDefaultAddress } from '../../../Redux/UserDashboard/userAddress';
+import { fetchAddresses, getAddresses, setDefaultAddress } from '../../../Redux/UserDashboard/userAddress';
 
 export default function Useraddresses(){
     const navigate=useNavigate();
     const dispatch=useDispatch();
-    const customer=useSelector(getCustomerdetails);
+    const userAddresses=useSelector(fetchAddresses);
     const location=useLocation();
     const [queryString]=useSearchParams();
 
 
     useEffect(()=>{
-        dispatch(getCustomer())
+        dispatch(getAddresses())
         .then(res=>{
             if(res.payload.status!=='success'){
                 if(queryString.get('next')) dispatch(setRedirectPath('/auth/login?next='+queryString.get('next')))
-                if(!queryString.get('next'))dispatch(setRedirectPath('/auth/login?next='+location.pathname))            
+                if(!queryString.get('next')) dispatch(setRedirectPath('/auth/login?next='+location.pathname))            
             }
         })
     },[])
@@ -43,7 +42,7 @@ export default function Useraddresses(){
         <div className='userorderscon'>
             <div className='useraddresscon'>
 
-               {customer.addresses&&customer.addresses.length===0 ? 
+               {userAddresses.length===0 ? 
                
                   <div className='overview'>
                   <div className='overviewdetails'>
@@ -51,7 +50,7 @@ export default function Useraddresses(){
                   </div>
                   </div>
          
-               : customer.addresses&&customer.addresses.map((address,i)=>{
+               : userAddresses.map((address,i)=>{
                   return <div className='overview' key={i}>
 
                   <div className='overviewdetails'>

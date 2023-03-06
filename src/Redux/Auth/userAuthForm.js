@@ -37,10 +37,10 @@ export const resetPassword=createAsyncThunk('userAuth/resetPassword',async (data
 })
 
 
-export const customerAuthStatus=createAsyncThunk('userAuth/customerAuthStatus',async ()=>{
+export const customerAuthStatus=createAsyncThunk('userAuth/customerAuthStatus',async (redirect)=>{
     loading(true);
-    const response=await api.get('/auth/isCustomerAuth',{withCredentials:true});
-    return response.data;
+    const response=await api.get('/auth/customerAuth',{withCredentials:true});
+    return {next:redirect,data:response.data};
 })
 
 
@@ -207,17 +207,20 @@ const userAuthSlice=createSlice({
         },
         [customerAuthStatus.fulfilled]: (state,{payload})=>{
             loading(false);
-            let status=payload.status;
+            let status=payload.data.status;
+            let next=payload.next;
 
             if(status!=='success'){
-                state.inview={view:'signin'};
-                state.trigger=true;     
+                state.redirectPath='/auth/login?next='+next;
            }
         },
         [customerAuthStatus.rejected]: (state,{error})=>{
             loading(false);
-            state.inview={view:'signin'};
-            state.trigger=true; 
+            Swal.fire(
+                "Error Occured",
+                error.message,
+                'error'
+            )
         }
     }
 })

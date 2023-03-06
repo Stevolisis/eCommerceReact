@@ -1,13 +1,15 @@
+import { useLayoutEffect } from 'react';
 import {React} from 'react';
 import { useDispatch } from 'react-redux';
 import { useLocation, useSearchParams } from 'react-router-dom';
-import { setRedirectPath } from '../../../Redux/Auth/userAuthForm';
+import { customerAuthStatus, setRedirectPath } from '../../../Redux/Auth/userAuthForm';
 import { addAddress } from '../../../Redux/UserDashboard/userAddress';
 
 export default function Adduseraddress(){
     const dispatch=useDispatch();
     const location=useLocation();
     const [queryString]=useSearchParams();
+    console.log(location)
 
     function handleSubmit(e){
         e.preventDefault();
@@ -21,6 +23,20 @@ export default function Adduseraddress(){
         })
     };
 
+    useLayoutEffect(()=>{
+        if(location.search){
+            dispatch(customerAuthStatus(location.pathname+location.search))
+        }else{
+            dispatch(customerAuthStatus(location.pathname))
+        }
+    },[])
+
+
+
+
+
+
+    
     return(
         <>
           <div className='usermaincon'>
