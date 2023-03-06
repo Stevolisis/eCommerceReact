@@ -63,6 +63,8 @@ export default function Adduseraddress(){
             <p>Prefix</p>
             <select name='prefix1' required='required'>
                 <option defaultValue='selected' value='+234'>Nigeria (+234)</option>
+                <option defaultValue='selected' value='+144'>Ghana (+144)</option>
+                <option defaultValue='selected' value='+231'>Liberia (+231)</option>
             </select>
         </div>
         <div className='usereditphonenumber'>
@@ -76,6 +78,8 @@ export default function Adduseraddress(){
             <p>Prefix</p>
             <select name='prefix2'>
                 <option defaultValue='selected' value='+234'>Nigeria (+234)</option>
+                <option defaultValue='selected' value='+144'>Ghana (+144)</option>
+                <option defaultValue='selected' value='+231'>Liberia (+231)</option>
             </select>
         </div>
         <div className='usereditphonenumber'>

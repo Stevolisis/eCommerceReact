@@ -91,6 +91,26 @@ const addressSlice=createSlice({
                 'error'
             )
         },
+        [setDefaultAddress.fulfilled]: (state,{payload})=>{
+            loading(false);
+            let status=payload.status;
+
+            if(status==='success'){
+                Swal.fire(
+                    'Default Address!',
+                    'This is set as your default address.',
+                    'success'
+                )        
+            }
+            
+        },[setDefaultAddress.rejected]: (state,{error})=>{
+            loading(false);
+            Swal.fire(
+                "Error Occured",
+                error.message,
+                'error'
+            )
+        },
     }
 })
 

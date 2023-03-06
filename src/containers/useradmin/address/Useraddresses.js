@@ -13,6 +13,22 @@ export default function Useraddresses(){
     const location=useLocation();
     const [queryString]=useSearchParams();
 
+    function defaultAddress(id){
+        Swal.fire({
+            title: 'Confirm?',
+            text: "Are you sure you want to make this your default address?",
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              dispatch(setDefaultAddress(id))
+            }
+          })
+    }
+
 
     useEffect(()=>{
         dispatch(getAddresses())
@@ -22,7 +38,7 @@ export default function Useraddresses(){
                 if(!queryString.get('next')) dispatch(setRedirectPath('/auth/login?next='+location.pathname))            
             }
         })
-    },[])
+    },[]);
 
 
 
@@ -31,7 +47,7 @@ export default function Useraddresses(){
         <>
         <div className='usermaincon'>
         <div className='userorderheading'>
-            <p>Address(3)</p>
+            <p>Address({userAddresses.length})</p>
            {/* {popup==='true'? 
             <button onClick={()=>setInview('adduseraddress')}>Add Address</button>
            :
@@ -67,7 +83,7 @@ export default function Useraddresses(){
 
                   <button onClick={()=>navigate(`/user/editaddress/${address._id}`)}>EDIT ADDRESS</button>
                 
-                  {!address.default&&<button onClick={()=>dispatch(setDefaultAddress(address._id))}>SET AS DEFAULT ADDRESS</button>}
+                  {!address.default&&<button onClick={()=>defaultAddress(address._id)}>SET AS DEFAULT ADDRESS</button>}
                   </div>
                   </div>
       
