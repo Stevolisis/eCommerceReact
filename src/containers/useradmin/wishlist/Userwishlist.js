@@ -53,11 +53,11 @@ console.log('yy',wishlists)
         <div className='userorderscon'>
 
           {
-            !wishlists ? <div className='overview'><div className='overviewdetails'>Your Wishlist is empty</div></div> 
+            wishlists.length==0 ? <div className='overview'><div className='overviewdetails'>Your Wishlist is empty</div></div> 
             :
             wishlists.map((wishlist,i)=>{
               return <div className='userorder' key={i}>
-              <div className='userorderimg'><img src={wishlist.img_link} alt='UserOrderImg'/></div>
+              <div className='userorderimg'><img src={wishlist.img_link} alt='wishlistImg'/></div>
               <div className='savediteminfo'>
               <div className='savedinfo1'>
               <p>{wishlist.name}</p>
