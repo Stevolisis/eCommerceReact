@@ -66,7 +66,7 @@ console.log('yy',wishlists)
               </div>
               <div className='savedinfo2'>
               
-              <div className='savedinfobtn1'><button onClick={()=>navigate(wishlist.slug)}>View</button></div>
+              <div className='savedinfobtn1'><button onClick={()=>navigate('/'+wishlist.slug)}>View</button></div>
               <div className='savedinfobtn2'><button onClick={()=>deleteitem(wishlist._id)}>Remove</button></div>
               
               </div>

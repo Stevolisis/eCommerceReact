@@ -119,7 +119,7 @@ const wishlistSlice=createSlice({
                     icon: 'success',
                     title: 'Product removed from your wishlist'
                 })
-                return {...state,wishlists:[...state.wishlists].filter(item => item._id !== id)}   
+                return {...state,wishlist:[...state.wishlist].filter(item => item._id !== id)}   
             }
             
         },[removeWishlist.rejected]: (state,{error})=>{
