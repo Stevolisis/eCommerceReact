@@ -3,12 +3,17 @@ import Popupcomponent from '../../components/Popupcomponent';
 import Swal from 'sweetalert2';
 import Mainheader from '../../components/main_page_layouts/Mainheader';
 import Mainfooter from '../../components/Mainfooter'
-import { useDispatch } from 'react-redux';
-import { setInview, setTrigger } from '../../Redux/Auth/userAuthForm';
+import { useDispatch, useSelector } from 'react-redux';
+import { setInview, setRedirectPath, setTrigger } from '../../Redux/Auth/userAuthForm';
+import { useLocation } from 'react-router-dom';
+import { useLayoutEffect } from 'react';
+import { fetchAddresses, getAddresses } from '../../Redux/UserDashboard/userAddress';
 
 export default function Checkout(){
-
     const dispatch=useDispatch();
+    const location=useLocation();
+    const userAddresses=useSelector(fetchAddresses);
+
 
    const Toast = Swal.mixin({
     toast: true,
@@ -21,12 +26,27 @@ export default function Checkout(){
       toast.addEventListener('mouseleave', Swal.resumeTimer)
     }
   })
-const vouchervalidate=(()=>{
-Toast.fire({
-    icon: 'success',
-    title: 'Congrats Voucher Validated'
+  const vouchervalidate=(()=>{
+  Toast.fire({
+      icon: 'success',
+      title: 'Congrats Voucher Validated'
+    })
   })
-})
+
+
+
+
+  
+  useLayoutEffect(()=>{
+    dispatch(getAddresses())
+    .then(res=>{
+      if(res.payload.status!=='success'){
+          dispatch(setRedirectPath('/auth/login?next='+location.pathname))            
+      }
+    })
+  },[]);
+
+
 
 
 
@@ -46,12 +66,30 @@ return(
     <div className='userorderheading'>
         <p>ADDRESS DETAILS</p>
         <button onClick={()=>(dispatch(setInview({view:'useraddress'}),dispatch(setTrigger(true))))}>CHANGE</button>
-        </div>
-    <div className='checkoutaddress'>
-        <p>Steven Joseph</p>
-        <p>Abubakar tafawa balewa university,yelwa canpus, Yelwa / Fed. Poly, Bauchi
-+2348103987495</p>
     </div>
+        
+      {
+        userAddresses&&userAddresses.length!==0 ?
+        userAddresses
+          .filter(address=>{
+            console.log('ffc',address.default==true)
+            return address.default==true
+          })
+          .map((addressDefault,i)=>{
+            console.log('addressDefault',addressDefault)
+            return <div className='checkoutaddress' key={i}>
+              <p>{addressDefault.first_name+' '+addressDefault.last_name}</p>
+            <p>{addressDefault.address}</p>
+            <p>{addressDefault.location.city+', '+addressDefault.location.state+', '+addressDefault.location.country}</p>
+            <p>{addressDefault.phone_number1} </p>
+            {addressDefault.phone_number2&&<p>{addressDefault.phone_number2}</p>} 
+            </div>
+          })
+      
+        :
+        <div className='overview'>No Address Found</div>
+      }
+
 </div>
 
 <div className='checkoutpaymentcon'>
