@@ -1,11 +1,15 @@
 import {React} from 'react';
-import { useSelector } from 'react-redux';
-import { Link ,useNavigate} from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link ,useLocation,useNavigate} from 'react-router-dom';
 import { getAllCategories } from '../Redux/Admin/categories';
+import { customerLogout } from '../Redux/Auth/userAuthForm';
 
 export default function UserDashboardNavbar(){
     const navigate=useNavigate();
-    const categories=useSelector(getAllCategories)
+    const categories=useSelector(getAllCategories);
+    const dispatch=useDispatch();
+    const location = useLocation();
+console.log('history',document)
 
     return(
         <>
@@ -18,7 +22,7 @@ export default function UserDashboardNavbar(){
             <div className='navlinks' onClick={()=>navigate('orders')}><Link className='navlink' to='userorders'>My Orders</Link></div>
             <div className='navlinks' onClick={()=>navigate('address')}><Link className='navlink' to='useraddress'>Addresses</Link></div>
             <div className='navlinks' onClick={()=>navigate('wishlist')}><Link className='navlink' to='wishlist'>Wishlist</Link></div>
-            <div className='navlinks' onClick={()=>navigate('dashboard')}><Link className='navlink' to='dashboard'>Logout</Link></div>
+            <div className='navlinks' onClick={()=>dispatch(customerLogout())}><Link className='navlink' to='dashboard'>Logout</Link></div>
             </div>
 
             <div className='navcetegories'>

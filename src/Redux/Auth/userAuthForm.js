@@ -43,6 +43,12 @@ export const customerAuthStatus=createAsyncThunk('userAuth/customerAuthStatus',a
     return {next:redirect,data:response.data};
 })
 
+export const customerLogout=createAsyncThunk('userAuth/customerLogout',async (redirect)=>{
+    loading(true);
+    const response=await api.delete('/auth/customerLogout',{withCredentials:true});
+    return response.data;
+})
+
 
 
 const userAuthSlice=createSlice({
@@ -215,6 +221,26 @@ const userAuthSlice=createSlice({
            }
         },
         [customerAuthStatus.rejected]: (state,{error})=>{
+            loading(false);
+            Swal.fire(
+                "Error Occured",
+                error.message,
+                'error'
+            )
+        },
+        [customerLogout.fulfilled]: (state,{payload})=>{
+            loading(false);
+            let status=payload.status;
+            const BaseUrl2='http://localhost:3000'
+            const BaseUrl='https://e-commerce-three-neon.vercel.app';
+
+            if(status=='success'){
+                state.redirectPath='/';
+            }else{
+                state.redirectPath=document.baseURI.split(BaseUrl)[1];
+            }
+        },
+        [customerLogout.rejected]: (state,{error})=>{
             loading(false);
             Swal.fire(
                 "Error Occured",
