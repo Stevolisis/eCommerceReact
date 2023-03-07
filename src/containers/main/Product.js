@@ -12,11 +12,17 @@ import { fetchProducts, getRelProducts } from '../../Redux/Main/relatedProducts'
 import { useDispatch, useSelector } from 'react-redux';
 import Products_slider_layout from '../../components/main_page_layouts/products_slider_layout';
 import { addCartProduct } from '../../Redux/Main/cart';
-import { addWishlist } from '../../Redux/UserDashboard/wishlist';
+import { addWishlist, checkWish } from '../../Redux/UserDashboard/wishlist';
 import { setRedirectPath } from '../../Redux/Auth/userAuthForm';
 
 export default function Product(props){
     const[wishColor,setWishColor]=useState(false);
+    const {slug}=useParams();
+    const dispatch=useDispatch();
+    const product=useSelector(getProduct);
+    const relProducts=useSelector(getRelProducts);
+    const location = useLocation();
+
     const[datas,setDatas]=useState({
         name:'related Products',
         product_component:{
@@ -24,11 +30,6 @@ export default function Product(props){
         }
 
     });
-    const {slug}=useParams();
-    const dispatch=useDispatch();
-    const product=useSelector(getProduct);
-    const relProducts=useSelector(getRelProducts);
-    const location = useLocation();
     const [quantity, setQuantity] = useReducer((state, action) =>
         action.type === 'increment'? state < product.stock ? state + 1 
         : state: action.type === 'decrement'? state > 1 ? state - 1
@@ -58,6 +59,7 @@ export default function Product(props){
 
     useEffect(()=>{
         dispatch(fetchProduct('product***'+slug));
+
     },[slug]);
 
     useEffect(()=>{
@@ -70,7 +72,17 @@ export default function Product(props){
                     products:relProducts
                 }
 
-            })      
+            })  
+            dispatch(checkWish(product._id))
+            .then(res=>{
+                if(res.payload.status==='product not Found'){
+                    setWishColor(false)   
+                }else if(res.payload.status!=='success'){
+                    dispatch(setRedirectPath('/auth/login?next='+location.pathname))            
+                }else{
+                    setWishColor(true)
+                }
+            })     
         }                
     },[product]);
 

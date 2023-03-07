@@ -12,9 +12,9 @@ export const fetchWishlist=createAsyncThunk('wishlist/fetchWishlist',async()=>{
     return response.data;
 });
 
-export const fetchWish=createAsyncThunk('wishlist/fetchWish',async(id)=>{
+export const checkWish=createAsyncThunk('wishlist/fetchWish',async(id)=>{
     loading(true);
-    const response=await api.get(`/users/getWish/${id}`,{withCredentials:true});
+    const response=await api.get(`/users/checkWish/${id}`,{withCredentials:true});
     return response.data;
 });
 
@@ -73,15 +73,15 @@ const wishlistSlice=createSlice({
                 'error'
             )
         },
-        [fetchWish.fulfilled]:(state,{payload})=>{
+        [checkWish.fulfilled]:(state,{payload})=>{
             loading(false);
             let status=payload.status;
 
             if(status==='success'){
                 let data=payload.data.wishlist[0];
-                state.wishlist=data;
+                state.wish=data;
             }
-        },[fetchWish.rejected]:(state,{error})=>{
+        },[checkWish.rejected]:(state,{error})=>{
             loading(false);
             Swal.fire(
                 "Error Occured",
