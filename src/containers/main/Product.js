@@ -2,7 +2,6 @@ import {React,useState,useEffect, useReducer} from 'react'
 import { useLocation, useParams } from 'react-router-dom'
 import Accordion from '../../components/accordions/Accordion'
 import Reviews from '../../components/Reviews'
-import Swal from 'sweetalert2';
 import Ratings from '../../components/Ratings';
 import Mainheader from '../../components/main_page_layouts/Mainheader';
 import Mainfooter from '../../components/Mainfooter'
@@ -75,10 +74,8 @@ export default function Product(props){
             })  
             dispatch(checkWish(product._id))
             .then(res=>{
-                if(res.payload.status==='product not Found'){
-                    setWishColor(false)   
-                }else if(res.payload.status!=='success'){
-                    dispatch(setRedirectPath('/auth/login?next='+location.pathname))            
+                if(res.payload&&res.payload.status!=='success'){
+                    setWishColor(false)            
                 }else{
                     setWishColor(true)
                 }

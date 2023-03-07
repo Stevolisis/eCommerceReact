@@ -81,14 +81,15 @@ const wishlistSlice=createSlice({
                 let data=payload.data.wishlist[0];
                 state.wish=data;
             }
-        },[checkWish.rejected]:(state,{error})=>{
-            loading(false);
-            Swal.fire(
-                "Error Occured",
-                error.message,
-                'error'
-            )
         },
+        // },[checkWish.rejected]:(state,{error})=>{
+        //     loading(false);
+        //     Swal.fire(
+        //         "Error Occured",
+        //         error.message,
+        //         'error'
+        //     )
+        // },
         [addWishlist.fulfilled]:(state,{payload})=>{
             loading(false);
             let status=payload.status;
