@@ -12,7 +12,7 @@ export const fetchWishlist=createAsyncThunk('wishlist/fetchWishlist',async()=>{
     return response.data;
 });
 
-export const checkWish=createAsyncThunk('wishlist/fetchWish',async(id)=>{
+export const checkWish=createAsyncThunk('wishlist/checkWish',async(id)=>{
     loading(true);
     const response=await api.get(`/users/checkWish/${id}`,{withCredentials:true});
     return response.data;
