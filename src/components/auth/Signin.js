@@ -7,7 +7,6 @@ export default function Signin(){
     const navigate=useNavigate();
     const [searchParams]=useSearchParams();
     const dispatch=useDispatch();
-    // console.log(searchParams.get('next')?'yes':'No')
 
     function handleSubmit(e){
         e.preventDefault();

@@ -170,7 +170,7 @@ useEffect(()=>{
       <Route path='/auth' element={<Auth />}>
       <Route path='login' element={<Login />} />
       <Route path='signup' element={<SignUp />} />
-      <Route path='resetPassword' element={<ResetPassword />} />
+      <Route path='resetPassword/:token' element={<ResetPassword />} />
       <Route path='passwordReset' element={<PasswordReset />} />
       <Route path='passcode' element={<Passcode />} />
       </Route>

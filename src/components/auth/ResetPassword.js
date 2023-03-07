@@ -3,8 +3,8 @@ import {  useParams, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { resetPassword } from '../../Redux/Auth/userAuthForm';
 
-export default function ResetPassword(){
-   const {passwordResetLink}=useParams();
+export default function ResetPasswordComp(){
+   const {token}=useParams();
    const password=useRef();
    const confirmpassword=useRef();
    const [checkLength,setcheckLength]=useState('');
@@ -43,8 +43,6 @@ export default function ResetPassword(){
 
     return(
         <>
-        <div style={{width:'100vw',height:'100vh',display:'flex',
-        justifyContent:'center',alignItems:'center',background:'linear-gradient(90deg,#5972b9,#fa568d)'}}>
         <div className='signincon'>
             <div className='siginheading'><p>Reset Password</p></div>
             <form onSubmit={handleSubmit}>
@@ -65,7 +63,7 @@ export default function ResetPassword(){
             <p style={{color:'black'}}>Confirm Password</p>
             <input required='required' type='password' name='confirm_password'  ref={confirmpassword} onChange={passwordMatch}/>
             <p style={{color:checkMatch === 'Password Mismatched'? 'red' : 'green'}}>{checkMatch}</p>
-            <input type='hidden' name='passwordResetLink' value={passwordResetLink}/>
+            <input type='hidden' name='token' value={token}/>
             </div>
 
         </div>
@@ -73,7 +71,6 @@ export default function ResetPassword(){
         <button>SUBMIT</button>
         </div>
         </form>
-        </div>
         </div>
         </>
     )

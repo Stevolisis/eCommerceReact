@@ -11,7 +11,7 @@ import { fetchProducts, getRelProducts } from '../../Redux/Main/relatedProducts'
 import { useDispatch, useSelector } from 'react-redux';
 import Products_slider_layout from '../../components/main_page_layouts/products_slider_layout';
 import { addCartProduct } from '../../Redux/Main/cart';
-import { addWishlist, checkWish, getWish, removeWishlist } from '../../Redux/UserDashboard/wishlist';
+import { addWishlist, checkWish, removeWishlist } from '../../Redux/UserDashboard/wishlist';
 import { setRedirectPath } from '../../Redux/Auth/userAuthForm';
 
 export default function Product(props){
@@ -20,7 +20,6 @@ export default function Product(props){
     const dispatch=useDispatch();
     const product=useSelector(getProduct);
     const relProducts=useSelector(getRelProducts);
-    const wish=useSelector(getWish)
     const location = useLocation();
 
     const[datas,setDatas]=useState({
