@@ -1,13 +1,19 @@
 import { useEffect } from 'react';
 import {React} from 'react'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import { getCustomer } from '../../../Redux/UserDashboard/customerDetails';
+import { setRedirectPath } from '../../../Redux/Auth/userAuthForm';
+import { fetchWishlist, getWishList, removeWishlist } from '../../../Redux/UserDashboard/wishlist';
 
 export default function Userwishlist(){
   const dispatch=useDispatch();
+  const location=useLocation();
+  const wishlists=useSelector(getWishList);
+  const navigate=useNavigate();
 
-  const deleteitem=(()=>{
+console.log('yy',wishlists)
+  const deleteitem=((id)=>{
     Swal.fire({
         title: 'Are you sure?',
         text: "You won't be able to revert this!",
@@ -18,80 +24,60 @@ export default function Userwishlist(){
         confirmButtonText: 'Yes, remove it!'
       }).then((result) => {
         if (result.isConfirmed) {
-          Swal.fire(
-            'Removed!',
-            'Product removed Wishlist.',
-            'success'
-          )
+          dispatch(removeWishlist(id))
+          .then(res=>{
+            console.log(res)
+            if(res.payload.data.status!=='success'){
+                // dispatch(setRedirectPath('/auth/login?next='+location.pathname))            
+            }
+          })
         }
       })
    });
 
 
   useEffect(()=>{
-    dispatch(getCustomer());
+    dispatch(fetchWishlist())
+    .then(res=>{
+      if(res.payload.status!=='success'){
+          dispatch(setRedirectPath('/auth/login?next='+location.pathname))            
+      }
+    })
   },[])
 
 
     return(
         <>
           <div className='usermaincon'>
-        <div className='userorderheading'><p>Wishlist (3)</p></div>
+        <div className='userorderheading'><p>Wishlist ({wishlists&&wishlists.length})</p></div>
         <div className='userorderscon'>
-        
-        <div className='userorder'>
-        <div className='userorderimg'><img src='/media3/advert6.jpg' alt='UserOrderImg'/></div>
-        <div className='savediteminfo'>
-        <div className='savedinfo1'>
-        <p>Bluetooth Headset - Extra Bass -MDR-XB950BT- Red</p>
-        <div className='saveditemprice'><span>Price: N34,000</span><span>39,000</span></div>
-        <p>-20%</p>
-        </div>
-        <div className='savedinfo2'>
-        
-        <div className='savedinfobtn1'><button>View</button></div>
-        <div className='savedinfobtn2'><button onClick={()=>deleteitem()}>Remove</button></div>
-        
-        </div>
-        </div>
-        </div>
 
-        <div className='userorder'>
-        <div className='userorderimg'><img src='/media3/advert5.jpg' alt='UserOrderImg'/></div>
-        <div className='savediteminfo'>
-        <div className='savedinfo1'>
-        <p>Bluetooth Headset - Extra Bass -MDR-XB950BT- Red</p>
-        <div className='saveditemprice'><span>Price: N34,000</span><span>39,000</span></div>
-        <p>-20%</p>
-        </div>
-        <div className='savedinfo2'>
-        
-        <div className='savedinfobtn1'><button>View</button></div>
-        <div className='savedinfobtn2'><button onClick={()=>deleteitem()}>Remove</button></div>
-        
-        </div>
-        </div>
-        </div>
+          {
+            !wishlists ? <div className='overview'><div className='overviewdetails'>Your Wishlist is empty</div></div> 
+            :
+            wishlists.map((wishlist,i)=>{
+              return <div className='userorder' key={i}>
+              <div className='userorderimg'><img src={wishlist.img_link} alt='UserOrderImg'/></div>
+              <div className='savediteminfo'>
+              <div className='savedinfo1'>
+              <p>{wishlist.name}</p>
+              <div className='saveditemprice'><span>Price: N{wishlist.sale_price}</span><span>N{wishlist.regular_price}</span></div>
+              <p>-{(wishlist.regular_price-wishlist.sale_price)/100}%</p>
+              </div>
+              <div className='savedinfo2'>
+              
+              <div className='savedinfobtn1'><button onClick={()=>navigate(wishlist.slug)}>View</button></div>
+              <div className='savedinfobtn2'><button onClick={()=>deleteitem(wishlist._id)}>Remove</button></div>
+              
+              </div>
+              </div>
+              </div>
 
-        <div className='userorder'>
-        <div className='userorderimg'><img src='/media3/advert4.jpg' alt='UserOrderImg'/></div>
-        <div className='savediteminfo'>
-        <div className='savedinfo1'>
-        <p>Bluetooth Headset - Extra Bass -MDR-XB950BT- Red</p>
-        <div className='saveditemprice'><span>Price: N34,000</span><span>39,000</span></div>
-        <p>-20%</p>
-        </div>
-        <div className='savedinfo2'>
-        
-        <div className='savedinfobtn1'><button>View</button></div>
-        <div className='savedinfobtn2'><button onClick={()=>deleteitem()}>Remove</button></div>
-        
-        </div>
-        </div>
-        </div>
-
-        </div>
-        </div>
+            })
+          }
+      
+              </div>
+              </div>        
         </>
     )
 }

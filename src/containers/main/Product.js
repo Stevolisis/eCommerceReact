@@ -12,6 +12,8 @@ import { fetchProducts, getRelProducts } from '../../Redux/Main/relatedProducts'
 import { useDispatch, useSelector } from 'react-redux';
 import Products_slider_layout from '../../components/main_page_layouts/products_slider_layout';
 import { addCartProduct } from '../../Redux/Main/cart';
+import { addWishlist } from '../../Redux/UserDashboard/wishlist';
+import { setRedirectPath } from '../../Redux/Auth/userAuthForm';
 
 export default function Product(props){
     const[wishColor,setWishColor]=useState(false);
@@ -42,11 +44,14 @@ export default function Product(props){
 
     function addToWishList(){
         if(wishColor){
-            setWishColor(!wishColor)
-            addcart('Product Removed from Wishlist');
+            
         }else{
-            setWishColor(!wishColor)
-            addcart('Product added to your Wishlist');
+            dispatch(addWishlist(product))
+            .then(res=>{
+                if(res.payload.status!=='success'){
+                    dispatch(setRedirectPath('/auth/login?next='+location.pathname))            
+                }
+            })
         }
     }
 
@@ -113,7 +118,7 @@ export default function Product(props){
     </i>
     </div>
 </div>
-<div className='gproductprice'><span>₦ {product.sale_price}</span> <span>₦ {product.regular_price}</span><span>-20%</span></div>
+<div className='gproductprice'><span>₦ {product.sale_price}</span> <span>₦ {product.regular_price}</span><span>{(product.regular_price-product.sale_price)/100}%</span></div>
 <div className='gproductshippinginfo'><p>{product.shipping&&'+ shipping : ₦'+product.shipping }</p> </div>
 <div className='gproductshippinginfo'><p>{product.stock&&'+ In Stock : '+product.stock }</p> </div>
 <div className='gproductshippinginfo'>

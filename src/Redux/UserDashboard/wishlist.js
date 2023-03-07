@@ -6,15 +6,15 @@ import api from "../../Utils/axiosConfig";
 
 
 
-export const fetchWishlists=createAsyncThunk('wishlist/fetchWishlists',async()=>{
+export const fetchWishlist=createAsyncThunk('wishlist/fetchWishlist',async()=>{
     loading(true);
-    const response=await api.get('/users/getWishlists',{withCredentials:true});
+    const response=await api.get('/users/getWishlist',{withCredentials:true});
     return response.data;
 });
 
-export const fetchWishlist=createAsyncThunk('wishlist/fetchWishlist',async(id)=>{
+export const fetchWish=createAsyncThunk('wishlist/fetchWish',async(id)=>{
     loading(true);
-    const response=await api.get(`/users/getWishlist/${id}`,{withCredentials:true});
+    const response=await api.get(`/users/getWish/${id}`,{withCredentials:true});
     return response.data;
 });
 
@@ -27,7 +27,7 @@ export const addWishlist=createAsyncThunk('wishlist/addWishlist',async(data)=>{
 
 export const removeWishlist=createAsyncThunk('wishlist/deleteWishlist',async(id)=>{
     loading(true);
-    const response=await api.get(`/users/deleteWishlist/${id}`,{withCredentials:true});
+    const response=await api.delete(`/users/deleteWishlist/${id}`,{withCredentials:true});
     return {id:id,data:response.data};
 })
 
@@ -53,19 +53,19 @@ const Toast = Swal.mixin({
 const wishlistSlice=createSlice({
     name:'wishlist',
     initialState:{
-        wishlists:[],
-        wishlist:{}
+        wishlist:[],
+        wish:{}
     },
     extraReducers:{
-        [fetchWishlists.fulfilled]:(state,{payload})=>{
+        [fetchWishlist.fulfilled]:(state,{payload})=>{
             loading(false);
             let status=payload.status;
 
-            if(state==='success'){
-                let data=payload.data;
-                state.wishlists=data;
+            if(status==='success'){
+                let data=payload.data.wishlist;
+                state.wishlist=data;
             }
-        },[fetchWishlists.rejected]:(state,{error})=>{
+        },[fetchWishlist.rejected]:(state,{error})=>{
             loading(false);
             Swal.fire(
                 "Error Occured",
@@ -73,15 +73,15 @@ const wishlistSlice=createSlice({
                 'error'
             )
         },
-        [fetchWishlist.fulfilled]:(state,{payload})=>{
+        [fetchWish.fulfilled]:(state,{payload})=>{
             loading(false);
             let status=payload.status;
 
-            if(state==='success'){
+            if(status==='success'){
                 let data=payload.data.wishlist[0];
                 state.wishlist=data;
             }
-        },[fetchWishlist.rejected]:(state,{error})=>{
+        },[fetchWish.rejected]:(state,{error})=>{
             loading(false);
             Swal.fire(
                 "Error Occured",
@@ -93,7 +93,7 @@ const wishlistSlice=createSlice({
             loading(false);
             let status=payload.status;
 
-            if(state==='success'){
+            if(status==='success'){
                 let data=payload.data;
                 state.wishlists=data;
                 Toast.fire({
@@ -138,5 +138,6 @@ const wishlistSlice=createSlice({
 
 
 
-
+export const getWishList=(state)=>state.wishlistReducer.wishlist;
+export const getWish=(state)=>state.wishlistReducer.wish;
 export default wishlistSlice.reducer;
