@@ -11,7 +11,7 @@ import { fetchProducts, getRelProducts } from '../../Redux/Main/relatedProducts'
 import { useDispatch, useSelector } from 'react-redux';
 import Products_slider_layout from '../../components/main_page_layouts/products_slider_layout';
 import { addCartProduct } from '../../Redux/Main/cart';
-import { addWishlist, checkWish } from '../../Redux/UserDashboard/wishlist';
+import { addWishlist, checkWish, removeWishlist } from '../../Redux/UserDashboard/wishlist';
 import { setRedirectPath } from '../../Redux/Auth/userAuthForm';
 
 export default function Product(props){
@@ -44,13 +44,18 @@ export default function Product(props){
 
     function addToWishList(){
         if(wishColor){
-            
-        }else{
-            dispatch(addWishlist(product))
+            dispatch(removeWishlist(product._id))
             .then(res=>{
                 if(res.payload.status!=='success'){
                     dispatch(setRedirectPath('/auth/login?next='+location.pathname))            
-                }
+                }else setWishColor(false)
+            })
+        }else{
+            dispatch(addWishlist(product))
+            .then(res=>{
+                if(res.payload.status!=='product not Found'&&res.payload.status!=='product already in wishlist'&&res.payload.status!=='success'){
+                    dispatch(setRedirectPath('/auth/login?next='+location.pathname))            
+                }else setWishColor(true)
             })
         }
     }

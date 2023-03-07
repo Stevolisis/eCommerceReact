@@ -25,9 +25,9 @@ export const addWishlist=createAsyncThunk('wishlist/addWishlist',async(data)=>{
 });
 
 
-export const removeWishlist=createAsyncThunk('wishlist/deleteWishlist',async(id)=>{
+export const removeWishlist=createAsyncThunk('wishlist/deleteWish',async(id)=>{
     loading(true);
-    const response=await api.delete(`/users/deleteWishlist/${id}`,{withCredentials:true});
+    const response=await api.delete(`/users/deleteWish/${id}`,{withCredentials:true});
     return {id:id,data:response.data};
 })
 
