@@ -9,7 +9,7 @@ import $ from 'jquery';
 import TopBanner from '../../Loaders/homepageLoaders/topbanner';
 import { getCartcount, getCartItems, getCartTotal } from '../../Redux/Main/cart';
 
-export default function MainContainer({route,setTogglefilter,togglefilter,data}){
+export default function MainHeader({route,setTogglefilter,togglefilter,data}){
     const categ=useSelector(getCategory);
     const cartCount=useSelector(getCartcount);
     const cartItems=useSelector(getCartItems);
@@ -47,55 +47,58 @@ export default function MainContainer({route,setTogglefilter,togglefilter,data})
             }
 
 
-<div className='header2'>
-    <div className='categoryspace2'>
-    <h2><Link to='/'><img src='/elite-plaza17.png' alt=''/>  </Link></h2>
-    
-    {route==='products'? 
-    <div className='currentcateg' style={{display:'block'}}>
-    <i className='fa fa-caret-right ' />
-    <span>{categ&&categ.name}</span>
+    <div className='header2'>
+        <div className='categoryspace2'>
+        <h2><Link to='/'><img src='/elite-plaza17.png' alt=''/>  </Link></h2>
+        
+        {route==='products'? 
+        <div className='currentcateg' style={{display:'block'}}>
+        <i className='fa fa-caret-right ' />
+        <span>{categ&&categ.name}</span>
+        </div>
+        :''}
+
     </div>
-    :''}
 
-</div>
-<div className='usercon2'>
-<Link to='/help'><i className='fa fa-question-circle'></i></Link>
+    <div className='usercon2'>
+        <Link to='/help'><i className='fa fa-question-circle'></i></Link>
 
-<div className='cart'>
-<Link to='/cart'><i className='fa fa-shopping-cart'></i>{!cartCount?'':<sup>{cartCount}</sup>}</Link>
-</div>
+        <div className='cart'>
+        <Link to='/cart'><i className='fa fa-shopping-cart'></i>{!cartCount?'':<sup>{cartCount}</sup>}</Link>
+        </div>
 
-<Link to='/user/dashboard'><i className='fa fa-user-circle'></i></Link>
-</div>
-</div>
+        <Link to='/user/dashboard'><i className='fa fa-user-circle'></i></Link>
+        </div>
 
-
-<div className='header'>
-    <div className='categoryspace'>
-    <h2><Link to='/'><img src='/elite-plaza17.png' alt=''/>  </Link></h2>
-    {route==='products'? 
-    <div className='currentcateg' style={{display:'block'}}>
-    <i className='fa fa-caret-right ' />
-    <span>{categ&&categ.name}</span>
-    </div>
-:''}
     </div>
 
 
-<Searchbar liftSearch={liftSearch} setTogglefilter={setTogglefilter} togglefilter={togglefilter} route={route}/>
+    <div className='header'>
+        <div className='categoryspace'>
+            <h2><Link to='/'><img src='/elite-plaza17.png' alt=''/>  </Link></h2>
+            {route==='products'? 
+            <div className='currentcateg' style={{display:'block'}}>
+            <i className='fa fa-caret-right ' />
+            <span>{categ&&categ.name}</span>
+            </div>
+            :''}
+        </div>
 
 
-<div className='usercon'>
-<Link to='/help'><i className='fa fa-question-circle'></i></Link>
+    <Searchbar liftSearch={liftSearch} setTogglefilter={setTogglefilter} togglefilter={togglefilter} route={route}/>
 
-<div className='cart'>
-<Link to='/cart'><i className='fa fa-shopping-cart'></i>{!cartCount?'':<sup>{cartCount}</sup>}</Link>
-</div>
 
-<Link to='/user/dashboard'><i className='fa fa-user-circle'></i></Link>
-</div>
-</div>
-</div>
+        <div className='usercon'>
+            <Link to='/help'><i className='fa fa-question-circle'></i></Link>
+
+            <div className='cart'>
+            <Link to='/cart'><i className='fa fa-shopping-cart'></i>{!cartCount?'':<sup>{cartCount}</sup>}</Link>
+            </div>
+
+            <Link to='/user/dashboard'><i className='fa fa-user-circle'></i></Link>
+        </div>
+    </div>
+
+   </div>
     )
 }

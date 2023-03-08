@@ -9,7 +9,6 @@ export default function UserDashboardNavbar(){
     const categories=useSelector(getAllCategories);
     const dispatch=useDispatch();
     const location = useLocation();
-console.log('history',document)
 
     return(
         <>

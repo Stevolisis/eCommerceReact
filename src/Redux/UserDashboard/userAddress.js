@@ -150,13 +150,13 @@ const addressSlice=createSlice({
             loading(false);
             let status=payload.status;
 
-            if(status==='success'){
-                Swal.fire(
-                    'Default Address!',
-                    'This is set as your default address.',
-                    'success'
-                )        
-            }
+            // if(status==='success'){
+            //     Swal.fire(
+            //         'Default Address!',
+            //         'This is set as your default address.',
+            //         'success'
+            //     )        
+            // }
             
         },[setDefaultAddress.rejected]: (state,{error})=>{
             loading(false);

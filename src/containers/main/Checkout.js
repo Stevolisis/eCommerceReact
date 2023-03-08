@@ -53,7 +53,6 @@ export default function Checkout(){
   useEffect(()=>{
     userAddresses&&userAddresses.length==0 ? setNavStat('/user/addAddress?next=/checkout')
     : setNavStat('/user/address?next=/checkout')
-    console.log(userAddresses)
   },[userAddresses])
 
 
