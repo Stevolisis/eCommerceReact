@@ -13,8 +13,8 @@ export default function UsersList({deleteuser}){
             <td>{first_name+' '+last_name}</td>
             <td>{email}</td>
             <td>{phone_number}</td>
-            {/* <td>{orders.length===0 ? 0 : orders}</td>
-            <td>{wishlist.length===0 ? 0 : wishlist}</td> */}
+            <td>{orders.length===0 ? 0 : orders.length}</td>
+            <td>{wishlist.length===0 ? 0 : wishlist.length}</td>
             <td>{verified===true ? 'true' : 'false'}</td>
             <td>{createdAt.split('T')[0]}</td>
             <td><Link to={`/admin/edituser/${_id}`}><i className='fa fa-edit'/></Link></td>
