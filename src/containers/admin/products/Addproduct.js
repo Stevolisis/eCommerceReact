@@ -114,8 +114,8 @@ export default function Addproduct({type}){
 
         <div className='admineditnamecon'>
             <div className='admineditname'>
-            <p>Shipping Fee [opional]</p>
-            <input type='number' name='shipping'/>
+            <p>Delivery Fee [opional]</p>
+            <input type='number' name='delivery_fee'/>
             </div>
         </div>
 

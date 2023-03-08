@@ -133,7 +133,7 @@ export default function Product(props){
     </div>
 </div>
 <div className='gproductprice'><span>₦ {product.sale_price}</span> <span>₦ {product.regular_price}</span><span>{(product.regular_price-product.sale_price)/100}%</span></div>
-<div className='gproductshippinginfo'><p>{product.shipping&&'+ shipping : ₦'+product.shipping }</p> </div>
+<div className='gproductshippinginfo'><p>{product.delivery_fee&&'+ shipping : ₦'+product.delivery_fee }</p> </div>
 <div className='gproductshippinginfo'><p>{product.stock&&'+ In Stock : '+product.stock }</p> </div>
 <div className='gproductshippinginfo'>
 

@@ -15,7 +15,7 @@ export default function Editproduct(){
     const [stock,setStock]=useState('');
     const [regular_price,setRegular_price]=useState('');
     const [sale_price,setSale_price]=useState('');
-    const [shipping,setShipping]=useState('');
+    const [delivery_fee,setDelivery_fee]=useState('');
     const [status,setStatus]=useState('');
     const [options,setOptions]=useState([]);
     const [initialValue,setInitialValue]=useState('');
@@ -75,7 +75,7 @@ export default function Editproduct(){
         setStock(data.stock||'');
         setRegular_price(data.regular_price||'');
         setSale_price(data.sale_price||'');
-        setShipping(data.shipping)
+        setDelivery_fee(data.delivery_fee)
         setStatus(data.status||'');
         data.img_gallery.forEach(img=>{
             setImggallerypreview(oldImg=>[...oldImg,img.url]);
@@ -152,8 +152,8 @@ export default function Editproduct(){
 
         <div className='admineditnamecon'>
             <div className='admineditname'>
-            <p>Shipping Fee [opional]</p>
-            <input type='number' name='shipping' value={shipping} onChange={(e)=> setShipping(e.target.value)}/>
+            <p>Delivery fee Fee [opional]</p>
+            <input type='number' name='delivery_fee' value={delivery_fee} onChange={(e)=> setDelivery_fee(e.target.value)}/>
             </div>
         </div>
 

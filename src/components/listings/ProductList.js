@@ -16,24 +16,24 @@ export default function ProductList({deleteproduct}) {
   })
 
   return(
-  <tr key={i}>
-  <td><img src={img_gallery[0].url} alt={name}/></td>
-  <td>{name}</td>
-  <td>{stock}</td>
-  <td>{sale_price}</td>
-  <td style={{width:'150px',maxWidth:'150px'}}>
-  <div style={{overflowX:'auto',whiteSpace:'nowrap'}}>
-    {categoryCon.map(categ=>{
-    return categ+', '
-  })}
-  </div>
-  </td>
-  <td>{sold}</td>
-  <td>{createdAt.split('T')[0]}</td>
-  <td><Link to={`/admin/editproduct/${_id}`}><i className='fa fa-edit'/></Link></td>
-  <td><button onClick={()=>deleteproduct(_id)}>Delete</button></td>
-  <td>{status}</td>
-  </tr>
+    <tr key={i}>
+    <td><img src={img_gallery[0].url} alt={name}/></td>
+    <td>{name}</td>
+    <td>{stock}</td>
+    <td>{sale_price}</td>
+    <td style={{width:'150px',maxWidth:'150px'}}>
+    <div style={{overflowX:'auto',whiteSpace:'nowrap'}}>
+      {categoryCon.map(categ=>{
+      return categ+', '
+    })}
+    </div>
+    </td>
+    <td>{sold}</td>
+    <td>{createdAt.split('T')[0]}</td>
+    <td><Link to={`/admin/editproduct/${_id}`}><i className='fa fa-edit'/></Link></td>
+    <td><button onClick={()=>deleteproduct(_id)}>Delete</button></td>
+    <td>{status}</td>
+    </tr>
   )
     })
 
