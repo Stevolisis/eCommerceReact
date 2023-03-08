@@ -16,9 +16,12 @@ export default function Adduseraddress(){
         const formData=new FormData(e.target)
         dispatch(addAddress(formData))
         .then(res=>{
+            
             if(res.payload.status!=='success'){
                 if(queryString.get('next')) dispatch(setRedirectPath('/auth/login?next='+queryString.get('next')))
                 if(!queryString.get('next')) dispatch(setRedirectPath('/auth/login?next='+location.pathname))            
+            }else{
+                if(queryString.get('next')) dispatch(setRedirectPath(queryString.get('next')))
             }
         })
     };

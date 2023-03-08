@@ -5,14 +5,18 @@ import Mainheader from '../../components/main_page_layouts/Mainheader';
 import Mainfooter from '../../components/Mainfooter'
 import { useDispatch, useSelector } from 'react-redux';
 import { setInview, setRedirectPath, setTrigger } from '../../Redux/Auth/userAuthForm';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useLayoutEffect } from 'react';
 import { fetchAddresses, getAddresses } from '../../Redux/UserDashboard/userAddress';
+import { useEffect } from 'react';
 
 export default function Checkout(){
     const dispatch=useDispatch();
     const location=useLocation();
     const userAddresses=useSelector(fetchAddresses);
+    const navigate=useNavigate();
+    const [navStat,setNavStat]=useState('')
+    
 
 
    const Toast = Swal.mixin({
@@ -46,6 +50,12 @@ export default function Checkout(){
     })
   },[]);
 
+  useEffect(()=>{
+    userAddresses&&userAddresses.length==0 ? setNavStat('/user/addAddress?next=/checkout')
+    : setNavStat('/user/address?next=/checkout')
+    console.log(userAddresses)
+  },[userAddresses])
+
 
 
 
@@ -65,18 +75,19 @@ return(
 <div className='checkoutaddresscon'>
     <div className='userorderheading'>
         <p>ADDRESS DETAILS</p>
-        <button onClick={()=>(dispatch(setInview({view:'useraddress'}),dispatch(setTrigger(true))))}>CHANGE</button>
+        {
+          navStat==='/user/addAddress?next=/checkout' ? 
+          <button onClick={()=>navigate('/user/addAddress?next=/checkout')}>ADD</button>
+          :
+          <button onClick={()=>navigate('/user/address?next=/checkout')}>CHANGE</button>
+        }
     </div>
         
       {
         userAddresses&&userAddresses.length!==0 ?
         userAddresses
-          .filter(address=>{
-            console.log('ffc',address.default==true)
-            return address.default==true
-          })
+          .filter((address,i)=>address.default==true)
           .map((addressDefault,i)=>{
-            console.log('addressDefault',addressDefault)
             return <div className='checkoutaddress' key={i}>
               <p>{addressDefault.first_name+' '+addressDefault.last_name}</p>
             <p>{addressDefault.address}</p>

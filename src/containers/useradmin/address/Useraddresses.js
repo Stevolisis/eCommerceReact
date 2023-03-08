@@ -28,6 +28,8 @@ export default function Useraddresses(){
                 if(res.payload.status!=='success'){
                     if(queryString.get('next')) dispatch(setRedirectPath('/auth/login?next='+queryString.get('next')))
                     if(!queryString.get('next')) dispatch(setRedirectPath('/auth/login?next='+location.pathname))            
+                }else{
+                    if(queryString.get('next')) dispatch(setRedirectPath(queryString.get('next')))
                 }
             })
             }
