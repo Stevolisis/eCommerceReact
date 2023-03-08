@@ -15,7 +15,7 @@ export default function UsersList({deleteuser}){
             <td>{phone_number}</td>
             {/* <td>{orders.length===0 ? 0 : orders}</td>
             <td>{wishlist.length===0 ? 0 : wishlist}</td> */}
-            {/* <td>{verified===true ? 'true' : 'false'}</td> */}
+            <td>{verified===true ? 'true' : 'false'}</td>
             <td>{createdAt.split('T')[0]}</td>
             <td><Link to={`/admin/edituser/${_id}`}><i className='fa fa-edit'/></Link></td>
             <td><button onClick={()=>deleteuser(_id)}>Delete</button></td>
