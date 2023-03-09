@@ -134,8 +134,35 @@ align-items: center;
     text-align: center;
 }
    
+.delivery_notesBtn{
+    margin: -25px 0 10px 0;
+
+    button{
+        color: $color50;
+        font-family: font3;
+        padding: 9px;
+        border: 0;
+        background: $color60;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);
+        font-size: 11px;
+        cursor: pointer;
+    }
 
 
+}
+
+.delivery_note{
+    textarea{
+        border: 1px solid $color108;
+        padding: 11px 8px;
+        border-radius: 5px;
+        width: 80%;
+        box-sizing: border-box;
+        height: 120px;
+        font-size: 12px;
+    }    
+}
 
 
 

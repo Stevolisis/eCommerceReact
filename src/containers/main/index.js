@@ -15,11 +15,34 @@ import MainBannerLoader from '../../Loaders/homepageLoaders/mainBannerLoader';
 import CategorySlider from '../../Loaders/homepageLoaders/categorySlider';
 import ProductsSlider from '../../Loaders/homepageLoaders/productSlider';
 import ProductListings from '../../Loaders/homepageLoaders/productListings';
+import axios from 'axios';
+import { useEffect } from 'react';
 
 export default function Index(){
     const [layouts, setLayouts] = useState(null);
     const dispatch=useDispatch();
+    const [ip, setIP] = useState('');
+    // const [flag, setFlag] = useState('');
     
+
+
+    const getData = async () => {
+      const res = await axios.get('https://geolocation-db.com/json/')
+      setIP(res.data)
+    }
+
+    // const getFlag = async () => {
+    //     const res = await axios.get(`https://countryflagsapi.com/png/US`)
+    //     setFlag('https://countryflagsapi.com/png/US')
+    //   }
+
+    useEffect( () => {
+      getData()
+    },[]);
+    
+    // useEffect(()=>{
+    //     getFlag()
+    // },[ip]);
 
 
 useMemo(()=>{
@@ -57,7 +80,6 @@ dispatch(fetchEvents())
 
 
 <div className='submain'>
-
 
 {layouts==null ?(
     <>

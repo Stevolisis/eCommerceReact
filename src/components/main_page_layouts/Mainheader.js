@@ -61,6 +61,7 @@ export default function MainHeader({route,setTogglefilter,togglefilter,data}){
     </div>
 
     <div className='usercon2'>
+        
         <Link to='/help'><i className='fa fa-question-circle'></i></Link>
 
         <div className='cart'>
@@ -89,6 +90,8 @@ export default function MainHeader({route,setTogglefilter,togglefilter,data}){
 
 
         <div className='usercon'>
+        
+
             <Link to='/help'><i className='fa fa-question-circle'></i></Link>
 
             <div className='cart'>

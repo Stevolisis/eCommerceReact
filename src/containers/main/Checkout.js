@@ -1,10 +1,9 @@
 import {React, useState} from 'react';
-import Popupcomponent from '../../components/Popupcomponent';
 import Swal from 'sweetalert2';
 import Mainheader from '../../components/main_page_layouts/Mainheader';
 import Mainfooter from '../../components/Mainfooter'
 import { useDispatch, useSelector } from 'react-redux';
-import { setInview, setRedirectPath, setTrigger } from '../../Redux/Auth/userAuthForm';
+import {  setRedirectPath } from '../../Redux/Auth/userAuthForm';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useLayoutEffect } from 'react';
 import { fetchAddresses, getAddresses } from '../../Redux/UserDashboard/userAddress';
@@ -16,7 +15,9 @@ export default function Checkout(){
     const userAddresses=useSelector(fetchAddresses);
     const navigate=useNavigate();
     const [navStat,setNavStat]=useState('')
-    
+    const [delivery_stat,setDelivery_stat]=useState(false)
+    const [delivery_note,setDelivery_note]=useState('')
+
 
 
    const Toast = Swal.mixin({
@@ -100,12 +101,22 @@ return(
         <div className='overview'>No Address Found</div>
       }
 
+    <div className='checkoutaddress'>
+        <div className='delivery_notesBtn'>
+          <button onClick={()=>setDelivery_stat(!delivery_stat)}>Add Notes</button>
+        </div>
+        {delivery_stat&&<div className='delivery_note'>
+        <textarea name='delivery_notes' value={delivery_note} onChange={(e)=>setDelivery_note(e.target.value)}/>
+        </div>}
+    </div>
+
 </div>
 
 <div className='checkoutpaymentcon'>
 <div className='userorderheading'><p>PAYMENT METHOD</p></div>
 <div className='checkoutpayment'>
 
+<form>
 <div className='paymentmethods'>
 <input type='radio' name='paymentgateway' value='Payment On Delivery' id='Flutterwave'/>
 <p ><label htmlFor='Flutterwave'>Flutterwave</label></p>
@@ -122,6 +133,7 @@ return(
 <input type='radio' name='paymentgateway' value='Payment On Delivery' id='Stripe'/>
 <p><label htmlFor='Stripe'>Stripe</label></p>
 </div>
+</form>
 
 </div>
 <div>

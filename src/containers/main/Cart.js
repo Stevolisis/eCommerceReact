@@ -12,7 +12,6 @@ export default function Cart(){
    const cartCount=useSelector(getCartcount);
    const cartSubAmount=useSelector(getSubAmount);
    const dispatch=useDispatch();
-
    
    const deletecartitem=((id)=>{
     Swal.fire({
