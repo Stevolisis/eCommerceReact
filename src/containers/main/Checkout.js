@@ -106,7 +106,7 @@ return(
           <button onClick={()=>setDelivery_stat(!delivery_stat)}>Add Notes</button>
         </div>
         {delivery_stat&&<div className='delivery_note'>
-        <textarea name='delivery_notes' value={delivery_note} onChange={(e)=>setDelivery_note(e.target.value)}/>
+        <textarea placeholder='if you want to add extra information e.g delivery instructions' name='delivery_notes' value={delivery_note} onChange={(e)=>setDelivery_note(e.target.value)}/>
         </div>}
     </div>
 
