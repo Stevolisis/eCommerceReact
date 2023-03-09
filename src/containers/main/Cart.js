@@ -1,18 +1,19 @@
 import {React, useEffect} from 'react'
-import { Link,useNavigate } from 'react-router-dom'
 import Swal from 'sweetalert2';
 import Mainheader from '../../components/main_page_layouts/Mainheader';
 import Mainfooter from '../../components/Mainfooter'
 import { useDispatch, useSelector } from 'react-redux';
 import { clearCart, decrement, deleteCartProduct, getCartcount, getCartItems, getCartTotal, getSubAmount, increment } from '../../Redux/Main/cart';
+import { placeOrder } from '../../Redux/Admin/orders';
+import { useLocation } from 'react-router-dom';
+import { setRedirectPath } from '../../Redux/Auth/userAuthForm';
 
 export default function Cart(){
-   const navigate=useNavigate();
    const cartItems=useSelector(getCartItems);
    const cartCount=useSelector(getCartcount);
    const cartSubAmount=useSelector(getSubAmount);
    const dispatch=useDispatch();
-   
+   const location=useLocation();
    const deletecartitem=((id)=>{
     Swal.fire({
         title: 'Are you sure?',
@@ -27,7 +28,19 @@ export default function Cart(){
           dispatch(deleteCartProduct(id))
         }
       })
-   })
+   });
+
+   function handleSubmit(){
+    const formData=new FormData();
+    formData.append('products',JSON.stringify(cartItems))
+
+    dispatch(placeOrder(formData))
+    .then(res=>{
+      if(res.payload.status!=='success'){
+        dispatch(setRedirectPath('/auth/login?next='+location.pathname))            
+      }
+    })
+   }
 
 
 
@@ -108,7 +121,7 @@ export default function Cart(){
 <div><p>₦{cartSubAmount}</p></div>
 </div>
 <div className='cartsummarybutton'>
-    <button onClick={()=>navigate('/checkout')}>CHECKOUT</button>
+    <button onClick={()=>handleSubmit()}>CHECKOUT</button>
 </div>
 </div>
 </div>
