@@ -167,6 +167,56 @@ align-items: center;
 }
 
 
+.ordersCon{
+    padding:10px 20px 0 20px;
+}
+
+.order{
+    display: flex;
+    margin: 10px 0;
+    border: 1px solid lightgray;
+    padding: 7px;
+}
+
+.orderImg{
+    background-color: $color50;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+
+    img{
+        width: 40px;
+        height: 40px;
+    }
+}
+
+.orderDetails{
+    padding: 0 0 0 10px;
+}
+
+.orderTitle{
+    p{
+        font-size: 14px;
+    }
+}
+
+.ordePrice p:nth-of-type(1){
+    font-family: font3;
+    font-size: 11px;
+    color: $color60;
+}
+
+.ordePrice p:nth-of-type(2){
+    font-size: 9px;
+}
+
+
+
+
+
+
+
 
 
 

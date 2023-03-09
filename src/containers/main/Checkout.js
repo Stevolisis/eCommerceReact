@@ -4,19 +4,22 @@ import Mainheader from '../../components/main_page_layouts/Mainheader';
 import Mainfooter from '../../components/Mainfooter'
 import { useDispatch, useSelector } from 'react-redux';
 import {  setRedirectPath } from '../../Redux/Auth/userAuthForm';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useLayoutEffect } from 'react';
 import { fetchAddresses, getAddresses } from '../../Redux/UserDashboard/userAddress';
 import { useEffect } from 'react';
+import { getOrder, orderDetails } from '../../Redux/Admin/orders';
 
 export default function Checkout(){
     const dispatch=useDispatch();
     const location=useLocation();
     const userAddresses=useSelector(fetchAddresses);
+    const order=useSelector(orderDetails)
     const navigate=useNavigate();
     const [navStat,setNavStat]=useState('')
     const [delivery_stat,setDelivery_stat]=useState(false)
-    const [delivery_note,setDelivery_note]=useState('')
+    const [delivery_note,setDelivery_note]=useState('');
+    const {id}=useParams();
 
 
 
@@ -51,10 +54,21 @@ export default function Checkout(){
     })
   },[]);
 
+  useLayoutEffect(()=>{
+    if(id){
+      dispatch(getOrder(id))
+      .then(res=>{
+        if(res.payload.status!=='success'){
+          dispatch(setRedirectPath('/auth/login?next='+location.pathname))            
+        }
+      })
+    }
+  },[id])
+
   useEffect(()=>{
     userAddresses&&userAddresses.length==0 ? setNavStat('/user/addAddress?next=/checkout')
     : setNavStat('/user/address?next=/checkout')
-  },[userAddresses])
+  },[userAddresses]);
 
 
 
@@ -146,22 +160,44 @@ return(
 
 <div className='checkoutsummarycon'>
 
-<div className='checkoutvouchercon'>
-<div className='checkoutvoucherheading'>
-<p>Use a voucher</p>
-</div>
-<div className='checkoutvoucher'>
-    <input type='text' placeholder='Enter Voucher Code'/>
-    <button onClick={()=>vouchervalidate()}>Apply</button>
-</div>
-</div>
+  <div className='ordersCon'>
+    {order.products&&order.products.map((item,i)=>{
+      return <div className='order' key={i}>
+              <div className='orderImg'>
+                <img src={item.img_link} alt='order'/>
+              </div>
 
-<div className='checkoutsummary'>
-<div><p>Subtotal</p><p>N2,167</p></div>
-<div><p>Shipping</p><p>N1,490</p></div>
-<div><p>Total</p><p>N3,657</p></div>
-<div><button>Pay</button></div>
-</div>
+              <div className='orderDetails'>
+                <div className='orderTitle'>
+                  <p>{item.name}</p>
+                </div>
+                <div className='ordePrice'>
+                <p>N{item.price}</p>
+                <p>Quantity: {item.quantity}</p>
+                </div>
+              </div>
+          </div>
+    })
+  }
+  </div>
+
+  <div className='checkoutvouchercon'>
+  <div className='checkoutvoucherheading'>
+  <p>Use a voucher</p>
+  </div>
+  <div className='checkoutvoucher'>
+      <input type='text' placeholder='Enter Voucher Code'/>
+      <button onClick={()=>vouchervalidate()}>Apply</button>
+  </div>
+  </div>
+
+  <div className='checkoutsummary'>
+  <div><p>Subtotal</p><p>N{order.total_delivery_fee}</p></div>
+  <div><p>Shipping</p><p>N{order.total_cost}</p></div>
+  <div><p>Total</p><p>N{order.total_delivery_fee+order.total_cost}</p></div>
+  <div><button>Pay</button></div>
+  </div>
+
 </div>
 </div>
 
