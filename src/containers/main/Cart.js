@@ -38,6 +38,8 @@ export default function Cart(){
     .then(res=>{
       if(res.payload.status!=='success'){
         dispatch(setRedirectPath('/auth/login?next='+location.pathname))            
+      }else{
+        dispatch(setRedirectPath('/checkout/'+res.payload.orderId))            
       }
     })
    }

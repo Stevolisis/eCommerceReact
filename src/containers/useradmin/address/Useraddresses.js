@@ -30,7 +30,7 @@ export default function Useraddresses(){
                     if(!queryString.get('next')) dispatch(setRedirectPath('/auth/login?next='+location.pathname))            
                 }else{
                     console.log('yyuu',queryString.get('next'))
-                    if(queryString.get('next')==='/checkout') dispatch(setRedirectPath(queryString.get('next')))
+                    if(queryString.get('next')) dispatch(setRedirectPath(queryString.get('next')))
                 }
             })
             }

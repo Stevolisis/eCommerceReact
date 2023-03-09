@@ -3,7 +3,7 @@ import { loading } from "../../Loaders/setMainLoader";
 import api from "../../Utils/axiosConfig";
 
 
-export const placeOrder=createAsyncThunk('adminCategories/addCategory',async(formData)=>{
+export const placeOrder=createAsyncThunk('orders/placeOrder',async(formData)=>{
     loading(true);
     const response=await api.post('users/placeOrder',formData,{withCredentials:true});
     return response.data;

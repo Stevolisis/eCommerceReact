@@ -160,7 +160,7 @@ useEffect(()=>{
         {/* <Route path='/products/:slug' element={<Products />} /> */}
         <Route path='/product/:slug' element={<Product />} />
         <Route path='cart' element={<Cart />} />
-        <Route path='checkout' element={<Checkout />} />
+        <Route path='checkout/:id' element={<Checkout />} />
         <Route path='help' element={<Help />} />
 
 

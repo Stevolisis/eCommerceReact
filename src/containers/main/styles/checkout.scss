@@ -154,13 +154,15 @@ align-items: center;
 
 .delivery_note{
     textarea{
-        border: 1px solid $color108;
+        border: 1px solid $color50;
         padding: 11px 8px;
         border-radius: 5px;
         width: 85%;
         box-sizing: border-box;
         height: 120px;
         font-size: 12px;
+        background: rgba(89, 114, 185, 0.1);
+        color: $color60;
     }    
 }
 
@@ -175,7 +177,7 @@ align-items: center;
 
     .checkoutinfocon{
         width:100%;
-        margin: 7px 0;
+        margin: 0 0 20px 0;
     }
 
     .checkoutsummarycon{
