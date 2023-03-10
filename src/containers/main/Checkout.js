@@ -161,7 +161,7 @@ return(
 <div className='checkoutsummarycon'>
 
   <div className='ordersCon'>
-    {order.products&&order.products.map((item,i)=>{
+    {order&&order.products&&order.products.map((item,i)=>{
       return <div className='order' key={i}>
               <div className='orderImg'>
                 <img src={item.img_link} alt='order'/>
@@ -192,9 +192,9 @@ return(
   </div>
 
   <div className='checkoutsummary'>
-  <div><p>Subtotal</p><p>N{order.total_delivery_fee}</p></div>
-  <div><p>Shipping</p><p>N{order.total_cost}</p></div>
-  <div><p>Total</p><p>N{order.total_delivery_fee+order.total_cost}</p></div>
+  <div><p>Subtotal</p><p>N{order&&order.total_delivery_fee}</p></div>
+  <div><p>Delivery Fee</p><p>N{order&&order.total_cost}</p></div>
+  <div><p>Total</p><p>N{order&&order.total_delivery_fee+order&&order.total_cost}</p></div>
   <div><button>Pay</button></div>
   </div>
 
