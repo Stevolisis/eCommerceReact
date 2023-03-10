@@ -175,7 +175,7 @@ align-items: center;
     display: flex;
     margin: 10px 0;
     border: 1px solid lightgray;
-    padding: 7px;
+    padding: 0 7px 0 0;
 }
 
 .orderImg{
@@ -186,8 +186,9 @@ align-items: center;
     height: auto;
 
     img{
-        width: 40px;
-        height: 40px;
+        width: 60px;
+        height: 60px;
+        object-fit: cover;
     }
 }
 
@@ -198,6 +199,8 @@ align-items: center;
 .orderTitle{
     p{
         font-size: 14px;
+        padding-top: 5px;
+
     }
 }
 
