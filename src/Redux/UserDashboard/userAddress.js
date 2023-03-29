@@ -6,38 +6,38 @@ import api from "../../Utils/axiosConfig";
 
 export const getAddresses=createAsyncThunk('address/getAddresses',async ()=>{
     loading(true);
-    const response=await api.get('/users/getAddresses',{withCredentials:true});
+    const response=await api.get('/address/getAddresses',{withCredentials:true});
     return response.data;
 });
 
 export const getAddress=createAsyncThunk('address/getAddress',async (id)=>{
     loading(true);
-    const response=await api.get(`/users/getAddress/${id}`,{withCredentials:true});
+    const response=await api.get(`/address/getAddress/${id}`,{withCredentials:true});
     return response.data;
 });
 
 export const addAddress=createAsyncThunk('address/addAddress',async (data)=>{
     loading(true);
-    const response=await api.post('/users/addAddress',data,{withCredentials:true});
+    const response=await api.post('/address/addAddress',data,{withCredentials:true});
     return response.data;
 });
 
 export const editAddress=createAsyncThunk('address/editAddress',async (data)=>{
     loading(true);
-    const response=await api.patch(`/users/editAddress`,data,{withCredentials:true});
+    const response=await api.patch(`/address/editAddress`,data,{withCredentials:true});
     return response.data;
 });
 
 export const deleteAddress=createAsyncThunk('address/deleteAddress',async (id)=>{
     loading(true);
-    const response=await api.delete(`/users/deleteAddress/${id}`,{withCredentials:true});
+    const response=await api.delete(`/address/deleteAddress/${id}`,{withCredentials:true});
     return {id:id,data:response.data};
 });
 
 
 export const setDefaultAddress=createAsyncThunk('address/setDefaultAdress',async (id)=>{
     loading(true);
-    const response=await api.post('/users/setDefaultAdress',{id:id},{withCredentials:true});
+    const response=await api.post('/address/setDefaultAdress',{id:id},{withCredentials:true});
     return response.data;
 });
 

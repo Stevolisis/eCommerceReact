@@ -8,26 +8,26 @@ import api from "../../Utils/axiosConfig";
 
 export const fetchWishlist=createAsyncThunk('wishlist/fetchWishlist',async()=>{
     loading(true);
-    const response=await api.get('/users/getWishlist',{withCredentials:true});
+    const response=await api.get('/wish/getWishlist',{withCredentials:true});
     return response.data;
 });
 
 export const checkWish=createAsyncThunk('wishlist/checkWish',async(id)=>{
     loading(true);
-    const response=await api.get(`/users/checkWish/${id}`,{withCredentials:true});
+    const response=await api.get(`/wish/checkWish/${id}`,{withCredentials:true});
     return response.data;
 });
 
 export const addWishlist=createAsyncThunk('wishlist/addWishlist',async(data)=>{
     loading(true);
-    const response=await api.post('/users/addWishlist',data,{withCredentials:true});
+    const response=await api.post('/wish/addWishlist',data,{withCredentials:true});
     return response.data;
 });
 
 
 export const removeWishlist=createAsyncThunk('wishlist/deleteWish',async(id)=>{
     loading(true);
-    const response=await api.delete(`/users/deleteWish/${id}`,{withCredentials:true});
+    const response=await api.delete(`/wish/deleteWish/${id}`,{withCredentials:true});
     return {id:id,data:response.data};
 })
 

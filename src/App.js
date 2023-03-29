@@ -82,7 +82,7 @@ import Editcoupon from './containers/admin/coupons/Editcoupon';
 import Addcoupon from './containers/admin/coupons/Addcoupon';
 
 import Adminbannerimg from './containers/admin/banners/Adminbannerimg';
-import Adminpayment from './containers/admin/payments/Adminpayment';
+import Adminsettings from './containers/admin/general_settings/Adminsettings';
 import Adminorders from './containers/admin/orders/Adminorders';
 import Adminsales from './containers/admin/sales/Adminsales';
 import Adminanalytics from './containers/admin/analytics/Adminanalytics';
@@ -200,7 +200,7 @@ useEffect(()=>{
       <Route path='staffs' element={<Adminstaffs />} />
       <Route path='support' element={<Adminsupport />} />
       <Route path='bannerimg' element={<Adminbannerimg />} />
-      <Route path='payment' element={<Adminpayment />} />
+      <Route path='general_settings' element={<Adminsettings />} />
       <Route path='events' element={<Adminevents />} />
       <Route path='coupons' element={<Admincoupons />} />
       <Route path='orders' element={<Adminorders />} />

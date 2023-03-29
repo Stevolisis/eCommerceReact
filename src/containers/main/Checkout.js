@@ -8,7 +8,7 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useLayoutEffect } from 'react';
 import { fetchAddresses, getAddresses } from '../../Redux/UserDashboard/userAddress';
 import { useEffect } from 'react';
-import { getOrder, orderDetails } from '../../Redux/Admin/orders';
+import { getOrder,completeOrder, orderDetails } from '../../Redux/Admin/orders';
 
 export default function Checkout(){
     const dispatch=useDispatch();
@@ -34,18 +34,26 @@ export default function Checkout(){
       toast.addEventListener('mouseleave', Swal.resumeTimer)
     }
   })
+
   const vouchervalidate=(()=>{
   Toast.fire({
       icon: 'success',
       title: 'Congrats Voucher Validated'
     })
-  })
+  });
 
-
+  function completeOrders(){
+    dispatch(completeOrder(id))
+    .then(res=>{
+      if(res.payload.status==='success'){
+        window.location.replace(res.payload.payment_link);
+      }
+    })
+  }
 
 
   
-  useLayoutEffect(()=>{
+  useEffect(()=>{
     dispatch(getAddresses())
     .then(res=>{
       if(res.payload.status!=='success'){
@@ -54,7 +62,7 @@ export default function Checkout(){
     })
   },[]);
 
-  useLayoutEffect(()=>{
+  useEffect(()=>{
     if(id){
       dispatch(getOrder(id))
       .then(res=>{
@@ -192,10 +200,10 @@ return(
   </div>
 
   <div className='checkoutsummary'>
-  <div><p>Subtotal</p><p>N{order&&order.total_delivery_fee}</p></div>
-  <div><p>Delivery Fee</p><p>N{order&&order.total_cost}</p></div>
-  <div><p>Total</p><p>N{order&&order.total_delivery_fee+order&&order.total_cost}</p></div>
-  <div><button>Pay</button></div>
+  <div><p>Subtotal</p><p>N{order&&order.sub_total}</p></div>
+  <div><p>Delivery Fee</p><p>N{order&&order.total_delivery_fee}</p></div>
+  <div><p>Total</p><p>N{order&&order.total_delivery_fee+order.sub_total}</p></div>
+  <div><button onClick={()=>completeOrders()}>Pay</button></div>
   </div>
 
 </div>

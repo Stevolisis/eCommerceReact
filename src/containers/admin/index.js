@@ -54,7 +54,7 @@ export default function Index(){
                 <div className='navlinks' onClick={()=>navigate('/admin/categories')}><Link className='navlink' to='/admin/categories'>Categories</Link></div>
                 <div className='navlinks' onClick={()=>navigate('/admin/products')}><Link className='navlink' to='/admin/products'>Products</Link></div>
                 <div className='navlinks' onClick={()=>navigate('/admin/orders')}><Link className='navlink' to='/admin/orders'>Orders</Link></div>
-                <div className='navlinks' onClick={()=>navigate('/admin/sales')}><Link className='navlink' to='/admin/sales'>Sales</Link></div>
+                {/* <div className='navlinks' onClick={()=>navigate('/admin/sales')}><Link className='navlink' to='/admin/sales'>Sales</Link></div> */}
                 <div className='navlinks' onClick={()=>navigate('/admin/users')}><Link className='navlink' to='/admin/users'>Users</Link></div>
                 <div className='navlinks' onClick={()=>navigate('/admin/staffs')}><Link className='navlink' to='/admin/staffs'>Staffs</Link></div>
                 <div className='navlinks' onClick={()=>navigate('/admin/sales')}><Link className='navlink' to='/admin/sales'>SMS Management</Link></div>
@@ -63,7 +63,7 @@ export default function Index(){
                 <div className='navlinks' onClick={()=>navigate('/admin/support')}><Link className='navlink' to='/admin/support'>Customer Support</Link></div>
                 <div className='navlinks' onClick={()=>navigate('/admin/coupons')}><Link className='navlink' to='/admin/coupons'>Coupons</Link></div>
                 <div className='navlinks' onClick={()=>navigate('/admin/analytics')}><Link className='navlink' to='/admin/analytics'>Analytics</Link></div>
-                <div className='navlinks' onClick={()=>navigate('/admin/payment')}><Link className='navlink' to='/admin/payment'>Payment Management</Link></div>
+                <div className='navlinks' onClick={()=>navigate('/admin/general_settings')}><Link className='navlink' to='/admin/general_settings'>General Settings</Link></div>
                 <div className='navlinks' onClick={()=>navigate('/')}><Link className='navlink' to='useraccount'>Logout</Link></div>
             </div>
 

@@ -6,13 +6,19 @@ import api from "../../Utils/axiosConfig";
 
 export const getOrder=createAsyncThunk('orders/placeOrder',async(id)=>{
     loading(true);
-    const response=await api.get(`users/getOrder/${id}`,{withCredentials:true});
+    const response=await api.get(`order/getOrder/${id}`,{withCredentials:true});
     return response.data;
 });
 
 export const placeOrder=createAsyncThunk('orders/placeOrder',async(formData)=>{
     loading(true);
-    const response=await api.post('users/placeOrder',formData,{withCredentials:true});
+    const response=await api.post('order/placeOrder',formData,{withCredentials:true});
+    return response.data;
+});
+
+export const completeOrder=createAsyncThunk('orders/completeOrder',async(orderId)=>{
+    loading(true);
+    const response=await api.post('order/completeOrder',{orderId:orderId},{withCredentials:true});
     return response.data;
 });
 
@@ -42,6 +48,32 @@ const orderSlice=createSlice({
            }
         },
         [getOrder.rejected]: (state,{error})=>{
+            loading(false);
+            Swal.fire(
+                "Error Occured",
+                error.message,
+                'error'
+            )
+        },
+        [completeOrder.fulfilled]: (state,{payload})=>{
+            loading(false);
+            let status=payload.status;
+
+            if(status==='success'){
+                Swal.fire(
+                    'Order Completed!!',
+                    `${status}`,
+                    'warning'
+                );                          
+           }else{
+               Swal.fire(
+                   'Error Occured!',
+                   `${status}`,
+                   'warning'
+               );
+           }
+        },
+        [completeOrder.rejected]: (state,{error})=>{
             loading(false);
             Swal.fire(
                 "Error Occured",
