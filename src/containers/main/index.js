@@ -26,19 +26,19 @@ export default function Index(){
     
 
 
-    const getData = async () => {
-      const res = await axios.get('https://geolocation-db.com/json/')
-      setIP(res.data)
-    }
+    // const getData = async () => {
+    //   const res = await axios.get('https://geolocation-db.com/json/')
+    //   setIP(res.data)
+    // }
 
     // const getFlag = async () => {
     //     const res = await axios.get(`https://countryflagsapi.com/png/US`)
     //     setFlag('https://countryflagsapi.com/png/US')
     //   }
 
-    useEffect( () => {
-      getData()
-    },[]);
+    // useEffect( () => {
+    //   getData()
+    // },[]);
     
     // useEffect(()=>{
     //     getFlag()

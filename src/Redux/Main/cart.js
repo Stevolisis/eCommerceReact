@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import Swal from "sweetalert2";
-
+import uuid4 from "uuid4";
 
 
 
@@ -18,6 +18,7 @@ const Toast = Swal.mixin({
 
 
 const initialState={
+    cartId:'',
     cartItems: [],
     totalCount: 0,
     subAmount: 0,
@@ -31,6 +32,7 @@ const cartReduxSlice=createSlice({
     reducers:{
         addCartProduct:(state,{payload})=>{
             let cartIndex=state.cartItems.findIndex(item=>item._id===payload.product._id);
+            if(!state.cartId) state.cartId=uuid4().toString().replace(/-/gi,"");
             if(cartIndex >= 0){
 
                 if(state.cartItems[cartIndex].quantity+payload.quantity>state.cartItems[cartIndex].stock){
@@ -97,6 +99,7 @@ const cartReduxSlice=createSlice({
 
 export const {addCartProduct, getCartCount, increment, decrement, deleteCartProduct, clearCart, getCartTotal}=cartReduxSlice.actions;
 export const getCartItems=(state)=>state.cartReducer.cartItems;
+export const getCartId=(state)=>state.cartReducer.cartId;
 export const getCartcount=(state)=>state.cartReducer.totalCount;
 export const getSubAmount=(state)=>state.cartReducer.subAmount;
 export const getTotalAmount=(state)=>state.cartReducer.totalAmount;

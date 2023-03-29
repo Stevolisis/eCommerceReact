@@ -3,14 +3,15 @@ import Swal from 'sweetalert2';
 import Mainheader from '../../components/main_page_layouts/Mainheader';
 import Mainfooter from '../../components/Mainfooter'
 import { useDispatch, useSelector } from 'react-redux';
-import { clearCart, decrement, deleteCartProduct, getCartcount, getCartItems, getCartTotal, getSubAmount, increment } from '../../Redux/Main/cart';
+import { clearCart, decrement, deleteCartProduct, getCartcount, getCartId, getCartItems, getCartTotal, getSubAmount, increment } from '../../Redux/Main/cart';
 import { placeOrder } from '../../Redux/Admin/orders';
 import { useLocation } from 'react-router-dom';
 import { setRedirectPath } from '../../Redux/Auth/userAuthForm';
 
 export default function Cart(){
-   const cartItems=useSelector(getCartItems);
-   const cartCount=useSelector(getCartcount);
+  const cartId=useSelector(getCartId);
+  const cartItems=useSelector(getCartItems);
+  const cartCount=useSelector(getCartcount);
    const cartSubAmount=useSelector(getSubAmount);
    const dispatch=useDispatch();
    const location=useLocation();
@@ -33,13 +34,20 @@ export default function Cart(){
    function handleSubmit(){
     const formData=new FormData();
     formData.append('products',JSON.stringify(cartItems))
+    formData.append('cartId',JSON.stringify(cartId))
 
     dispatch(placeOrder(formData))
     .then(res=>{
-      if(res.payload.status!=='success'){
-        dispatch(setRedirectPath('/auth/login?next='+location.pathname))            
+      if(res.payload.status==='Invalid Cart'){
+        Swal.fire(
+          'Invalid Cart',
+          'Unknown cart number',
+          'error'
+        )
+      }if(res.payload.status==='success'){
+        dispatch(setRedirectPath('/checkout/'+res.payload.orderId+"?navigate="+Math.random().toFixed(2)))  
       }else{
-        dispatch(setRedirectPath('/checkout/'+res.payload.orderId))            
+        dispatch(setRedirectPath('/auth/login?next='+location.pathname))            
       }
     })
    }
