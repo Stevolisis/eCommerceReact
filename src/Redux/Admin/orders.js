@@ -22,6 +22,12 @@ export const completeOrder=createAsyncThunk('orders/completeOrder',async(orderId
     return response.data;
 });
 
+export const verifyOrder=createAsyncThunk('orders/verifyOrder',async(res)=>{
+    loading(true);
+    const response=await api.post('order/verifyOrder',{tx_ref:res.tx_ref,status:res.status,transaction_id:res.transaction_id},{withCredentials:true});
+    return response.data;
+});
+
 
 
 const orderSlice=createSlice({
@@ -74,6 +80,52 @@ const orderSlice=createSlice({
            }
         },
         [completeOrder.rejected]: (state,{error})=>{
+            loading(false);
+            Swal.fire(
+                "Error Occured",
+                error.message,
+                'error'
+            )
+        },
+        [completeOrder.fulfilled]: (state,{payload})=>{
+            loading(false);
+            let status=payload.status;
+
+            if(status!=='success'){
+               Swal.fire(
+                   'Error Occured!',
+                   `${status}`,
+                   'warning'
+               );
+           }
+        },
+        [completeOrder.rejected]: (state,{error})=>{
+            loading(false);
+            Swal.fire(
+                "Error Occured",
+                error.message,
+                'error'
+            )
+        },
+        [verifyOrder.fulfilled]: (state,{payload})=>{
+            loading(false);
+            let status=payload.status;
+
+            if(status==='success'){
+                Swal.fire(
+                    'Order Completed!!',
+                    `${status}`,
+                    'warning'
+                );                          
+           }else{
+               Swal.fire(
+                   'Error Occured!',
+                   `${status}`,
+                   'warning'
+               );
+           }
+        },
+        [verifyOrder.rejected]: (state,{error})=>{
             loading(false);
             Swal.fire(
                 "Error Occured",

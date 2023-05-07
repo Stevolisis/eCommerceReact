@@ -23,7 +23,7 @@ const persistConfig = {
     storage,
     version: 1,
     whitelist:['cartReducer']
-  }
+}
   
 const reducer = combineReducers({
     productReducer: productReducer,

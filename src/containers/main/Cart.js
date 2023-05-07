@@ -35,6 +35,7 @@ export default function Cart(){
     const formData=new FormData();
     formData.append('products',JSON.stringify(cartItems))
     formData.append('cartId',JSON.stringify(cartId))
+    console.log('cartItems',cartItems)
 
     dispatch(placeOrder(formData))
     .then(res=>{
