@@ -115,7 +115,7 @@ const orderSlice=createSlice({
                 Swal.fire(
                     'Order Completed!!',
                     `${status}`,
-                    'warning'
+                    'success'
                 );                          
            }else{
                Swal.fire(
