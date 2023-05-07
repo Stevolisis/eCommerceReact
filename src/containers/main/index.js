@@ -15,47 +15,46 @@ import MainBannerLoader from '../../Loaders/homepageLoaders/mainBannerLoader';
 import CategorySlider from '../../Loaders/homepageLoaders/categorySlider';
 import ProductsSlider from '../../Loaders/homepageLoaders/productSlider';
 import ProductListings from '../../Loaders/homepageLoaders/productListings';
-import axios from 'axios';
-import { useEffect } from 'react';
+import { useLocation, useSearchParams } from 'react-router-dom';
+import { verifyOrder } from '../../Redux/Admin/orders';
+import { clearCart } from '../../Redux/Main/cart';
+import { setRedirectPath } from '../../Redux/Auth/userAuthForm';
 
 export default function Index(){
     const [layouts, setLayouts] = useState(null);
     const dispatch=useDispatch();
-    const [ip, setIP] = useState('');
-    // const [flag, setFlag] = useState('');
-    
+    const location=useLocation();
+    const query=useSearchParams();
+    const status=query[0].get('status')
+    const tx_ref=query[0].get('tx_ref')
+    const transaction_id=query[0].get('transaction_id')
 
 
-    // const getData = async () => {
-    //   const res = await axios.get('https://geolocation-db.com/json/')
-    //   setIP(res.data)
-    // }
+    useMemo(()=>{
+        dispatch(fetchEvents())
+            .then(res=>{
+            let data=res.payload;
+            let eventlayout=[];
+            data.forEach(event=>{
+                eventlayout.push(event)
+            })
+            setLayouts(eventlayout)
+        })
+    },[]);
 
-    // const getFlag = async () => {
-    //     const res = await axios.get(`https://countryflagsapi.com/png/US`)
-    //     setFlag('https://countryflagsapi.com/png/US')
-    //   }
-
-    // useEffect( () => {
-    //   getData()
-    // },[]);
-    
-    // useEffect(()=>{
-    //     getFlag()
-    // },[ip]);
-
-
-useMemo(()=>{
-dispatch(fetchEvents())
- .then(res=>{
-    let data=res.payload;
-    let eventlayout=[];
-    data.forEach(event=>{
-     eventlayout.push(event)
-    })
-   setLayouts(eventlayout)
-})
-},[])
+    useMemo(()=>{
+        if(transaction_id&&status&&tx_ref){
+            dispatch(verifyOrder({tx_ref:tx_ref,status:status,transaction_id:transaction_id}))
+                .then(res=>{
+                    console.log('res',res);
+                    if(res.payload.status==='success'||res.payload.status==='Error in payment verification'){
+                        dispatch(clearCart());
+                    }else{
+                        dispatch(setRedirectPath('/auth/login?next='+location.pathname))
+                    }
+                })
+        }
+    },[transaction_id,tx_ref,status])
 
 
       
