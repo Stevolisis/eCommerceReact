@@ -19,8 +19,8 @@ export default function Checkout(){
     const [navStat,setNavStat]=useState('')
     const [delivery_stat,setDelivery_stat]=useState(false)
     const [delivery_note,setDelivery_note]=useState('');
+    const [payment_gateway,setPayment_gateway]=useState('');
     const {id}=useParams();
-
 
 
    const Toast = Swal.mixin({
@@ -43,10 +43,10 @@ export default function Checkout(){
   });
 
   function completeOrders(){
-    dispatch(completeOrder(id))
+    dispatch(completeOrder({id,payment_gateway,delivery_note}))
     .then(res=>{
       if(res.payload.status==='success'){
-        window.location.replace(res.payload.payment_link);
+        // window.location.replace(res.payload.payment_link);
       }
     })
   }
@@ -140,19 +140,19 @@ return(
 
 <form>
 <div className='paymentmethods'>
-<input type='radio' name='paymentgateway' value='Payment On Delivery' id='Flutterwave'/>
+<input type='radio' required onChange={(e)=>setPayment_gateway(e.target.value)} name='paymentgateway' value='Flutterwave' id='Flutterwave'/>
 <p ><label htmlFor='Flutterwave'>Flutterwave</label></p>
 </div>
 <div className='paymentmethods'>
-<input type='radio' name='paymentgateway' value='Payment On Delivery' id='Payment on delivery'/>
+<input type='radio' required onChange={(e)=>setPayment_gateway(e.target.value)} name='paymentgateway' value='Payment On Delivery' id='Payment on delivery'/>
 <p><label htmlFor='Payment on delivery'>Payment on delivery</label></p>
 </div>
 <div className='paymentmethods'>
-<input type='radio' name='paymentgateway' value='Payment On Delivery' id='Paypal'/>
+<input type='radio' required onChange={(e)=>setPayment_gateway(e.target.value)} name='paymentgateway' value='Paypal' id='Paypal'/>
 <p><label htmlFor='Paypal'>Paypal</label></p>
 </div>
 <div className='paymentmethods'>
-<input type='radio' name='paymentgateway' value='Payment On Delivery' id='Stripe'/>
+<input type='radio' required onChange={(e)=>setPayment_gateway(e.target.value)} name='paymentgateway' value='Stripe' id='Stripe'/>
 <p><label htmlFor='Stripe'>Stripe</label></p>
 </div>
 </form>

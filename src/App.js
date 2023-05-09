@@ -135,10 +135,6 @@ useMemo(()=>{
 
 },[inview]);
 
-useEffect(()=>{
-
-},[])
-
 
 
 
