@@ -43,12 +43,20 @@ export default function Checkout(){
   });
 
   function completeOrders(){
-    dispatch(completeOrder({id,payment_gateway,delivery_note}))
-    .then(res=>{
-      if(res.payload.status==='success'){
-        // window.location.replace(res.payload.payment_link);
-      }
-    })
+    if(payment_gateway){
+      dispatch(completeOrder({id,payment_gateway,delivery_note}))
+        .then(res=>{
+          if(res.payload.status==='success'){
+            window.location.replace(res.payload.payment_link);
+          }
+      })
+    }else{
+      Swal.fire(
+        'Complete Details',
+        'Choose payment gateway',
+        'success'
+      )
+    }
   }
 
 
