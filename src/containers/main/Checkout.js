@@ -54,7 +54,7 @@ export default function Checkout(){
       Swal.fire(
         'Complete Details',
         'Choose payment gateway',
-        'success'
+        'warning'
       )
     }
   }
