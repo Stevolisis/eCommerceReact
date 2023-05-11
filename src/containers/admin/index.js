@@ -60,7 +60,6 @@ export default function Index(){
                 <div className='navlinks' onClick={()=>navigate('/admin/sales')}><Link className='navlink' to='/admin/sales'>SMS Management</Link></div>
                 <div className='navlinks' onClick={()=>navigate('/admin/sales')}><Link className='navlink' to='/admin/sales'>Email Management</Link></div>
                 <div className='navlinks' onClick={()=>navigate('/admin/events')}><Link className='navlink' to='/admin/events'>Events</Link></div>
-                <div className='navlinks' onClick={()=>navigate('/admin/support')}><Link className='navlink' to='/admin/support'>Customer Support</Link></div>
                 <div className='navlinks' onClick={()=>navigate('/admin/coupons')}><Link className='navlink' to='/admin/coupons'>Coupons</Link></div>
                 <div className='navlinks' onClick={()=>navigate('/admin/analytics')}><Link className='navlink' to='/admin/analytics'>Analytics</Link></div>
                 <div className='navlinks' onClick={()=>navigate('/admin/general_settings/index')}><Link className='navlink' to='/admin/general_settings/index'>General Settings</Link></div>

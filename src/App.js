@@ -69,7 +69,6 @@ import Editstaff from './containers/admin/staffs/Editstaff';
 import Adminusers from './containers/admin/users/Adminusers';
 import Edituser from './containers/admin/users/Edituser';
 
-import Adminsupport from './containers/admin/supports/Adminsupport';
 import Addfaq from './containers/admin/supports/Addfaq';
 import Editfaq from './containers/admin/supports/Editfaq';
 
@@ -194,7 +193,6 @@ useMemo(()=>{
       <Route path='sales' element={<Adminsales />} />
       <Route path='users' element={<Adminusers />} />
       <Route path='staffs' element={<Adminstaffs />} />
-      <Route path='support' element={<Adminsupport />} />
       <Route path='bannerimg' element={<Adminbannerimg />} />
       <Route path='events' element={<Adminevents />} />
       <Route path='coupons' element={<Admincoupons />} />
