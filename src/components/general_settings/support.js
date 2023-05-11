@@ -92,10 +92,6 @@ export default function Support(){
         
 
     return(
-        <div className='admindashcon'>
-            <div className='userorderheading'>
-                <p>Customer support </p>
-            </div>
 
             <div className='addcategcon'>
 
@@ -208,6 +204,5 @@ export default function Support(){
             </div>
 
             </div>
-        </div>
     )
 }

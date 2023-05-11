@@ -14,9 +14,10 @@ export default function PaymentGateway(){
 
 
 
-    
+
     return(
         <>
+        <div className='admincategcon'>
             <div className='adminstat3con'>
                 <form onSubmit={handleSubmit}>
                     <div className='adminstat3'>
@@ -63,6 +64,7 @@ export default function PaymentGateway(){
                     </div>
                 </form>
             </div>
+        </div>
         </>
     )
 }

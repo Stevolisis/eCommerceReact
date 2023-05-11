@@ -1,8 +1,15 @@
 import {React} from 'react';
 import PaymentGateway from '../../../components/general_settings/payment_method';
 import Support from '../../../components/general_settings/support';
+import { useParams } from 'react-router-dom';
+import { useMemo } from 'react';
 
 export default function Adminpayment(){
+    const { section }=useParams();
+
+    useMemo(()=>{
+
+    },[section])
 
     return(
         <>
@@ -10,15 +17,14 @@ export default function Adminpayment(){
             <div className='userorderheading'>
                 <p>Payment Methods</p>
             </div>
-            
-            <div className='admincategcon'>
 
-                <PaymentGateway/>
-                <Support/>
-
-            </div>
-
-
+            {
+                {
+                    'index':<div>Index</div>,
+                    'payment_gateway':<PaymentGateway/>,
+                    'support':<Support/>
+                }[section]
+            }
         </div>
         </>
 
