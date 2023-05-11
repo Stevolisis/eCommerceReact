@@ -196,11 +196,11 @@ useMemo(()=>{
       <Route path='staffs' element={<Adminstaffs />} />
       <Route path='support' element={<Adminsupport />} />
       <Route path='bannerimg' element={<Adminbannerimg />} />
-      <Route path='general_settings' element={<Adminsettings />} />
       <Route path='events' element={<Adminevents />} />
       <Route path='coupons' element={<Admincoupons />} />
       <Route path='orders' element={<Adminorders />} />
       <Route path='order' element={<Userorder origin='admin'/>} />
+      <Route path='general_settings' element={<Adminsettings />} />
 
       <Route path='addcategory' element={<Addcategory />} />
       <Route path='addproduct' element={<Addproduct />} />
