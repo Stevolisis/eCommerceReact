@@ -32,7 +32,10 @@ const cartReduxSlice=createSlice({
     reducers:{
         addCartProduct:(state,{payload})=>{
             let cartIndex=state.cartItems.findIndex(item=>item._id===payload.product._id);
-            if(!state.cartId) state.cartId=uuid4().toString().replace(/-/gi,"");
+            if(!state.cartId) {
+                state.cartId=uuid4().toString().replace(/-/gi,"");
+                console.log('cartID',state.cartId);
+            }
             //not creating unique cart Id Why?
             if(cartIndex >= 0){
 
@@ -93,12 +96,16 @@ const cartReduxSlice=createSlice({
         },
         clearCart:(state)=>{
             state.cartItems=[];
+        },
+        deleteCart:(state)=>{
+            state.cartItems=[];
+            state.cartId='';
         }
     }
 })
 
 
-export const {addCartProduct, getCartCount, increment, decrement, deleteCartProduct, clearCart, getCartTotal}=cartReduxSlice.actions;
+export const {addCartProduct, getCartCount, increment, decrement, deleteCartProduct, clearCart, deleteCart, getCartTotal}=cartReduxSlice.actions;
 export const getCartItems=(state)=>state.cartReducer.cartItems;
 export const getCartId=(state)=>state.cartReducer.cartId;
 export const getCartcount=(state)=>state.cartReducer.totalCount;

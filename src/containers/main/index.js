@@ -17,7 +17,7 @@ import ProductsSlider from '../../Loaders/homepageLoaders/productSlider';
 import ProductListings from '../../Loaders/homepageLoaders/productListings';
 import { useLocation, useSearchParams } from 'react-router-dom';
 import { verifyOrder } from '../../Redux/Admin/orders';
-import { clearCart } from '../../Redux/Main/cart';
+import { deleteCart } from '../../Redux/Main/cart';
 import { setRedirectPath } from '../../Redux/Auth/userAuthForm';
 
 export default function Index(){
@@ -48,7 +48,7 @@ export default function Index(){
                 .then(res=>{
                     console.log('res',res);
                     if(res.payload.status==='success'||res.payload.status==='Error in payment verification'){
-                        dispatch(clearCart());
+                        dispatch(deleteCart());
                     }else{
                         dispatch(setRedirectPath('/auth/login?next='+location.pathname))
                     }
