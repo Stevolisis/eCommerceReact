@@ -47,7 +47,7 @@ export default function Checkout(){
       dispatch(completeOrder({id,payment_gateway,delivery_note}))
         .then(res=>{
           if(res.payload.status==='success'){
-            window.location.replace(res.payload.payment_link);
+            // window.location.replace(res.payload.payment_link);
           }
       })
     }else{
@@ -148,19 +148,19 @@ return(
 
 <form>
 <div className='paymentmethods'>
-<input type='radio' required onChange={(e)=>setPayment_gateway(e.target.value)} name='paymentgateway' value='Flutterwave' id='Flutterwave'/>
+<input type='radio' required onChange={(e)=>setPayment_gateway(e.target.value)} name='paymentgateway' value='flutterwave' id='Flutterwave'/>
 <p ><label htmlFor='Flutterwave'>Flutterwave</label></p>
 </div>
 <div className='paymentmethods'>
-<input type='radio' required onChange={(e)=>setPayment_gateway(e.target.value)} name='paymentgateway' value='Payment On Delivery' id='Payment on delivery'/>
+<input type='radio' required onChange={(e)=>setPayment_gateway(e.target.value)} name='paymentgateway' value='payment_on_delivery' id='Payment on delivery'/>
 <p><label htmlFor='Payment on delivery'>Payment on delivery</label></p>
 </div>
 <div className='paymentmethods'>
-<input type='radio' required onChange={(e)=>setPayment_gateway(e.target.value)} name='paymentgateway' value='Paypal' id='Paypal'/>
+<input type='radio' required onChange={(e)=>setPayment_gateway(e.target.value)} name='paymentgateway' value='paypal' id='Paypal'/>
 <p><label htmlFor='Paypal'>Paypal</label></p>
 </div>
 <div className='paymentmethods'>
-<input type='radio' required onChange={(e)=>setPayment_gateway(e.target.value)} name='paymentgateway' value='Stripe' id='Stripe'/>
+<input type='radio' required onChange={(e)=>setPayment_gateway(e.target.value)} name='paymentgateway' value='stripe' id='Stripe'/>
 <p><label htmlFor='Stripe'>Stripe</label></p>
 </div>
 </form>

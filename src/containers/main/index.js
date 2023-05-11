@@ -46,7 +46,6 @@ export default function Index(){
         if(transaction_id&&status&&tx_ref){
             dispatch(verifyOrder({tx_ref:tx_ref,status:status,transaction_id:transaction_id}))
                 .then(res=>{
-                    console.log('res',res);
                     if(res.payload.status==='success'||res.payload.status==='Error in payment verification'){
                         dispatch(deleteCart());
                     }else{

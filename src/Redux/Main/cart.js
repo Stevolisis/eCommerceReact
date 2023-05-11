@@ -34,9 +34,8 @@ const cartReduxSlice=createSlice({
             let cartIndex=state.cartItems.findIndex(item=>item._id===payload.product._id);
             if(!state.cartId) {
                 state.cartId=uuid4().toString().replace(/-/gi,"");
-                console.log('cartID',state.cartId);
             }
-            //not creating unique cart Id Why?
+            
             if(cartIndex >= 0){
 
                 if(state.cartItems[cartIndex].quantity+payload.quantity>state.cartItems[cartIndex].stock){
