@@ -15,6 +15,7 @@ export default function Cart(){
    const cartSubAmount=useSelector(getSubAmount);
    const dispatch=useDispatch();
    const location=useLocation();
+   
    const deletecartitem=((id)=>{
     Swal.fire({
         title: 'Are you sure?',
