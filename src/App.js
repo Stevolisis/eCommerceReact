@@ -90,6 +90,7 @@ import './containers/admin/styles/admin.scss';
 import './containers/admin/styles/admindashboard.scss';
 import './containers/admin/styles/admincategories.scss';
 import './containers/admin/styles/adminaddcateg.scss';
+import './containers/admin/styles/settingsNavigate.scss';
 
 //---------Fontawesome-----------
 import 'font-awesome/css/font-awesome.min.css';

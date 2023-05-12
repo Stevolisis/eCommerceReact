@@ -1,0 +1,26 @@
+@import '../../main/styles/variables2';
+
+
+.settingsNavigateCon{
+    box-shadow: 0 1px 2px 0 rgba(0,0,0,.2);
+    background: $color40;
+}
+
+.settingsNavigateBtn{
+    border: none;
+    padding: 10px 15px;
+    border-right: 4px solid $color40;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+
+
+
+@media (max-width:750px) {
+    .settingsNavigateBtn{
+        padding: 8px 13px;
+        font-size: 10px;
+    }
+       
+}
