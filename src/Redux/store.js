@@ -8,6 +8,7 @@ import eventReducer from './Admin/events';
 import supportReducer from './Admin/supports';
 import faqReducer from './Admin/supportFaqs';
 import orderReducer from "./Admin/orders";
+import paymentsReducer from "./Admin/payments";
 import mainRedux from "./Main/mainRedux";
 import relatedProductsReducer from "./Main/relatedProducts";
 import searchResultReducer from "./Main/searchResult";
@@ -33,6 +34,7 @@ const reducer = combineReducers({
     supportReducer: supportReducer,
     faqReducer: faqReducer,
     orderReducer: orderReducer,
+    paymentsReducer: paymentsReducer,
     mainReduxReducer:mainRedux,
     relatedProductsReducer:relatedProductsReducer,
     searchResultReducer:searchResultReducer,
