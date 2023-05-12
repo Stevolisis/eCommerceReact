@@ -202,6 +202,10 @@ justify-content:space-between;
 align-items:center;
 color:$color40;
 
+    .specialhead1 p{
+        font-family: font3;
+    }
+
     a{
         text-decoration:none;
         color:$color40;
@@ -344,7 +348,7 @@ box-sizing: border-box;
     justify-content:space-between;
     align-items:center;
     color:$color40;
-    }
+}
 
 .categproducts{
 display:flex;
@@ -358,6 +362,7 @@ box-sizing: border-box;
 
 .producthead1 p{
     color: $color40;
+    font-family: font3;
 }
 .footercon{
     width:100%;
@@ -656,7 +661,7 @@ margin: 10px;
 }
 
 .specialcateghead{
-    padding:15px;
+    padding:15px 12px;
     font-size: 13px;
 
         a{
@@ -712,7 +717,8 @@ align-items: center;
 
 .productcateghead{
     font-size: 14px;
-    }
+    padding:14px 20px;
+}
 
 
 .footercon{
