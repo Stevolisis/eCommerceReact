@@ -6,7 +6,8 @@ import api from "../../Utils/axiosConfig";
 
 export const editPayments=createAsyncThunk('orders/placeOrder',async(data)=>{
     loading(true);
-    const response=await api.patch('payments/edit_payment_methods',{data:data},{withCredentials:true});
+    console.log('data',data)
+    const response=await api.patch('payments/edit_payment_methods',data,{withCredentials:true});
     return response.data;
 });
 
