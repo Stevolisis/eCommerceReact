@@ -1,9 +1,11 @@
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { editPayments } from '../../Redux/Admin/payments';
+import { useState } from 'react';
 
 export default function PaymentGateway(){
     const dispatch=useDispatch();
+    const gatewayStatus=useState({flutterwave:false,stripe:false})
 
     const handleSubmit=((e)=>{
         e.preventDefault();
@@ -45,7 +47,7 @@ export default function PaymentGateway(){
 
                                     <tr>
                                     <td>Payment on Delivery</td>
-                                    <td><input type='checkbox' value={true} name='payment_on_delivery'/></td>
+                                    <td><input type='checkbox' value={true} name='payment_on_delivery' onClick={(e)=>console.log(e.target.value)}/></td>
                                     <td><Link to={`/admin/editcategory/${2}`}><i className='fa fa-edit'/></Link></td>
                                     </tr>
 
