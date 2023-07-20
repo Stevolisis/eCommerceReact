@@ -47,7 +47,7 @@ export default function Checkout(){
       dispatch(completeOrder({id,payment_gateway,delivery_note}))
         .then(res=>{
           if(res.payload.status==='success'){
-            // window.location.replace(res.payload.payment_link);
+            window.location.replace(res.payload.payment_link);
           }
       })
     }else{
