@@ -16,9 +16,9 @@ export default function Products_slider_layout({data,route}){
         <div className='specialhead1'>
         <p>{data.name}</p>
         </div>
-        <div className='specialhead1'>
+        {/* <div className='specialhead1'>
         <p>Time Left: 18h : 21m : 07s</p>
-        </div>
+        </div> */}
         <div className='specialhead1'>
         <Link to={'/'+data.product_component.slug}>See All</Link>
         </div>
