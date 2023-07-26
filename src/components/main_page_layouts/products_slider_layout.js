@@ -9,25 +9,26 @@ export default function Products_slider_layout({data,route}){
 
     return(
         <>
-        <div className='section3'>
+        {/* <div className='section3'>
         <div className='specialcateg'>
 
         <div className='specialcateghead' style={{background:data.product_component.banner_color}}>
         <div className='specialhead1'>
         <p>{data.name}</p>
         </div>
-        {/* <div className='specialhead1'>
+        <div className='specialhead1'>
         <p>Time Left: 18h : 21m : 07s</p>
-        </div> */}
+        </div>
         <div className='specialhead1'>
         <Link to={'/'+data.product_component.slug}>See All</Link>
         </div>
 
-        </div>
+        </div> */}
 
         <div className='specialcategproducts'>
 
-        {route==='prodListing'?
+        {
+        route==='prodListing' ?
         relProducts==undefined ? <ProductsSlider/> :relProducts.filter(product=>product.status==='active').map((product,i)=>{
         return (
                 <div className='specialproduct' key={i}>
@@ -94,8 +95,8 @@ export default function Products_slider_layout({data,route}){
 
 
 
-        </div>
-        </div>
+         {/* </div>
+         </div> */}
         </>
     )
 }
