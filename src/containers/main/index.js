@@ -42,6 +42,7 @@ export default function Index(){
         })
     },[]);
 
+    
     useMemo(()=>{
         if(transaction_id&&status&&tx_ref){
             dispatch(verifyOrder({tx_ref:tx_ref,status:status,transaction_id:transaction_id}))
