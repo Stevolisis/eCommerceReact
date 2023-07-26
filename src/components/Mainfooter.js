@@ -27,6 +27,7 @@ export default function MainFooter(){
 </div>
 
 </div>
+
 <div className='footer1'>
 <div className='links'>
 <Link to='/'>Need Help?</Link>
