@@ -5,7 +5,6 @@ import Mainfooter from '../../components/Mainfooter'
 import { useDispatch, useSelector } from 'react-redux';
 import {  setRedirectPath } from '../../Redux/Auth/userAuthForm';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import { useLayoutEffect } from 'react';
 import { fetchAddresses, getAddresses } from '../../Redux/UserDashboard/userAddress';
 import { useEffect } from 'react';
 import { getOrder,completeOrder, orderDetails } from '../../Redux/Admin/orders';

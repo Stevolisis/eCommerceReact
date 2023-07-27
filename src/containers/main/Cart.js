@@ -36,22 +36,22 @@ export default function Cart(){
     const formData=new FormData();
     formData.append('products',JSON.stringify(cartItems))
     formData.append('cartId',JSON.stringify(cartId))
-    console.log('cartItems',cartItems)
+    // console.log('cartItems',cartItems)
 
     dispatch(placeOrder(formData))
-    .then(res=>{
-      if(res.payload.status==='Invalid Cart'){
-        Swal.fire(
-          'Invalid Cart',
-          'Unknown cart number',
-          'error'
-        )
-      }if(res.payload.status==='success'){
-        dispatch(setRedirectPath('/checkout/'+res.payload.orderId+"?navigate="+Math.random().toFixed(2)))  
-      }else{
-        dispatch(setRedirectPath('/auth/login?next='+location.pathname))            
-      }
-    })
+    // .then(res=>{
+    //   if(res.payload.status==='Invalid Cart'){
+    //     Swal.fire(
+    //       'Invalid Cart',
+    //       'Unknown cart number',
+    //       'error'
+    //     )
+    //   }if(res.payload.status==='success'){
+    //     dispatch(setRedirectPath('/checkout/'+res.payload.orderId+"?navigate="+Math.random().toFixed(2)))  
+    //   }else{
+    //     dispatch(setRedirectPath('/auth/login?next='+location.pathname));
+    //   }
+    // })
    }
 
 

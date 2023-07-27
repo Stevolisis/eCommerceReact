@@ -4,7 +4,7 @@ import { loading } from "../../Loaders/setMainLoader";
 import api from "../../Utils/axiosConfig";
 
 
-export const getOrder=createAsyncThunk('orders/placeOrder',async(id)=>{
+export const getOrder=createAsyncThunk('orders/getOrder',async(id)=>{
     loading(true);
     const response=await api.get(`order/getOrder/${id}`,{withCredentials:true});
     return response.data;
@@ -88,26 +88,26 @@ const orderSlice=createSlice({
                 'error'
             )
         },
-        [completeOrder.fulfilled]: (state,{payload})=>{
-            loading(false);
-            let status=payload.status;
+        // [completeOrder.fulfilled]: (state,{payload})=>{
+        //     loading(false);
+        //     let status=payload.status;
 
-            if(status!=='success'){
-               Swal.fire(
-                   'Error Occured!',
-                   `${status}`,
-                   'warning'
-               );
-           }
-        },
-        [completeOrder.rejected]: (state,{error})=>{
-            loading(false);
-            Swal.fire(
-                "Error Occured",
-                error.message,
-                'error'
-            )
-        },
+        //     if(status!=='success'){
+        //        Swal.fire(
+        //            'Error Occured!',
+        //            `${status}`,
+        //            'warning'
+        //        );
+        //    }
+        // },
+        // [completeOrder.rejected]: (state,{error})=>{
+        //     loading(false);
+        //     Swal.fire(
+        //         "Error Occured",
+        //         error.message,
+        //         'error'
+        //     )
+        // },
         [verifyOrder.fulfilled]: (state,{payload})=>{
             loading(false);
             let status=payload.status;
