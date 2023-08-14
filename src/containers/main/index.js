@@ -35,7 +35,7 @@ export default function Index(){
             .then(res=>{
             let data=res.payload;
             let eventlayout=[];
-            data.forEach(event=>{
+            data&&data.forEach(event=>{
                 eventlayout.push(event)
             })
             setLayouts(eventlayout)
