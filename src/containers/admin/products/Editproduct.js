@@ -45,10 +45,15 @@ export default function Editproduct(){
 
                 dispatch(editProduct(formData));
             }
-          })
-   
+          })  
     }
 
+    // customClass: {
+    //     // actions: 'my-actions',
+    //     cancelButton: 'order-1 right-gap',
+    //     confirmButton: 'order-2',
+    //     // denyButton: 'order-3',
+    // }
 
 
 

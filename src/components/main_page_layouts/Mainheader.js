@@ -52,10 +52,10 @@ export default function MainHeader({route,setTogglefilter,togglefilter,data}){
         <h2><Link to='/'><img src='/elite-plaza17.png' alt=''/>  </Link></h2>
         
         {route==='products'? 
-        <div className='currentcateg' style={{display:'block'}}>
-        <i className='fa fa-caret-right ' />
-        <span>{categ&&categ.name}</span>
-        </div>
+            <div className='currentcateg' style={{display:'block'}}>
+            <i className='fa fa-caret-right ' />
+            <span>{categ&&categ.name}</span>
+            </div>
         :''}
 
     </div>

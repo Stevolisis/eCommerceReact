@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { clearCart, decrement, deleteCartProduct, getCartcount, getCartId, getCartItems, getCartTotal, getSubAmount, increment } from '../../Redux/Main/cart';
 import { placeOrder } from '../../Redux/Admin/orders';
 import { useLocation } from 'react-router-dom';
-import { setRedirectPath } from '../../Redux/Auth/userAuthForm';
 
 export default function Cart(){
   const cartId=useSelector(getCartId);
@@ -39,19 +38,19 @@ export default function Cart(){
     // console.log('cartItems',cartItems)
 
     dispatch(placeOrder(formData))
-    // .then(res=>{
-    //   if(res.payload.status==='Invalid Cart'){
-    //     Swal.fire(
-    //       'Invalid Cart',
-    //       'Unknown cart number',
-    //       'error'
-    //     )
-    //   }if(res.payload.status==='success'){
-    //     dispatch(setRedirectPath('/checkout/'+res.payload.orderId+"?navigate="+Math.random().toFixed(2)))  
-    //   }else{
-    //     dispatch(setRedirectPath('/auth/login?next='+location.pathname));
-    //   }
-    // })
+    .then(res=>{
+      if(res.payload.status==='Invalid Cart'){
+        Swal.fire(
+          'Invalid Cart',
+          'Unknown cart number',
+          'error'
+        )
+      }if(res.payload.status==='success'){
+        dispatch(setRedirectPath('/checkout/'+res.payload.orderId+"?navigate="+Math.random().toFixed(2)));
+      }else{
+        dispatch(setRedirectPath('/auth/login?next='+location.pathname));
+      }
+    })
    }
 
 
