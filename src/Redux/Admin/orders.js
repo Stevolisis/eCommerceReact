@@ -48,7 +48,7 @@ const orderSlice=createSlice({
                state.order=order;            
            }else{
                Swal.fire(
-                   'Error Occured!',
+                   'Error Occured1!',
                    `${status}`,
                    'warning'
                );
@@ -57,10 +57,27 @@ const orderSlice=createSlice({
         [getOrder.rejected]: (state,{error})=>{
             loading(false);
             Swal.fire(
-                "Error Occured",
+                "Error Occured2",
                 error.message,
                 'error'
             )
+        },
+        [placeOrder.fulfilled]: (state,{payload})=>{
+            let status=payload.status;
+            loading(false);
+            console.log('eeeeee',payload)
+            if(status==='no Cookie'){
+                console.log('zzzzzzzzz',payload);
+                window&&window.location.assign('https://e-commerce-three-neon.vercel.app')
+
+             Swal.fire(
+                "Error Occured2",
+                'error.message',
+                'error'
+            )               
+            }
+            console.log('vvvvvv',payload)
+
         },
         [completeOrder.fulfilled]: (state,{payload})=>{
             loading(false);
@@ -70,11 +87,11 @@ const orderSlice=createSlice({
                 Swal.fire(
                     'Order Completed!!',
                     `${status}`,
-                    'warning'
+                    'success'
                 );                          
            }else{
                Swal.fire(
-                   'Error Occured!',
+                   'Error Occured3!',
                    `${status}`,
                    'warning'
                );
@@ -83,7 +100,7 @@ const orderSlice=createSlice({
         [completeOrder.rejected]: (state,{error})=>{
             loading(false);
             Swal.fire(
-                "Error Occured",
+                "Error Occured4",
                 error.message,
                 'error'
             )
@@ -94,7 +111,7 @@ const orderSlice=createSlice({
 
         //     if(status!=='success'){
         //        Swal.fire(
-        //            'Error Occured!',
+        //            'Error Occured1!',
         //            `${status}`,
         //            'warning'
         //        );
@@ -103,7 +120,7 @@ const orderSlice=createSlice({
         // [completeOrder.rejected]: (state,{error})=>{
         //     loading(false);
         //     Swal.fire(
-        //         "Error Occured",
+        //         "Error Occured1",
         //         error.message,
         //         'error'
         //     )
@@ -120,7 +137,7 @@ const orderSlice=createSlice({
                 );                          
            }else{
                Swal.fire(
-                   'Error Occured!',
+                   'Error Occured5!',
                    `${status}`,
                    'warning'
                );
@@ -129,7 +146,7 @@ const orderSlice=createSlice({
         [verifyOrder.rejected]: (state,{error})=>{
             loading(false);
             Swal.fire(
-                "Error Occured",
+                "Error Occured6",
                 error.message,
                 'error'
             )
