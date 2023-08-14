@@ -6,7 +6,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { clearCart, decrement, deleteCartProduct, getCartcount, getCartId, getCartItems, getCartTotal, getSubAmount, increment } from '../../Redux/Main/cart';
 import { placeOrder } from '../../Redux/Admin/orders';
 import { useLocation } from 'react-router-dom';
-
+import { setRedirectPath } from '../../Redux/Auth/userAuthForm';
+//why was redirect removed chk
 export default function Cart(){
   const cartId=useSelector(getCartId);
   const cartItems=useSelector(getCartItems);
