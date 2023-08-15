@@ -19,8 +19,8 @@ export default function Index(){
 
     return(
         <>
-    {trigger &&<div className='popupaddresscon' >
-    </div>}
+    { trigger &&<div className='popupaddresscon' >
+    </div> }
 
 <div className='main'>
 
