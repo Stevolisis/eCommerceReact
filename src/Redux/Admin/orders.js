@@ -85,13 +85,7 @@ const orderSlice=createSlice({
             loading(false);
             let status=payload.status;
 
-            if(status==='success'){
-                Swal.fire(
-                    'Order Completed!!',
-                    `${status}`,
-                    'success'
-                );                          
-            }else if(status==='no Cookie'){
+            if(status==='no Cookie'){
                 return;
             }else{
                Swal.fire(
