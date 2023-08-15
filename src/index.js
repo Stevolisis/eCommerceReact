@@ -5,6 +5,7 @@ import {store} from './Redux/store';
 import { persistStore } from 'redux-persist'
 import { PersistGate } from 'redux-persist/integration/react'
 import App from './App';
+import Navigate from './components/auth/Navigate';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -14,6 +15,7 @@ root.render(
   <React.StrictMode>
     <Provider store={store}>
       <PersistGate persistor={persistor}>
+        {/* <Navigate/> */}
         <App />
       </PersistGate>
     </Provider>

@@ -15,7 +15,7 @@ export default function Cart(){
    const cartSubAmount=useSelector(getSubAmount);
    const dispatch=useDispatch();
    const location=useLocation();
-   
+
    const deletecartitem=((id)=>{
     Swal.fire({
         title: 'Are you sure?',
@@ -39,20 +39,19 @@ export default function Cart(){
     // console.log('cartItems',cartItems)
 
     dispatch(placeOrder(formData))
-    // .then(res=>{
-    //   if(res.payload.status==='Invalid Cart'){
-    //     Swal.fire(
-    //       'Invalid Cart',
-    //       'Unknown cart number',
-    //       'error'
-    //     )
-    //   }if(res.payload.status==='success'){
-    //     dispatch(setRedirectPath('/checkout/'+res.payload.orderId+"?navigate="+Math.random().toFixed(2)));
-    //   }
-    //   // else{
-    //   //   dispatch(setRedirectPath('/auth/login?next='+location.pathname));
-    //   // }
-    // })
+    .then(res=>{
+      if(res.payload.status==='Invalid Cart'){
+        Swal.fire(
+          'Invalid Cart',
+          'Unknown cart number',
+          'error'
+        )
+      }else if(res.payload.status==='success'){
+        dispatch(setRedirectPath('/checkout/'+res.payload.orderId+"?navigate="+Math.random().toFixed(2)));
+      }else{
+        return dispatch(setRedirectPath('/auth/login?next='+location.pathname));
+      }
+    })
    }
 
 

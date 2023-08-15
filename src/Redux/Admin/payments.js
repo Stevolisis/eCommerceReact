@@ -4,7 +4,7 @@ import { loading } from "../../Loaders/setMainLoader";
 import api from "../../Utils/axiosConfig";
 
 
-export const editPayments=createAsyncThunk('orders/placeOrder',async(data)=>{
+export const editPayments=createAsyncThunk('payments/editPayments',async(data)=>{
     loading(true);
     console.log('data',data)
     const response=await api.patch('payments/edit_payment_methods',data,{withCredentials:true});

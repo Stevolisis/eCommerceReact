@@ -62,23 +62,23 @@ const orderSlice=createSlice({
                 'error'
             )
         },
-        [placeOrder.fulfilled]: (state,{payload})=>{
-            let status=payload.status;
-            loading(false);
-            console.log('eeeeee',payload)
-            if(status==='no Cookie'){
-                console.log('zzzzzzzzz',payload);
-                window&&window.location.assign('https://e-commerce-three-neon.vercel.app')
+        // [placeOrder.fulfilled]: (state,{payload})=>{
+        //     let status=payload.status;
+        //     loading(false);
+        //     console.log('eeeeee',payload)
+        //     if(status==='no Cookie'){
+        //         console.log('zzzzzzzzz',payload);
+        //         window&&window.location.assign('https://e-commerce-three-neon.vercel.app')
 
-             Swal.fire(
-                "Error Occured2",
-                'error.message',
-                'error'
-            )               
-            }
-            console.log('vvvvvv',payload)
+        //      Swal.fire(
+        //         "Error Occured2",
+        //         'error.message',
+        //         'error'
+        //     )               
+        //     }
+        //     console.log('vvvvvv',payload)
 
-        },
+        // },
         [completeOrder.fulfilled]: (state,{payload})=>{
             loading(false);
             let status=payload.status;
