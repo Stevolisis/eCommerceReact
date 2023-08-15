@@ -112,7 +112,7 @@ return(
         <p>ADDRESS DETAILS</p>
         {
           navStat==='/user/addAddress?next=/checkout' ? 
-          <button onClick={()=>navigate('/user/addAddress?next=/checkout')}>ADD</button>
+          <button onClick={()=>navigate(`${'/user/addAddress?next=/checkout'}${id}`)}>ADD</button>
           :
           <button onClick={()=>navigate(`${'/user/address?next=/checkout/'}${id}`)}>CHANGE</button>
         }

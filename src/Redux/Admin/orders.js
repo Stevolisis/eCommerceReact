@@ -46,13 +46,15 @@ const orderSlice=createSlice({
 
             if(status==='success'){
                state.order=order;            
-           }else{
-               Swal.fire(
-                   'Error Occured1!',
-                   `${status}`,
-                   'warning'
-               );
-           }
+            }else if(status==='no Cookie'){
+                return;
+            }else{
+                Swal.fire(
+                    'Error Occured1!',
+                    `${status}`,
+                    'warning'
+                );
+            }
         },
         [getOrder.rejected]: (state,{error})=>{
             loading(false);
@@ -89,7 +91,9 @@ const orderSlice=createSlice({
                     `${status}`,
                     'success'
                 );                          
-           }else{
+            }else if(status==='no Cookie'){
+                return;
+            }else{
                Swal.fire(
                    'Error Occured3!',
                    `${status}`,
@@ -135,7 +139,9 @@ const orderSlice=createSlice({
                     `${status}`,
                     'success'
                 );                          
-           }else{
+           }else if(status==='no Cookie'){
+                return;
+            }else{
                Swal.fire(
                    'Error Occured5!',
                    `${status}`,
