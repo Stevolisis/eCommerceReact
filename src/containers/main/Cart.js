@@ -5,17 +5,19 @@ import Mainfooter from '../../components/Mainfooter'
 import { useDispatch, useSelector } from 'react-redux';
 import { clearCart, decrement, deleteCartProduct, getCartcount, getCartId, getCartItems, getCartTotal, getSubAmount, increment } from '../../Redux/Main/cart';
 import { placeOrder } from '../../Redux/Admin/orders';
-import { useLocation } from 'react-router-dom';
-import { setRedirectPath } from '../../Redux/Auth/userAuthForm';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { loading } from '../../Loaders/setMainLoader';
-//why was redirect removed chk
+
+
+
 export default function Cart(){
   const cartId=useSelector(getCartId);
   const cartItems=useSelector(getCartItems);
   const cartCount=useSelector(getCartcount);
-   const cartSubAmount=useSelector(getSubAmount);
-   const dispatch=useDispatch();
-   const location=useLocation();
+  const cartSubAmount=useSelector(getSubAmount);
+  const dispatch=useDispatch();
+  const location=useLocation();
+  const navigate=useNavigate();
 
    const deletecartitem=((id)=>{
     Swal.fire({
@@ -48,9 +50,9 @@ export default function Cart(){
           'error'
         )
       }else if(res.payload.status==='success'){
-        dispatch(setRedirectPath('/checkout/'+res.payload.orderId+"?navigate="+Math.random().toFixed(2)));
+        navigate('/checkout/'+res.payload.orderId+"?navigate="+Math.random().toFixed(2));
       }else{
-        return dispatch(setRedirectPath('/auth/login?next='+location.pathname));
+        return navigate('/auth/login?next='+location.pathname);
       }
     })
    }

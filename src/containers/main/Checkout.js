@@ -42,19 +42,25 @@ export default function Checkout(){
   });
 
   function completeOrders(){
-    if(payment_gateway){
+    if(!payment_gateway){
+      Swal.fire(
+        'Complete Details',
+        'Choose payment gateway',
+        'warning'
+      )
+    }else if(userAddresses.length==0){
+      Swal.fire(
+        'Complete Details',
+        'Please add address',
+        'warning'
+      )
+    }else{
       dispatch(completeOrder({id,payment_gateway,delivery_note}))
         .then(res=>{
           if(res.payload.status==='success'){
             window.location.assign(res.payload.payment_link);
           }
       })
-    }else{
-      Swal.fire(
-        'Complete Details',
-        'Choose payment gateway',
-        'warning'
-      )
     }
   }
 
