@@ -52,7 +52,7 @@ export default function Index(){
                     }else if(res.payload.status==='Order already verified'){
                         return;
                     }else{
-                        dispatch(setRedirectPath('/auth/login?next='+location.pathname))
+                        dispatch(setRedirectPath('/auth/login?next='+location.search))
                     }
                 })
         }

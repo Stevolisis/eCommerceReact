@@ -76,6 +76,7 @@ const userAuthSlice=createSlice({
             let next=payload.next;
 
             if(status==='success'){
+                console.log('next',payload)
                 state.redirectPath=next;             
             }else if(status==='Account not verified'){
                Swal.fire(
