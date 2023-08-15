@@ -7,6 +7,7 @@ import { clearCart, decrement, deleteCartProduct, getCartcount, getCartId, getCa
 import { placeOrder } from '../../Redux/Admin/orders';
 import { useLocation } from 'react-router-dom';
 import { setRedirectPath } from '../../Redux/Auth/userAuthForm';
+import { loading } from '../../Loaders/setMainLoader';
 //why was redirect removed chk
 export default function Cart(){
   const cartId=useSelector(getCartId);
@@ -36,10 +37,10 @@ export default function Cart(){
     const formData=new FormData();
     formData.append('products',JSON.stringify(cartItems))
     formData.append('cartId',JSON.stringify(cartId))
-    // console.log('cartItems',cartItems)
 
     dispatch(placeOrder(formData))
     .then(res=>{
+      loading(false)
       if(res.payload.status==='Invalid Cart'){
         Swal.fire(
           'Invalid Cart',
