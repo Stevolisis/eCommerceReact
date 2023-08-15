@@ -49,6 +49,8 @@ export default function Index(){
                 .then(res=>{
                     if(res.payload.status==='success'||res.payload.status==='Error in payment verification'){
                         dispatch(deleteCart());
+                    }else if(res.payload.status==='Order already verified'){
+                        return;
                     }else{
                         dispatch(setRedirectPath('/auth/login?next='+location.pathname))
                     }

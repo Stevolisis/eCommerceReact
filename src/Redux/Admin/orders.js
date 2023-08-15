@@ -133,7 +133,7 @@ const orderSlice=createSlice({
                     `${status}`,
                     'success'
                 );                          
-           }else if(status==='no Cookie'){
+           }else if(status==='no Cookie'||status==='Order already verified'){
                 return;
             }else{
                Swal.fire(

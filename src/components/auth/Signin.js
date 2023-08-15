@@ -7,11 +7,16 @@ export default function Signin(){
     const navigate=useNavigate();
     const [searchParams]=useSearchParams();
     const dispatch=useDispatch();
+    console.log('next ',window.location.search)
 
     function handleSubmit(e){
         e.preventDefault();
         const formData=new FormData(e.target);
-        dispatch(customerLogin({next:searchParams.get('next'),data:formData}));
+        if(searchParams.get('next')&&searchParams.get('tx_ref')&&searchParams.get('transaction_id')){
+            dispatch(customerLogin({next:searchParams.get('next')+searchParams.get('tx_ref')+searchParams.get('transaction_id'),data:formData}));
+        }else{
+            dispatch(customerLogin({next:searchParams.get('next'),data:formData}));
+        }
     }
 
 
