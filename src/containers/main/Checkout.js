@@ -59,6 +59,8 @@ export default function Checkout(){
         .then(res=>{
           if(res.payload.status==='success'){
             window.location.assign(res.payload.payment_link);
+          }else{
+            return navigate('/auth/login?next='+location.pathname);
           }
       })
     }
