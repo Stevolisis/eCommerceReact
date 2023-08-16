@@ -77,7 +77,7 @@ const orderSlice=createSlice({
 
             if(status==='success'){
                state.orders=orders;            
-            }else if(status==='no Cookie'){
+            }else if(status==='no Cookie'||status==='Invalid Token'){
                 return;
             }else{
                 Swal.fire(
@@ -167,4 +167,5 @@ const orderSlice=createSlice({
 
 
 export const orderDetails=(state)=>state.orderReducer.order;
+export const getUserOrders=(state)=>state.orderReducer.orders;
 export default orderSlice.reducer;
