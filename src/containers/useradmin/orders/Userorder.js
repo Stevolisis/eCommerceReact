@@ -55,7 +55,9 @@ export default function Userorder({origin}){
         <div className='orderdetail'>
         <p><span>Quantity:</span> {userOrder?.products?.length} items</p>
         <p><span>Date: </span> {userOrder?.createdAt?.split('T')[0]}</p>
-        <p><span>Total: </span> N{userOrder?.total_cost}</p>
+        <p><span>Sub total: </span> N{userOrder?.sub_total}</p>
+        <p><span>Total delivery fee: </span> N{userOrder?.total_delivery_fee}</p>
+        <p><span>Total Cost: </span> N{userOrder?.total_cost}</p>
         <p><span>Status: </span> {origin==='user' ? 'Successful' :
         <> <button onClick={()=>confirmspec()}>Delivered</button></>}</p>
         </div>  
@@ -73,17 +75,12 @@ export default function Userorder({origin}){
                         <div className='userorderinfo'>
                         <div className='orderinfo1'>
                         <p>{order.name}</p>
-                        <p>Price: N{order.price}</p>
-                            {order.payment_status==='Paid' ? 
-                                <p style={{background:order.status==='Delivered' ?'dodgerblue':'black'}}>STATUS: {order.status}</p>
-                            :
-                                <p style={{background:'red'}}>STATUS: {order.status==='In Cart'&& `(${order.status})`} {order.payment_status} </p>
-                            }
+                        <p>Price: N{order.price} <br/>Delivery fee: N{order.delivery_fee}</p>
                         </div>
-                        <div className='orderinfo2'>
+                        {/* <div className='orderinfo2'>
                             <p>{userOrder?.createdAt.split('T')[0]}</p>
                             <button onClick={()=>navigate(`/user/order/${order._id}`)}>View</button>
-                        </div>
+                        </div> */}
                         </div>
 
                     </div>
