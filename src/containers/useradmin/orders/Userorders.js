@@ -62,7 +62,7 @@ export default function Userorders(){
                             }
                         </div>
                         <div className='orderinfo2'>
-                            <p>On 14-11-2019</p>
+                            <p>{order.createdAt.split('T')[0]}</p>
                             <button onClick={()=>navigate(`/user/order/${order._id}`)}>View</button>
                         </div>
                         </div>
