@@ -50,7 +50,7 @@ const orderSlice=createSlice({
                 return;
             }else{
                 Swal.fire(
-                    'Error Occured1!',
+                    'Error Occured!',
                     `${status}`,
                     'warning'
                 );
@@ -59,7 +59,7 @@ const orderSlice=createSlice({
         [getOrder.rejected]: (state,{error})=>{
             loading(false);
             Swal.fire(
-                "Error Occured2",
+                "Error Occured",
                 error.message,
                 'error'
             )
@@ -89,7 +89,7 @@ const orderSlice=createSlice({
                 return;
             }else{
                Swal.fire(
-                   'Error Occured3!',
+                   'Error Occured!',
                    `${status}`,
                    'warning'
                );
@@ -98,7 +98,7 @@ const orderSlice=createSlice({
         [completeOrder.rejected]: (state,{error})=>{
             loading(false);
             Swal.fire(
-                "Error Occured4",
+                "Error Occured",
                 error.message,
                 'error'
             )
@@ -117,7 +117,7 @@ const orderSlice=createSlice({
                 return;
             }else{
                Swal.fire(
-                   'Error Occured5!',
+                   'Error Occured!',
                    `${status}`,
                    'warning'
                );

@@ -54,6 +54,8 @@ export default function Index(){
                         return;
                     }
                 })
+        }else if(status&&tx_ref){
+            dispatch(verifyOrder({tx_ref:tx_ref,status:status}));
         }
     },[transaction_id,tx_ref,status])
 
