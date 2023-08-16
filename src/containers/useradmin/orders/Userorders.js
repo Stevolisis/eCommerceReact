@@ -27,7 +27,7 @@ export default function Userorders(){
     return(
         <>
         <div className='usermaincon'>
-        <div className='userorderheading'><p>Orders(3)</p></div>
+        <div className='userorderheading'><p>Orders({userOrders.length})</p></div>
         <div className='userorderscon'>
 
 
@@ -63,7 +63,7 @@ export default function Userorders(){
                         </div>
                         <div className='orderinfo2'>
                             <p>On 14-11-2019</p>
-                            <button onClick={()=>navigate('/user/order')}>View</button>
+                            <button onClick={()=>navigate(`/user/order/${order._id}`)}>View</button>
                         </div>
                         </div>
 

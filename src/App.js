@@ -183,7 +183,7 @@ useMemo(()=>{
         <Route path='addaddress' element={<Addaddress/>} />
         <Route path='wishlist' element={<Userwishlist/>} />
         <Route path='orders' element={<Userorders />} />
-        <Route path='order' element={<Userorder origin='user'/>} />
+        <Route path='order/:id' element={<Userorder origin='user'/>} />
       </Route>
 
       {/* ----------------Admin Route--------------- */}
