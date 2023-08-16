@@ -1,27 +1,46 @@
+import { useEffect } from 'react';
 import {React} from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
 export default function Userorder({origin}){
+  const navigate=useNavigate();
+  const dispatch=useDispatch();
+  const location=useLocation();
+  // const userOrder=useSelector();
+
+  useEffect(()=>{
+      // dispatch(getOrders())
+      // .then(res=>{
+      //     console.log('res.payload.status',res.payload.status)
+      //     if(res.payload.status!=='success'){
+      //         console.log('res.payload',res.payload.status)
+      //         dispatch(setRedirectPath('/auth/login?next='+location.pathname))            
+      //     }
+      // })
+  },[]);
+
 
     const confirmspec=(()=>{
-        Swal.fire({
-            title: 'Confirm Delivery',
-            text: `Product Delivered on ${Date()}`,
-            icon: 'info',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Confirm'
-          }).then((result) => {
-            if (result.isConfirmed) {
-              Swal.fire(
-                'Successful!',
-                'Product Delivered.',
-                'success'
-              )
-            }
-          })
-       })
+      Swal.fire({
+          title: 'Confirm Delivery',
+          text: `Product Delivered on ${Date()}`,
+          icon: 'info',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Confirm'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            Swal.fire(
+              'Successful!',
+              'Product Delivered.',
+              'success'
+            )
+          }
+        })
+    })
 
     return(
         <>

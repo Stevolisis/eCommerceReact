@@ -81,7 +81,7 @@ export default function Checkout(){
 
   useEffect(()=>{
     if(id){
-      dispatch(getOrder(id))
+      dispatch(getOrder({id:id,page:'checkout'}))
       .then(res=>{
         if(res.payload.status!=='success'){
           dispatch(setRedirectPath('/auth/login?next='+location.pathname))            

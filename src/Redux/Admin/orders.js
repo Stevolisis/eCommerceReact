@@ -4,11 +4,12 @@ import { loading } from "../../Loaders/setMainLoader";
 import api from "../../Utils/axiosConfig";
 
 
-export const getOrder=createAsyncThunk('orders/getOrder',async(id)=>{
+export const getOrder=createAsyncThunk('orders/getOrder',async({id,page})=>{
     loading(true);
-    const response=await api.get(`order/getOrder/${id}`,{withCredentials:true});
+    const response=await api.get(`order/getOrder/${id}/${page}`,{withCredentials:true});
     return response.data;
 });
+
 
 export const getOrders=createAsyncThunk('orders/getOrders',async()=>{
     loading(true);
