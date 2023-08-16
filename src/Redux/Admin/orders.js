@@ -12,7 +12,7 @@ export const getOrder=createAsyncThunk('orders/getOrder',async(id)=>{
 
 export const getOrders=createAsyncThunk('orders/getOrders',async()=>{
     loading(true);
-    const response=await api.get(`order/getOrders`,{withCredentials:true});
+    const response=await api.get(`order/getuserOrders`,{withCredentials:true});
     return response.data;
 });
 
