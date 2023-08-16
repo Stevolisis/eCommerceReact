@@ -103,26 +103,6 @@ const orderSlice=createSlice({
                 'error'
             )
         },
-        // [completeOrder.fulfilled]: (state,{payload})=>{
-        //     loading(false);
-        //     let status=payload.status;
-
-        //     if(status!=='success'){
-        //        Swal.fire(
-        //            'Error Occured1!',
-        //            `${status}`,
-        //            'warning'
-        //        );
-        //    }
-        // },
-        // [completeOrder.rejected]: (state,{error})=>{
-        //     loading(false);
-        //     Swal.fire(
-        //         "Error Occured1",
-        //         error.message,
-        //         'error'
-        //     )
-        // },
         [verifyOrder.fulfilled]: (state,{payload})=>{
             loading(false);
             let status=payload.status;
