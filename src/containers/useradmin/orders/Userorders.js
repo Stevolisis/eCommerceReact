@@ -1,9 +1,25 @@
+import { useEffect } from 'react';
 import {React} from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { getOrders } from '../../../Redux/Admin/orders';
+import { setRedirectPath } from '../../../Redux/Auth/userAuthForm';
 
 export default function Userorders(){
-     
     const navigate=useNavigate();
+    const dispatch=useDispatch();
+    const location=useLocation();
+
+    useEffect(()=>{
+        dispatch(getOrders())
+        .then(res=>{
+            if(res.payload.status!=='success'||res.payload.status!=='no Cookie'){
+                dispatch(setRedirectPath('/auth/login?next='+location.pathname))            
+            }
+        })
+    },[])
+
+
 
     return(
         <>
