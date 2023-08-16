@@ -42,22 +42,31 @@ export default function Userorders(){
             : userOrders.map((order,i)=>{
                 return (
                     <div className='userorder' key={i}>
-                    <div className='userorderimg'><img src={order.products[0].img_link} alt='UserOrderImg'/></div>
-                    <div className='userorderinfo'>
-                    <div className='orderinfo1'>
-                    <p>{order.products.length} Items : Bluetooth Headsekkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk kkkkkkkkkk kkkkkkkkkkkkk kkkkkkkkkkkkkkkkkkk kkkkkkkkkkkkkkkkkkkkk kkkkkkkkkkkkkkkk kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk kkkkkkkkkkkkkkkkkkkk kkkkkkkkkkkkkkkk kkkkkkkkkkkkkkkkkkk kkkkkkkkkkkkkkkkt - Extra Bass -MDR-XB950BT- Red</p>
-                    <p>Price: N{order.total_cost}</p>
-                        {order.payment_status==='Paid' ? 
-                            <p style={{background:order.status==='Delivered' ?'dodgerblue':'black'}}>STATUS: {order.status}</p>
-                        :
-                            <p style={{background:'red'}}>STATUS: {order.status==='In Cart'&& `(${order.status})`} {order.payment_status} </p>
-                        }
-                    </div>
-                    <div className='orderinfo2'>
-                        <p>On 14-11-2019</p>
-                        <button onClick={()=>navigate('/user/order')}>View</button>
-                    </div>
-                    </div>
+
+                        <div className='userorderimg'>
+                            <img src={order.products[0].img_link} alt='UserOrderImg'/>
+                        </div>
+
+                        <div className='userorderinfo'>
+                        <div className='orderinfo1'>
+                        <p>{order.products.length} Items : {
+                            order?.products.map(product=>{
+                                return product.name + ' | '
+                            })
+                        }</p>
+                        <p>Price: N{order.total_cost}</p>
+                            {order.payment_status==='Paid' ? 
+                                <p style={{background:order.status==='Delivered' ?'dodgerblue':'black'}}>STATUS: {order.status}</p>
+                            :
+                                <p style={{background:'red'}}>STATUS: {order.status==='In Cart'&& `(${order.status})`} {order.payment_status} </p>
+                            }
+                        </div>
+                        <div className='orderinfo2'>
+                            <p>On 14-11-2019</p>
+                            <button onClick={()=>navigate('/user/order')}>View</button>
+                        </div>
+                        </div>
+
                     </div>
                 )
             })
