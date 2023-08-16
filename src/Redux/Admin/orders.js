@@ -10,6 +10,12 @@ export const getOrder=createAsyncThunk('orders/getOrder',async(id)=>{
     return response.data;
 });
 
+export const getOrders=createAsyncThunk('orders/getOrders',async()=>{
+    loading(true);
+    const response=await api.get(`order/getOrders`,{withCredentials:true});
+    return response.data;
+});
+
 export const placeOrder=createAsyncThunk('orders/placeOrder',async(formData)=>{
     loading(true);
     const response=await api.post('order/placeOrder',formData,{withCredentials:true});
@@ -57,6 +63,31 @@ const orderSlice=createSlice({
             }
         },
         [getOrder.rejected]: (state,{error})=>{
+            loading(false);
+            Swal.fire(
+                "Error Occured",
+                error.message,
+                'error'
+            )
+        },
+        [getOrders.fulfilled]: (state,{payload})=>{
+            loading(false);
+            let status=payload.status;
+            let orders=payload.data;
+
+            if(status==='success'){
+               state.orders=orders;            
+            }else if(status==='no Cookie'){
+                return;
+            }else{
+                Swal.fire(
+                    'Error Occured!',
+                    `${status}`,
+                    'warning'
+                );
+            }
+        },
+        [getOrders.rejected]: (state,{error})=>{
             loading(false);
             Swal.fire(
                 "Error Occured",

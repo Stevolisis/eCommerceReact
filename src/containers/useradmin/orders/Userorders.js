@@ -26,35 +26,6 @@ export default function Userorders(){
         </div>
         </div>
 
-        <div className='userorder'>
-        <div className='userorderimg'><img src='/media3/advert5.jpg' alt='UserOrderImg'/></div>
-        <div className='userorderinfo'>
-        <div className='orderinfo1'>
-        <p>Bluetooth Headset - Extra Bass -MDR-XB950BT- Red</p>
-        <p>Price: N34,000</p>
-        <p>STATUS: Cancelled</p>
-        </div>
-        <div className='orderinfo2'>
-            <p>On 14-11-2019</p>
-            <button onClick={()=>navigate('order')}>View</button>
-        </div>        
-        </div>
-        </div>
-
-        <div className='userorder'>
-        <div className='userorderimg'><img src='/media3/advert4.jpg' alt='UserOrderImg'/></div>
-        <div className='userorderinfo'>
-        <div className='orderinfo1'>
-        <p>Bluetooth Headset - Extra Bass -MDR-XB950BT- Red</p>
-        <p>Price: N34,000</p>
-        <p>STATUS: Cancelled</p>
-        </div>
-        <div className='orderinfo2'>
-            <p>On 14-11-2019</p>
-            <button onClick={()=>navigate('order')}>View</button>
-        </div>
-        </div>
-        </div>
 
         </div>
         </div>
