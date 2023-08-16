@@ -83,7 +83,7 @@ const userAuthSlice=createSlice({
                'Verification',
                'Account not verified',
                'warning'
-            );   
+            );
             state.redirectPath='/auth/passcode'            
             }else{
                Swal.fire(
