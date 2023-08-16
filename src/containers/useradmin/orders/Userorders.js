@@ -45,7 +45,7 @@ export default function Userorders(){
                     <div className='userorderimg'><img src={order.products[0].img_link} alt='UserOrderImg'/></div>
                     <div className='userorderinfo'>
                     <div className='orderinfo1'>
-                    <p>Bluetooth Headset - Extra Bass -MDR-XB950BT- Red</p>
+                    <p>{order.products.length} Items : Bluetooth Headsekkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk kkkkkkkkkk kkkkkkkkkkkkk kkkkkkkkkkkkkkkkkkk kkkkkkkkkkkkkkkkkkkkk kkkkkkkkkkkkkkkk kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk kkkkkkkkkkkkkkkkkkkk kkkkkkkkkkkkkkkk kkkkkkkkkkkkkkkkkkk kkkkkkkkkkkkkkkkt - Extra Bass -MDR-XB950BT- Red</p>
                     <p>Price: N{order.total_cost}</p>
                         {order.payment_status==='Paid' ? 
                             <p style={{background:order.status==='Delivered' ?'dodgerblue':'black'}}>STATUS: {order.status}</p>
