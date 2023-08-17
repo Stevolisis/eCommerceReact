@@ -100,10 +100,12 @@ export default function Userorder({origin}){
         <div className='orderdetailcon2'>
         <div className='orderdetailheading'><p>ADDRESS</p></div>  
         <div className='orderdetail'>
-        <p><span>Name: </span>Steven Joseph</p>
+        <p><span>Name: </span>{userOrder?.address?.name}</p>
         <p><span>Address: </span>Abubakar tafawa balewa university,yelwa campus</p>
-        <p><span>Location: </span>Yelwa / Fed. Poly, Bauchi</p>
-        <p><span>Phone Number: </span>+234 8103987495</p>
+        <p><span>Location: </span>{userOrder?.address?.location?.city} / {userOrder?.address?.location?.state}, {userOrder?.address?.location?.country}</p>
+        <p><span>Phone Number: </span>{userOrder?.address?.phone_number}</p>
+        {userOrder?.address?.phone_number2 ? 
+        <p><span>Phone Number2: </span>{userOrder?.address?.phone_number2}</p> : 'mm'}
         </div>  
         </div>
         </div>
