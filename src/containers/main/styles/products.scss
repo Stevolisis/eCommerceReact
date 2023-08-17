@@ -194,14 +194,16 @@ font-size: 14px;
 }
 
 .specialproductimg2{
-cursor: pointer;
+    cursor: pointer;
+
     .discount2{
         padding: 10px;
         background-color: $color100;
         font-size: 11px;
-        margin-bottom: -37px;
+        margin-bottom: -35px;
         position: sticky;
         width: 14%;
+        border-radius: 6px 0 0 0;
     }
   
     .productimg2{
@@ -359,7 +361,7 @@ margin: 10px;
     .discount2{
         padding: 7px;
         font-size: 10px;
-        margin-bottom: -30px;
+        margin-bottom: -28px;
     }
   
     .productimg2{
