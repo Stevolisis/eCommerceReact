@@ -121,18 +121,18 @@ return(
           <button onClick={()=>navigate(`${'/user/address?next=/checkout/'}${id}`)}>CHANGE</button>
         }
     </div>
-        
+        {console.log('userAddress',userAddresses)}
       {
         userAddresses&&userAddresses.length!==0 ?
         userAddresses
-          .filter((address,i)=>address.default==true)
+          .filter(address=> address.default==true)
           .map((addressDefault,i)=>{
             return <div className='checkoutaddress' key={i}>
-              <p>{addressDefault.first_name+' '+addressDefault.last_name}</p>
-            <p>{addressDefault.address}</p>
-            <p>{addressDefault.location.city+', '+addressDefault.location.state+', '+addressDefault.location.country}</p>
-            <p>{addressDefault.phone_number1} </p>
-            {addressDefault.phone_number2&&<p>{addressDefault.phone_number2}</p>} 
+              <p>{addressDefault?.first_name+' '+addressDefault?.last_name}</p>
+            <p>{addressDefault?.address}</p>
+            <p>{addressDefault?.location.city+', '+addressDefault?.location.state+', '+addressDefault?.location.country}</p>
+            <p>{addressDefault?.phone_number1} </p>
+            {addressDefault?.phone_number2&&<p>{addressDefault?.phone_number2}</p>} 
             </div>
           })
       
