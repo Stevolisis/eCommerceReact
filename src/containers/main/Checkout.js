@@ -55,7 +55,7 @@ export default function Checkout(){
         'warning'
       )
     }else{
-      dispatch(completeOrder({id,payment_gateway,delivery_note}))
+      dispatch(completeOrder({id,payment_gateway,delivery_note,address:userAddresses.filter((address,i)=>address.default==true) }))
         .then(res=>{
           if(res.payload.status==='success'){
             window.location.assign(res.payload.payment_link);
@@ -116,7 +116,7 @@ return(
         <p>ADDRESS DETAILS</p>
         {
           navStat==='/user/addAddress?next=/checkout' ? 
-          <button onClick={()=>navigate(`${'/user/addAddress?next=/checkout'}${id}`)}>ADD</button>
+          <button onClick={()=>navigate(`${'/user/addAddress?next=/checkout/'}${id}`)}>ADD</button>
           :
           <button onClick={()=>navigate(`${'/user/address?next=/checkout/'}${id}`)}>CHANGE</button>
         }

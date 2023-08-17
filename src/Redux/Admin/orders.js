@@ -23,10 +23,10 @@ export const placeOrder=createAsyncThunk('orders/placeOrder',async(formData)=>{
     return response.data;
 });
 
-export const completeOrder=createAsyncThunk('orders/completeOrder',async({id,payment_gateway,delivery_note})=>{
+export const completeOrder=createAsyncThunk('orders/completeOrder',async({id,payment_gateway,delivery_note,address})=>{
     loading(true);
     console.log(id,payment_gateway)
-    const response=await api.post('order/completeOrder',{orderId:id,payment_gateway:payment_gateway,delivery_note:delivery_note},{withCredentials:true});
+    const response=await api.post('order/completeOrder',{orderId:id,payment_gateway:payment_gateway,delivery_note:delivery_note,address:address},{withCredentials:true});
     return response.data;
 });
 
