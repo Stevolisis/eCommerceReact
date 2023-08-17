@@ -3,7 +3,7 @@ import {React} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import { getOrder, orderDetails } from '../../../Redux/Admin/orders';
+import { completeOrder, getOrder, orderDetails } from '../../../Redux/Admin/orders';
 import { setRedirectPath } from '../../../Redux/Auth/userAuthForm';
 
 export default function Userorder({origin}){
@@ -24,7 +24,18 @@ export default function Userorder({origin}){
       })
   },[]);
 
-
+    const completeOrder=()=>{
+        dispatch(completeOrder({id,payment_gateway,delivery_note,address:userAddresses.filter((address,i)=>address.default==true) }))
+        .then(res=>{
+          if(res.payload.status==='success'){
+            window.location.assign(res.payload.payment_link);
+          }else if(res.payload.status==='getaddrinfo ENOTFOUND api.flutterwave.com'){
+            return;
+          }else{
+            return navigate('/auth/login?next='+location.pathname);
+          }
+      })
+    }
     const confirmspec=(()=>{
       Swal.fire({
           title: 'Confirm Delivery',
@@ -58,8 +69,13 @@ export default function Userorder({origin}){
         <p><span>Sub total: </span> N{userOrder?.sub_total}</p>
         <p><span>Total delivery fee: </span> N{userOrder?.total_delivery_fee}</p>
         <p><span>Total Cost: </span> N{userOrder?.total_cost}</p>
-        <p><span>Status: </span> {origin==='user' ? 'Successful' :
-        <> <button onClick={()=>confirmspec()}>Delivered</button></>}</p>
+        <p><span>Payment Status: </span> {userOrder?.payment_status}</p>
+        {userOrder?.payment_status==='not Paid' ? 
+            <button onClick={()=>completeOrder()}>Complete Order</button> : 
+            <p><span>Delivery Status: </span> {userOrder?.status}</p>
+        }
+        {/* <p><span>Status: </span> {origin==='user' ? 'Successful' :
+        <> <button onClick={()=>confirmspec()}>Delivered</button></>}</p> */}
         </div>  
         </div>
 
