@@ -228,12 +228,13 @@ box-sizing: border-box;
 
 .specialproduct{
     display:flex;
-justify-content: center;
-align-items: center;
-flex-direction: column;
-width:200px;
-max-width:198px;
-margin: 10px 3px;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width:200px;
+    max-width:198px;
+    margin: 10px 3px;
+    border-radius: 6px;
 
            a{
             text-decoration: none;
@@ -260,9 +261,13 @@ margin: 10px 3px;
         width:198px;
         height: 170px;
         background: $color105;
+        border-radius: 6px;
+
         img{
             width:198px;
             height: 170px;
+            border-radius: 6px;
+
         }
     }
 }
