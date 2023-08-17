@@ -21,7 +21,7 @@
 .orderdetail{
     //border-bottom: 1px solid $color105;
     border: 1px solid $color105;
-    padding: 7px 10px;
+    padding: 7px 22px;
 
     span{
         font-size: 13px;
@@ -33,11 +33,11 @@
     p{
         font-size: 13px;
         color: $color104;
-        padding: 7px 12px;
+        padding: 7px 0px;
     }
 
     button{
-        margin: 0 3px;
+        margin: 3px 0px;
         color: $color50;
         padding: 10px;
         border: 0;
@@ -79,13 +79,18 @@
 }
 
 .orderdetail{
-    padding: 7px 5px;
+    padding: 7px 17px;
 
     span{
         font-size: 12px;
     }
 
     p{
+        font-size: 12px;
+    }
+
+    button{
+        padding: 9px;
         font-size: 12px;
     }
 }
