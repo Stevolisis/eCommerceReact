@@ -25,24 +25,6 @@ export default function Userorder({origin}){
       })
   },[]);
 
-    // const completeOrder=()=>{
-    //     dispatch(completeOrder({
-    //         id:userOrder?._id,
-    //         payment_gateway:userOrder?.payment_gateway,
-    //         delivery_note:userOrder?.delivery_note,
-    //         address:[userOrder?.address]
-    //     }))
-    //     .then(res=>{
-    //       if(res.payload.status==='success'){
-    //         window.location.assign(res.payload.payment_link);
-    //       }else if(res.payload.status==='getaddrinfo ENOTFOUND api.flutterwave.com'){
-    //         return;
-    //       }else{
-    //         return navigate('/auth/login?next='+location.pathname);
-    //       }
-    //   })
-    // }
-
 
     const confirmspec=(()=>{
       Swal.fire({
