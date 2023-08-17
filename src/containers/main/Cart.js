@@ -50,7 +50,7 @@ export default function Cart(){
           'error'
         )
       }else if(res.payload.status==='success'){
-        navigate('/checkout/'+res.payload.orderId+"?navigate="+Math.random().toFixed(2));
+        navigate('/checkout/'+res.payload.orderId);
       }else{
         return navigate('/auth/login?next='+location.pathname);
       }

@@ -5,6 +5,7 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { completeOrder, getOrder, orderDetails } from '../../../Redux/Admin/orders';
 import { setRedirectPath } from '../../../Redux/Auth/userAuthForm';
+import { addAddress } from '../../../Redux/UserDashboard/userAddress';
 
 export default function Userorder({origin}){
   const navigate=useNavigate();
@@ -24,18 +25,25 @@ export default function Userorder({origin}){
       })
   },[]);
 
-    const completeOrder=()=>{
-        dispatch(completeOrder({id,payment_gateway,delivery_note,address:userAddresses.filter((address,i)=>address.default==true) }))
-        .then(res=>{
-          if(res.payload.status==='success'){
-            window.location.assign(res.payload.payment_link);
-          }else if(res.payload.status==='getaddrinfo ENOTFOUND api.flutterwave.com'){
-            return;
-          }else{
-            return navigate('/auth/login?next='+location.pathname);
-          }
-      })
-    }
+    // const completeOrder=()=>{
+    //     dispatch(completeOrder({
+    //         id:userOrder?._id,
+    //         payment_gateway:userOrder?.payment_gateway,
+    //         delivery_note:userOrder?.delivery_note,
+    //         address:[userOrder?.address]
+    //     }))
+    //     .then(res=>{
+    //       if(res.payload.status==='success'){
+    //         window.location.assign(res.payload.payment_link);
+    //       }else if(res.payload.status==='getaddrinfo ENOTFOUND api.flutterwave.com'){
+    //         return;
+    //       }else{
+    //         return navigate('/auth/login?next='+location.pathname);
+    //       }
+    //   })
+    // }
+
+
     const confirmspec=(()=>{
       Swal.fire({
           title: 'Confirm Delivery',
@@ -71,7 +79,7 @@ export default function Userorder({origin}){
         <p><span>Total Cost: </span> N{userOrder?.total_cost}</p>
         <p><span>Payment Status: </span> {userOrder?.payment_status}</p>
         {userOrder?.payment_status==='not Paid' ? 
-            <button onClick={()=>completeOrder()}>Complete Order</button> : 
+            <button onClick={()=>navigate(`/checkout/${userOrder?._id}`)}>Complete Order</button> : 
             <p><span>Delivery Status: </span> {userOrder?.status}</p>
         }
         {/* <p><span>Status: </span> {origin==='user' ? 'Successful' :
@@ -104,7 +112,7 @@ export default function Userorder({origin}){
             })}
         </div>
 
-        <div className='detailscon'>
+        {userOrder?.address && <div className='detailscon'>
         <div className='orderdetailcon2'>
         <div className='orderdetailheading'><p>PAYMENT METHOD</p></div>  
         <div className='orderdetail'>
@@ -124,7 +132,7 @@ export default function Userorder({origin}){
         <p><span>Phone Number2: </span>{userOrder?.address?.phone_number2}</p> : ''}
         </div>  
         </div>
-        </div>
+        </div>}
 
         </div>    
         </>
