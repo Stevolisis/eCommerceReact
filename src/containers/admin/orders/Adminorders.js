@@ -1,7 +1,15 @@
+import { useEffect } from 'react';
 import {React} from 'react';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 export default function Adminorders(){
+    const dispatch=useDispatch();
+    let [limit,setlimit]=useState(10);
+
+    useEffect(()=>{
+        dispatch(fetchCategories(limit));
+    },[dispatch,limit]);
 
     return(
         <>
@@ -90,7 +98,7 @@ export default function Adminorders(){
             </div>
         </div>
         <div className='adminmorebtn'>
-            <button>See More</button>
+            <button onClick={()=>setlimit(limit+10)}>See More</button>
         </div>
         </div>
 

@@ -28,9 +28,9 @@ export default function Admincategories(){
     })
 
 
-        useEffect(()=>{
+    useEffect(()=>{
         dispatch(fetchCategories(limit));
-        },[dispatch,limit]);
+    },[dispatch,limit]);
 
         
     return(
