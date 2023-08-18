@@ -145,7 +145,7 @@ export default function Adduseraddress(){
         </div>
 
         <div className='paymentmethods' style={{padding:'0 10px 20px 10px'}}>
-        <input type='checkbox' name='defaultAddress' value='Payment On Delivery' id='Stripe'/>
+        <input type='checkbox' name='defaultAddress' id='Stripe'/>
         <p><label htmlFor='Stripe'>Set as default Address</label></p>
         </div>
 

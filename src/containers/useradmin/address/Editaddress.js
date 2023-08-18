@@ -44,6 +44,11 @@ export default function Editaddress(){
           }).then((result) => {
             if (result.isConfirmed) {
               dispatch(editAddress(formData))
+              .then(res=>{
+                if(res.payload.status!=='success'){
+                   dispatch(setRedirectPath('/auth/login?next='+location.pathname))            
+                }
+            })
             }
         })
     }
@@ -186,7 +191,7 @@ export default function Editaddress(){
         </div>
 
         <div className='paymentmethods' style={{padding:'0 10px 20px 10px'}}>
-        <input type='checkbox' name='defaultAddress' id='Stripe' checked={defaultAddress} onChange={(e)=>setDefaultAddress(!defaultAddress)}/>
+        <input type='checkbox' name='defaultAddress' id='Stripe' onChange={(e)=>setDefaultAddress(!defaultAddress)}/>
         <p><label htmlFor='Stripe'>Set as default Address</label></p>
         </div>
 
