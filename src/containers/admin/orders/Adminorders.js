@@ -1,14 +1,16 @@
 import { useEffect } from 'react';
+import { useState } from 'react';
 import {React} from 'react';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { getOrders } from '../../../Redux/Admin/orders';
 
 export default function Adminorders(){
     const dispatch=useDispatch();
     let [limit,setlimit]=useState(10);
 
     useEffect(()=>{
-        dispatch(fetchCategories(limit));
+        dispatch(getOrders(limit));
     },[dispatch,limit]);
 
     return(

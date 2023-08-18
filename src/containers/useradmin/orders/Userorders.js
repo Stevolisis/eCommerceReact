@@ -2,17 +2,17 @@ import { useEffect } from 'react';
 import {React} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { getOrders, getUserOrders } from '../../../Redux/Admin/orders';
+import { getUserOrder, getUserOrders } from '../../../Redux/Admin/orders';
 import { setRedirectPath } from '../../../Redux/Auth/userAuthForm';
 
 export default function Userorders(){
     const navigate=useNavigate();
     const dispatch=useDispatch();
     const location=useLocation();
-    const userOrders=useSelector(getUserOrders);
+    const userOrders=useSelector(getUserOrder);
 
     useEffect(()=>{
-        dispatch(getOrders())
+        dispatch(getUserOrders())
         .then(res=>{
             console.log('res.payload.status',res.payload.status)
             if(res.payload.status!=='success'){

@@ -32,6 +32,7 @@ export default function Editaddress(){
         e.preventDefault();
         const formData=new FormData(e.target)
         formData.append('id',id);
+        console.log('iddddddd',id)
 
         Swal.fire({
             title: 'Confirm?',
@@ -191,7 +192,7 @@ export default function Editaddress(){
         </div>
 
         <div className='paymentmethods' style={{padding:'0 10px 20px 10px'}}>
-        <input type='checkbox' name='defaultAddress' id='Stripe' onChange={(e)=>setDefaultAddress(!defaultAddress)}/>
+        <input type='checkbox' checked={defaultAddress} name='defaultAddress' id='Stripe' onChange={(e)=>setDefaultAddress(!defaultAddress)}/>
         <p><label htmlFor='Stripe'>Set as default Address</label></p>
         </div>
 

@@ -13,6 +13,12 @@ export const getOrder=createAsyncThunk('orders/getOrder',async({id,page})=>{
 
 export const getOrders=createAsyncThunk('orders/getOrders',async()=>{
     loading(true);
+    const response=await api.get(`order/getOrders`,{withCredentials:true});
+    return response.data;
+});
+
+export const getUserOrders=createAsyncThunk('orders/getUserOrders',async()=>{
+    loading(true);
     const response=await api.get(`order/getuserOrders`,{withCredentials:true});
     return response.data;
 });
@@ -42,6 +48,7 @@ const orderSlice=createSlice({
     name:'orders',
     initialState:{
         orders:[],
+        orders2:[],
         filterBackup:[],
         order:{}
     },
@@ -71,7 +78,7 @@ const orderSlice=createSlice({
                 'error'
             )
         },
-        [getOrders.fulfilled]: (state,{payload})=>{
+        [getUserOrders.fulfilled]: (state,{payload})=>{
             loading(false);
             let status=payload.status;
             let orders=payload.data;
@@ -88,8 +95,20 @@ const orderSlice=createSlice({
                 );
             }
         },
-        [getOrders.rejected]: (state,{error})=>{
+        [getUserOrders.rejected]: (state,{error})=>{
             loading(false);
+            Swal.fire(
+                "Error Occured",
+                error.message,
+                'error'
+            )
+        },
+        [getOrders.fulfilled]: (state,{payload})=>{
+            loading(false)
+            return {...state,orders:payload,filterBackup:payload}
+        },
+        [getOrders.rejected]: (state,{error})=>{
+            loading(false)
             Swal.fire(
                 "Error Occured",
                 error.message,
@@ -168,5 +187,5 @@ const orderSlice=createSlice({
 
 
 export const orderDetails=(state)=>state.orderReducer.order;
-export const getUserOrders=(state)=>state.orderReducer.orders;
+export const getUserOrder=(state)=>state.orderReducer.orders;
 export default orderSlice.reducer;
