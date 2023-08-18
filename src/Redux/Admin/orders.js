@@ -78,7 +78,7 @@ const orderSlice=createSlice({
 
             if(status==='success'){
                state.orders=orders;            
-            }else if(status==='no Cookie'||status==='Invalid Token'){
+            }else if(status==='no Cookie'){
                 return;
             }else{
                 Swal.fire(
