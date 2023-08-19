@@ -1,12 +1,13 @@
 import { useEffect } from 'react';
 import { useState } from 'react';
 import {React} from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { getOrders } from '../../../Redux/Admin/orders';
+import { getOrders, getOrdersAdmin } from '../../../Redux/Admin/orders';
 
 export default function Adminorders(){
     const dispatch=useDispatch();
+    const orders=useSelector(getOrdersAdmin);
     let [limit,setlimit]=useState(10);
 
     useEffect(()=>{
@@ -17,7 +18,7 @@ export default function Adminorders(){
         <>
         <div className='admindashcon'>
         <div className='userorderheading'>
-            <p>Orders</p>
+            <p>Orders({orders.length})</p>
             </div>
         <div className='admincategcon'>
 
@@ -51,49 +52,30 @@ export default function Adminorders(){
             <tbody>
 
             <tr>
-            <th>Customer</th>
-            <th>Product</th>
+            <th>Name</th>
+            <th>Email</th>
             <th>Quantity</th>
-            <th>Status</th>
+            <th>Price</th>
+            <th>Payment Status</th>
+            <th>Delivery Status</th>
             <th>Date</th>
             <th>View</th>
             </tr>
 
-            <tr>
-            <td>Raegan</td>
-            <td>Heinz Stew Cream 120kg</td>
-            <td>6</td>
-            <td>Delivered</td>
-            <td>10/06/2022</td>
-            <td><Link to='/admin/order'><i className='fa fa-eye'/></Link></td>
-            </tr>
-
-            <tr>
-            <td>Raegan</td>
-            <td>Heinz Stew Cream 120kg</td>
-            <td>6</td>
-            <td>Delivered</td>
-            <td>10/06/2022</td>
-            <td><Link to='/admin/order'><i className='fa fa-eye'/></Link></td>
-            </tr>
-
-            <tr>
-            <td>Raegan</td>
-            <td>Heinz Stew Cream 120kg</td>
-            <td>6</td>
-            <td>Delivered</td>
-            <td>10/06/2022</td>
-            <td><Link to='/admin/order'><i className='fa fa-eye'/></Link></td>
-            </tr>
-
-            <tr>
-            <td>Raegan</td>
-            <td>Heinz Stew Cream 120kg</td>
-            <td>6</td>
-            <td>Delivered</td>
-            <td>10/06/2022</td>
-            <td><Link to='/admin/order'><i className='fa fa-eye'/></Link></td>
-            </tr>
+            {
+                orders.map((order,i)=>{
+                    return  <tr key={i}>
+                                <td>{`${order?.customerId?.first_name} ${order?.customerId?.last_name}`}</td>
+                                <td>{order?.customerId?.email}</td>
+                                <td>{order?.products.length}</td>
+                                <td>N{order?.total_cost}</td>
+                                <td><span style={{background:`${order.payment_status==='Paid' ? 'LimeGreen' : 'Crimson'}`, padding:'3px 5px', borderRadius:'0 5px 0 5px', whiteSpace:'nowrap', color: 'white'}}>{order?.payment_status}</span></td>
+                                <td><span style={{background:`${order.status==='Delivered' ? 'LimeGreen' : order.status==='In Cart' ? 'Crimson' : 'black'}`, padding:'3px 5px', borderRadius:'0 5px 0 5px', whiteSpace:'nowrap', color: 'white'}}>{order?.status}</span></td>
+                                <td>{order?.createdAt.split('T')[0]}</td>
+                            <td><Link to={`/admin/order/${order?._id}`}><i className='fa fa-eye'/></Link></td>
+                    </tr>
+                })
+            }
 
             </tbody>
             </table>

@@ -105,7 +105,7 @@ const orderSlice=createSlice({
         },
         [getOrders.fulfilled]: (state,{payload})=>{
             loading(false)
-            return {...state,orders:payload,filterBackup:payload}
+            return {...state,orders2:payload.data,filterBackup:payload.data}
         },
         [getOrders.rejected]: (state,{error})=>{
             loading(false)
@@ -188,4 +188,5 @@ const orderSlice=createSlice({
 
 export const orderDetails=(state)=>state.orderReducer.order;
 export const getUserOrder=(state)=>state.orderReducer.orders;
+export const getOrdersAdmin=(state)=>state.orderReducer.orders2;
 export default orderSlice.reducer;
