@@ -15,7 +15,7 @@ export default function Order({origin}){
 
   useEffect(()=>{
       if(origin==='user'){
-        dispatch(fetchUserOrder({id:id,page:origin==='user' ? 'user' : 'admin'}))
+        dispatch(fetchUserOrder({id:id,page:origin==='user' ? 'user' : ''}))
         .then(res=>{
             console.log('res.payload.status',res.payload.status)
             if(res.payload.status!=='success'){
@@ -66,7 +66,8 @@ export default function Order({origin}){
         <p><span>Total delivery fee: </span> N{userOrder?.total_delivery_fee}</p>
         <p><span>Total Cost: </span> N{userOrder?.total_cost}</p>
         <p><span>Payment Status: </span> {userOrder?.payment_status}</p>
-        {userOrder?.payment_status==='not Paid' ? 
+        
+        {origin==='user' && userOrder?.payment_status==='not Paid' ? 
             <button onClick={()=>navigate(`/checkout/${userOrder?._id}`)}>Complete Order</button> : 
             <p><span>Delivery Status: </span> {userOrder?.status}</p>
         }
