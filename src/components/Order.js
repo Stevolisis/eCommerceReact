@@ -3,7 +3,7 @@ import {React} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import { getOrder, orderDetails } from '../Redux/Admin/orders';
+import { fetchUserOrder, getOrder, orderDetails } from '../Redux/Admin/orders';
 import { setRedirectPath } from '../Redux/Auth/userAuthForm';
 
 export default function Order({origin}){
@@ -15,7 +15,7 @@ export default function Order({origin}){
 
   useEffect(()=>{
       if(origin==='user'){
-        dispatch(getOrder({id:id,page:'userOrders'}))
+        dispatch(fetchUserOrder({id:id,page:origin==='user' ? 'user' : 'admin'}))
         .then(res=>{
             console.log('res.payload.status',res.payload.status)
             if(res.payload.status!=='success'){
@@ -24,7 +24,7 @@ export default function Order({origin}){
             }
         })
       }else{
-        
+        dispatch(getOrder({id:id,page:origin==='user' ? 'user' : 'admin'}))
       }
   },[]);
 

@@ -4,9 +4,15 @@ import { loading } from "../../Loaders/setMainLoader";
 import api from "../../Utils/axiosConfig";
 
 
-export const getOrder=createAsyncThunk('orders/getOrder',async({id,page})=>{
+export const getOrder=createAsyncThunk('orders/getOrder',async({id})=>{
     loading(true);
-    const response=await api.get(`order/getOrder/${id}/${page}`,{withCredentials:true});
+    const response=await api.get(`order/getOrder/${id}/`,{withCredentials:true});
+    return response.data;
+});
+
+export const fetchUserOrder=createAsyncThunk('orders/fetchUserOrder',async({id,page})=>{
+    loading(true);
+    const response=await api.get(`order/getUserOrder/${id}/${page}`,{withCredentials:true});
     return response.data;
 });
 
@@ -60,6 +66,29 @@ const orderSlice=createSlice({
 
             if(status==='success'){
                state.order=order;            
+            }else{
+                Swal.fire(
+                    'Error Occured!',
+                    `${status}`,
+                    'warning'
+                );
+            }
+        },
+        [getOrder.rejected]: (state,{error})=>{
+            loading(false);
+            Swal.fire(
+                "Error Occured",
+                error.message,
+                'error'
+            )
+        },
+        [fetchUserOrder.fulfilled]: (state,{payload})=>{
+            loading(false);
+            let status=payload.status;
+            let order=payload.data;
+
+            if(status==='success'){
+               state.order=order;            
             }else if(status==='no Cookie'){
                 return;
             }else{
@@ -70,7 +99,7 @@ const orderSlice=createSlice({
                 );
             }
         },
-        [getOrder.rejected]: (state,{error})=>{
+        [fetchUserOrder.rejected]: (state,{error})=>{
             loading(false);
             Swal.fire(
                 "Error Occured",
