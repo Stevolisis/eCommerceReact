@@ -65,7 +65,7 @@ export default function Adminorders(){
             {
                 orders.map((order,i)=>{
                     return  <tr key={i}>
-                                <td>{`${order?.customerId?.first_name} ${order?.customerId?.last_name}`}</td>
+                                <td><span style={{whiteSpace:'nowrap'}}>{`${order?.customerId?.first_name} ${order?.customerId?.last_name}`}</span></td>
                                 <td>{order?.customerId?.email}</td>
                                 <td>{order?.products.length}</td>
                                 <td>N{order?.total_cost}</td>

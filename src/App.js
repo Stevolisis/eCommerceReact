@@ -40,7 +40,6 @@ import Useraddresses from './containers/useradmin/address/Useraddresses';
 import Editaddress from './containers/useradmin/address/Editaddress';
 import Addaddress from './containers/useradmin/address/Addaddress';
 import Userorders from './containers/useradmin/orders/Userorders';
-import Userorder from './containers/useradmin/orders/Userorder';
 import Userwishlist from './containers/useradmin/wishlist/Userwishlist';
 //-----------User Admin Css--------
 import './containers/useradmin/styles/usercontainer.scss';
@@ -115,6 +114,7 @@ import { getInview, getTrigger, setTrigger } from './Redux/Auth/userAuthForm';
 import $ from 'jquery';
 import { useEffect } from 'react';
 import Navigate from './components/auth/Navigate';
+import Order from './components/Order';
 
 
 
@@ -183,7 +183,7 @@ useMemo(()=>{
         <Route path='addaddress' element={<Addaddress/>} />
         <Route path='wishlist' element={<Userwishlist/>} />
         <Route path='orders' element={<Userorders />} />
-        <Route path='order/:id' element={<Userorder origin='user'/>} />
+        <Route path='order/:id' element={<Order origin='user'/>} />
       </Route>
 
       {/* ----------------Admin Route--------------- */}
@@ -198,7 +198,7 @@ useMemo(()=>{
       <Route path='events' element={<Adminevents />} />
       <Route path='coupons' element={<Admincoupons />} />
       <Route path='orders' element={<Adminorders />} />
-      <Route path='order' element={<Userorder origin='admin'/>} />
+      <Route path='order/:id' element={<Order origin='admin'/>} />
       <Route path='general_settings/:section' element={<Adminsettings />} />
 
       <Route path='addcategory' element={<Addcategory />} />

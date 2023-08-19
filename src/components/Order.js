@@ -3,11 +3,10 @@ import {React} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import { completeOrder, getOrder, orderDetails } from '../../../Redux/Admin/orders';
-import { setRedirectPath } from '../../../Redux/Auth/userAuthForm';
-import { addAddress } from '../../../Redux/UserDashboard/userAddress';
+import { getOrder, orderDetails } from '../Redux/Admin/orders';
+import { setRedirectPath } from '../Redux/Auth/userAuthForm';
 
-export default function Userorder({origin}){
+export default function Order({origin}){
   const navigate=useNavigate();
   const dispatch=useDispatch();
   const location=useLocation();
@@ -15,14 +14,18 @@ export default function Userorder({origin}){
   const userOrder=useSelector(orderDetails);
 
   useEffect(()=>{
-      dispatch(getOrder({id:id,page:'userOrders'}))
-      .then(res=>{
-          console.log('res.payload.status',res.payload.status)
-          if(res.payload.status!=='success'){
-              console.log('res.payload',res.payload.status)
-              dispatch(setRedirectPath('/auth/login?next='+location.pathname))            
-          }
-      })
+      if(origin==='user'){
+        dispatch(getOrder({id:id,page:'userOrders'}))
+        .then(res=>{
+            console.log('res.payload.status',res.payload.status)
+            if(res.payload.status!=='success'){
+                console.log('res.payload',res.payload.status)
+                dispatch(setRedirectPath('/auth/login?next='+location.pathname))            
+            }
+        })
+      }else{
+        
+      }
   },[]);
 
 
@@ -49,7 +52,10 @@ export default function Userorder({origin}){
     return(
         <>
         <div className='usermaincon'>
-        <div className='userorderheading'><p>ORDER DETAILS</p></div>
+        <div className='userorderheading'>
+            <p>ORDER DETAILS</p>
+            <button>PRINT</button>
+        </div>
 
         <div className='orderdetailcon'>
         <div className='orderdetailheading'><p>Order Id: {userOrder?.tracking_number}</p></div>  
@@ -64,8 +70,21 @@ export default function Userorder({origin}){
             <button onClick={()=>navigate(`/checkout/${userOrder?._id}`)}>Complete Order</button> : 
             <p><span>Delivery Status: </span> {userOrder?.status}</p>
         }
-        {/* <p><span>Status: </span> {origin==='user' ? 'Successful' :
-        <> <button onClick={()=>confirmspec()}>Delivered</button></>}</p> */}
+
+
+        
+        {
+            origin==='user' ? 
+            '' :
+            <>
+                <p><span>Status: </span>  
+                    <button onClick={()=>confirmspec()}>Delivered</button>
+                </p>
+            </>
+        }
+        
+
+
         </div>  
         </div>
 
