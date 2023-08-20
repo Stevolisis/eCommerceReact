@@ -28,17 +28,17 @@ export default function Adminorders(){
                 </div>
                 <div className='adminfilters'>
                     <select>
-                    <option defaultValue='All Category'>All Category</option>
-                    <option>001</option>
-                    <option>Shirts</option>
-                    <option>Home Appliances</option>
-                    <option>Underwears</option>
+                    <option defaultValue='All Category'>Status</option>
+                    <option>Payment Status Status(Paid)</option>
+                    <option>Payment Status Status(Not Paid)</option>
+                    <option>Delivery Status(Delivered)</option>
+                    <option>Delivery Status(Not Delivered)</option>
                     </select>
                     <select>
-                    <option defaultValue='All Category'>Recent Added</option>
-                    <option>High product</option>
-                    <option>Desc</option>
-                    <option>Home Appliances</option>
+                    <option defaultValue='All Category'>Ascending Order</option>
+                    <option>Descending Order</option>
+                    <option>Most Expensive</option>
+                    <option>Lest Expensive</option>
                     </select>
                 </div>
             </div>

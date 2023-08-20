@@ -17,9 +17,9 @@ export const fetchUserOrder=createAsyncThunk('orders/fetchUserOrder',async({id,p
 });
 
 
-export const getOrders=createAsyncThunk('orders/getOrders',async()=>{
+export const getOrders=createAsyncThunk('orders/getOrders',async(limit)=>{
     loading(true);
-    const response=await api.get(`order/getOrders`,{withCredentials:true});
+    const response=await api.get(`order/getOrders?limit=${limit}`,{withCredentials:true});
     return response.data;
 });
 
@@ -61,9 +61,25 @@ const orderSlice=createSlice({
     reducers:{
         searchOrders:(state,{payload})=>{
             return {...state,orders2:[...state.filterBackup]
-                .filter(item=>item.customerId.first_name.toLowerCase()
+                .filter(item=>item.customerId.first_name.toLowerCase()||
+                item.customerId.email           
                 .includes(payload.toLowerCase()))}
         },
+        filterOrders:(state,{payload})=>{
+            if(payload==='ascend'){                
+                return {...state,orders2:[...state.filterBackup].sort((a,b)=>a._id < b._id ? 1:-1)}
+            }else if(payload==='descend'){
+                return {...state,orders2:[...state.filterBackup].sort((a,b)=>a._id < b._id ? -1:1)}
+            }else if(payload==='mostProduct'){
+                return {...state,orders2:[...state.filterBackup].sort((a,b)=>a.product < b.product ? 1:-1)}
+            }else if(payload==='active'){
+                return {...state,orders2:[...state.filterBackup].filter(item=>item.status==='active')}
+            }else if(payload==='inactive'){
+                return {...state,orders2:[...state.filterBackup].filter(item=>item.status==='inactive')}
+            }else{
+                return;
+            }
+        } 
     },
     extraReducers:{
         [getOrder.fulfilled]: (state,{payload})=>{
