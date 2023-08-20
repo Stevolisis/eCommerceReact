@@ -3,7 +3,7 @@ import { useState } from 'react';
 import {React} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { getOrders, getOrdersAdmin } from '../../../Redux/Admin/orders';
+import { getOrders, getOrdersAdmin, searchOrders } from '../../../Redux/Admin/orders';
 
 export default function Adminorders(){
     const dispatch=useDispatch();
@@ -24,7 +24,7 @@ export default function Adminorders(){
 
             <div className='adminfilterscon'>
             <div className='adminfilters'>
-                    <input type='text' placeholder='Search...'/>
+                    <input type='text' placeholder='Search...' onChange={(e)=>dispatch(searchOrders(e.target.value))}/>
                 </div>
                 <div className='adminfilters'>
                     <select>

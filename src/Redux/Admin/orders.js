@@ -58,6 +58,13 @@ const orderSlice=createSlice({
         filterBackup:[],
         order:{}
     },
+    reducers:{
+        searchOrders:(state,{payload})=>{
+            return {...state,orders2:[...state.filterBackup]
+                .filter(item=>item.customerId.first_name.toLowerCase()
+                .includes(payload.toLowerCase()))}
+        },
+    },
     extraReducers:{
         [getOrder.fulfilled]: (state,{payload})=>{
             loading(false);
@@ -218,4 +225,5 @@ const orderSlice=createSlice({
 export const orderDetails=(state)=>state.orderReducer.order;
 export const getUserOrder=(state)=>state.orderReducer.orders;
 export const getOrdersAdmin=(state)=>state.orderReducer.orders2;
+export const {searchOrders}=orderSlice.actions;
 export default orderSlice.reducer;
