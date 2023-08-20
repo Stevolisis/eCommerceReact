@@ -3,7 +3,7 @@ import { useState } from 'react';
 import {React} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { getOrders, getOrdersAdmin, searchOrders } from '../../../Redux/Admin/orders';
+import { filterOrders, getOrders, getOrdersAdmin, searchOrders } from '../../../Redux/Admin/orders';
 
 export default function Adminorders(){
     const dispatch=useDispatch();
@@ -23,22 +23,17 @@ export default function Adminorders(){
         <div className='admincategcon'>
 
             <div className='adminfilterscon'>
-            <div className='adminfilters'>
+                <div className='adminfilters'>
                     <input type='text' placeholder='Search...' onChange={(e)=>dispatch(searchOrders(e.target.value))}/>
                 </div>
                 <div className='adminfilters'>
-                    <select>
-                    <option defaultValue='All Category'>Status</option>
-                    <option>Payment Status Status(Paid)</option>
-                    <option>Payment Status Status(Not Paid)</option>
-                    <option>Delivery Status(Delivered)</option>
-                    <option>Delivery Status(Not Delivered)</option>
-                    </select>
-                    <select>
-                    <option defaultValue='All Category'>Ascending Order</option>
-                    <option>Descending Order</option>
-                    <option>Most Expensive</option>
-                    <option>Lest Expensive</option>
+                    <select onChange={(e)=>dispatch(filterOrders(e.target.value))}>
+                    <option defaultValue='ascend' value='ascend'>Ascending Order</option>
+                    <option value='descend'>Descending Order</option>
+                    <option value='payment_paid'>Payment Status Status(Paid)</option>
+                    <option value='payment_notpaid'>Payment Status Status(Not Paid)</option>
+                    <option value='order_delivered'>Delivery Status(Delivered)</option>
+                    <option value='order_notdelivered'>Delivery Status(Not Delivered)</option>
                     </select>
                 </div>
             </div>

@@ -61,8 +61,7 @@ const orderSlice=createSlice({
     reducers:{
         searchOrders:(state,{payload})=>{
             return {...state,orders2:[...state.filterBackup]
-                .filter(item=>item.customerId.first_name.toLowerCase()||
-                item.customerId.email           
+                .filter(item=>`${item.customerId.first_name} ${item.customerId.last_name}`.toLowerCase()  
                 .includes(payload.toLowerCase()))}
         },
         filterOrders:(state,{payload})=>{
@@ -70,12 +69,14 @@ const orderSlice=createSlice({
                 return {...state,orders2:[...state.filterBackup].sort((a,b)=>a._id < b._id ? 1:-1)}
             }else if(payload==='descend'){
                 return {...state,orders2:[...state.filterBackup].sort((a,b)=>a._id < b._id ? -1:1)}
-            }else if(payload==='mostProduct'){
-                return {...state,orders2:[...state.filterBackup].sort((a,b)=>a.product < b.product ? 1:-1)}
-            }else if(payload==='active'){
-                return {...state,orders2:[...state.filterBackup].filter(item=>item.status==='active')}
-            }else if(payload==='inactive'){
-                return {...state,orders2:[...state.filterBackup].filter(item=>item.status==='inactive')}
+            }else if(payload==='payment_paid'){
+                return {...state,orders2:[...state.filterBackup].filter(item=>item.payment_status==='Paid')}
+            }else if(payload==='payment_notpaid'){
+                return {...state,orders2:[...state.filterBackup].filter(item=>item.payment_status==='not Paid')}
+            }else if(payload==='order_delivered'){
+                return {...state,orders2:[...state.filterBackup].filter(item=>item.status==='Delivered')}
+            }else if(payload==='order_notdelivered'){
+                return {...state,orders2:[...state.filterBackup].filter(item=>item.status!=='Delivered')}
             }else{
                 return;
             }
@@ -241,5 +242,5 @@ const orderSlice=createSlice({
 export const orderDetails=(state)=>state.orderReducer.order;
 export const getUserOrder=(state)=>state.orderReducer.orders;
 export const getOrdersAdmin=(state)=>state.orderReducer.orders2;
-export const {searchOrders}=orderSlice.actions;
+export const {searchOrders, filterOrders}=orderSlice.actions;
 export default orderSlice.reducer;
