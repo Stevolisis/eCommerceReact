@@ -20,7 +20,7 @@ export default function Userorder({origin}){
           console.log('res.payload.status',res.payload.status)
           if(res.payload.status!=='success'){
               console.log('res.payload',res.payload.status)
-              dispatch(setRedirectPath('/auth/login?next='+location.pathname))            
+              dispatch(setRedirectPath('/auth/login?next='+location.pathname.slice(1)))            
           }
       })
   },[]);

@@ -26,7 +26,7 @@ export default function Useraddresses(){
               .then(res=>{
                 if(res.payload.status!=='success'){
                     if(queryString.get('next')) navigate('/auth/login?next='+queryString.get('next'))
-                    if(!queryString.get('next')) navigate('/auth/login?next='+location.pathname)          
+                    if(!queryString.get('next')) navigate('/auth/login?next='+location.pathname.slice(1))          
                 }else{
                     console.log('yyuu',queryString.get('next'));
                     if(queryString.get('next')) navigate(queryString.get('next'));
@@ -52,7 +52,7 @@ export default function Useraddresses(){
                 console.log(res)
                 if(res.payload.data.status!=='success'){
                     // if(queryString.get('next')) navigate('/auth/login?next='+queryString.get('next'))
-                    // if(!queryString.get('next')) navigate('/auth/login?next='+location.pathname))            
+                    // if(!queryString.get('next')) navigate('/auth/login?next='+location.pathname.slice(1)))            
                 }
             })
             }
@@ -65,7 +65,7 @@ export default function Useraddresses(){
         .then(res=>{
             if(res.payload.status!=='success'){
                 if(queryString.get('next')) navigate('/auth/login?next='+queryString.get('next'))
-                if(!queryString.get('next')) navigate('/auth/login?next='+location.pathname);       
+                if(!queryString.get('next')) navigate('/auth/login?next='+location.pathname.slice(1));       
             }
         })
     },[]);

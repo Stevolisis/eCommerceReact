@@ -1,5 +1,5 @@
 import {React} from 'react';
-import { customerLogin, setInview, setTrigger } from '../../Redux/Auth/userAuthForm';
+import { customerLogin } from '../../Redux/Auth/userAuthForm';
 import { useDispatch } from 'react-redux';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
@@ -7,7 +7,7 @@ export default function Signin(){
     const navigate=useNavigate();
     const [searchParams]=useSearchParams();
     const dispatch=useDispatch();
-    // console.log('next ',window.location.search)
+    console.log('next ',searchParams.get('next'));
 
     function handleSubmit(e){
         e.preventDefault();

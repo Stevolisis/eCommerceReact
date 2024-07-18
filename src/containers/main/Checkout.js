@@ -62,19 +62,19 @@ export default function Checkout(){
           }else if(res.payload.status==='getaddrinfo ENOTFOUND api.flutterwave.com'){
             return;
           }else{
-            return navigate('/auth/login?next='+location.pathname);
+            return navigate('/auth/login?next='+location.pathname.trim());
           }
       })
     }
   }
 
-
+console.log(location.pathname.trim())
   
   useEffect(()=>{
     dispatch(getAddresses())
     .then(res=>{
       if(res.payload.status!=='success'){
-          dispatch(setRedirectPath('/auth/login?next='+location.pathname))            
+          dispatch(setRedirectPath('/auth/login?next='+location.pathname.trim()))            
       }
     })
   },[]);
@@ -84,15 +84,15 @@ export default function Checkout(){
       dispatch(getOrder({id:id,page:'checkout'}))
       .then(res=>{
         if(res.payload.status!=='success'){
-          dispatch(setRedirectPath('/auth/login?next='+location.pathname))            
+          dispatch(setRedirectPath('/auth/login?next='+location.pathname.trim()))            
         }
       })
     }
   },[id])
 
   useEffect(()=>{
-    userAddresses&&userAddresses.length==0 ? setNavStat('/user/addAddress?next=/checkout')
-    : setNavStat('/user/address?next=/checkout')
+    userAddresses&&userAddresses.length==0 ? setNavStat('/user/addAddress?next=checkout')
+    : setNavStat('/user/address?next=checkout')
   },[userAddresses]);
 
 
@@ -115,10 +115,10 @@ return(
     <div className='userorderheading'>
         <p>ADDRESS DETAILS</p>
         {
-          navStat==='/user/addAddress?next=/checkout' ? 
-          <button onClick={()=>navigate(`${'/user/addAddress?next=/checkout/'}${id}`)}>ADD</button>
+          navStat==='/user/addAddress?next=checkout' ? 
+          <button onClick={()=>navigate(`${'/user/addAddress?next=checkout/'}${id}`)}>ADD</button>
           :
-          <button onClick={()=>navigate(`${'/user/address?next=/checkout/'}${id}`)}>CHANGE</button>
+          <button onClick={()=>navigate(`${'/user/address?next=checkout/'}${id}`)}>CHANGE</button>
         }
     </div>
         {console.log('userAddress',userAddresses)}

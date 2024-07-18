@@ -29,10 +29,10 @@ export default function Useraccount(){
             }
           })
        });
-
+console.log("YU: ", location.pathname.slice(1))
     useEffect(()=>{
         dispatch(getCustomer())
-        .then(res=>{if(res.payload.status!=='success') dispatch(setRedirectPath('/auth/login?next='+location.pathname))})
+        .then(res=>{if(res.payload.status!=='success') dispatch(setRedirectPath('/auth/login?next='+location.pathname.slice(1)))})
     },[])
 
 

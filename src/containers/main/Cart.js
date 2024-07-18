@@ -5,7 +5,7 @@ import Mainfooter from '../../components/Mainfooter'
 import { useDispatch, useSelector } from 'react-redux';
 import { clearCart, decrement, deleteCartProduct, getCartcount, getCartId, getCartItems, getCartTotal, getSubAmount, increment } from '../../Redux/Main/cart';
 import { placeOrder } from '../../Redux/Admin/orders';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { loading } from '../../Loaders/setMainLoader';
 
 
@@ -16,8 +16,9 @@ export default function Cart(){
   const cartCount=useSelector(getCartcount);
   const cartSubAmount=useSelector(getSubAmount);
   const dispatch=useDispatch();
-  const location=useLocation();
+  const [searchParams]=useSearchParams();
   const navigate=useNavigate();
+  console.log('next ',searchParams.get('checkout'));
 
    const deletecartitem=((id)=>{
     Swal.fire({
@@ -52,10 +53,18 @@ export default function Cart(){
       }else if(res.payload.status==='success'){
         navigate('/checkout/'+res.payload.orderId);
       }else{
-        return navigate('/auth/login?next='+location.pathname);
+        // eslint-disable-next-line no-useless-concat
+        return navigate('/auth/login?next='+'cart?checkout=true');
       }
     })
    }
+
+   
+   useEffect(()=>{
+    if(searchParams.get('checkout')){
+      handleSubmit();
+    }
+   },[]);
 
 
 

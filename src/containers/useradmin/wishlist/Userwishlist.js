@@ -28,7 +28,7 @@ console.log('yy',wishlists)
           .then(res=>{
             console.log(res)
             if(res.payload.data.status!=='success'){
-                // dispatch(setRedirectPath('/auth/login?next='+location.pathname))            
+                // dispatch(setRedirectPath('/auth/login?next='+location.pathname.slice(1)))            
             }
           })
         }
@@ -40,7 +40,7 @@ console.log('yy',wishlists)
     dispatch(fetchWishlist())
     .then(res=>{
       if(res.payload.status!=='success'){
-          dispatch(setRedirectPath('/auth/login?next='+location.pathname))            
+          dispatch(setRedirectPath('/auth/login?next='+location.pathname.slice(1)))            
       }
     })
   },[])

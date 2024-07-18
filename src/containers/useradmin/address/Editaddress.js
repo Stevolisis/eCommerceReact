@@ -47,7 +47,7 @@ export default function Editaddress(){
               dispatch(editAddress(formData))
               .then(res=>{
                 if(res.payload.status!=='success'){
-                   dispatch(setRedirectPath('/auth/login?next='+location.pathname))            
+                   dispatch(setRedirectPath('/auth/login?next='+location.pathname.slice(1)))            
                 }
             })
             }
@@ -58,7 +58,7 @@ export default function Editaddress(){
         dispatch(getAddress(id))
         .then(res=>{
             if(res.payload.status!=='success'){
-                dispatch(setRedirectPath('/auth/login?next='+location.pathname))            
+                dispatch(setRedirectPath('/auth/login?next='+location.pathname.slice(1)))            
             }
         })
     },[])
