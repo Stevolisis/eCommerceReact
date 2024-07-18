@@ -40,6 +40,7 @@ import Useraddresses from './containers/useradmin/address/Useraddresses';
 import Editaddress from './containers/useradmin/address/Editaddress';
 import Addaddress from './containers/useradmin/address/Addaddress';
 import Userorders from './containers/useradmin/orders/Userorders';
+import Userorder from './containers/useradmin/orders/Userorder';
 import Userwishlist from './containers/useradmin/wishlist/Userwishlist';
 //-----------User Admin Css--------
 import './containers/useradmin/styles/usercontainer.scss';
@@ -112,9 +113,7 @@ import Popupcomponent from './components/Popupcomponent';
 import { useDispatch, useSelector } from 'react-redux';
 import { getInview, getTrigger, setTrigger } from './Redux/Auth/userAuthForm';
 import $ from 'jquery';
-import { useEffect } from 'react';
 import Navigate from './components/auth/Navigate';
-import Order from './components/Order';
 
 
 
@@ -147,7 +146,7 @@ useMemo(()=>{
     <ScrollToTop/>
     <Navigate/>
     {trigger &&<Popupcomponent/>}
-      <Routes>  
+      <Routes>
       {/* -------------Main Route------------- */}
       <Route path='/' element={<Index />} />
       <Route path='/index2' element={<Index2 />} />
@@ -158,6 +157,7 @@ useMemo(()=>{
         <Route path='cart' element={<Cart />} />
         <Route path='checkout/:id' element={<Checkout />} />
         <Route path='help' element={<Help />} />
+
 
 
 
@@ -183,7 +183,7 @@ useMemo(()=>{
         <Route path='addaddress' element={<Addaddress/>} />
         <Route path='wishlist' element={<Userwishlist/>} />
         <Route path='orders' element={<Userorders />} />
-        <Route path='order/:id' element={<Order origin='user'/>} />
+        <Route path='order/:id' element={<Userorder origin='user'/>} />
       </Route>
 
       {/* ----------------Admin Route--------------- */}
@@ -198,7 +198,7 @@ useMemo(()=>{
       <Route path='events' element={<Adminevents />} />
       <Route path='coupons' element={<Admincoupons />} />
       <Route path='orders' element={<Adminorders />} />
-      <Route path='order/:id' element={<Order origin='admin'/>} />
+      <Route path='order' element={<Userorder origin='admin'/>} />
       <Route path='general_settings/:section' element={<Adminsettings />} />
 
       <Route path='addcategory' element={<Addcategory />} />

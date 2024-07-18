@@ -4,22 +4,16 @@ import { loading } from "../../Loaders/setMainLoader";
 import api from "../../Utils/axiosConfig";
 
 
-export const getOrder=createAsyncThunk('orders/getOrder',async({id})=>{
+export const getOrder=createAsyncThunk('orders/getOrder',async({id,page})=>{
     loading(true);
-    const response=await api.get(`order/getOrder/${id}/`,{withCredentials:true});
-    return response.data;
-});
-
-export const fetchUserOrder=createAsyncThunk('orders/fetchUserOrder',async({id,page})=>{
-    loading(true);
-    const response=await api.get(`order/getUserOrder/${id}/${page}`,{withCredentials:true});
+    const response=await api.get(`order/getOrder/${id}/${page}`,{withCredentials:true});
     return response.data;
 });
 
 
-export const getOrders=createAsyncThunk('orders/getOrders',async(limit)=>{
+export const getOrders=createAsyncThunk('orders/getOrders',async()=>{
     loading(true);
-    const response=await api.get(`order/getOrders?limit=${limit}`,{withCredentials:true});
+    const response=await api.get(`order/getOrders`,{withCredentials:true});
     return response.data;
 });
 
@@ -58,55 +52,8 @@ const orderSlice=createSlice({
         filterBackup:[],
         order:{}
     },
-    reducers:{
-        searchOrders:(state,{payload})=>{
-            return {...state,orders2:[...state.filterBackup]
-                .filter(item=>`${item.customerId.first_name} ${item.customerId.last_name}`.toLowerCase()  
-                .includes(payload.toLowerCase()))}
-        },
-        filterOrders:(state,{payload})=>{
-            if(payload==='ascend'){                
-                return {...state,orders2:[...state.filterBackup].sort((a,b)=>a._id < b._id ? 1:-1)}
-            }else if(payload==='descend'){
-                return {...state,orders2:[...state.filterBackup].sort((a,b)=>a._id < b._id ? -1:1)}
-            }else if(payload==='payment_paid'){
-                return {...state,orders2:[...state.filterBackup].filter(item=>item.payment_status==='Paid')}
-            }else if(payload==='payment_notpaid'){
-                return {...state,orders2:[...state.filterBackup].filter(item=>item.payment_status==='not Paid')}
-            }else if(payload==='order_delivered'){
-                return {...state,orders2:[...state.filterBackup].filter(item=>item.status==='Delivered')}
-            }else if(payload==='order_notdelivered'){
-                return {...state,orders2:[...state.filterBackup].filter(item=>item.status!=='Delivered')}
-            }else{
-                return;
-            }
-        } 
-    },
     extraReducers:{
         [getOrder.fulfilled]: (state,{payload})=>{
-            loading(false);
-            let status=payload.status;
-            let order=payload.data;
-
-            if(status==='success'){
-               state.order=order;            
-            }else{
-                Swal.fire(
-                    'Error Occured!',
-                    `${status}`,
-                    'warning'
-                );
-            }
-        },
-        [getOrder.rejected]: (state,{error})=>{
-            loading(false);
-            Swal.fire(
-                "Error Occured",
-                error.message,
-                'error'
-            )
-        },
-        [fetchUserOrder.fulfilled]: (state,{payload})=>{
             loading(false);
             let status=payload.status;
             let order=payload.data;
@@ -123,7 +70,7 @@ const orderSlice=createSlice({
                 );
             }
         },
-        [fetchUserOrder.rejected]: (state,{error})=>{
+        [getOrder.rejected]: (state,{error})=>{
             loading(false);
             Swal.fire(
                 "Error Occured",
@@ -158,7 +105,7 @@ const orderSlice=createSlice({
         },
         [getOrders.fulfilled]: (state,{payload})=>{
             loading(false)
-            return {...state,orders2:payload.data,filterBackup:payload.data}
+            return {...state,orders:payload,filterBackup:payload}
         },
         [getOrders.rejected]: (state,{error})=>{
             loading(false)
@@ -241,6 +188,4 @@ const orderSlice=createSlice({
 
 export const orderDetails=(state)=>state.orderReducer.order;
 export const getUserOrder=(state)=>state.orderReducer.orders;
-export const getOrdersAdmin=(state)=>state.orderReducer.orders2;
-export const {searchOrders, filterOrders}=orderSlice.actions;
 export default orderSlice.reducer;
